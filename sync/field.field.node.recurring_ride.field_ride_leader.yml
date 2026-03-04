@@ -1,0 +1,44 @@
+uuid: bee73950-920c-4e69-b0ca-d05a4eee777b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ride_leader
+    - node.type.recurring_ride
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: jsld2uUA1zB28RjXVdQ3Un_2-Abh0403hz4B-GZZ42g
+id: node.recurring_ride.field_ride_leader
+field_name: field_ride_leader
+entity_type: node
+bundle: recurring_ride
+label: Leader(s)
+description: "Enter one name per text box. Begin typing name in field to get a list of ride leaders matching your search string and select from list. Leader must be a club member and designated ride leader.\r\n<p><strong>Ride page AUTHOR is automatically set to the first listed ride leader because ride leaders may edit only their OWN rides (i.e., for which they are author).</strong></p>"
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        ride_leader: ride_leader
+        administrator: '0'
+        member: '0'
+        board: '0'
+        rides_editor: '0'
+        editor: '0'
+        rides_coordinator: '0'
+        civicrm: '0'
+        site_admin: '0'
+    include_anonymous: true
+field_type: entity_reference

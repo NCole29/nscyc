@@ -1,0 +1,23 @@
+{
+    "name": "drupal/ckeditor_accordion",
+    "description": "Accordion plugin for CKEditor 5.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/ckeditor_accordion",
+    "authors": [
+        {
+            "name": "Juhani Väätäjä (j-vee)",
+            "homepage": "https://www.drupal.org/u/j-vee",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Rotem Reiss (rreiss)",
+            "homepage": "https://www.drupal.org/u/rreiss",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ckeditor_accordion",
+        "source": "https://git.drupalcode.org/project/ckeditor_accordion"
+    }
+}

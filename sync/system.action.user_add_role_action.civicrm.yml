@@ -1,0 +1,14 @@
+uuid: 6d6882e6-d2f7-4f1b-9537-c5f8cf63af3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.civicrm
+  module:
+    - user
+id: user_add_role_action.civicrm
+label: 'Add the Membership Coordinator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: civicrm

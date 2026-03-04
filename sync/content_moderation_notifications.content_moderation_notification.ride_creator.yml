@@ -1,0 +1,17 @@
+uuid: 368fc32a-fdaa-4ea6-9ba1-c82fb72bcefb
+langcode: en
+status: false
+dependencies: {  }
+id: ride_creator
+workflow: rides
+transitions:
+  publish: publish
+roles: {  }
+author: true
+site_mail: false
+emails: ''
+subject: '[node:title] is published'
+body:
+  value: "<p><strong>[node:title]</strong> at&nbsp;[node:url] has been reviewed and published.</p>\r\n\r\n<p>The revision log message, if filled, is shown below:&nbsp;</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Notify ride leader'

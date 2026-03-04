@@ -1,0 +1,30 @@
+uuid: c57e943d-14a9-4f17-8385-fdcbd62f3f2b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_restrooms
+field_name: field_restrooms
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '0'
+      label: "Don't know (nothing is printed on ride page)"
+    -
+      value: '1'
+      label: 'There are restrooms at the start.'
+    -
+      value: '2'
+      label: 'There are no restrooms at the start.'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

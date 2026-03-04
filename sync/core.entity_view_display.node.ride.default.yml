@@ -1,0 +1,618 @@
+uuid: 1d86eb7c-0cda-4f15-bc65-cc5a52fc6d74
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.ride.title
+    - field.field.node.ride.field_activity
+    - field.field.node.ride.field_additional_information
+    - field.field.node.ride.field_based_on
+    - field.field.node.ride.field_cancel
+    - field.field.node.ride.field_date
+    - field.field.node.ride.field_dayofweek
+    - field.field.node.ride.field_description
+    - field.field.node.ride.field_developed_by
+    - field.field.node.ride.field_gravel_category
+    - field.field.node.ride.field_location
+    - field.field.node.ride.field_lunch_place
+    - field.field.node.ride.field_lunch_same
+    - field.field.node.ride.field_master
+    - field.field.node.ride.field_multiple_times
+    - field.field.node.ride.field_registration
+    - field.field.node.ride.field_registration_form
+    - field.field.node.ride.field_registration_free_form
+    - field.field.node.ride.field_registration_link
+    - field.field.node.ride.field_results_access
+    - field.field.node.ride.field_ride_leader
+    - field.field.node.ride.field_ride_picture
+    - field.field.node.ride.field_rwgps_routes
+    - field.field.node.ride.field_schedule_date
+    - field.field.node.ride.field_show_and_go
+    - field.field.node.ride.field_time
+    - node.type.ride
+  module:
+    - datetime
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - link
+    - options
+    - text
+    - webform
+  enforced:
+    module:
+      - club_ride
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          917d3788-e4fd-449b-9562-237105a4618c:
+            uuid: 917d3788-e4fd-449b-9562-237105a4618c
+            region: content
+            configuration:
+              id: 'extra_field_block:node:ride:content_moderation_control'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          a48af967-7d9a-4ff2-a5b4-77c7497434aa:
+            uuid: a48af967-7d9a-4ff2-a5b4-77c7497434aa
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_cancel'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: visually_hidden
+                settings:
+                  format: custom
+                  format_custom_false: ''
+                  format_custom_true: '<h3>CANCELLED</h3>'
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          ff94084c-8b59-4d64-890b-6d590f5a57e3:
+            uuid: ff94084c-8b59-4d64-890b-6d590f5a57e3
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_activity'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          9762070f-200c-43fc-8814-8dcfa5639ab9:
+            uuid: 9762070f-200c-43fc-8814-8dcfa5639ab9
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_description'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: visually_hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          578c3b28-0bdb-4714-9d25-c8c9c413ae15:
+            uuid: 578c3b28-0bdb-4714-9d25-c8c9c413ae15
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: long
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          09ea2680-2f85-46e2-adaa-034a7f14f189:
+            uuid: 09ea2680-2f85-46e2-adaa-034a7f14f189
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_time'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          b13eab51-c8b6-4dba-ab1d-728279e1f313:
+            uuid: b13eab51-c8b6-4dba-ab1d-728279e1f313
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_ride_leader'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          df45ef54-34e8-481f-8d9d-e3333d50b544:
+            uuid: df45ef54-34e8-481f-8d9d-e3333d50b544
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_show_and_go'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: hidden
+                settings:
+                  format: custom
+                  format_custom_false: ''
+                  format_custom_true: 'No ride leader'
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          979233fb-e42c-481e-90f0-9fcde5ead561:
+            uuid: 979233fb-e42c-481e-90f0-9fcde5ead561
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_location'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          766a6382-131a-4e41-a36a-f27446432b25:
+            uuid: 766a6382-131a-4e41-a36a-f27446432b25
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_rwgps_routes'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+          91f39cff-c3c5-4b9b-b388-ca77e4d728fc:
+            uuid: 91f39cff-c3c5-4b9b-b388-ca77e4d728fc
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_additional_information'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 10
+            additional: {  }
+          505e2806-09b6-445a-86e3-913657b0a78f:
+            uuid: 505e2806-09b6-445a-86e3-913657b0a78f
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_dayofweek'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 11
+            additional: {  }
+          171e581e-ef0a-48de-b0ba-cc75ffa38236:
+            uuid: 171e581e-ef0a-48de-b0ba-cc75ffa38236
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_registration'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 12
+            additional: {  }
+          bcc76f9c-8665-46d2-9df0-7107358df437:
+            uuid: bcc76f9c-8665-46d2-9df0-7107358df437
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_registration_free_form'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: webform_entity_reference_entity_view
+                label: above
+                settings:
+                  source_entity: true
+                  lazy: false
+                third_party_settings: {  }
+            weight: 13
+            additional: {  }
+          05569d15-3af1-4ad9-8c24-4ba7666d80cc:
+            uuid: 05569d15-3af1-4ad9-8c24-4ba7666d80cc
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_registration_form'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: webform_entity_reference_entity_view
+                label: above
+                settings:
+                  source_entity: true
+                  lazy: false
+                third_party_settings: {  }
+            weight: 14
+            additional: {  }
+          36d8f635-0a99-41cd-a2cd-7b1f0a270ddb:
+            uuid: 36d8f635-0a99-41cd-a2cd-7b1f0a270ddb
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_registration_link'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: link
+                label: above
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: ''
+                  target: ''
+                third_party_settings: {  }
+            weight: 15
+            additional: {  }
+          29e36c06-87ca-44b7-944f-3fd05f4d4d19:
+            uuid: 29e36c06-87ca-44b7-944f-3fd05f4d4d19
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_results_access'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 16
+            additional: {  }
+          2cf59147-cca3-490d-9543-196f7ffab820:
+            uuid: 2cf59147-cca3-490d-9543-196f7ffab820
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_lunch_place'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 17
+            additional: {  }
+          0c8d0356-383d-4439-a553-4b0b5aa57a95:
+            uuid: 0c8d0356-383d-4439-a553-4b0b5aa57a95
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_lunch_same'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 18
+            additional: {  }
+          5c505b17-ac7f-4d81-ae6e-9d6df997d2d6:
+            uuid: 5c505b17-ac7f-4d81-ae6e-9d6df997d2d6
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_master'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 20
+            additional: {  }
+          a090aff2-6021-43dc-8142-2e3ae43a5a61:
+            uuid: a090aff2-6021-43dc-8142-2e3ae43a5a61
+            region: content
+            configuration:
+              id: 'field_block:node:ride:field_based_on'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 21
+            additional: {  }
+          be2a74d9-c2ca-4591-987d-3d601f4763e7:
+            uuid: be2a74d9-c2ca-4591-987d-3d601f4763e7
+            region: content
+            configuration:
+              id: 'field_block:node:ride:title'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 22
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+_core:
+  default_config_hash: t-vnDNuO9DG_AXQl8WYIImwM8k6TfWDlENyvTzAxHwk
+id: node.ride.default
+targetEntityType: node
+bundle: ride
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_activity:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_additional_information:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_based_on:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  field_cancel:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: '<h3>CANCELLED</h3>'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: long
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_dayofweek:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_description:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_location:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_lunch_place:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  field_lunch_same:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_master:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  field_registration:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_registration_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_registration_free_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_registration_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_results_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_ride_leader:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_rwgps_routes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_show_and_go:
+    type: boolean
+    label: hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: 'No ride leader'
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_time:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 21
+    region: content
+hidden:
+  created: true
+  field_day: true
+  field_developed_by: true
+  field_gravel_category: true
+  field_multiple_times: true
+  field_ride_picture: true
+  field_schedule_date: true
+  links: true
+  uid: true

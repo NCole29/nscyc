@@ -1,0 +1,28 @@
+@media (min-width: $breakMin) {
+
+  body.crm-menubar-visible.crm-menubar-over-cms-menu {
+    border-top: 0 none !important;
+    margin-top: var(--crm-menubar-height);
+  }
+  body.crm-menubar-visible.crm-menubar-over-cms-menu.crm-menubar-wrapped {
+    margin-top: calc(var(--crm-menubar-height) * 2);
+  }
+  body.crm-menubar-visible.crm-menubar-over-cms-menu #admin-bar {
+    visibility: hidden;
+  }
+  /* ignore the crm-menubar-below-cms-menu setting */
+  body.crm-menubar-below-cms-menu > #civicrm-menu-nav #civicrm-menu {
+    top: 0;
+  }
+
+}
+@media (max-width: $breakMax) {
+
+  body #civicrm-menu-nav .crm-menubar-toggle-btn {
+    position: absolute;
+    right: 3px;
+    top: 0;
+    margin-top: 3px;
+  }
+
+}

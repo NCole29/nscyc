@@ -1,0 +1,25 @@
+uuid: 3d102ed5-3e2f-43f9-93c0-c305841dbff1
+langcode: en
+status: true
+dependencies:
+  module:
+    - geofield
+    - node
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: fFBapJy3PkFSvB7YMdR8cpos7lAtIn2kfdJ7PTUhhlo
+id: node.field_coordinates
+field_name: field_coordinates
+entity_type: node
+type: geofield
+settings:
+  backend: geofield_backend_default
+module: geofield
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

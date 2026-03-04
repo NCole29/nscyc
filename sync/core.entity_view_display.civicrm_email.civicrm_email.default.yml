@@ -1,0 +1,47 @@
+uuid: 902e7c7e-a49a-498b-a077-f06c2e35c82b
+langcode: en
+status: true
+dependencies:
+  module:
+    - civicrm_entity
+    - options
+_core:
+  default_config_hash: vmk-XTmSjI9yCZrmSk1uy7n45gw_8F15R0cpORBAcNQ
+id: civicrm_email.civicrm_email.default
+targetEntityType: civicrm_email
+bundle: civicrm_email
+mode: default
+content:
+  contact_id:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  email:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  location_type_id:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  hold_date: true
+  id: true
+  is_billing: true
+  is_bulkmail: true
+  is_primary: true
+  on_hold: true
+  reset_date: true
+  signature_html: true
+  signature_text: true

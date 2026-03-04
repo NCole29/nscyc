@@ -1,0 +1,8 @@
+uuid: 067f9f4a-a782-41dc-ba18-6e67783a3bd2
+langcode: en
+status: true
+dependencies: {  }
+id: date_and_12_hr_time
+label: 'Date and 12-hr time'
+locked: false
+pattern: 'm/d/Y g:i a'

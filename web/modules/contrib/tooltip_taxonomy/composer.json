@@ -1,0 +1,8 @@
+{
+  "name": "drupal/tooltip_taxonomy",
+  "description": "A Drupal module to provide tooltip functionality for taxonomy terms.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

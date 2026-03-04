@@ -1,0 +1,26 @@
+uuid: 5ae84e7c-8c88-40ee-82dd-4e990cd09cd2
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+  enforced:
+    module:
+      - club_paragraph
+_core:
+  default_config_hash: XN4Vp_-vB_kkxxMHURrX9oa8rN2AAxH3OIBYT2yvSds
+id: paragraph.field_title
+field_name: field_title
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,27 @@
+uuid: 143872c4-a645-47e8-a35b-856dde3d1863
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.location
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: vjOJQsozJ5OzRHupxuDtzezg8IQVXJ_FZAnlCsfpY5Q
+id: node.location.promote
+field_name: promote
+entity_type: node
+bundle: location
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

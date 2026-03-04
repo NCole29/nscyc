@@ -1,0 +1,106 @@
+uuid: 00e085da-aea7-41ff-9d23-53121194f686
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.recurring_ride
+    - node.type.ride
+  module:
+    - content_moderation
+id: rides
+label: Rides
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: 2
+      published: false
+      default_revision: false
+    draft:
+      label: Draft
+      weight: -3
+      published: false
+      default_revision: false
+    finalize_draft:
+      label: 'Ready for review'
+      weight: -2
+      published: false
+      default_revision: false
+    needs_work:
+      label: 'Needs work (notified author)'
+      weight: -1
+      published: false
+      default_revision: false
+    publish_and_notify:
+      label: 'Published (notified author)'
+      weight: 0
+      published: true
+      default_revision: true
+    published:
+      label: Published
+      weight: 1
+      published: true
+      default_revision: true
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - draft
+        - publish_and_notify
+        - published
+      to: archived
+      weight: 2
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - needs_work
+        - publish_and_notify
+        - published
+      to: draft
+      weight: -3
+    finalize_draft:
+      label: 'Finalize draft'
+      from:
+        - draft
+        - needs_work
+        - publish_and_notify
+      to: finalize_draft
+      weight: -2
+    needs_work:
+      label: 'Needs work'
+      from:
+        - finalize_draft
+      to: needs_work
+      weight: -1
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 1
+    publish_notify:
+      label: 'Publish & notify'
+      from:
+        - finalize_draft
+      to: publish_and_notify
+      weight: 0
+    restore_to_draft:
+      label: 'Restore to draft'
+      from:
+        - archived
+      to: draft
+      weight: 3
+    restore_to_published:
+      label: 'Restore to published'
+      from:
+        - archived
+      to: published
+      weight: 4
+  entity_types:
+    node:
+      - recurring_ride
+      - ride
+  default_moderation_state: draft

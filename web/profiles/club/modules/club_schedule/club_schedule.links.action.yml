@@ -1,0 +1,6 @@
+# Don't show list under Content, add a "View" button on the settings form
+club_schedule.view:
+  route_name: entity.club_schedule.collection
+  title: 'View ride schedule'
+  appears_on:
+    - club_schedule.schedule_settings

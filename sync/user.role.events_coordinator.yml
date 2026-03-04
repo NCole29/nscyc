@@ -1,0 +1,79 @@
+uuid: 64df8b54-36c0-4aab-ab40-dcc37e1385e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.node.event.default
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.summary_fields
+    - media.type.image_crop_16_9
+    - media.type.image_crop_4_3
+    - media.type.public_file
+    - node.type.announcement
+    - node.type.event
+    - node.type.location
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - disable_messages
+    - filter
+    - help
+    - layout_builder
+    - media
+    - node
+    - paragraphs
+    - quick_node_clone
+    - system
+    - toolbar
+    - webform
+id: events_coordinator
+label: 'Events coordinator'
+weight: -5
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access help pages'
+  - 'access own webform configuration'
+  - 'access toolbar'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'clone announcement content'
+  - 'clone event content'
+  - 'configure editable event node layout overrides'
+  - 'create announcement content'
+  - 'create event content'
+  - 'create image_crop_16_9 media'
+  - 'create image_crop_4_3 media'
+  - 'create location content'
+  - 'create public_file media'
+  - 'create webform'
+  - 'delete media'
+  - 'delete own announcement content'
+  - 'delete own event content'
+  - 'delete own location content'
+  - 'delete own webform'
+  - 'edit own announcement content'
+  - 'edit own event content'
+  - 'edit own location content'
+  - 'edit own webform'
+  - 'revert announcement revisions'
+  - 'revert event revisions'
+  - 'revert location revisions'
+  - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition finalize_draft'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format summary_fields'
+  - 'view announcement revisions'
+  - 'view error messages'
+  - 'view event revisions'
+  - 'view latest version'
+  - 'view location revisions'
+  - 'view own unpublished content'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view warning messages'

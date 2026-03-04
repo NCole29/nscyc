@@ -1,0 +1,14 @@
+uuid: c0900792-99ac-4ff6-b5db-267ea929f32c
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_page
+_core:
+  default_config_hash: 2n-gwwCYwT1-lh40OvGP6V1SoF_n52pcu4IrxvcIRCI
+name: 'Club positions'
+vid: positions
+description: 'Club leadership positions and associated website roles.'
+weight: 0
+new_revision: false

@@ -1,0 +1,24 @@
+uuid: a4025a15-bccd-4d92-97dc-1dfb520740f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: uhgjFcPXVLGh7dt4wOpUtoXyNdtZbWCcq94X0k7H30I
+id: node.field_location_info
+field_name: field_location_info
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

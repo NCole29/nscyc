@@ -1,0 +1,50 @@
+uuid: 9f649107-c15b-46ab-90b8-c72df3544c89
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - scheduler
+  enforced:
+    module:
+      - club_ride
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 5
+    created:
+      status: true
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+_core:
+  default_config_hash: dxkJD1kRKKC1aodNRfDvuV9lKhaA5WDig_zq2DviR3Q
+name: Ride
+type: ride
+description: 'Use <em>ride</em> to add a nonrecurring ride to the calendar. If adding an existing ride on a new date, find that ride in <em>Content</em> and clone it.<br> Rides automatically appear in the <em>upcoming</em> block on the home page.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

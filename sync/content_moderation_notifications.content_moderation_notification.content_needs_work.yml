@@ -1,0 +1,17 @@
+uuid: efc4e315-0086-4202-a6b0-b539f7f3ce14
+langcode: en
+status: true
+dependencies: {  }
+id: content_needs_work
+workflow: editorial
+transitions:
+  needs_work: needs_work
+roles: {  }
+author: true
+site_mail: false
+emails: ''
+subject: '[node:title] needs work'
+body:
+  value: "<p><strong>[node:title]</strong> at&nbsp;[node:url] has been reviewed and needs work.</p>\r\n\r\n<p>The revision log message, if filled, is shown below:</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Content needs work'

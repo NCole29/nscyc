@@ -1,0 +1,14 @@
+uuid: 8391a902-9449-407a-b76c-ac47aa430567
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rides_coordinator
+  module:
+    - user
+id: user_remove_role_action.rides_coordinator
+label: 'Remove the Rides coordinator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: rides_coordinator

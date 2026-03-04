@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+id: media.medium
+label: Medium
+targetEntityType: media
+cache: true

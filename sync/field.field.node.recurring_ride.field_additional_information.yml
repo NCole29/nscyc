@@ -1,0 +1,29 @@
+uuid: 4cdf9ff8-900a-4042-b8ae-9e7a20f3cec3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_additional_information
+    - filter.format.ride_page
+    - node.type.recurring_ride
+  module:
+    - text
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: xaooz_mBzw9afZYb_t9vHk7HpDbNP1cegaaQaW22hwA
+id: node.recurring_ride.field_additional_information
+field_name: field_additional_information
+entity_type: node
+bundle: recurring_ride
+label: 'Additional information'
+description: 'OPTIONAL. Use this field for information that should stand out from general ride description such as (1) directions, (2) parking information, (3) cookout information, (4) road conditions.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - ride_page
+field_type: text_long

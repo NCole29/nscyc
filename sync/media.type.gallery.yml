@@ -1,0 +1,18 @@
+uuid: afa01ae7-044e-4fe2-9792-917594e1baf4
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: diz0-MNs2lZqt7tOuK_Xx3z1_Pwld57DvTVKIOJ_7lY
+id: gallery
+label: 'Gallery picture'
+description: 'Use local images with crop for reusable media; 3:2 aspect ratio enforced.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

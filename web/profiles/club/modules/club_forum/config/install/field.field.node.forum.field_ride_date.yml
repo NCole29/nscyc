@@ -1,0 +1,21 @@
+uuid: 6c1b54b5-38b7-4e2a-a307-eb7ffd8df425
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ride_date
+    - node.type.forum
+  module:
+    - datetime
+id: node.forum.field_ride_date
+field_name: field_ride_date
+entity_type: node
+bundle: forum
+label: 'Ride date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

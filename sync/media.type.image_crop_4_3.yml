@@ -1,0 +1,23 @@
+uuid: ee79d7ba-eeb8-41de-b0d2-3e35700e301b
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+  enforced:
+    module:
+      - club_media
+third_party_settings:
+  crop:
+    image_field: _none
+_core:
+  default_config_hash: NGG6KvUeL1GhHxrJsFECt5NrEjEPiAeN0lmtd45La2s
+id: image_crop_4_3
+label: 'Image, 4:3 aspect ratio'
+description: 'Use local images with crop for reusable media; 4:3 aspect ratio enforced.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

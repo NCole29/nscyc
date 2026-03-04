@@ -1,0 +1,17 @@
+club.config_checklist:
+  path: '/admin/config/club/config_settings'
+  defaults:
+    _form: '\Drupal\club\Form\ConfigChecklist'
+    _title: 'Configuration checklist'
+  requirements:
+    _permission: 'administer config checklist'
+  options:
+    _admin_route: TRUE
+
+club.complete_install:
+  path: '/complete_install'
+  defaults:
+    _form: '\Drupal\club\Form\CiviComplete'
+    _title: 'Complete Installation'
+  requirements:
+    _permission: 'administer CiviCRM'

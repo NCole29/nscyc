@@ -1,0 +1,27 @@
+uuid: d1a671f1-ee9d-48bf-839c-dc4dc543d7cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.ride
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: 4dt-J3hl_CD2g4GrKuPQHtqX_jfP6Ew7v09RzRxvas4
+id: node.ride.promote
+field_name: promote
+entity_type: node
+bundle: ride
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

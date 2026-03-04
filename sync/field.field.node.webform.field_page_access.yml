@@ -1,0 +1,31 @@
+uuid: 1a386a2a-fcea-499f-a115-444c414f9691
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_page_access
+    - node.type.webform
+    - taxonomy.vocabulary.page_access
+_core:
+  default_config_hash: df1cGNXkAvqA0hBii0w_ifU8SgbJsL_jfNrSPvU_FxA
+id: node.webform.field_page_access
+field_name: field_page_access
+entity_type: node
+bundle: webform
+label: 'Page is visible to'
+description: "<em>Members</em> restricts access to logged-in Club members.<br>\r\n<em>Admin</em> restricts access to logged-in Club leaders.<br>\r\n<em>Ride leaders</em> restricts access to Ride leaders and Club leaders."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      page_access: page_access
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

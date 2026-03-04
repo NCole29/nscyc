@@ -1,0 +1,14 @@
+uuid: 55e49c47-5a1c-4765-acbe-0fbfbe5ff84e
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: qS0tz5g3XAym9fQDjMv0WNN19juAS-aLUIs7HqsBk4g
+name: 'Document category'
+vid: document_category
+description: 'Document category'
+weight: 0
+new_revision: false

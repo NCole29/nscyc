@@ -1,0 +1,11 @@
+uuid: 1f9529c7-aca2-460b-932f-b5f820552263
+langcode: en
+status: true
+dependencies:
+  module:
+    - club_ride
+id: club_route.related_ride_page
+label: 'Related ride page'
+description: ''
+targetEntityType: club_route
+cache: true

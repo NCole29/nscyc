@@ -1,0 +1,29 @@
+uuid: 6b83016d-92b0-46c7-b956-468122f48564
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: WP7mcOqI2rO9wVneak55rNnn4ooGmj7nkguVyU-IXNw
+id: node.field_type_of_page
+field_name: field_type_of_page
+entity_type: node
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 1
+      label: 'Simple one-column page'
+    -
+      value: 2
+      label: 'Page with section layouts and design components'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

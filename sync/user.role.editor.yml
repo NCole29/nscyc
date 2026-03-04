@@ -1,0 +1,133 @@
+uuid: 6e3c46b6-a90d-4b03-92c0-f342436faf3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.node.event.default
+    - core.entity_view_display.node.page.default
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.ride_page
+    - filter.format.summary_fields
+    - node.type.announcement
+    - node.type.banner
+    - node.type.event
+    - node.type.location
+    - node.type.page
+    - node.type.webform
+    - workflows.workflow.editorial
+  module:
+    - block
+    - civicrm
+    - content_moderation
+    - contextual
+    - disable_messages
+    - file
+    - file_delete
+    - filter
+    - help
+    - layout_builder
+    - media
+    - menu_admin_per_menu
+    - node
+    - paragraphs
+    - quick_node_clone
+    - scheduler
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+    - webform_node
+  enforced:
+    module:
+      - club_user
+id: editor
+label: 'Content editor'
+weight: 0
+is_admin: false
+permissions:
+  - 'access CiviMail'
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access help pages'
+  - 'access media overview'
+  - 'access own webform configuration'
+  - 'access shortcuts'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'administer blocks'
+  - 'administer main menu items'
+  - 'clone announcement content'
+  - 'clone event content'
+  - 'clone page content'
+  - 'clone webform content'
+  - 'configure editable event node layout overrides'
+  - 'configure editable page node layout overrides'
+  - 'create and edit custom blocks'
+  - 'create announcement content'
+  - 'create banner content'
+  - 'create event content'
+  - 'create location content'
+  - 'create media'
+  - 'create page content'
+  - 'create webform'
+  - 'create webform content'
+  - 'delete all revisions'
+  - 'delete announcement revisions'
+  - 'delete any announcement content'
+  - 'delete any banner content'
+  - 'delete any event content'
+  - 'delete any location content'
+  - 'delete any media'
+  - 'delete any page content'
+  - 'delete any webform content'
+  - 'delete banner revisions'
+  - 'delete event revisions'
+  - 'delete files'
+  - 'delete in CiviMail'
+  - 'delete location revisions'
+  - 'delete own webform'
+  - 'delete page revisions'
+  - 'delete webform revisions'
+  - 'edit any announcement content'
+  - 'edit any banner content'
+  - 'edit any event content'
+  - 'edit any location content'
+  - 'edit any page content'
+  - 'edit any webform content'
+  - 'edit own webform'
+  - 'revert all revisions'
+  - 'schedule publishing of nodes'
+  - 'update any media'
+  - 'use editorial transition archive'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition finalize_draft'
+  - 'use editorial transition needs_work'
+  - 'use editorial transition new_draft'
+  - 'use editorial transition new_draft_ready'
+  - 'use editorial transition publish'
+  - 'use editorial transition publish_notify'
+  - 'use editorial transition restore_to_draft'
+  - 'use editorial transition restore_to_published'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format ride_page'
+  - 'use text format summary_fields'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view error messages'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view public CiviMail content'
+  - 'view scheduled content'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view warning messages'
+  - 'view webform submissions own node'

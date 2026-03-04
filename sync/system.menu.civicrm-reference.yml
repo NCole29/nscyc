@@ -1,0 +1,10 @@
+uuid: ce65207f-4dcd-4cbf-80a8-0014910db58c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 5S-hnyxk_B_fZoF-8aQAwZV6dBIEkT7PucWnJgN08i4
+id: civicrm-reference
+label: 'CiviCRM Reference'
+description: ''
+locked: false

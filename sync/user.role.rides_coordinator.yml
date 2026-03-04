@@ -1,0 +1,124 @@
+uuid: a76c1085-4d95-40be-ba5f-a3fed5de5fb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.ride_page
+    - filter.format.summary_fields
+    - node.type.location
+    - node.type.recurring_ride
+    - node.type.ride
+    - workflows.workflow.rides
+  module:
+    - civicrm
+    - civicrm_group_roles
+    - club_ride
+    - club_schedule
+    - comment
+    - contact
+    - content_moderation
+    - contextual
+    - disable_messages
+    - file
+    - filter
+    - help
+    - layout_builder
+    - media
+    - node
+    - paragraphs
+    - quick_node_clone
+    - scheduler
+    - shortcut
+    - smart_date_recur
+    - system
+    - toolbar
+  enforced:
+    module:
+      - club_user
+id: rides_coordinator
+label: 'Rides coordinator'
+weight: -2
+is_admin: false
+permissions:
+  - 'access CiviCRM'
+  - 'access CiviMail'
+  - 'access CiviReport'
+  - 'access Report Criteria'
+  - 'access administration pages'
+  - 'access civicrm group role setting'
+  - 'access comments'
+  - 'access content'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access help pages'
+  - 'access media overview'
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access user contact forms'
+  - 'access user profiles'
+  - 'administer Reports'
+  - 'cancel smart date recur instances'
+  - 'clone recurring_ride content'
+  - 'clone ride content'
+  - 'create and edit custom blocks'
+  - 'create location content'
+  - 'create media'
+  - 'create recurring_ride content'
+  - 'create ride content'
+  - 'delete any location content'
+  - 'delete any recurring_ride content'
+  - 'delete any ride content'
+  - 'delete club_route entity'
+  - 'delete in CiviMail'
+  - 'delete location revisions'
+  - 'delete media'
+  - 'delete recurring_ride revisions'
+  - 'delete ride revisions'
+  - 'edit all contacts'
+  - 'edit any location content'
+  - 'edit any recurring_ride content'
+  - 'edit any ride content'
+  - 'edit club_route entity'
+  - 'edit club_schedule entity'
+  - 'edit groups'
+  - 'edit message templates'
+  - 'make smart dates recur'
+  - 'post comments'
+  - 'reschedule smart date recur instances'
+  - 'revert all revisions'
+  - 'save Report Criteria'
+  - 'schedule publishing of nodes'
+  - 'skip comment approval'
+  - 'update any media'
+  - 'use rides transition archive'
+  - 'use rides transition create_new_draft'
+  - 'use rides transition finalize_draft'
+  - 'use rides transition needs_work'
+  - 'use rides transition publish'
+  - 'use rides transition publish_notify'
+  - 'use rides transition restore_to_draft'
+  - 'use rides transition restore_to_published'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format ride_page'
+  - 'use text format summary_fields'
+  - 'view all contacts'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view club_route entity'
+  - 'view club_schedule entity'
+  - 'view error messages'
+  - 'view latest version'
+  - 'view media'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view public CiviMail content'
+  - 'view scheduled content'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view user email addresses'
+  - 'view warning messages'

@@ -1,0 +1,14 @@
+uuid: 61748912-09f9-46f7-b59a-44ba7b97779d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_page
+_core:
+  default_config_hash: aV5Vr6dw1rrSUyRtEH-PgPFrOEsBDVOJvB4wU6ZLMLk
+name: 'Page access'
+vid: page_access
+description: 'Taxonomy Access Control module grants page permission using these terms.'
+weight: 0
+new_revision: false

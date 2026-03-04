@@ -1,0 +1,32 @@
+uuid: 90569fb7-76c9-4ca9-950e-4d260a73dbfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_3_2
+  module:
+    - crop
+  enforced:
+    module:
+      - responsive_image
+      - club_media
+_core:
+  default_config_hash: hts4JLq9-4dRLo3LtRllXrwqTV09jXrVxVjbktziX9c
+name: gallery
+label: Gallery
+effects:
+  314e9332-d9e3-476f-b4b2-6be77fb1c45c:
+    uuid: 314e9332-d9e3-476f-b4b2-6be77fb1c45c
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_3_2
+      automatic_crop_provider: null
+  bc2e86ea-0a3f-4f8f-bdad-53b977ff3ccc:
+    uuid: bc2e86ea-0a3f-4f8f-bdad-53b977ff3ccc
+    id: image_scale
+    weight: 3
+    data:
+      width: 1058
+      height: 705
+      upscale: false

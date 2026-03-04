@@ -1,0 +1,21 @@
+uuid: fbb3a3e5-dd37-4da0-988a-d466888d75b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_restrooms
+    - node.type.location
+  module:
+    - options
+id: node.location.field_restrooms
+field_name: field_restrooms
+entity_type: node
+bundle: location
+label: Restrooms
+description: 'Indicate if restrooms are available at the ride start. This allows riders to plan a stop in advance, if necessary.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

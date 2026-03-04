@@ -1,0 +1,45 @@
+uuid: 2b0c3165-4dea-4a4d-86e4-7393d3911e11
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.announcement.field_summary
+    - field.field.node.announcement.field_text
+    - node.type.announcement
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - text
+    - user
+  enforced:
+    module:
+      - club_announcement
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+_core:
+  default_config_hash: HXLVD4iF2l39lKF4ZBDoPuiuJPjYECaUhE_n-Gd2_Uc
+id: node.announcement.teaser
+targetEntityType: node
+bundle: announcement
+mode: teaser
+content:
+  field_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_text: true
+  links: true

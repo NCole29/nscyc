@@ -1,0 +1,41 @@
+uuid: 3b745509-5bc4-4038-8df1-47d5d93cb5e6
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+  enforced:
+    module:
+      - club_page
+_core:
+  default_config_hash: lsaltrbU_w7zHvCv-95fvwKvLZdjJQraF0mEARpN9Wc
+id: taxonomy_term.field_position_category
+field_name: field_position_category
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Board members'
+      label: 'Board members'
+    -
+      value: Officers
+      label: Officers
+    -
+      value: Coordinators
+      label: Coordinators
+    -
+      value: 'Ride program coordinators'
+      label: 'Ride program coordinators'
+    -
+      value: 'Recurring ride coordinators'
+      label: 'Recurring ride coordinators'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

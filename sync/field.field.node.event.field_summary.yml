@@ -1,0 +1,26 @@
+uuid: 48a08160-c67a-4be8-bc2a-9449a3db90d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - filter.format.summary_fields
+    - node.type.event
+  module:
+    - text
+_core:
+  default_config_hash: '-YhGZny3XxiHi_-viKEG_Fs4Npu9gLPJklTlSKn0k2Q'
+id: node.event.field_summary
+field_name: field_summary
+entity_type: node
+bundle: event
+label: 'Summary for home page'
+description: "Summary should be brief, but there is no character limit.<br>\r\nTo insert images, click the media icon and \"Choose file\" to upload new or scroll down and select existing image. Select image alignment from the image toolbar (size is fixed). Hover over an image and click arrows to insert text before or after the image.<br>\r\nLinks may optionally be displayed as \"buttons\" using Styles on the toolbar."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - summary_fields
+field_type: text_long

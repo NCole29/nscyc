@@ -1,0 +1,25 @@
+uuid: dec823d6-caeb-4b83-9a6f-bc8e2b34aacc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: TYAqJfIM2ynSDARSYVCNwKeC1S2IgXSmKVKQYQyau4w
+id: node.field_activity
+field_name: field_activity
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,499 @@
+<?php
+
+/**
+ * @file
+ * Module file for the CiviCRM Entity module.
+ */
+
+use Drupal\civicrm_entity\CiviEntityStorage;
+use Drupal\civicrm_entity\Entity\CivicrmEntity;
+use Drupal\civicrm_entity\Hook\EntityAlterHooks;
+use Drupal\civicrm_entity\Hook\EntityHooks;
+use Drupal\civicrm_entity\Hook\FormHooks;
+use Drupal\civicrm_entity\Hook\QueryHooks;
+use Drupal\civicrm_entity\Hook\RulesHooks;
+use Drupal\civicrm_entity\SupportedEntities;
+use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Render\Element;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\Core\Entity\Display\EntityDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_theme().
+ */
+function civicrm_entity_theme() {
+  return [
+    'civicrm_entity_entity_form' => [
+      'render element' => 'form',
+    ],
+    'civicrm_entity' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_type_build().
+ *
+ * Populates supported CiviCRM Entity definitions.
+ */
+#[LegacyHook]
+function civicrm_entity_entity_type_build(array &$entity_types) {
+  \Drupal::service(EntityHooks::class)->entityTypeBuild($entity_types);
+}
+
+/**
+ * Implements hook_entity_bundle_info().
+ */
+#[LegacyHook]
+function civicrm_entity_entity_bundle_info() {
+  return \Drupal::service(EntityHooks::class)->entityBundleInfo();
+}
+
+/**
+ * Implements hook_entity_bundle_field_info().
+ *
+ * This ensures CiviCRM Entity entity types have their field config instances
+ * across all bundles. It's a copy of the Field module's logic, but clones
+ * field config definitions.
+ *
+ * @see field_entity_bundle_field_info()
+ */
+#[LegacyHook]
+function civicrm_entity_entity_bundle_field_info(EntityTypeInterface $entity_type, $bundle, array $base_field_definitions) {
+  return \Drupal::service(EntityHooks::class)->entityBundleFieldInfo($entity_type, $bundle, $base_field_definitions);
+}
+
+/**
+ * Implements hook_entity_view_display_alter().
+ *
+ * There is no way to handle this in the entity type's view builder.
+ */
+#[LegacyHook]
+function civicrm_entity_entity_view_display_alter(EntityViewDisplayInterface $display, array $context) {
+  \Drupal::service(EntityAlterHooks::class)->entityViewDisplayAlter($display, $context);
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_entity_view_alter(array &$build, EntityInterface $entity, EntityDisplayInterface $display) {
+  \Drupal::service(EntityAlterHooks::class)->entityViewAlter($build, $entity, $display);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(FormHooks::class)->formAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function civicrm_entity_module_implements_alter(&$implementations, $hook) {
+  switch ($hook) {
+    case 'form_alter':
+      $group = $implementations['civicrm_entity'];
+      unset($implementations['civicrm_entity']);
+      $implementations['civicrm_entity'] = $group;
+      break;
+  }
+}
+
+/**
+ * Implements callback_allowed_values_function().
+ *
+ * Provides the pseudoconstant values for CiviCRM entity fields.
+ *
+ * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition
+ *   The field storage definition.
+ * @param \Drupal\Core\Entity\FieldableEntityInterface|null $entity
+ *   The entity.
+ * @param bool $cacheable
+ *   If the options are cacheable.
+ *
+ * @return array
+ *   The array of field options.
+ */
+function civicrm_entity_pseudoconstant_options(FieldStorageDefinitionInterface $definition, ?FieldableEntityInterface $entity = NULL, &$cacheable = NULL) {
+  /** @var \Drupal\civicrm_entity\CiviCrmApiInterface $civicrm_api */
+  $civicrm_api = \Drupal::service('civicrm_entity.api');
+  $entity_type = \Drupal::entityTypeManager()->getDefinition($definition->getTargetEntityTypeId());
+  $options = $civicrm_api->getOptions($entity_type->get('civicrm_entity'), $definition->getName());
+  return $options;
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function template_preprocess_civicrm_entity(&$variables) {
+  // Add fields as content to template.
+  $variables += ['content' => []];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  // Add the view_mode to the template.
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  // Add the bundle to the template.
+  $variables['entity_type'] = _civicrm_entity_get_entity_type_from_elements($variables['elements']);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function civicrm_entity_theme_suggestions_civicrm_entity_alter(array &$suggestions, array $variables) {
+  $view_mode = $variables['elements']['#view_mode'];
+  $hook = $variables['theme_hook_original'];
+
+  // Add a suggestion based on the entity type.
+  if ($entity_type = _civicrm_entity_get_entity_type_from_elements($variables['elements'])) {
+    $suggestions[] = $hook . '__' . $entity_type;
+
+    // Add a suggestion based on the view mode.
+    $suggestions[] = $hook . '__' . $entity_type . '__' . $view_mode;
+  }
+}
+
+/**
+ * Helper to find the entity type from $variables['elements'].
+ */
+function _civicrm_entity_get_entity_type_from_elements($elements) {
+  if (isset($elements['#entity_type'])) {
+    return $elements['#entity_type'];
+  }
+
+  // Find the CivicrmEntity from elements if #entity_type is not set.
+  foreach ($elements as $element) {
+    if ($element instanceof CivicrmEntity) {
+      /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $element */
+      return $element->getEntityTypeId();
+    }
+  }
+
+  return NULL;
+}
+
+/**
+ * For stashing deleted entities until we need them later.
+ *
+ * @todo Convert hooks to a service and keep this in a member variable
+ *
+ * @param string $objectName
+ *   The CiviCRM entity type.
+ * @param int $id
+ *   The id.
+ * @param \Drupal\Core\Entity\EntityInterface|null|string $entity
+ *   The entity.
+ *
+ * @return void|\Drupal\Core\Entity\EntityInterface
+ *   The cached entity object.
+ */
+function _civicrm_entity_stash($objectName, $id, $entity = NULL) {
+  $cache =& drupal_static(__FUNCTION__, []);
+  if (empty($entity)) {
+    return $cache[$objectName][$id] ?? NULL;
+  }
+  elseif ($entity === 'clear') {
+    unset($cache[$objectName][$id]);
+  }
+  else {
+    $cache[$objectName][$id] = $entity;
+  }
+}
+
+/**
+ * Implements hook_civicrm_pre().
+ */
+function civicrm_entity_civicrm_pre($op, $objectName, $id, &$params) {
+  if (\Drupal::config('civicrm_entity.settings')->get('disable_hooks')) {
+    return;
+  }
+
+  $operations = ['create', 'edit', 'delete', 'restore'];
+  if (!in_array($op, $operations)) {
+    return;
+  }
+
+  $entityType = SupportedEntities::getEntityType($objectName);
+
+  // Check valid entity type.
+  if (!$entityType) {
+    return;
+  }
+
+  // Disable hook per entity type settings.
+  $disable_hooks_per_type = \Drupal::config('civicrm_entity.settings')->get('disable_hooks_per_type');
+  if (!empty($disable_hooks_per_type[$entityType])) {
+    return;
+  }
+
+  /** @var \Drupal\civicrm_entity\CiviEntityStorage $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage($entityType);
+
+  if ($op == 'create') {
+    /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $entity */
+    $entity = $storage->create($params);
+  }
+  elseif (empty($id)) {
+    // Sometimes 'delete' is called with an $id of NULL, but we can't really do
+    // anything with that in this context, so return.
+    return;
+  }
+  else {
+    // Special handling for EntityTag objects.
+    if ($objectName == 'EntityTag') {
+      if (isset($params['entity_id']) && isset($params['entity_table'])) {
+        $id = $storage->getEntityTagEntityId($params['entity_id'], $params['entity_table']);
+      }
+      else {
+        $id = $storage->getEntityTagEntityId($params[0][0], $params[1]);
+      }
+    }
+    /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $entity */
+    $entity = $storage->load($id);
+  }
+  if (!$entity) {
+    return;
+  }
+  if ($entity->id()) {
+    $entity->original = $storage->loadUnchanged($entity->id());
+  }
+
+  switch ($op) {
+    case 'create':
+      $storage->civiPreSave($entity);
+      break;
+
+    case 'delete':
+      $storage->civiPreDelete($entity);
+      _civicrm_entity_stash($objectName, $id, $entity);
+      break;
+
+    case 'restore':
+      $storage->civiPreSave($entity);
+      break;
+
+    case 'edit':
+      $storage->civiPreSave($entity);
+      break;
+  }
+}
+
+/**
+ * Implements hook_civicrm_post().
+ */
+function civicrm_entity_civicrm_post($op, $objectName, $objectId, &$objectRef) {
+  if (\Drupal::config('civicrm_entity.settings')->get('disable_hooks')) {
+    return;
+  }
+
+  $operations = ['create', 'edit', 'delete', 'restore'];
+  if (!in_array($op, $operations)) {
+    return;
+  }
+
+  $entityType = SupportedEntities::getEntityType($objectName);
+
+  // Check valid entity type.
+  if (!$entityType) {
+    return;
+  }
+
+  // Disable hook per entity type settings.
+  $disable_hooks_per_type = \Drupal::config('civicrm_entity.settings')->get('disable_hooks_per_type');
+  if (!empty($disable_hooks_per_type[$entityType])) {
+    return;
+  }
+
+  /** @var \Drupal\civicrm_entity\CiviEntityStorage $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage($entityType);
+
+  // Fix because $objectId is not set for participant payments, possibly other
+  // entity types.
+  if (!$objectId) {
+    // If we cannot determine the id, bail.
+    if (empty($objectRef->id)) {
+      return;
+    }
+    $objectId = $objectRef->id;
+  }
+
+  if ($op == 'delete') {
+    /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $entity */
+    $entity = _civicrm_entity_stash($objectName, $objectId);
+  }
+  else {
+    // Special handling for EntityTag objects.
+    if ($entityType == 'civicrm_entity_tag' && is_array($objectRef)) {
+      foreach ($objectRef[0] as $entityTag) {
+        $object = new CRM_Core_BAO_EntityTag();
+        $object->entity_id = $entityTag;
+        $object->entity_table = 'civicrm_contact';
+        $object->tag_id = $objectId;
+        if ($object->find(TRUE)) {
+          /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $entity */
+          $entity = $storage->load($object->id);
+          $entity->original = $storage->loadUnchanged($entity->id());
+          _civicrm_entity_post_invoke($op, $storage, $entity);
+        }
+      }
+      return;
+    }
+    /** @var \Drupal\civicrm_entity\Entity\CivicrmEntity $entity */
+    $entity = $storage->load($objectId);
+    if ($entity) {
+      $entity->original = $storage->loadUnchanged($entity->id());
+    }
+  }
+  if ($entity) {
+    _civicrm_entity_post_invoke($op, $storage, $entity);
+  }
+  _civicrm_entity_stash($objectName, $objectId, 'clear');
+}
+
+/**
+ * Invokes the post save hooks for a CiviCRM entity.
+ *
+ * @param string $op
+ *   The operation being performed.
+ * @param \Drupal\civicrm_entity\CiviEntityStorage $storage
+ *   The entity storage.
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity.
+ */
+function _civicrm_entity_post_invoke($op, CiviEntityStorage $storage, EntityInterface $entity) {
+  switch ($op) {
+    case 'create':
+      $storage->civiPostSave($entity, FALSE);
+      break;
+
+    case 'delete':
+      $storage->civiPostDelete($entity);
+      break;
+
+    case 'restore':
+      $storage->civiPostSave($entity, TRUE);
+      break;
+
+    case 'edit':
+      $storage->civiPostSave($entity, TRUE);
+      break;
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  \Drupal::service(QueryHooks::class)->viewsQueryAlter($view, $query);
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function civicrm_entity_theme_registry_alter(&$theme_registry) {
+  $theme_registry['civicrm_entity']['preprocess functions'][] = 'field_group_build_entity_groups';
+}
+
+/**
+ * Implements hook_rebuild().
+ *
+ * This resets the field storage and entity type definitions for civicrm_entity
+ * according to the active definitions to avoid mismatches since the definitions
+ * are not necessary to be updated.
+ */
+#[LegacyHook]
+function civicrm_entity_rebuild() {
+  \Drupal::service(EntityHooks::class)->rebuild();
+}
+
+/**
+ * Implements hook_rules_action_info_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_rules_action_info_alter(&$rules_actions) {
+  \Drupal::service(RulesHooks::class)->rulesActionInfoAlter($rules_actions);
+}
+
+/**
+ * Implements hook_civicrm_merge().
+ */
+function civicrm_entity_civicrm_merge($mode, &$sqls, $mainId = NULL, $otherId = NULL, $tables = NULL) {
+  if ($mode == 'sqls' && !empty($mainId) && !empty($otherId)) {
+    // Get List if civicrm contact entity reference field.
+    $entityRefFields = \Drupal::entityTypeManager()->getStorage('field_storage_config')
+      ->loadByProperties([
+        'type' => 'entity_reference',
+        'settings' => ['target_type' => 'civicrm_contact'],
+      ]);
+
+    // Iterate fields and prepare the array.
+    foreach ($entityRefFields as $entityRefField) {
+      // Get Field name.
+      $fieldName = $entityRefField->getName();
+      // Get Type, Node etc..
+      $entityRefType = $entityRefField->getTargetEntityTypeId();
+      $options[$entityRefType][] = $fieldName;
+    }
+
+    foreach ($options as $type => $fields) {
+      foreach ($fields as $field) {
+        try {
+          // $otherId is duplicate contact ID
+          $ids = \Drupal::entityQuery($type)
+            ->condition($field, $otherId, '=')
+            ->accessCheck(FALSE)
+            ->execute();
+          if (!empty($ids)) {
+            $entityRecords = Drupal::entityTypeManager()->getStorage($type)
+              ->loadMultiple($ids);
+            foreach ($entityRecords as $entityRecord) {
+              // Update new contact.
+              // Target Contact.
+              try {
+                $entityRecord->set($field, $mainId);
+                $entityRecord->save();
+              }
+              catch (\Exception $e) {
+                \Drupal::logger('civicrm_entity')->error($e->getMessage());
+              }
+            }
+          }
+        }
+        catch (\Exception $e) {
+          \Drupal::logger('civicrm_entity')->error($e->getMessage());
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_query_pathauto_bulk_update_alter(AlterableInterface $query) {
+  \Drupal::service(QueryHooks::class)->queryPathautoBulkUpdateAlter($query);
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+#[LegacyHook]
+function civicrm_entity_query_pathauto_bulk_delete_alter(AlterableInterface $query) {
+  \Drupal::service(QueryHooks::class)->queryPathautoBulkDeleteAlter($query);
+}

@@ -1,0 +1,13 @@
+uuid: f8557897-0283-49a9-9fb8-e42b0f60875d
+langcode: en
+status: true
+dependencies: {  }
+id: change_status
+label: 'Change status'
+category: General
+likert: false
+options: |-
+  rejected: Rejected
+  pending: Pending
+  completed: Completed
+  deployed: Deployed

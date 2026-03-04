@@ -1,0 +1,51 @@
+_core:
+  default_config_hash: tL9xuN0xf22P9zPLwOSnlq17jg0nL-i6hVH1KkNxLd0
+definitions:
+  contact__site_page:
+    menu_name: footer
+    parent: ''
+    weight: 0
+    expanded: false
+    enabled: false
+  masquerade__unmasquerade:
+    enabled: false
+    menu_name: account
+    parent: ''
+    expanded: false
+    weight: -50
+  club_contacts__admin__structure__settings:
+    menu_name: admin
+    parent: 'menu_link_content:5b3136d9-da74-4285-836c-74a92ef5022a'
+    weight: 0
+    expanded: false
+    enabled: true
+  club_schedule__admin__structure__settings:
+    menu_name: admin
+    parent: 'menu_link_content:5b3136d9-da74-4285-836c-74a92ef5022a'
+    weight: 0
+    expanded: false
+    enabled: true
+  civicrm_group_roles__admin_config_civicrm__civicrm_group_roles:
+    enabled: false
+    menu_name: admin
+    parent: civicrm.admin_config_civicrm
+    expanded: false
+    weight: 0
+  'admin_toolbar_tools__extra_links:user__admin_create':
+    enabled: false
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    weight: 0
+  user__page:
+    weight: -48
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true
+  user__logout:
+    weight: -47
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true

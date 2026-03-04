@@ -1,0 +1,27 @@
+uuid: d04fcf55-6bae-4e9e-9c52-c0d55f8ea5c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.recurring_ride
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: HKRf7smjCPkQMxHnnIuy84NZZqmg6Cuo99kyCjD8e1c
+id: node.recurring_ride.promote
+field_name: promote
+entity_type: node
+bundle: recurring_ride
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

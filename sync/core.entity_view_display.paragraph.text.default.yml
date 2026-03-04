@@ -1,0 +1,27 @@
+uuid: 9b17f673-d96d-461b-8417-b868cd995331
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.text.field_text
+    - paragraphs.paragraphs_type.text
+  module:
+    - text
+  enforced:
+    module:
+      - club_paragraph
+_core:
+  default_config_hash: 8IxssDrEltNc-sHggTOMy6U62sZVr1kXcQdsv6cc4CM
+id: paragraph.text.default
+targetEntityType: paragraph
+bundle: text
+mode: default
+content:
+  field_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

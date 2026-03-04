@@ -1,0 +1,21 @@
+uuid: 1bb802dd-e892-4d08-b3bc-3f4a6b99e521
+langcode: en
+status: true
+dependencies: {  }
+id: months_abbrev
+label: 'Months (abbrev)'
+category: 'Date and time'
+likert: false
+options: |-
+  '01': Jan
+  '02': Feb
+  '03': Mar
+  '04': Apr
+  '05': May
+  '06': Jun
+  '07': Jul
+  '08': Aug
+  '09': Sep
+  10: Oct
+  11: Nov
+  12: Dec

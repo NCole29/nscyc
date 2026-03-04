@@ -1,0 +1,14 @@
+uuid: 4950efd4-5137-4b75-a8d6-67d3a0753f33
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.member
+  module:
+    - user
+id: user_add_role_action.member
+label: 'Add the Member role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: member

@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: 5nraRLH7Kj7F8i2798sMIio0j2ymMTfxLcd6cxgYf0A
+sync_method:
+  - login
+  - cron
+  - update
+cron_limit: 150

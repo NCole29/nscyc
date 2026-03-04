@@ -1,0 +1,12 @@
+uuid: ab05a7c9-9636-4542-811e-890fef97c9f2
+langcode: en
+status: true
+dependencies: {  }
+id: moderators
+label: Moderators
+recipients:
+  - moderators@nscyc.org
+reply: ''
+weight: 0
+message: ''
+redirect: ''

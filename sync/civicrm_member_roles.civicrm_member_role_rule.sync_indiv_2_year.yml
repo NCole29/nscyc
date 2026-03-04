@@ -1,0 +1,18 @@
+uuid: 87f4c561-493b-43e4-8b76-aeff2acca423
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: C9zDw08Yg8BCc7B3-cVxcwf08IpoqQsvNW_lU_DOOhc
+id: sync_indiv_2_year
+label: 'Sync Indiv 2 year'
+role: member
+type: '2'
+current:
+  1: '1'
+  2: '2'
+expired:
+  4: '4'
+  5: '5'
+  6: '6'
+  7: '7'

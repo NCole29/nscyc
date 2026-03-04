@@ -1,0 +1,23 @@
+uuid: 2be5c5b5-1c03-4ced-b3e4-d4e86903bfe2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: 5Ffmz78ZghgrNQ_qZAsHUQmFJRJRU-ulvYSvqsPCN4k
+id: node.field_multiple_times
+field_name: field_multiple_times
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,17 @@
+uuid: 29d1e13e-8034-4bfe-83f8-41369c7bd417
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: nT3PhBp_nZMCSfykRti1obYlHKx4eDOYT87PeykwJnc
+id: crop_16_9
+label: 'Crop 16:9'
+description: 'Landscape format.'
+aspect_ratio: '16:9'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

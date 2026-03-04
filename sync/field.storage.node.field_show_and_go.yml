@@ -1,0 +1,23 @@
+uuid: 3c48fa3c-63c0-4776-b258-a92902352b25
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: QMKLRXcliivC32vHnZuyFRS4XtTYTWRlUIudlZmROW4
+id: node.field_show_and_go
+field_name: field_show_and_go
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

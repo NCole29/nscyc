@@ -1,0 +1,14 @@
+uuid: 22aca531-371e-43b3-a3e3-408e7d71fda8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: '-h9ruV3txxFXljhXa3WsCD-zBxF_HoHns_jyuh482hA'
+id: membership
+label: Membership
+recipients:
+  - membership@nscyc.org
+reply: ''
+weight: 0
+message: ''
+redirect: ''

@@ -1,0 +1,6 @@
+administer permission spreadsheet:
+  title: 'Administer permission spreadsheet'
+import permission spreadsheet:
+  title: 'Import permission spreadsheet'
+export permission spreadsheet:
+  title: 'Export permission spreadsheet'

@@ -1,0 +1,12 @@
+{*
+ +--------------------------------------------------------------------+
+ | Copyright CiviCRM LLC. All rights reserved.                        |
+ |                                                                    |
+ | This work is published under the GNU AGPLv3 license with some      |
+ | permitted exceptions and without any warranty. For full license    |
+ | and copyright information, see https://civicrm.org/licensing       |
+ +--------------------------------------------------------------------+
+*}
+{htxt id='upload_type'}
+<p>{ts}You can also <strong>Upload</strong> the content stored in the files. OR you can <strong>Compose</strong> content directly on the screen.{/ts}</p>
+{/htxt}

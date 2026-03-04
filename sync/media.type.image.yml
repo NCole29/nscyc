@@ -1,0 +1,19 @@
+uuid: 18908b78-56de-4a1b-9fce-5f4e13edeab9
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: Nr_Gli9BKXipV5n4_41LOiB03LT_P69s2VV6btmAbpE
+id: image
+label: Image
+description: 'Use local images for reusable media.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_media_image
+field_map:
+  name: name

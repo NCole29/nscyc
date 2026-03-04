@@ -1,0 +1,29 @@
+uuid: ec4a9d13-f8ac-49c3-afda-7951af7191ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.restricted_file.field_media_file_1
+    - media.type.restricted_file
+  module:
+    - file
+_core:
+  default_config_hash: E6IyYy6VrUxgiGTTFbOqecohnRkWQm4c8rJEbI-wpeA
+id: media.restricted_file.default
+targetEntityType: media
+bundle: restricted_file
+mode: default
+content:
+  field_media_file_1:
+    type: file_default
+    label: visually_hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

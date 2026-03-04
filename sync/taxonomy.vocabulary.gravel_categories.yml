@@ -1,0 +1,9 @@
+uuid: 2378c3b3-3e74-4e6e-a1ee-51b1bd44e932
+langcode: en
+status: true
+dependencies: {  }
+name: 'Gravel categories'
+vid: gravel_categories
+description: null
+weight: 0
+new_revision: false

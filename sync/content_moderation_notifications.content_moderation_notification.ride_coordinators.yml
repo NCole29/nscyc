@@ -1,0 +1,18 @@
+uuid: 77f38b67-75a1-483f-a507-23a2bbad29b4
+langcode: en
+status: false
+dependencies: {  }
+id: ride_coordinators
+workflow: rides
+transitions:
+  finalize_draft: finalize_draft
+roles:
+  rides_coordinator: rides_coordinator
+author: false
+site_mail: false
+emails: ''
+subject: 'Review: [node:title]'
+body:
+  value: "<p>Rides coordinator,</p>\r\n\r\n<p>Please review and approve&nbsp;<strong>[node:title]</strong> at&nbsp;[node:url],&nbsp;authored by&nbsp;[current-user:account-name].</p>\r\n\r\n<p>Transition the content to <strong>Published </strong>or back to <strong>Draft.</strong>&nbsp;Leave comments in the Revision Log if returning to <strong>Draft</strong>.</p>\r\n\r\n<p>The revision log message, if filled, is shown below:&nbsp;</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Request ride publication'

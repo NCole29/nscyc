@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+id: feedback
+label: 'Website feedback'
+recipients:
+  - info@example.org
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''

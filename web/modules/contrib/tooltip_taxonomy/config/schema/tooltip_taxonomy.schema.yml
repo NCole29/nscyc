@@ -1,0 +1,69 @@
+tooltip_taxonomy.filter_condition.*:
+  type: config_entity
+  label: 'Filter condition config'
+  mapping:
+    cid:
+      type: string
+      label: 'ID'
+    name:
+      type: label
+      label: 'Condition name'
+    weight:
+      type: integer
+      label: 'Weight'
+    vids:
+      type: sequence
+      label: 'Vocabulary selected'
+      sequence:
+        type: string
+    path:
+      type: mapping
+      label: 'Path Settings'
+      mapping:
+        id:
+          type: string
+          label: 'Path ID'
+        pages:
+          type: string
+          label: 'Pages'
+        negate:
+          type: integer
+          label: 'Negate'
+    contentTypes:
+      type: mapping
+      label: 'Content Types'
+      mapping:
+        id:
+          type: string
+          label: 'Content Type ID'
+        bundles:
+          type: sequence
+          label: 'Bundles'
+          sequence:
+            type: string
+        negate:
+          type: integer
+          label: 'Negate'
+    field:
+      type: sequence
+      label: 'Field'
+      nullable: true
+      sequence:
+        type: string
+    view:
+      type: sequence
+      label: 'View Modes'
+      nullable: true
+      sequence:
+        type: string
+    formats:
+      type: sequence
+      label: 'Text Formats'
+      sequence:
+        type: string
+    allowed_html_tags:
+      type: string
+      label: 'Allowed HTML Tags'
+    excluded_tags:
+      type: string
+      label: 'Excluded tag names for replacement'

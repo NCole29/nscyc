@@ -1,0 +1,73 @@
+uuid: 0ee03479-08b7-4638-a039-790bf217513a
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - filter.format.ride_page
+    - node.type.location
+    - node.type.recurring_ride
+    - node.type.ride
+    - workflows.workflow.rides
+  module:
+    - club_ride
+    - club_schedule
+    - comment
+    - contact
+    - content_moderation
+    - disable_messages
+    - filter
+    - media
+    - node
+    - quick_node_clone
+    - smart_date_recur
+    - system
+    - toolbar
+    - webform_node
+  enforced:
+    module:
+      - club_user
+id: ride_leader
+label: 'Ride leader'
+weight: -3
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content overview'
+  - 'access toolbar'
+  - 'access user contact forms'
+  - 'cancel smart date recur instances'
+  - 'change own username'
+  - 'clone recurring_ride content'
+  - 'clone ride content'
+  - 'create location content'
+  - 'create media'
+  - 'create recurring_ride content'
+  - 'create ride content'
+  - 'delete own location content'
+  - 'delete own recurring_ride content'
+  - 'delete own ride content'
+  - 'edit own location content'
+  - 'edit own recurring_ride content'
+  - 'edit own ride content'
+  - 'enter waivers'
+  - 'make smart dates recur'
+  - 'post comments'
+  - 'reschedule smart date recur instances'
+  - 'skip comment approval'
+  - 'use rides transition create_new_draft'
+  - 'use rides transition finalize_draft'
+  - 'use text format full_html'
+  - 'use text format ride_page'
+  - 'view club_schedule entity'
+  - 'view error messages'
+  - 'view latest version'
+  - 'view location revisions'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view recurring_ride revisions'
+  - 'view ride revisions'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view warning messages'
+  - 'view webform submissions any node'

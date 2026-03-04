@@ -1,0 +1,23 @@
+uuid: 5ac5dc61-a34c-400a-9f2b-9694dbb26071
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.ride
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: MPJtllj-y4WNSjRH8Gg4srq2CyUfYD_OW9O56Q_AjzI
+id: node.ride.title
+field_name: title
+entity_type: node
+bundle: ride
+label: 'Ride name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

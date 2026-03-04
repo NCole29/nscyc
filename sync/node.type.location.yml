@@ -1,0 +1,22 @@
+uuid: 76fe6c6c-83cb-4104-bd2b-822a28a2adaa
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+  enforced:
+    module:
+      - club_location
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+_core:
+  default_config_hash: Gc9GqKfYsxOvc4TT7o3HugZovCy8jP_WhXlF9EC0FeI
+name: Location
+type: location
+description: '<em>Locations</em> are addresses available for selection when posting rides and events. They are automatically geocoded for mapping.'
+help: "<strong>Locations</strong> are automatically geocoded for mapping and available for selection when creating rides and events.\r\n<br><br>"
+new_revision: false
+preview_mode: 1
+display_submitted: false

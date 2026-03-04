@@ -1,0 +1,22 @@
+uuid: 7add9306-be31-4ec2-a531-be77774e1440
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: ride
+label: Ride
+type: 'canonical_entities:node'
+pattern: 'ride/[node:title]'
+selection_criteria:
+  0f5ff1e5-41da-4127-a6a0-4116244d753e:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 0f5ff1e5-41da-4127-a6a0-4116244d753e
+    context_mapping:
+      node: node
+    bundles:
+      ride: ride
+selection_logic: and
+weight: -5
+relationships: {  }

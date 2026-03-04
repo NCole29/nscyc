@@ -1,0 +1,31 @@
+kint.settings:
+  type: config_object
+  label: 'Kint settings'
+  mapping:
+    early_enable:
+      type: boolean
+      label: 'Enable dumps before authentication'
+    date_format:
+      type: string
+      label: 'Format for date in dump footer'
+      nullable: true
+    use_kint_trace_in_devel:
+      type: boolean
+      label: "Use kint's trace instead of devel's in ddebug_backtrace"
+    rich_theme:
+      type: string
+      label: 'Rich renderer theme'
+
+kint.helper.*:
+  type: config_object
+  label: 'Kint helper definition'
+  mapping:
+    renderer:
+      type: string
+      label: 'FQDN of renderer to use'
+    cli_detection:
+      type: boolean
+      label: "Whether to dump with the CLI renderer if Kint detects you're in CLI mode"
+    mode:
+      type: string
+      label: 'Dumping mode'

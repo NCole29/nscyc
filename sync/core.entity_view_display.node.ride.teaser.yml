@@ -1,0 +1,243 @@
+uuid: f88decf5-0728-44e4-ab71-b3cd55b4deb8
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.ride.field_activity
+    - field.field.node.ride.field_additional_information
+    - field.field.node.ride.field_based_on
+    - field.field.node.ride.field_cancel
+    - field.field.node.ride.field_date
+    - field.field.node.ride.field_dayofweek
+    - field.field.node.ride.field_description
+    - field.field.node.ride.field_developed_by
+    - field.field.node.ride.field_gravel_category
+    - field.field.node.ride.field_location
+    - field.field.node.ride.field_lunch_place
+    - field.field.node.ride.field_lunch_same
+    - field.field.node.ride.field_master
+    - field.field.node.ride.field_multiple_times
+    - field.field.node.ride.field_registration
+    - field.field.node.ride.field_registration_form
+    - field.field.node.ride.field_registration_free_form
+    - field.field.node.ride.field_registration_link
+    - field.field.node.ride.field_results_access
+    - field.field.node.ride.field_ride_leader
+    - field.field.node.ride.field_ride_picture
+    - field.field.node.ride.field_rwgps_routes
+    - field.field.node.ride.field_schedule_date
+    - field.field.node.ride.field_show_and_go
+    - field.field.node.ride.field_time
+    - node.type.ride
+  module:
+    - datetime
+    - layout_builder
+    - layout_builder_restrictions
+    - link
+    - options
+    - text
+    - user
+    - webform
+  enforced:
+    module:
+      - club_ride
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+_core:
+  default_config_hash: t-vnDNuO9DG_AXQl8WYIImwM8k6TfWDlENyvTzAxHwk
+id: node.ride.teaser
+targetEntityType: node
+bundle: ride
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_activity:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_additional_information:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_based_on:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  field_cancel:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: '<h3>CANCELLED</h3>'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: long
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_dayofweek:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_description:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_location:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_lunch_place:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  field_lunch_same:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_master:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  field_registration:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_registration_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_registration_free_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_registration_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_results_access:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_ride_leader:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_rwgps_routes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_show_and_go:
+    type: boolean
+    label: hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: 'No ride leader'
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_time:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  field_day: true
+  field_developed_by: true
+  field_gravel_category: true
+  field_multiple_times: true
+  field_ride_picture: true
+  field_schedule_date: true
+  links: true

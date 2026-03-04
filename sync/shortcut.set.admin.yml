@@ -1,0 +1,11 @@
+uuid: 03c9365c-dad3-4411-b70e-f4b465ce3022
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_user
+_core:
+  default_config_hash: 1ypASZbNF2o5eI4itpxd5-ezxvSYyPUsDEU3j4HhzaE
+id: admin
+label: Admin

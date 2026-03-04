@@ -1,0 +1,28 @@
+uuid: 39b9597a-4ef9-4c0f-95e7-e8381fd9fa7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_multiple_times
+    - node.type.recurring_ride
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: szDAXsuNc8W8oyDmnafw0WbGEm_O6gZIRxvjjxdslhY
+id: node.recurring_ride.field_multiple_times
+field_name: field_multiple_times
+entity_type: node
+bundle: recurring_ride
+label: 'Multiple start times?'
+description: "Check to make <em>Time</em> field visible. Enter earliest time in date field and all times/conditions in <em>Time</em> field. \r\n<br>Multiple times may depend on time of year, route distance, or other condition.\r\n<br><strong>You must MANAGE INSTANCES in the Date field to set time corresponding with the information in this field.</strong>"
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

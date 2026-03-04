@@ -1,0 +1,24 @@
+uuid: 7dbd9160-7d8f-4187-8eb1-91b511df5004
+langcode: en
+status: true
+dependencies:
+  module:
+    - address
+    - node
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: 7-94DM9QyNh70YwqgYlXsFPJ5L6UNVgm3P_ZO0buGpo
+id: node.field_address
+field_name: field_address
+entity_type: node
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

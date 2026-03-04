@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: nUOA4CCVtUW-1MK3cRXSHXwCL1CKzj7lXWp4LnPyS5Y
+exclude:
+  node: {  }
+  paragraph: {  }
+text_to_prepend_to_title: ''
+clone_status: true
+create_group_relationships: true

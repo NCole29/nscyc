@@ -1,0 +1,19 @@
+{*
+ +--------------------------------------------------------------------+
+ | Copyright CiviCRM LLC. All rights reserved.                        |
+ |                                                                    |
+ | This work is published under the GNU AGPLv3 license with some      |
+ | permitted exceptions and without any warranty. For full license    |
+ | and copyright information, see https://civicrm.org/licensing       |
+ +--------------------------------------------------------------------+
+*}
+{htxt id="content-intro"}
+<p>{ts}You can choose to send BOTH an <strong>HTML</strong> and a plain <strong>TEXT</strong> version of your mailing, OR you can send a <strong>TEXT</strong> version only.{/ts}</p>
+<p>{ts}If you create only an <strong>HTML</strong> version, CiviMail will automatically create a <strong>TEXT</strong> version for your recipients who have chosen NOT to receive HTML email.{/ts}</p>
+<h1>{ts}Required Elements{/ts}</h1>
+<p>{ts}CiviMail email messages must include an <strong>opt-out</strong> link ("Opt out via web page"), and the <strong>postal address</strong> of your organization. These elements help reduce the chances of your email being categorized as SPAM. They can be included in the main message body OR in a re-usable <strong>message footer</strong>. Refer to the online documentation for details on how to include required links and contact information as well as sample messages.{/ts} {docURL page="Sample CiviMail Messages" resource="wiki"}</p>
+{/htxt}
+
+{htxt id='email_comment'}
+{ts}You can add a message that will appear at the top of the invoice email. This message will be the same for all recipients.{/ts}
+{/htxt}

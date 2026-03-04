@@ -1,0 +1,10 @@
+role:
+  anonymous: default
+  authenticated: default
+  administrator: admin
+  ride_leader: ride-leaders
+  rides_coordinator: ride-leaders
+  editor: default
+  civicrm: default
+  site_admin: default
+  member: default

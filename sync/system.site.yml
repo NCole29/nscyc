@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+langcode: en
+uuid: e2b5de68-1666-450c-b1d0-affbb5a7c49a
+name: 'North Shore Cyclists'
+mail: info@nscyc.org
+slogan: 'The Best Cycling North of Boston'
+page:
+  403: /node/280
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: ''

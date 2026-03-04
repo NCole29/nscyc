@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ */
+#}
+
+{%
+  set classes = [
+   'login-form',
+ ]
+%}
+
+<h3>Change email address and password</h3> 
+<form{{ attributes.addClass(classes) }}>
+  {{ children }}
+</form>

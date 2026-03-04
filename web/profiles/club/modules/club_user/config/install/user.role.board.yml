@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: board
+label: Board
+weight: 10
+is_admin: null
+permissions: {  }

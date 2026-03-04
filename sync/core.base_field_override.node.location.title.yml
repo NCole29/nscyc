@@ -1,0 +1,23 @@
+uuid: 98a44a17-d6bc-4f15-9fb3-c6c3d2ec76da
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.location
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: b6r-ynTjCssMqWaNCA4YJUnw__ifHzGuEunlMCUDnJY
+id: node.location.title
+field_name: title
+entity_type: node
+bundle: location
+label: 'Place name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,17 @@
+bundle_types:
+  - node--forum--comment_forum
+available_alerts:
+  1: true
+  2: false
+enable_default:
+  watcher: '0'
+  entity_author: true
+mail_templates:
+  watcher:
+    node:
+      subject: '[site:name] :: new comment on [node:title]'
+      body: "Hi [comment-subscribed:author],\r\n\r\n[comment:author] commented on: \"[node:title]\"\r\n\r\n----\r\n[comment:title]\r\n[comment:body]\r\n----\r\n\r\nView the comment at [comment:url]\r\n\r\nStop receiving emails when someone replies to this post by visiting [comment-subscribed:unsubscribe-url]\r\n\r\n-- [site:name] team\r\n[site:url]\r\n"
+  entity_author:
+    node:
+      subject: '[site:name] :: new comment for your post'
+      body: "Hi [node:author],\r\n\r\nYou have received a comment on: \"[node:title]\"\r\n\r\n----\r\n[comment:title]\r\n[comment:body]\r\n----\r\n\r\nView the comment at [comment:url]\r\n\r\nYou currently receive emails like this for all replies to your posts. \r\nTo disable this, log in and uncheck \"Receive content follow-up notification e-mails\" at [node:author:edit-url].\r\n\r\n\r\n-- [site:name] team\r\n[site:url]\r\n"

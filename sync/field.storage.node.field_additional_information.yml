@@ -1,0 +1,24 @@
+uuid: 9091acf4-2a33-4a93-8c71-057597d28e08
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: nHtnRx4RFciCrNuiQSTnb2N5u3w5WdtcMJ5NJwNKp5w
+id: node.field_additional_information
+field_name: field_additional_information
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,31 @@
+uuid: 2d07d882-35f4-4210-9289-282bd7b0d9a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_4_3
+  module:
+    - crop
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: VBf4XY1LEkn6wnBOR7DZKu74syzQC0450SHMCITofQ4
+name: large_4_3
+label: 'Large - (768 wide) with crop 4:3'
+effects:
+  e051acef-d8a1-4983-a700-a70eb0856971:
+    uuid: e051acef-d8a1-4983-a700-a70eb0856971
+    id: crop_crop
+    weight: 3
+    data:
+      crop_type: crop_4_3
+      automatic_crop_provider: null
+  6e9fa75b-8056-47e4-a2d5-4230d484236d:
+    uuid: 6e9fa75b-8056-47e4-a2d5-4230d484236d
+    id: image_scale
+    weight: 3
+    data:
+      width: 768
+      height: null
+      upscale: false

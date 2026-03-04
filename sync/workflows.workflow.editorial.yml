@@ -1,0 +1,134 @@
+uuid: 5b2b7dfc-17e6-4e87-a78a-a0a460f244cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+    - node.type.event
+    - node.type.page
+    - node.type.webform
+  module:
+    - content_moderation
+id: editorial
+label: Editorial
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: 3
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: -4
+      published: false
+      default_revision: false
+    needs_work:
+      label: 'Needs work (notified author)'
+      weight: 0
+      published: false
+      default_revision: false
+    new_draft:
+      label: 'New draft (of published page)'
+      weight: -2
+      published: false
+      default_revision: false
+    new_draft_ready:
+      label: 'New draft ready for review'
+      weight: -1
+      published: false
+      default_revision: false
+    publish_and_notify:
+      label: 'Published (notified author)'
+      weight: 1
+      published: true
+      default_revision: true
+    published:
+      label: Published
+      weight: 2
+      published: true
+      default_revision: true
+    ready_for_review:
+      label: 'Ready for review'
+      weight: -3
+      published: false
+      default_revision: false
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - publish_and_notify
+        - published
+      to: archived
+      weight: 2
+    create_new_draft:
+      label: 'Create new draft'
+      from:
+        - draft
+        - needs_work
+      to: draft
+      weight: -5
+    finalize_draft:
+      label: 'Finalize draft'
+      from:
+        - draft
+        - needs_work
+      to: ready_for_review
+      weight: -4
+    needs_work:
+      label: 'Needs work'
+      from:
+        - new_draft_ready
+        - ready_for_review
+      to: needs_work
+      weight: -1
+    new_draft:
+      label: 'New draft'
+      from:
+        - new_draft
+        - publish_and_notify
+        - published
+      to: new_draft
+      weight: -3
+    new_draft_ready:
+      label: 'New draft ready'
+      from:
+        - new_draft
+        - publish_and_notify
+        - published
+      to: new_draft_ready
+      weight: -2
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 1
+    publish_notify:
+      label: 'Publish & notify'
+      from:
+        - new_draft_ready
+        - ready_for_review
+      to: publish_and_notify
+      weight: 0
+    restore_to_draft:
+      label: 'Restore to draft'
+      from:
+        - archived
+      to: draft
+      weight: 3
+    restore_to_published:
+      label: 'Restore to published'
+      from:
+        - archived
+      to: published
+      weight: 4
+  entity_types:
+    node:
+      - announcement
+      - event
+      - page
+      - webform
+  default_moderation_state: draft

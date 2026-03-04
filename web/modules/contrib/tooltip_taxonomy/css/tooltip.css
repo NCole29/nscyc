@@ -1,0 +1,56 @@
+.tx-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 2px dashed #0070c9;
+  cursor: help;
+}
+
+.tx-tooltip .tx-tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #fff;
+  color: #222;
+  text-align: left;
+  border-radius: 6px;
+  border: 2px solid #0070c9;
+  padding: 0.5rem 0.3rem;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+.tx-tooltip .tx-tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 0.8rem;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent #0070c9 transparent transparent;
+}
+.tx-tooltip:hover .tx-tooltip-text,
+.tx-tooltip:focus .tx-tooltip-text {
+  visibility: visible;
+}
+
+.tx-tooltip .tx-tooltip {
+  border: none;
+}
+
+.tx-tooltip:hover .tx-tooltip-text .tx-tooltip .tx-tooltip-text,
+.tx-tooltip:focus .tx-tooltip-text .tx-tooltip .tx-tooltip-text {
+  visibility: hidden;
+}

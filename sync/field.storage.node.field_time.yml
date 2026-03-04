@@ -1,0 +1,26 @@
+uuid: 814d34ac-5f28-4dea-8270-d857f1fb4c17
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: j7n_MupNx8XJHPUN3ei6ux6ozz7-1C8Wgck_F_Xt73o
+id: node.field_time
+field_name: field_time
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: 52d5ec83-c35c-48bd-8996-17de8fd11428
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dayofweek
+    - node.type.recurring_dates
+id: node.recurring_dates.field_dayofweek
+field_name: field_dayofweek
+entity_type: node
+bundle: recurring_dates
+label: 'Day of week'
+description: 'Integer equal to 0 (Sunday) to 6 (Saturday). Field is used to display Weekday and Weekend rides on home page (Rides view), and by Club Schedule module. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

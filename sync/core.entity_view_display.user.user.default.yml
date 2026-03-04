@@ -1,0 +1,25 @@
+uuid: f3cdf2e8-da3b-4c65-bb1f-e52c0a61fb29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.user_picture
+  module:
+    - user
+  enforced:
+    module:
+      - club_user
+_core:
+  default_config_hash: 9_byWsZYSoMm-9UbEIE5unh0oLVtW3BoSpZx2X-3rv4
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  member_for:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  user_picture: true

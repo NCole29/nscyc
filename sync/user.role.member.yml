@@ -1,0 +1,31 @@
+uuid: aea6759b-69d6-4775-af6a-740ce5725268
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - contact
+    - disable_messages
+    - file
+    - system
+    - webform_node
+  enforced:
+    module:
+      - club_user
+_core:
+  default_config_hash: MWdEK832cY4CO5y2fcWCRDjiVTy5sEtqqYFWUpA6Efw
+id: member
+label: Member
+weight: -7
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access user contact forms'
+  - 'delete own files'
+  - 'post comments'
+  - 'skip comment approval'
+  - 'view error messages'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view warning messages'
+  - 'view webform submissions own node'

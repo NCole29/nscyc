@@ -1,0 +1,29 @@
+uuid: db5f9114-9437-4174-bad0-4719cf885272
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_recurid
+    - node.type.recurring_dates
+    - node.type.recurring_ride
+id: node.recurring_dates.field_recurid
+field_name: field_recurid
+entity_type: node
+bundle: recurring_dates
+label: 'Recurring ride ID'
+description: "Node ID for recurring ride\r\n"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      recurring_ride: recurring_ride
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

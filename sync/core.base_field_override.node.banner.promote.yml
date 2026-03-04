@@ -1,0 +1,27 @@
+uuid: 9db33c8b-a2cf-4fe4-b177-a5cc8a7a1fb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.banner
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: Oqu9LOccbzTksc_i1ncJbRNHdCsMHc_fhTtBw4mmlko
+id: node.banner.promote
+field_name: promote
+entity_type: node
+bundle: banner
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

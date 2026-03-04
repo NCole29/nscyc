@@ -1,0 +1,209 @@
+_core:
+  default_config_hash: ALrmD1SCpEpTvkP6L2jqsOPnHOGPciQIIu3lgtjGHtU
+filter_format: plain_text
+enabled_entity_types:
+  civicrm_activity: civicrm_activity
+  civicrm_address: civicrm_address
+  civicrm_contact: civicrm_contact
+  civicrm_contribution: civicrm_contribution
+  civicrm_contribution_page: civicrm_contribution_page
+  civicrm_custom_field: civicrm_custom_field
+  civicrm_custom_group: civicrm_custom_group
+  civicrm_email: civicrm_email
+  civicrm_entity_financial_trxn: civicrm_entity_financial_trxn
+  civicrm_entity_tag: civicrm_entity_tag
+  civicrm_event: civicrm_event
+  civicrm_financial_account: civicrm_financial_account
+  civicrm_financial_trxn: civicrm_financial_trxn
+  civicrm_financial_type: civicrm_financial_type
+  civicrm_group: civicrm_group
+  civicrm_group_contact: civicrm_group_contact
+  civicrm_mailing: civicrm_mailing
+  civicrm_membership: civicrm_membership
+  civicrm_membership_payment: civicrm_membership_payment
+  civicrm_membership_type: civicrm_membership_type
+  civicrm_option_value: civicrm_option_value
+  civicrm_participant: civicrm_participant
+  civicrm_participant_payment: civicrm_participant_payment
+  civicrm_participant_status_type: civicrm_participant_status_type
+  civicrm_phone: civicrm_phone
+  civicrm_price_field: civicrm_price_field
+  civicrm_price_field_value: civicrm_price_field_value
+  civicrm_price_set: civicrm_price_set
+  civicrm_tag: civicrm_tag
+disable_hooks: false
+enable_links_per_type:
+  civicrm_activity:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_address:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_contact:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_contribution:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_contribution_page:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_custom_field:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_custom_group:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_email:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_entity_financial_trxn:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_entity_tag:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_event:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_financial_account:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_financial_trxn:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_financial_type:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_group:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_group_contact:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_mailing:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_membership:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_membership_payment:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_membership_type:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_option_value:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_participant:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_participant_payment:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_participant_status_type:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_phone:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_price_field:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_price_field_value:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_price_set:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_tag:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete

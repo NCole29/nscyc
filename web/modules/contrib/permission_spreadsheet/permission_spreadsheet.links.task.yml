@@ -1,0 +1,9 @@
+permission_spreadsheet.import:
+  title: 'Import'
+  route_name: permission_spreadsheet.import
+  base_route: permission_spreadsheet.import
+
+permission_spreadsheet.export:
+  title: 'Export'
+  route_name: permission_spreadsheet.export
+  base_route: permission_spreadsheet.import

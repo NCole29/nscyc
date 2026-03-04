@@ -1,0 +1,12 @@
+name: 'Webform CiviCRM'
+type: module
+description: 'Webform CiviCRM Integration'
+core_version_requirement: ^9.4 || ^10
+package: 'CiviCRM'
+dependencies:
+  - drupal:webform
+
+# Information added by Drupal.org packaging script on 2025-06-03
+version: '6.3.1'
+project: 'webform_civicrm'
+datestamp: 1748980966

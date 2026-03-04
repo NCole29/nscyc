@@ -1,0 +1,8 @@
+uuid: 212348ca-a746-482b-80f3-eeae8f133073
+langcode: en
+status: true
+dependencies: {  }
+id: club-reports
+label: 'Club Reports'
+description: ''
+locked: false

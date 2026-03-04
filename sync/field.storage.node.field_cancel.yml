@@ -1,0 +1,23 @@
+uuid: 8e5dba94-1c97-4f71-952c-e0132b26dec1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: l-rFBn0YScBJvJgMRTUwPJ3b3jPdHaMPHe2HUB1EgI8
+id: node.field_cancel
+field_name: field_cancel
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

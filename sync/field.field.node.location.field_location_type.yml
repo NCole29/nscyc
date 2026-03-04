@@ -1,0 +1,34 @@
+uuid: 4ba70874-e80f-4f0a-a462-234e8571e1c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_type
+    - node.type.location
+    - taxonomy.vocabulary.locations
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: N7cbwXtQtPtHWbGrvPSO3fNcbcZp3_U4QHxrrMGsjRE
+id: node.location.field_location_type
+field_name: field_location_type
+entity_type: node
+bundle: location
+label: 'Type of location'
+description: "Type is used to filter locations on maps and lists. Use <strong>Remote ride start</strong> for locations outside the club's usual area; the homepage map excludes remote locations. "
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      locations: locations
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

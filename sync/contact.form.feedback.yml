@@ -1,0 +1,14 @@
+uuid: 0573554c-8d92-4dd5-bfc8-6a35b609149b
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: KWThslHZmn7v5dFvy-n_GVF9Oc8kpOcnO5Z_g32TCXc
+id: feedback
+label: 'Website feedback'
+recipients:
+  - info@nscyc.org
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''

@@ -1,0 +1,23 @@
+permission_spreadsheet.settings:
+  path: '/admin/config/people/permission_spreadsheet'
+  defaults:
+    _form: '\Drupal\permission_spreadsheet\Form\SettingsForm'
+    _title: 'Permission spreadsheet settings'
+  requirements:
+    _permission: 'administer permission spreadsheet'
+
+permission_spreadsheet.import:
+  path: '/admin/people/permissions/spreadsheet/import'
+  defaults:
+    _form: '\Drupal\permission_spreadsheet\Form\ImportForm'
+    _title: 'Import permission spreadsheet'
+  requirements:
+    _permission: 'import permission spreadsheet'
+
+permission_spreadsheet.export:
+  path: '/admin/people/permissions/spreadsheet/export'
+  defaults:
+    _form: '\Drupal\permission_spreadsheet\Form\ExportForm'
+    _title: 'Export permission spreadsheet'
+  requirements:
+    _permission: 'export permission spreadsheet'

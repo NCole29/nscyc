@@ -1,0 +1,29 @@
+uuid: ebbfc891-7202-46cc-ac62-b0ae81be079b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file_1
+    - media.type.restricted_file
+  module:
+    - file
+_core:
+  default_config_hash: p11kHd_7OGjuatfWVr0TfL-GTO1-klcR_5dAsWC_Frs
+id: media.restricted_file.field_media_file_1
+field_name: field_media_file_1
+entity_type: media
+bundle: restricted_file
+label: File
+description: 'Use restricted file only for documents containing sensitive information.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]'
+  file_extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt key numbers pages'
+  max_filesize: '5 MB'
+  description_field: true
+field_type: file

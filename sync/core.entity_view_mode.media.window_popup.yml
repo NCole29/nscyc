@@ -1,0 +1,13 @@
+uuid: cdb259fc-69b3-4f32-bac5-7d54995e44cb
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: kjB-7nA8tee_f3SjOh-bI9yspmslPQ5yXxPoEkINei4
+id: media.window_popup
+label: 'Popup window'
+description: ''
+targetEntityType: media
+cache: true

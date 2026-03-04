@@ -1,0 +1,14 @@
+defaults:
+  amount:
+    status: true
+    settings:
+      amount: 5
+  created:
+    status: true
+    settings:
+      age: 6
+  drafts:
+    status: false
+    settings:
+      age: 1
+disable_automatic_queueing: false

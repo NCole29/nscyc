@@ -1,0 +1,47 @@
+uuid: 3d8fd5b3-7344-4831-ac10-dabed70f9b38
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.webform_default
+  module:
+    - civicrm
+    - civicrm_member_roles
+    - club_ride
+    - contact
+    - disable_messages
+    - file
+    - filter
+    - media
+    - system
+    - webform
+_core:
+  default_config_hash: HeegsNVAED12WUr6vli8LX3yY0AwpKqvagV0JBG4Ntw
+id: authenticated
+label: 'Authenticated user'
+weight: -9
+is_admin: false
+permissions:
+  - 'access CiviMail subscribe/unsubscribe pages'
+  - 'access all custom data'
+  - 'access civicrm member role setting'
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'access uploaded files'
+  - 'access user contact forms'
+  - 'delete own files'
+  - 'edit my contact'
+  - 'make online contributions'
+  - 'profile create'
+  - 'profile edit'
+  - 'profile view'
+  - 'register for events'
+  - 'use text format webform_default'
+  - 'view club_route entity'
+  - 'view error messages'
+  - 'view event info'
+  - 'view event participants'
+  - 'view media'
+  - 'view own webform submission'
+  - 'view status messages'
+  - 'view warning messages'

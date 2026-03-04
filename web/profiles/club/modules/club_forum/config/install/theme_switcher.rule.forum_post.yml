@@ -1,0 +1,17 @@
+uuid: 2ecbfca3-3dd7-427a-a2a5-86c0b6cba991
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: forum_post
+label: 'Forum post'
+weight: 0
+theme: clubtheme
+admin_theme: clubtheme
+conjunction: or
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/node/add/forum*'

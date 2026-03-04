@@ -1,0 +1,55 @@
+uuid: 7c7bbd60-f461-4e80-bf95-e4b01091dabe
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - scheduler
+  enforced:
+    module:
+      - club_event
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 5
+    created:
+      status: true
+      settings:
+        age: 6
+    drafts:
+      status: false
+      settings:
+        age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+_core:
+  default_config_hash: IT2w0M8R-akIPHuSW86ktF-x6AbKEApzviiE9jWU-A0
+name: Event
+type: event
+description: "<em>Events</em> may be used for free or paid events, with or without registration.<br>\r\n-- Events are listed on the calendar and shown on the home page through the date of the event (Events sidebar and optional summary).<br>\r\n-- The \"Free event\" registration form may be used for multiple events; results for EACH event are on the Results tab of the event page."
+help: "<em>Events</em> are displayed on the Calendar and the Event sidebar on the home page.<br>\r\n<li>Registration may be added for free or paid events.</li>\r\n<li>If <strong>Promoted to front page</strong>, the Summary is displayed on the home page with the registration link, if applicable, thru the day of the event.</li><br>"
+new_revision: true
+preview_mode: 1
+display_submitted: false

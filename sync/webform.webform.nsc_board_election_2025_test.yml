@@ -1,0 +1,311 @@
+uuid: 3a4894db-2506-4e85-8756-33e24a2db83c
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 874
+template: false
+archive: false
+id: nsc_board_election_2025_test
+title: 'NSC Board Election 2025'
+description: '<p>Voting for 2025 board</p>'
+categories: {  }
+elements: |-
+  markup_06:
+    '#type': webform_markup
+    '#markup': '<p>Read the candidate profiles <a href="https://www.nscyc.org/board-candidate-profiles-2026" target="_blank">HERE</a> and vote for the officers and directors below.</p>'
+  markup_01:
+    '#type': webform_markup
+    '#markup': '<h3>OFFICERS</h3>'
+  markup_05:
+    '#type': webform_markup
+    '#display_on': both
+    '#markup': '<p>Vote for officer positions by clicking the radio button next to their name.'
+  president:
+    '#type': radios
+    '#title': President
+    '#options':
+      - 'Brad Westbrook -- '
+      - 'Donald Duck -- '
+    '#wrapper_type': form_element
+    '#label_attributes': null
+  vicepresident:
+    '#type': radios
+    '#options':
+      - 'Don Foley'
+    '#title': 'Vice President'
+    '#wrapper_type': form_element
+  treasurer:
+    '#type': radios
+    '#options':
+      - 'Jeff King'
+    '#title': Treasurer
+    '#wrapper_type': form_element
+  secretary:
+    '#type': radios
+    '#options':
+      - 'Joan Pilch'
+    '#title': Secretary
+    '#wrapper_type': form_element
+  clerk:
+    '#type': radios
+    '#options':
+      - 'Jim Goldberg'
+    '#title': Clerk
+    '#wrapper_type': form_element
+  markup:
+    '#type': webform_markup
+    '#markup': '<h3>BOARD OF DIRECTORS</h3>'
+  markup_04:
+    '#type': webform_markup
+    '#markup': '<div>Vote for four Board of Directors candidates by clicking the checkbox next to their names.&nbsp;</div>'
+  candidate_1:
+    '#type': checkbox
+    '#title': 'Ralph Haseler (incumbent)'
+  candidate_2:
+    '#type': checkbox
+    '#title': 'Karen Lee (incumbent)'
+  candidate_3:
+    '#type': checkbox
+    '#title': 'Mark Shamon (incumbent)'
+  candidate_4:
+    '#type': checkbox
+    '#title': 'Tom Swanson (incumbent)'
+  candidate_5:
+    '#type': checkbox
+    '#title': 'Paula Figelski (incumbent)'
+  candidate_6:
+    '#type': checkbox
+    '#title': 'Jennifer Peat (incumbent)'
+  mickey:
+    '#type': checkbox
+    '#title': 'Micky Mouse'
+  minnie_mouse:
+    '#type': checkbox
+    '#title': 'Minnie Mouse'
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': Submit
+    '#reset_hide': true
+css: ' .webform-submission-information {display: none}'
+javascript: ''
+settings:
+  ajax: true
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: /nsc_board_election_2025
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: false
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns:
+    - serial
+    - created
+    - remote_addr
+    - sid
+    - label
+    - completed
+    - changed
+    - element__president
+    - element__vicepresident
+    - element__treasurer
+    - element__secretary
+    - element__clerk
+    - element__candidate_1
+    - element__candidate_2
+    - element__candidate_3
+    - element__candidate_4
+    - element__candidate_5
+    - element__candidate_6
+    - element__mickey
+    - element__minnie_mouse
+    - operations
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: 'Preview Submission'
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements:
+    markup02: markup02
+    markup_01: markup_01
+    markup_05: markup_05
+    markup: markup
+    markup_04: markup_04
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: '<p>Your ballot has been submitted. Thank you for voting in the 2026 NSC Board Election.</p>'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: true
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users:
+      - 55
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles:
+      - authenticated
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles:
+      - authenticated
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles:
+      - administrator
+      - site_admin
+    users: {  }
+    permissions: {  }
+  test:
+    roles:
+      - administrator
+      - site_admin
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles:
+      - administrator
+      - site_admin
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

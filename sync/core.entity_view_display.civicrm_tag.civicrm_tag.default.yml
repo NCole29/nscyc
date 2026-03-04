@@ -1,0 +1,62 @@
+uuid: bb8789a7-4409-454f-827c-0923b4b4dda5
+langcode: en
+status: true
+dependencies:
+  module:
+    - civicrm_entity
+    - datetime
+    - options
+_core:
+  default_config_hash: l7DBpqAoMhbag6bUd9EQgpQ-Plnsot3sVSQ7Q1XMWRE
+id: civicrm_tag.civicrm_tag.default
+targetEntityType: civicrm_tag
+bundle: civicrm_tag
+mode: default
+content:
+  color:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  created_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: day_and_date
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  used_for:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created_id: true
+  id: true
+  is_reserved: true
+  is_selectable: true
+  is_tagset: true
+  parent_id: true

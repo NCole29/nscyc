@@ -1,0 +1,13 @@
+name: 'Club Leader'
+type: module
+description: 'Provides Leader entity type and related configuration.'
+package: Club
+core_version_requirement: ^9 || ^10
+dependencies:
+  - club:club_user
+  - drupal:datetime
+  - drupal:options
+  - drupal:taxonomy
+  - drupal:views
+  - drupal:user
+  - views_infinite_scroll:views_infinite_scroll

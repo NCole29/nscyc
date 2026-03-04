@@ -1,0 +1,125 @@
+uuid: 7dd0e9f2-ca6e-4609-8d74-c3f94c1d2b7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.basic
+    - block_content.type.paragraphs_block
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.summary_fields
+    - filter.format.webform_default
+    - node.type.announcement
+    - node.type.banner
+    - node.type.event
+    - node.type.location
+    - node.type.page
+    - node.type.webform
+    - workflows.workflow.editorial
+  module:
+    - block
+    - block_content
+    - content_moderation
+    - contextual
+    - disable_messages
+    - file
+    - filter
+    - help
+    - media
+    - menu_admin_per_menu
+    - node
+    - paragraphs
+    - quick_node_clone
+    - scheduler
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+    - webform_node
+id: content_creator
+label: 'Content creator'
+weight: -1
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access block library'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access help pages'
+  - 'access own webform configuration'
+  - 'access shortcuts'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'administer blocks'
+  - 'administer main menu items'
+  - 'clone announcement content'
+  - 'clone banner content'
+  - 'clone event content'
+  - 'clone location content'
+  - 'clone page content'
+  - 'clone webform content'
+  - 'create announcement content'
+  - 'create banner content'
+  - 'create basic block content'
+  - 'create event content'
+  - 'create location content'
+  - 'create media'
+  - 'create page content'
+  - 'create paragraphs_block block content'
+  - 'create webform'
+  - 'create webform content'
+  - 'delete all revisions'
+  - 'delete any basic block content'
+  - 'delete any paragraphs_block block content'
+  - 'delete media'
+  - 'delete own announcement content'
+  - 'delete own banner content'
+  - 'delete own event content'
+  - 'delete own files'
+  - 'delete own location content'
+  - 'delete own page content'
+  - 'delete own webform'
+  - 'delete own webform content'
+  - 'delete webform submissions own node'
+  - 'edit any basic block content'
+  - 'edit any paragraphs_block block content'
+  - 'edit own announcement content'
+  - 'edit own banner content'
+  - 'edit own event content'
+  - 'edit own location content'
+  - 'edit own page content'
+  - 'edit own webform'
+  - 'edit own webform content'
+  - 'revert all revisions'
+  - 'schedule publishing of nodes'
+  - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition finalize_draft'
+  - 'use editorial transition new_draft'
+  - 'use editorial transition new_draft_ready'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format summary_fields'
+  - 'use text format webform_default'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view any basic block content history'
+  - 'view any paragraphs_block block content history'
+  - 'view any unpublished content'
+  - 'view error messages'
+  - 'view event revisions'
+  - 'view latest version'
+  - 'view media'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view scheduled content'
+  - 'view status messages'
+  - 'view unpublished paragraphs'
+  - 'view warning messages'
+  - 'view webform revisions'
+  - 'view webform submissions own node'

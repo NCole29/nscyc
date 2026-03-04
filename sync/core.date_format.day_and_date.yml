@@ -1,0 +1,10 @@
+uuid: a0d61fd8-b677-4f1a-b13f-95927e567247
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: XZ0SawN_6DCQtPfDlDatINAOyjl2FztiN4MRBwRNIhY
+id: day_and_date
+label: 'Day and date'
+locked: false
+pattern: 'l - F j, Y'

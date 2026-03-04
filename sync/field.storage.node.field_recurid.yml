@@ -1,0 +1,19 @@
+uuid: 4489c871-9fcc-42bc-9c84-548f09cbf8c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_recurid
+field_name: field_recurid
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

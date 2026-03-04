@@ -1,0 +1,13 @@
+type: module
+name: Kint
+description: 'Kint dump tool, drupal configs, and devel integration'
+package: Development
+core_version_requirement: ^9 || ^10 || ^11 || ^12
+configure: kint.form
+tags:
+  - developer
+
+# Information added by Drupal.org packaging script on 2026-01-27
+version: '2.3.3'
+project: 'kint'
+datestamp: 1769536756

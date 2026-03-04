@@ -1,0 +1,8 @@
+uuid: 9de7328c-c21d-4b88-882d-7b6ef056b60b
+langcode: en
+status: true
+dependencies: {  }
+id: ride_leaders
+label: 'Ride leaders'
+role: ride_leader
+group: '13'

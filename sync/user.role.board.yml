@@ -1,0 +1,16 @@
+uuid: 2cbd4f74-ef4b-4255-8eb1-602ef8eb513c
+langcode: en
+status: true
+dependencies:
+  module:
+    - disable_messages
+_core:
+  default_config_hash: 4J6HbHdjOdEoLyEPR2K8og_BYqyesu51KiGqqM6fCaA
+id: board
+label: Board
+weight: -6
+is_admin: false
+permissions:
+  - 'view error messages'
+  - 'view status messages'
+  - 'view warning messages'

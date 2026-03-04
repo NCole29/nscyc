@@ -1,0 +1,22 @@
+uuid: 148b9f55-6b41-478e-900d-3a9ebf3bbb24
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: recurring_dates
+label: 'Recurring dates'
+type: 'canonical_entities:node'
+pattern: 'ride/[node:title]/[node:field_date:date:html_date]'
+selection_criteria:
+  a36ff545-d823-4c6a-8bf4-5480f552a908:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a36ff545-d823-4c6a-8bf4-5480f552a908
+    context_mapping:
+      node: node
+    bundles:
+      recurring_dates: recurring_dates
+selection_logic: and
+weight: -5
+relationships: {  }

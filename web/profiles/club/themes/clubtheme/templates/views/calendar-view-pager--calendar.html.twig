@@ -1,0 +1,50 @@
+{#
+/**
+ * Override Calendar Pager template. Original displayed only MONTH between pagers.
+ * Here, use items['current'] which is 'Current March 2024' and slice function to remove 'Current'.
+ *
+ * Important: `js-pager__items` class is required for Ajax.
+ *
+ * @see template_preprocess_calendar_view_pager()
+ */
+#}
+{%
+  set classes = [
+    'pager__items',
+    'js-pager__items',
+    'calendar-view-pager',
+  ]
+%}
+
+{#
+  $variables['items']['current'] = [
+    '#type' => 'item',
+    '#markup' => $current_label,
+    '#attributes' => [
+      'aria-label' => t('Current @date', [
+        '@date' => $date_formatter->format($current, 'custom', 'F Y'),
+      ]),
+    ],
+  ];
+#}
+
+
+{% if items|length %}
+  <ul {{ attributes.addClass(classes) }}>
+    {% for key,item in items|without('reset') %}
+
+      {% if item['#type'] == 'item' %}
+        <li class="pager__item {{ 'pager__' ~ key|clean_class }}"><h3>{{ items['current']['#attributes']['aria-label'][8:] }}</h3></li>
+      {% else %}
+        <li class="pager__item {{ 'pager__' ~ key|clean_class }}">{{- item -}}</li>
+      {% endif %}
+
+    {% endfor %}
+  </ul>
+
+  {% if items.reset %}
+    <div class="calendar-view-pager__reset">
+      {{- items.reset -}}
+    </div>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,19 @@
+uuid: 8961b88c-0aa6-4b90-a167-60ee95eed0cf
+langcode: en
+status: true
+dependencies:
+  module:
+    - club
+  enforced:
+    module:
+      - webform
+name: 'Webform (Default) - DO NOT EDIT'
+format: webform_default
+weight: 100
+filters:
+  filter_maplink:
+    id: filter_maplink
+    provider: club
+    status: true
+    weight: 0
+    settings: {  }

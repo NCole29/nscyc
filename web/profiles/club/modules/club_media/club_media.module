@@ -1,0 +1,102 @@
+<?php
+
+use Drupal\club\ImageCategory;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\media\Entity\Media;
+use Drupal\node\Entity\Node;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function club_media_views_pre_render(ViewExecutable $view) {
+
+  // If view is banner and display is grid.
+  if ($view->id() == "banner" &&
+     ($view->current_display == 'gallery_home' || $view->current_display == 'gallery_other')) {
+
+      // Condition on total_rows>0 because block layout includes both gallery & banner views
+      if ($view->total_rows > 0) {
+        // Dynamically set column options equal to #images (total_rows).
+        $view->getStyle()->options['columns'] = $view->total_rows;
+
+        // Get value of field_gallery_padding
+        $padding = $view->result[0]->_entity->field_padding->getValue()[0]['value'];
+
+        // Dynamically apply padding css
+        if ($padding == 0) {
+          $view->getStyle()->options['col_class_custom'] = 'gallery-pad';
+        } else {
+          $view->getStyle()->options['col_class_custom'] = 'gallery-nopad';
+        }
+      }
+    }
+  }
+
+/**
+ * Implements hook_node_presave().
+ *
+ */
+function club_media_node_presave(EntityInterface $node) {
+
+  if ($node->bundle() == 'banner') {
+
+    // Load image entities (Limit = unlimited).
+    $entities = $node->get('banner_image')->referencedEntities();
+
+    foreach ($entities as $key => $entity) {
+      $mid = $entity->id();  // Media ID.
+
+      $media = Media::load($mid);
+      $alt = $media->get('thumbnail')[0]->get('alt')->getString();
+
+      if ($alt) {
+        $media->set('name',$alt)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_file_download().
+ */
+function club_media_file_download($uri) {
+
+  // Control access to Restricted files from private filesystem.
+  if (substr($uri,0,7) == 'private') {
+
+    // If user is logged in
+    if (\Drupal::currentUser()->isAuthenticated()) {
+      // Check if current user is admin or coordinator.
+      $currentAdmin = 0;
+      $admin_roles = ['administrator','civicrm','editor','site_admin','rides_coordinator'];
+
+      $user_roles = \Drupal::currentUser()->getRoles(); // Returns array. User may have multiple roles.
+
+      foreach($admin_roles as $admin) {
+        if ( in_array($admin, $user_roles) ) {
+          $currentAdmin = 1;
+        }
+      }
+      if ($currentAdmin) {
+          $files = \Drupal::entityTypeManager()
+            ->getStorage('file')
+            ->loadByProperties(array('uri' => $uri));
+          $file = get_mangled_object_vars($file);
+          $file = reset($files);
+          return file_get_content_headers($file);
+      } else {
+        // Logged in users who are not "admin"
+        $message = t("You don't have access to restricted files.");
+        \Drupal::messenger()->addWarning($message);
+        return -1;
+      }
+    } else {
+      // Anonymous users
+      $message = t("You don't have access to restricted files.");
+      \Drupal::messenger()->addWarning($message);
+      return -1;
+    }
+  }
+}

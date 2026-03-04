@@ -1,0 +1,14 @@
+uuid: 379c0118-78ff-4105-ad6c-6201d2c4a8d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.civicrm
+  module:
+    - user
+id: user_remove_role_action.civicrm
+label: 'Remove the Membership Coordinator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: civicrm

@@ -1,0 +1,27 @@
+uuid: 5593aef7-827a-40f0-a3f8-b888fd79a308
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_lunch_same
+field_name: field_lunch_same
+entity_type: node
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: 'Same as starting location'
+    -
+      value: 1
+      label: 'Other, enter below'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

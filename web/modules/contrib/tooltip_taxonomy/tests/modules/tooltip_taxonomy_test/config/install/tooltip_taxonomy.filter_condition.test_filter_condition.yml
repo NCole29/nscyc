@@ -1,0 +1,12 @@
+id: test_filter_condition
+label: 'Test Filter Condition'
+weight: 0
+vids:
+  - tooltip_test_vocabulary
+path: ''
+contentTypes:
+  - page
+fields:
+  - body
+view_modes: {  }
+formats: {  }

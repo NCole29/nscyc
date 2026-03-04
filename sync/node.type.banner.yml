@@ -1,0 +1,36 @@
+uuid: 893598b4-155d-4317-9ea1-adb7d14e89b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - scheduler
+  enforced:
+    module:
+      - club_media
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: ZNdrfNR5nBK-QnojdcE1Rk_dXAI88pqhHbIYKgxPv44
+name: 'Home page banner'
+type: banner
+description: '<em>Banner</em> displays one or more images across the top of the <strong>home page</strong>.'
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: false

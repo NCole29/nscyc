@@ -1,0 +1,382 @@
+uuid: c881b79e-81c7-459a-a0a8-19d4db37e7d6
+langcode: en
+status: closed
+dependencies:
+  module:
+    - honeypot
+    - webform_options_limit
+third_party_settings:
+  honeypot:
+    honeypot: true
+_core:
+  default_config_hash: 70J2TCgr9E37ezrGJd3Vw237hgU7ZqSnPOsHxXL_BiE
+weight: 0
+open: null
+close: null
+uid: 1
+template: true
+archive: false
+id: century_volunteers
+title: 'Century Volunteer Signup'
+description: '<p><small>Click <strong>Build </strong>to edit positions&nbsp;and T-shirt field.</small><br><small>Click <strong>Settings</strong> and then at top of page:</small><br><small>&nbsp; - click&nbsp;<strong>Emails/Handlers </strong>to edit sign-up limits</small><br><small>&nbsp; - click <strong>Confirmation </strong>to edit the Confirmation message</small><br><small>Duplicate this form if making substantial changes.</small><br><small>Create or clone a <strong>Webform&nbsp;</strong>page and select this "registration&nbsp;form."</small><br><em><small>The same webform may be used multiple times (with or without changes) without clearing results because results are associated with the webform page.</small></em></p>'
+categories:
+  - 'Volunteer signup'
+elements: |-
+  civicrm_1_contact_1_fieldset_fieldset:
+    '#type': fieldset
+    '#title': 'Contact information'
+    '#title_display': invisible
+    contactinfo_header:
+      '#type': webform_markup
+      '#markup': '<h3>Contact Information</h3>'
+    civicrm_1_contact_1_contact_existing:
+      '#type': civicrm_contact
+      '#title': 'Existing Contact'
+      '#widget': hidden
+      '#none_prompt': '+ Create new +'
+      '#results_display':
+        display_name: display_name
+      '#allow_url_autofill': false
+      '#allow_create': 1
+      '#contact_type': individual
+      '#form_key': civicrm_1_contact_1_contact_existing
+      '#parent': civicrm_1_contact_1_fieldset_fieldset
+      '#extra': {  }
+    flexbox:
+      '#type': webform_flexbox
+      civicrm_1_contact_1_contact_first_name:
+        '#type': textfield
+        '#counter_type': character
+        '#counter_maximum': 64
+        '#counter_maximum_message': ' '
+        '#contact_type': individual
+        '#form_key': civicrm_1_contact_1_contact_first_name
+        '#extra':
+          width: 20
+        '#parent': civicrm_1_contact_1_fieldset_fieldset
+        '#title': 'First Name'
+        '#required': true
+      civicrm_1_contact_1_contact_last_name:
+        '#type': textfield
+        '#counter_type': character
+        '#counter_maximum': 64
+        '#counter_maximum_message': ' '
+        '#contact_type': individual
+        '#form_key': civicrm_1_contact_1_contact_last_name
+        '#extra':
+          width: 20
+        '#parent': civicrm_1_contact_1_fieldset_fieldset
+        '#title': 'Last Name'
+        '#required': true
+    civicrm_1_contact_1_contact_user_id:
+      '#type': hidden
+      '#form_key': civicrm_1_contact_1_contact_user_id
+      '#parent': civicrm_1_contact_1_fieldset_fieldset
+      '#extra': {  }
+      '#title': 'User ID'
+    civicrm_1_contact_1_email_email:
+      '#type': email
+      '#title': Email
+  flexbox_01:
+    '#type': webform_flexbox
+  positions_header:
+    '#type': webform_markup
+    '#markup': '<h3>Positions</h3>'
+  positions:
+    '#type': checkboxes
+    '#title': Positions
+    '#title_display': invisible
+    '#options':
+      'Parking Lot attendants: 6 am to 9 am': 'Parking Lot attendants: 6 am to 9 am -- Manage the parking areas for safety'
+      'Registration: 6am-9am': 'Registration: 6am-9am -- Sign in pre-registered participants and hand them their BSC jerseys and help set up the area'
+      'Rest Stop Set Up and Supply distribution: 6:30am-9am': 'Rest Stop Set Up and Supply distribution: 6:30am-9am -- Work with the Rest Stop set up crew and the box truck to set up rest stops 2, 3 and 4 and to distribute supplies and set up the tables and canopies.'
+      'Set Up Triton Lunch Area: 8:30am-9:30am': 'Set Up Triton Lunch Area: 8:30am-9:30am -- Includes working with Mark Shamon setting up the large canopy, kitchen area, tables and chairs'
+      'Runner for the Day': 'Runner for the Day -- Assist with the Rest Stop Crew distributing the supplies, be available at Triton to run to rest stops when/if needed, assist at Triton with other needs'
+      'Rest Stop 1: Sanborn Memorial School - 7:30am-11:15am': 'Rest Stop 1: Sanborn Memorial School - 7:30am-11:15am -- Join Karen and Jeff Ontell and Neal Schuster to engage with and serve the century riders.'
+      'Rest Stop 2: Maudslay State Park - 7:30am to 11:15am ': 'Rest Stop 2: Maudslay State Park - 7:30am to 11:15am  -- Join Faith Delaney to engage with and serve primarily the riders riding the 35, 50, metric and 80 mile routes'
+      'Rest Stop 3: Newbury Elementary - 8am-1:15pm': 'Rest Stop 3: Newbury Elementary - 8am-1:15pm -- Join Lenny DeBenedictus and Candy Mulligan to engage with and serve primarily the century riders.'
+      'Rest Stop 4: Bradley Palmer - 9am-12pm': 'Rest Stop 4: Bradley Palmer - 9am-12pm -- Join Mark Shamon to engage with and serve the metric, 80 mile and century riders.'
+      'Rest Stop 4: Bradley Palmer - 12pm-3:15pm': 'Rest Stop 4: Bradley Palmer - 12pm-3:15pm -- Join Hillary Benson and Joe Hedrick to engage with and serve the metric, 80 mile and century riders.'
+      'Roving sag: 7am-4pm ': 'Roving sag: 7am-4pm  -- Along with Jim Goldberg to be available on the road to assist riders'' non-emergency needs; mainly retrieving riders who can''t continue.'
+      'Triton Lunch Crew: 10am-2pm': 'Triton Lunch Crew: 10am-2pm -- Assist Tony Salerno with food prep and engaging with and serving riders.'
+      'Triton Lunch Crew: 2pm-5pm': 'Triton Lunch Crew: 2pm-5pm -- Assist Tony Salerno with food prep and engaging with and serving riders.'
+      'Final Rider Sweep ': 'Final Rider Sweep  -- Drive the routes that have not been swept at 5 pm to be sure all riders have completed the ride. '
+      Arrowing: 'Arrowing -- Work with the arrowing Ray Best to arrow the 5 Blazing Saddles routes'
+      'Shut Down Triton: 4pm - 5pm': 'Shut Down Triton: 4pm - 5pm -- Be part of the team to close and clean Triton'
+      'Administrative Tasks that arise': 'Administrative Tasks that arise -- Mainly affixing labels to the rider wristbands'
+      'Communication and promotion': 'Communication and promotion -- Promoting the Century on other clubs FaceBook pages and websites where possible'
+    '#options__properties': ''
+    '#required': true
+  tshirt_size:
+    '#type': select
+    '#title': 'T-shirt size (first-time volunteers)'
+    '#options':
+      S: S
+      M: M
+      L: L
+      XL: XL
+      XXL: XXL
+    '#empty_option': 'Select size'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: '<h5><strong>The sign-up form will open on&nbsp;[webform:open:custom:D, M j, Y] at [webform:open:custom:g:ia].</strong></h5>'
+  form_close_message: '<h5><strong>The sign-up form closed on [webform:close:custom:D, M j, Y] at [webform:close:custom:g:ia].</strong></h5>'
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: '[current-page:title]'
+  confirmation_message: "<h3>Registration is complete for&nbsp;<strong>[webform_submission:node]</strong></h3>\r\nName:&nbsp;<strong>[webform_submission:values:civicrm_1_contact_1_contact_first_name]&nbsp;[webform_submission:values:civicrm_1_contact_1_contact_last_name]</strong><br />\r\nSign-up date:&nbsp;[webform_submission:completed:custom:D, M j, Y g:ia]<br />\r\n<br />\r\nPositions: [webform_submission:values:positions]<br />\r\n<br />\r\nT-shirt size (if applicable):&nbsp;[webform_submission:values:tshirt_size]"
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  century_signup_limit:
+    id: options_limit
+    handler_id: century_signup_limit
+    label: 'century signup limit'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      element_key: positions
+      limit: null
+      limits:
+        'Parking Lot attendants: 6 am to 9 am': 3
+        'Registration: 6am-9am': 5
+        'Rest Stop Set Up and Supply distribution: 6:30am-9am': 5
+        'Set Up Triton Lunch Area: 8:30am-9:30am': 4
+        'Runner for the Day': 2
+        'Rest Stop 1: Sanborn Memorial School - 7:30am-11:15am': 4
+        'Rest Stop 2: Maudslay State Park - 7:30am to 11:15am ': 6
+        'Rest Stop 3: Newbury Elementary - 8am-1:15pm': 8
+        'Rest Stop 4: Bradley Palmer - 9am-12pm': 7
+        'Rest Stop 4: Bradley Palmer - 12pm-3:15pm': 8
+        'Roving sag: 7am-4pm ': 3
+        'Triton Lunch Crew: 10am-2pm': 7
+        'Triton Lunch Crew: 2pm-5pm': 6
+        'Final Rider Sweep ': 2
+        Arrowing: 4
+        'Shut Down Triton: 4pm - 5pm': 8
+        'Administrative Tasks that arise': 1
+        'Communication and promotion': 2
+      limit_reached_message: '@name is not available'
+      limit_source_entity: true
+      limit_user: false
+      option_none_action: disable
+      option_message_display: label
+      option_multiple_message: '[@remaining remaining]'
+      option_single_message: '[@remaining remaining]'
+      option_none_message: '[@remaining remaining]'
+      option_unlimited_message: '[Unlimited]'
+      option_error_message: '@name: @label is unavailable.'
+      tableselect_header: ''
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:civicrm_1_contact_1_email_email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: blazingsaddles@nscyc.org
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[webform_submission:source-title]'
+      body: "<h1>{{ webform_token('[webform_submission:source-title]', webform_submission, [], options) }}</h1>\r\n<p>Thank you for volunteering to help at the 2023 Blazing Saddles Century.  \r\nThe details are below. \r\nPlease contact us at BlazingSaddles@nscyc.org if you have any questions or you wish to change your selection.</p>\r\n<h3>Submitted on</h3>\r\n<p>{{ webform_token('[webform_submission:created]', webform_submission, [], options) }}</p>\r\n\r\n<h3>Submitted by:</h3>\r\n <p>{{ webform_token('[webform_submission:values:civicrm_1_contact_1_contact_first_name] [webform_submission:values:civicrm_1_contact_1_contact_last_name]', webform_submission, [], options) }}  \r\n </p>\r\n\r\n<h3>Position:</h3>\r\n<p>{{ webform_token('[webform_submission:values:positions]', webform_submission, [], options) }}</p>\r\n\r\n{% if webform_token('[webform_submission:values:tshirt_size]',webform_submission, [], options) %}\r\n<h3>T-shirt size (if applicable):</h3>\r\n<p>{{ webform_token('[webform_submission:values:tshirt_size]', webform_submission, [], options) }}</p>\r\n{% endif %}\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: true
+      theme_name: clubtheme
+      parameters: {  }
+      debug: false
+variants: {  }

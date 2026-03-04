@@ -1,0 +1,23 @@
+.preview {
+  margin-top: 20px;
+}
+.preview table {
+  margin-bottom: 20px;
+}
+.preview caption {
+  font-weight: bold;
+  font-size: 125%;
+}
+.preview .granted {
+  color: green;
+}
+#preview .revoked {
+  color: red;
+}
+
+.notes {
+  text-align: right;
+}
+.notes span {
+  margin-left: 10px;
+}

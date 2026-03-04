@@ -1,0 +1,29 @@
+uuid: 1c0b78a8-23dc-4bcc-bb3e-cfa9bb50bbe4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_info
+    - filter.format.full_html
+    - node.type.location
+  module:
+    - text
+  enforced:
+    module:
+      - club_location
+_core:
+  default_config_hash: s_CCU-4qOErLqz9Bt2Ml4hItdsRyfDPBK4GseZxKlGI
+id: node.location.field_location_info
+field_name: field_location_info
+entity_type: node
+bundle: location
+label: 'Other location info'
+description: 'Use this field for parking information or to advise on nearby restrooms if there are none at the start.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

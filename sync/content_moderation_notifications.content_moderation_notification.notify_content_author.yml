@@ -1,0 +1,17 @@
+uuid: 1e9f5e8e-9c32-4a74-8b16-c1870203b423
+langcode: en
+status: true
+dependencies: {  }
+id: notify_content_author
+workflow: editorial
+transitions:
+  publish_notify: publish_notify
+roles: {  }
+author: true
+site_mail: false
+emails: ''
+subject: '[node:title] is published'
+body:
+  value: "<p><strong>[node:title]</strong> at&nbsp;[node:url] has been reviewed and published.</p>\r\n\r\n<p>The revision log message, if filled, is shown below:</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Notify content author'

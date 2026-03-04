@@ -1,0 +1,12 @@
+uuid: 4c8bb2db-c4db-4553-bb84-f32891690f8f
+langcode: en
+status: true
+dependencies: {  }
+id: rides
+label: Rides
+recipients:
+  - rides@nscyc.org
+reply: ''
+weight: 0
+message: ''
+redirect: ''

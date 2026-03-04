@@ -1,0 +1,71 @@
+uuid: 9bfb6240-741b-4234-b2fa-9424d0f8296c
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.summary_fields
+  module:
+    - ckeditor5
+_core:
+  default_config_hash: 1AZG3MXodQ1j7YyJQywr8so6SbiiHioMiKroJ5AQEIo
+format: summary_fields
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - undo
+      - redo
+      - heading
+      - bold
+      - italic
+      - bulletedList
+      - numberedList
+      - alignment
+      - link
+      - drupalMedia
+      - style
+      - blockQuote
+      - removeFormat
+      - sourceEditing
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Light button'
+          element: '<p class="light-button">'
+        -
+          label: 'Dark button'
+          element: '<p class="dark-button">'
+        -
+          label: 'Light centered'
+          element: '<p class="light-centered">'
+        -
+          label: 'Dark centered'
+          element: '<p class="dark-centered">'
+    media_media:
+      allow_view_mode_override: false
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: null
+  max_dimensions:
+    width: null
+    height: null

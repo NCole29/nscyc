@@ -1,0 +1,50 @@
+uuid: c21509fa-0260-4f80-a2ca-15496f45df34
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.positions.field_disabled
+    - field.field.taxonomy_term.positions.field_position_category
+    - field.field.taxonomy_term.positions.field_website_role
+    - taxonomy.vocabulary.positions
+  enforced:
+    module:
+      - club_leader
+_core:
+  default_config_hash: Zts1aZc84nSMLUS13BHfZmrdM8QjOHDsm7Q7g4aRXzI
+id: taxonomy_term.positions.default
+targetEntityType: taxonomy_term
+bundle: positions
+mode: default
+content:
+  field_disabled:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_position_category:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_website_role:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 40
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true
+  status: true

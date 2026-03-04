@@ -1,0 +1,13 @@
+uuid: a7006902-2c0a-423b-8e69-25cdc8b39a7c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: SzwfXx0Al9fAKnFzRrJvPw390z5XUmErUW0Ch6HlaXA
+id: node.past_event
+label: 'Past event'
+description: ''
+targetEntityType: node
+cache: true

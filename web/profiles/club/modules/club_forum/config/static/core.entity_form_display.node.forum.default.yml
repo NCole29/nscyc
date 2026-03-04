@@ -1,0 +1,79 @@
+uuid: 715dc688-15ff-4bd6-ba1e-debcc3cd208c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.forum.comment_forum
+    - field.field.node.forum.field_anonymous
+    - field.field.node.forum.field_message
+    - field.field.node.forum.field_ride_date
+    - field.field.node.forum.taxonomy_forums
+    - node.type.forum
+  module:
+    - allowed_formats
+    - comment
+    - datetime
+    - datetimehideseconds
+    - text
+id: node.forum.default
+targetEntityType: node
+bundle: forum
+mode: default
+content:
+  comment_forum:
+    type: comment_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_anonymous:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_message:
+    type: text_textarea
+    weight: 26
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '1'
+  field_ride_date:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings:
+      datetimehideseconds:
+        hide: true
+  taxonomy_forums:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  display_breadcrumbs: true
+  moderation_state: true
+  path: true
+  promote: true
+  publish_on: true
+  status: true
+  sticky: true
+  uid: true
+  unpublish_on: true

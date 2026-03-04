@@ -1,0 +1,14 @@
+uuid: 3c4cbb5d-89a0-429d-8879-dafc00033ef7
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: pDwOv9iBBafoor81z94PU6Qz-DO8Qhb_ALvBqK9whOw
+name: 'Image category'
+vid: image_category
+description: 'Category corresponds with content type where image was originally saved.'
+weight: 0
+new_revision: false

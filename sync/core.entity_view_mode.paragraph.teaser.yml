@@ -1,0 +1,16 @@
+uuid: 2b57715c-8acb-48d8-868d-b1cc3ec1d753
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+  enforced:
+    module:
+      - club_paragraph
+_core:
+  default_config_hash: 6Oat9dNKw42dI9ElzIxUwoN-wGLJ1XDkqsQW7PDLwOQ
+id: paragraph.teaser
+label: Teaser
+description: ''
+targetEntityType: paragraph
+cache: true

@@ -1,0 +1,21 @@
+uuid: b6b64e09-50cc-4b4b-a8b3-47732b1415ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment_forum
+    - field.storage.comment.field_anonymous
+id: comment.comment_forum.field_anonymous
+field_name: field_anonymous
+entity_type: comment
+bundle: comment_forum
+label: 'Comment anonymously'
+description: '<medium>The notification option is not effective when commenting anonymously.</medium>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

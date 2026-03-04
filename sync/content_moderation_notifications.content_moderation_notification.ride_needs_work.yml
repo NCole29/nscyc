@@ -1,0 +1,17 @@
+uuid: 04763ebb-8817-4920-baba-e62f4c2fdc88
+langcode: en
+status: true
+dependencies: {  }
+id: ride_needs_work
+workflow: rides
+transitions:
+  needs_work: needs_work
+roles: {  }
+author: true
+site_mail: false
+emails: ''
+subject: '[node:title] needs work'
+body:
+  value: "<p><strong>[node:title]</strong> at&nbsp;[node:url] has been reviewed and needs work.</p>\r\n\r\n<p>The revision log message, if filled, is shown below:</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Ride needs work'

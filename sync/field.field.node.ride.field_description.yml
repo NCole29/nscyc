@@ -1,0 +1,29 @@
+uuid: db8c8400-5413-4034-a96d-736cda04caba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - filter.format.ride_page
+    - node.type.ride
+  module:
+    - text
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: 9qSRytJl8Y9M3XnVlre4SxNT62WsDftReWiTXhgcKy4
+id: node.ride.field_description
+field_name: field_description
+entity_type: node
+bundle: ride
+label: Description
+description: 'The media library icon can be used to add files (such as cue sheets). Use the Ride picture field for an image.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - ride_page
+field_type: text_long

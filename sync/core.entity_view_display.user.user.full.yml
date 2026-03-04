@@ -1,0 +1,71 @@
+uuid: 3cee0f92-5bf9-431a-9bc1-a07f6b116486
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.full
+    - field.field.user.user.user_picture
+  content:
+    - 'block_content:basic:member_info_block'
+  module:
+    - block_content
+    - layout_builder
+    - layout_discovery
+    - user
+  enforced:
+    module:
+      - club_user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: content
+          context_mapping: {  }
+        components:
+          f60a8eb9-cf83-4d80-a4df-87a98daa9ee0:
+            uuid: f60a8eb9-cf83-4d80-a4df-87a98daa9ee0
+            region: content
+            configuration:
+              id: 'block_content:member_info_block'
+              label: 'Member Info'
+              label_display: '0'
+              provider: block_content
+              status: true
+              info: ''
+              view_mode: full
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          9156f4d6-ccd7-4e15-a520-100eba5e4ae1:
+            uuid: 9156f4d6-ccd7-4e15-a520-100eba5e4ae1
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:user:user:masquerade'
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+_core:
+  default_config_hash: YIuPwX0nvflJAUEqBWJOSARE0YedYL8n08YvjZCMUc0
+id: user.user.full
+targetEntityType: user
+bundle: user
+mode: full
+content:
+  masquerade:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  civicrm_dashboard: true
+  civicrm_profiles: true
+  civicrm_record: true
+  member_for: true
+  user_picture: true

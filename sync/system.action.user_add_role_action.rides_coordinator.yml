@@ -1,0 +1,14 @@
+uuid: 0e8e2a86-4aa8-4436-ae0f-08c2eafd2682
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rides_coordinator
+  module:
+    - user
+id: user_add_role_action.rides_coordinator
+label: 'Add the Rides coordinator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: rides_coordinator

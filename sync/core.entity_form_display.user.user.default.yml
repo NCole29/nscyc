@@ -1,0 +1,61 @@
+uuid: 7cef9bbb-09fe-46ff-aa87-9ff51c920161
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - field_group
+    - svg_image
+    - user
+  enforced:
+    module:
+      - club_user
+third_party_settings:
+  field_group:
+    group_edit_me:
+      children:
+        - account
+        - user_picture
+      label: 'Enter current password to make changes. To change password, enter new password twice below your email address.'
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: false
+_core:
+  default_config_hash: 8w9HJHn5-MtSOb3RVloXnCriC-szEqB8CvZEPy0wgF0
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  google_analytics:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image_image
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+hidden:
+  contact: true
+  language: true
+  path: true
+  timezone: true

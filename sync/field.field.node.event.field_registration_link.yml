@@ -1,0 +1,28 @@
+uuid: 6c10cdc4-1fe2-4bca-88c1-bec41d29a231
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_registration_link
+    - node.type.event
+  module:
+    - link
+  enforced:
+    module:
+      - club_event
+_core:
+  default_config_hash: PALk8f00CnCY0euraE2pJ5c6Bzgy6MzouwuB_OfB_lw
+id: node.event.field_registration_link
+field_name: field_registration_link
+entity_type: node
+bundle: event
+label: 'Registration link to CiviCRM Event page or external site'
+description: "A <a href=\"/civicrm/event/manage?reset=1\" target=\"_blank\">CiviCRM Event</a> must be setup to obtain a link to the CiviCRM registration page.<br>\r\n"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

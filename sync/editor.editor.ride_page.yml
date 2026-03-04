@@ -1,0 +1,48 @@
+uuid: e5039bc1-5d68-4cc3-9849-a62d5e49d035
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.ride_page
+  module:
+    - ckeditor5
+_core:
+  default_config_hash: DUKqKmUyXR3GfMTsoALqGyDdCcQneqaJkeD8vXq7RhQ
+format: ride_page
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - undo
+      - redo
+      - heading
+      - bold
+      - italic
+      - bulletedList
+      - numberedList
+      - alignment
+      - link
+      - drupalMedia
+      - insertTable
+      - blockQuote
+      - removeFormat
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    media_media:
+      allow_view_mode_override: false
+image_upload:
+  status: false

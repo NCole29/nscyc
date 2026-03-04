@@ -1,0 +1,14 @@
+permission_spreadsheet.settings:
+  title: 'Permission spreadsheet'
+  route_name: permission_spreadsheet.settings
+  parent: user.admin_index
+
+permission_spreadsheet.import:
+  title: 'Import permission spreadsheet'
+  route_name: permission_spreadsheet.import
+  parent: entity.user.collection
+
+permission_spreadsheet.export:
+  title: 'Export permission spreadsheet'
+  route_name: permission_spreadsheet.export
+  parent: entity.user.collection

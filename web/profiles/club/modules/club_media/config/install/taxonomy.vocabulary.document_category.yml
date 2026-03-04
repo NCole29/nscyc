@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+name: 'Document category'
+vid: document_category
+description: 'Document category'
+weight: 0

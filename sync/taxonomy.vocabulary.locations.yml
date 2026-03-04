@@ -1,0 +1,14 @@
+uuid: 021b3153-971e-4af4-be52-b1defe6a2f5b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: eLZU8ljSfyzJXr8cJjr5PePR3o09fmaMvutx5f-dUBg
+name: Locations
+vid: locations
+description: 'Types of locations.'
+weight: 0
+new_revision: false

@@ -1,0 +1,15 @@
+name: 'Configuration Single Export'
+type: module
+description: 'Adds an “Export” button to the single configuration export page enabling administrators to download the output with one click.'
+package: Config
+# version: 8.x-1.0-dev
+core_version_requirement: ^9 || ^10 || ^11
+dependencies:
+  - drupal:config
+tags:
+  - developer
+
+# Information added by Drupal.org packaging script on 2025-01-05
+version: '8.x-1.4'
+project: 'config_single_export'
+datestamp: 1736098841

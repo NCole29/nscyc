@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for drupal/kint.
+ */
+
+use Kint\Renderer\RichRenderer;
+use Kint\Renderer\PlainRenderer;
+use Drupal\kint\HelperManager;
+
+/**
+ * Add a configuration for d, s, and kint now that they're configurable.
+ */
+function kint_update_8001(): void {
+  $config_factory = \Drupal::configFactory();
+  $helpers = $config_factory->listAll(HelperManager::HELPER_CONFIG_PREFIX);
+
+  if ($helpers) {
+    return;
+  }
+
+  $d = \Drupal::configFactory()->getEditable('kint.helper.d');
+  $d->set('renderer', RichRenderer::class);
+  $d->set('cli_detection', TRUE);
+  $d->set('mode', 'default');
+  $d->save();
+
+  $s = \Drupal::configFactory()->getEditable('kint.helper.s');
+  $s->set('renderer', PlainRenderer::class);
+  $s->set('cli_detection', TRUE);
+  $s->set('mode', 'default');
+  $s->save();
+
+  $kint = \Drupal::configFactory()->getEditable('kint.helper.kint');
+  $kint->set('renderer', RichRenderer::class);
+  $kint->set('cli_detection', TRUE);
+  $kint->set('mode', 'default');
+  $kint->save();
+}

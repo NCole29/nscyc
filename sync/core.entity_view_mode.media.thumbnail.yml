@@ -1,0 +1,16 @@
+uuid: 06f59e80-5e58-4af9-8a66-0a2afdd361c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+  enforced:
+    module:
+      - club_media
+_core:
+  default_config_hash: FrONFcN1ekJzVidgSXDa7HeqAoz1sSvxRASiNs5tdEk
+id: media.thumbnail
+label: Thumbnail
+description: ''
+targetEntityType: media
+cache: true

@@ -1,0 +1,18 @@
+uuid: e1ba3aec-bade-4dda-8c7e-97fed08f04ed
+langcode: en
+status: true
+dependencies: {  }
+id: content_editor
+workflow: editorial
+transitions:
+  finalize_draft: finalize_draft
+roles:
+  editor: editor
+author: false
+site_mail: false
+emails: ''
+subject: 'Review: [node:title]'
+body:
+  value: "<p>Content editor,</p>\r\n\r\n<p>Please review and publish&nbsp;<strong>[node:title]</strong> at&nbsp;[node:url],&nbsp;created by&nbsp;[current-user:account-name].</p>\r\n\r\n<p>If the page <strong>Needs work,</strong> please leave a comment in the Revision log.&nbsp;</p>\r\n\r\n<p>The revision log message, if filled, is shown below:&nbsp;</p>\r\n\r\n<p>[node:log]</p>\r\n"
+  format: basic_html
+label: 'Request content publication'

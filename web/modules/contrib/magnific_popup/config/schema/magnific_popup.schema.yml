@@ -1,0 +1,13 @@
+field.formatter.settings.magnific_popup:
+  type: field.formatter.settings.image
+  label: Magnific popup formatter settings
+  mapping:
+    thumbnail_image_style:
+      type: string
+      label: Thumbnail image style
+    popup_image_style:
+      type: string
+      label: Popup image class
+    gallery_type:
+      type: string
+      label: Gallery type

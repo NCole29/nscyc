@@ -1,0 +1,52 @@
+uuid: 1beb9848-7f63-4418-b977-70065c81e0f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.recurring_dates.field_cancel
+    - field.field.node.recurring_dates.field_date
+    - field.field.node.recurring_dates.field_dayofweek
+    - field.field.node.recurring_dates.field_recurid
+    - node.type.recurring_dates
+  module:
+    - content_moderation
+id: node.recurring_dates.default
+targetEntityType: node
+bundle: recurring_dates
+mode: default
+content:
+  field_dayofweek:
+    type: number
+    weight: 101
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_recurid:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_cancel: true
+  field_date: true
+  path: true
+  promote: true
+  publish_on: true
+  status: true
+  sticky: true
+  title: true
+  uid: true
+  unpublish_on: true

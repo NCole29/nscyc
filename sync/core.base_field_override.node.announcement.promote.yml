@@ -1,0 +1,27 @@
+uuid: fe43c671-f880-454f-9340-5c5248a64ef3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+  enforced:
+    module:
+      - club_announcement
+_core:
+  default_config_hash: FUoxVCq38ZlZxRgntwCOpXk1Db0U_hOVdyhk8plLnwQ
+id: node.announcement.promote
+field_name: promote
+entity_type: node
+bundle: announcement
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

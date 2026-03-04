@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override for login form.
+ */
+#}
+
+{%
+  set classes = [
+   'login-form',
+  ]
+%}
+<form{{ attributes.addClass(classes) }}>
+  {{ children }}
+</form>

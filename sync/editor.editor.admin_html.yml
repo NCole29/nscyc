@@ -1,0 +1,83 @@
+uuid: 2dbc03b8-7363-46a9-a814-7db348853b0e
+langcode: en
+status: false
+dependencies:
+  config:
+    - filter.format.admin_html
+  module:
+    - ckeditor5
+format: admin_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - undo
+      - redo
+      - heading
+      - bold
+      - italic
+      - bulletedList
+      - numberedList
+      - alignment
+      - outdent
+      - indent
+      - link
+      - drupalMedia
+      - insertTable
+      - style
+      - blockQuote
+      - removeFormat
+      - specialCharacters
+      - sourceEditing
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<drupal-media data-caption title>'
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Small text (85%)'
+          element: '<p class="small">'
+        -
+          label: 'Medium text (95%)'
+          element: '<p class="medium">'
+        -
+          label: 'Regular text (100%)'
+          element: '<p class="regular">'
+        -
+          label: 'Light button'
+          element: '<p class="light-button">'
+        -
+          label: 'Dark button'
+          element: '<p class="dark-button">'
+        -
+          label: 'Light centered'
+          element: '<p class="light-centered">'
+        -
+          label: 'Dark centered'
+          element: '<p class="dark-centered">'
+    media_media:
+      allow_view_mode_override: true
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: null
+  max_dimensions:
+    width: null
+    height: null

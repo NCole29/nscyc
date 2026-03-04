@@ -1,0 +1,12 @@
+name: 'Tooltip Taxonomy Test'
+type: module
+description: 'Provides default filter condition configuration for Tooltip Taxonomy module testing.'
+core_version_requirement: ^10 || ^11
+package: Testing
+dependencies:
+  - tooltip_taxonomy
+
+# Information added by Drupal.org packaging script on 2025-09-28
+version: '2.2.1'
+project: 'tooltip_taxonomy'
+datestamp: 1759035576

@@ -1,0 +1,236 @@
+<?php
+
+use CRM_CivicrmSearchUi_ExtensionUtil as E;
+
+return [
+  [
+    'name' => 'SavedSearch_Find_Contacts',
+    'entity' => 'SavedSearch',
+    'cleanup' => 'always',
+    'update' => 'unmodified',
+    'params' => [
+      'version' => 4,
+      'values' => [
+        'name' => 'Find_Contacts',
+        'label' => E::ts('Find Contacts'),
+        'form_values' => NULL,
+        'mapping_id' => NULL,
+        'search_custom_id' => NULL,
+        'api_entity' => 'Contact',
+        'api_params' => [
+          'version' => 4,
+          'select' => [
+            'id',
+            'contact_type:label',
+            'contact_sub_type:label',
+            'display_name',
+            'sort_name',
+            'address_primary.street_address',
+            'address_primary.city',
+            'address_primary.state_province_id:label',
+            'address_primary.postal_code',
+            'address_primary.country_id:label',
+            'email_primary.email',
+            'phone_primary.phone',
+            'do_not_email',
+            'do_not_phone',
+          ],
+          'orderBy' => [],
+          'where' => [],
+          'groupBy' => [],
+          'join' => [],
+          'having' => [],
+        ],
+        'expires_date' => NULL,
+        'description' => NULL,
+      ],
+      'match' => [
+        'name',
+      ],
+    ],
+  ],
+  [
+    'name' => 'SavedSearch_Find_Contacts_SearchDisplay_Find_Contacts_Table_1',
+    'entity' => 'SearchDisplay',
+    'cleanup' => 'always',
+    'update' => 'unmodified',
+    'params' => [
+      'version' => 4,
+      'values' => [
+        'name' => 'Find_Contacts_Table_1',
+        'label' => E::ts('Find Contacts'),
+        'saved_search_id.name' => 'Find_Contacts',
+        'type' => 'table',
+        'settings' => [
+          'description' => NULL,
+          'sort' => [
+            [
+              'sort_name',
+              'ASC',
+            ],
+          ],
+          'limit' => 50,
+          'pager' => [
+            'show_count' => TRUE,
+            'expose_limit' => TRUE,
+          ],
+          'placeholder' => 5,
+          'columns' => [
+            [
+              'type' => 'field',
+              'key' => 'contact_type',
+              'label' => '',
+              'sortable' => FALSE,
+              'rewrite' => '',
+              'icons' => [
+                [
+                  'field' => 'contact_sub_type:icon',
+                  'side' => 'left',
+                ],
+                [
+                  'field' => 'contact_type:icon',
+                  'side' => 'left',
+                ],
+              ],
+            ],
+            [
+              'type' => 'field',
+              'key' => 'sort_name',
+              'label' => E::ts('Name'),
+              'sortable' => TRUE,
+              'link' => [
+                'path' => '',
+                'entity' => 'Contact',
+                'action' => 'view',
+                'join' => '',
+                'target' => '',
+              ],
+              'title' => E::ts('View Contact'),
+            ],
+            [
+              'type' => 'field',
+              'key' => 'address_primary.street_address',
+              'label' => E::ts('Address'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'address_primary.city',
+              'label' => E::ts('City'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'address_primary.state_province_id:label',
+              'label' => E::ts('State'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'address_primary.postal_code',
+              'label' => E::ts('Postal Code'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'address_primary.country_id:label',
+              'label' => E::ts('Country'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'email_primary.email',
+              'label' => E::ts('Email'),
+              'sortable' => TRUE,
+              'icons' => [
+                [
+                  'icon' => 'fa-ban',
+                  'side' => 'right',
+                  'if' => [
+                    'do_not_email',
+                    '=',
+                    TRUE,
+                  ],
+                ],
+              ],
+              'title' => E::ts('Do not email: %1', [1 => '[do_not_email]']),
+            ],
+            [
+              'type' => 'field',
+              'key' => 'phone_primary.phone',
+              'label' => E::ts('Phone'),
+              'sortable' => TRUE,
+              'icons' => [
+                [
+                  'icon' => 'fa-ban',
+                  'side' => 'right',
+                  'if' => [
+                    'do_not_phone',
+                    '=',
+                    TRUE,
+                  ],
+                ],
+              ],
+              'title' => E::ts('Do not phone: %1', [1 => '[do_not_phone]']),
+            ],
+            [
+              'text' => '',
+              'style' => 'default',
+              'size' => 'btn-xs',
+              'icon' => 'fa-bars',
+              'links' => [
+                [
+                  'entity' => 'Contact',
+                  'action' => 'view',
+                  'join' => '',
+                  'target' => '',
+                  'icon' => 'fa-external-link',
+                  'text' => E::ts('View'),
+                  'style' => 'default',
+                  'path' => '',
+                  'condition' => [],
+                ],
+                [
+                  'entity' => 'Contact',
+                  'action' => 'update',
+                  'join' => '',
+                  'target' => '',
+                  'icon' => 'fa-pencil',
+                  'text' => E::ts('Edit'),
+                  'style' => 'default',
+                  'path' => '',
+                  'condition' => [],
+                ],
+                [
+                  'entity' => 'Contact',
+                  'action' => 'delete',
+                  'join' => '',
+                  'target' => 'crm-popup',
+                  'icon' => 'fa-trash',
+                  'text' => E::ts('Delete Contact'),
+                  'style' => 'danger',
+                  'path' => '',
+                  'condition' => [],
+                ],
+              ],
+              'type' => 'menu',
+              'alignment' => 'text-right',
+            ],
+          ],
+          'actions' => TRUE,
+          'classes' => [
+            'table',
+            'table-striped',
+          ],
+          'headerCount' => TRUE,
+          'button' => NULL,
+        ],
+        'acl_bypass' => FALSE,
+      ],
+      'match' => [
+        'name',
+        'saved_search_id',
+      ],
+    ],
+  ],
+];

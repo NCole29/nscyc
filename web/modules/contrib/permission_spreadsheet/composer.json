@@ -1,0 +1,22 @@
+{
+    "name": "drupal/permission_spreadsheet",
+    "description": "Provides features to import/export permission via spreadsheet.",
+    "type": "drupal-module",
+    "homepage": "https://drupal.org/project/permission_spreadsheet",
+    "authors": [
+        {
+            "name": "Tetsuya Hayashi (hayashi)",
+            "homepage": "https://www.drupal.org/u/hayashi",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://drupal.org/project/issues/permission_spreadsheet",
+        "source": "https://cgit.drupalcode.org/permission_spreadsheet"
+    },
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1 || ^2 || ^3"
+    }
+}

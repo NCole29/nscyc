@@ -1,0 +1,26 @@
+uuid: effe6ac9-1209-4f1b-94ce-99f070496aab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_position_category
+    - taxonomy.vocabulary.positions
+  module:
+    - options
+  enforced:
+    module:
+      - club_page
+_core:
+  default_config_hash: 6HMpH0ukXEWMH9PwpvSOLCVqomrRJ5PK_eAEZ7cZOcQ
+id: taxonomy_term.positions.field_position_category
+field_name: field_position_category
+entity_type: taxonomy_term
+bundle: positions
+label: Category
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

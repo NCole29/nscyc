@@ -1,0 +1,201 @@
+uuid: ef0cc870-e58e-4055-8aa0-54a247084d91
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.ride_page
+    - filter.format.summary_fields
+    - node.type.announcement
+    - node.type.banner
+    - node.type.event
+    - node.type.location
+    - node.type.page
+    - node.type.recurring_ride
+    - node.type.ride
+    - node.type.webform
+  module:
+    - block
+    - block_content
+    - civicrm
+    - civicrm_group_roles
+    - club_leader
+    - club_ride
+    - comment
+    - contact
+    - content_moderation
+    - contextual
+    - disable_messages
+    - field_ui
+    - file
+    - file_delete
+    - filter
+    - help
+    - layout_builder
+    - media
+    - menu_admin_per_menu
+    - node
+    - paragraphs
+    - path
+    - quick_node_clone
+    - role_delegation
+    - scheduler
+    - shortcut
+    - smart_date_recur
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+  enforced:
+    module:
+      - club_user
+id: site_admin
+label: 'Site administrator'
+weight: 1
+is_admin: false
+permissions:
+  - 'access CiviCRM'
+  - 'access CiviContribute'
+  - 'access CiviEvent'
+  - 'access CiviMail'
+  - 'access CiviMember'
+  - 'access CiviReport'
+  - 'access Contact Dashboard'
+  - 'access Report Criteria'
+  - 'access administration pages'
+  - 'access block library'
+  - 'access civicrm group role setting'
+  - 'access comments'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access deleted contacts'
+  - 'access files overview'
+  - 'access help pages'
+  - 'access media overview'
+  - 'access own webform configuration'
+  - 'access shortcuts'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user contact forms'
+  - 'access user profiles'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'add club_contact entity'
+  - 'add contact notes'
+  - 'add contacts'
+  - 'administer CiviCRM'
+  - 'administer CiviCRM data'
+  - 'administer CiviCRM system'
+  - 'administer Reports'
+  - 'administer Tagsets'
+  - 'administer block content'
+  - 'administer block types'
+  - 'administer block_content display'
+  - 'administer blocks'
+  - 'administer comments'
+  - 'administer contact forms'
+  - 'administer dedupe rules'
+  - 'administer footer menu items'
+  - 'administer main menu items'
+  - 'administer nodes'
+  - 'administer payment processors'
+  - 'administer users'
+  - 'assign content_creator role'
+  - 'assign editor role'
+  - 'cancel smart date recur instances'
+  - 'change own username'
+  - 'clone announcement content'
+  - 'clone event content'
+  - 'clone page content'
+  - 'clone recurring_ride content'
+  - 'clone ride content'
+  - 'clone webform content'
+  - 'configure any layout'
+  - 'create and edit custom blocks'
+  - 'create announcement content'
+  - 'create banner content'
+  - 'create event content'
+  - 'create location content'
+  - 'create media'
+  - 'create page content'
+  - 'create recurring_ride content'
+  - 'create ride content'
+  - 'create url aliases'
+  - 'create webform'
+  - 'create webform content'
+  - 'delete any announcement content'
+  - 'delete any banner content'
+  - 'delete any event content'
+  - 'delete any location content'
+  - 'delete any media'
+  - 'delete any page content'
+  - 'delete any recurring_ride content'
+  - 'delete any ride content'
+  - 'delete any webform content'
+  - 'delete club_contact entity'
+  - 'delete club_route entity'
+  - 'delete contacts'
+  - 'delete files'
+  - 'delete in CiviContribute'
+  - 'delete in CiviEvent'
+  - 'delete in CiviMail'
+  - 'delete in CiviMember'
+  - 'delete own files'
+  - 'delete own webform'
+  - 'edit all contacts'
+  - 'edit all events'
+  - 'edit any announcement content'
+  - 'edit any banner content'
+  - 'edit any event content'
+  - 'edit any location content'
+  - 'edit any page content'
+  - 'edit any recurring_ride content'
+  - 'edit any ride content'
+  - 'edit any webform content'
+  - 'edit club_contact entity'
+  - 'edit club_route entity'
+  - 'edit contributions'
+  - 'edit event participants'
+  - 'edit groups'
+  - 'edit inbound email basic information'
+  - 'edit inbound email basic information and content'
+  - 'edit memberships'
+  - 'edit message templates'
+  - 'edit own comments'
+  - 'edit own webform'
+  - 'edit system workflow message templates'
+  - 'edit user-driven message templates'
+  - 'make smart dates recur'
+  - 'manage event profiles'
+  - 'manage tags'
+  - 'merge duplicate contacts'
+  - 'post comments'
+  - 'reschedule smart date recur instances'
+  - 'save Report Criteria'
+  - 'schedule publishing of nodes'
+  - 'send SMS'
+  - 'skip comment approval'
+  - 'update any media'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format ride_page'
+  - 'use text format summary_fields'
+  - 'view all activities'
+  - 'view all contacts'
+  - 'view all notes'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view club_contact entity'
+  - 'view club_route entity'
+  - 'view error messages'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view public CiviMail content'
+  - 'view scheduled content'
+  - 'view status messages'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view user email addresses'
+  - 'view warning messages'

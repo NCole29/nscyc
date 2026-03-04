@@ -1,0 +1,29 @@
+uuid: aea6759b-69d6-4775-af6a-740ce5725268
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.forum
+  module:
+    - comment
+    - contact
+    - file
+    - node
+    - system
+    - webform_node
+  enforced:
+    module:
+      - club_user
+id: member
+label: Member
+weight: -7
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access user contact forms'
+  - 'create forum content'
+  - 'delete own files'
+  - 'post comments'
+  - 'skip comment approval'
+  - 'view the administration theme'
+  - 'view webform submissions own node'

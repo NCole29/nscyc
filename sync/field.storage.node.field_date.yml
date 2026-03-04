@@ -1,0 +1,25 @@
+uuid: 2aaaa930-14c0-48eb-83db-d9808938f2ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+  enforced:
+    module:
+      - club_ride
+_core:
+  default_config_hash: wcMSRNcp1_qwW3cbF9CdROm4WK9G_Z_j27ly6uBzPlI
+id: node.field_date
+field_name: field_date
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

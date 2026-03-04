@@ -1,0 +1,26 @@
+uuid: cec4c1b9-cebe-4f78-a613-69a76579e290
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - filter.format.summary_fields
+    - node.type.webform
+  module:
+    - text
+_core:
+  default_config_hash: U9KJ1twehCxfB2WwXudq-A7J7GkMq4k7Md6-efMZP8U
+id: node.webform.field_summary
+field_name: field_summary
+entity_type: node
+bundle: webform
+label: 'Summary for home page'
+description: "Summary should be brief, but there is no character limit.<br>\r\nClick media icon to insert images. \"Edit media\" to select image alignment. Images are displayed at thumbnail size. To add text before or after an image, hover cursor over the media box and click the red arrows."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - summary_fields
+field_type: text_long

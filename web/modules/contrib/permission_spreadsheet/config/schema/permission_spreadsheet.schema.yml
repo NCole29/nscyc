@@ -1,0 +1,32 @@
+# Schema for the configuration files of the Permission Spreadsheet module.
+
+permission_spreadsheet.settings:
+  type: config_object
+  label: 'Devel settings'
+  mapping:
+    import:
+      type: mapping
+      label: 'Import'
+      mapping:
+        text_revoked:
+          type: string
+          label: 'Text for revoked'
+        auto_preview:
+          type: boolean
+          label: 'Automatically show preview on upload'
+    export:
+      type: mapping
+      label: 'Export'
+      mapping:
+        filename:
+          type: string
+          label: 'Download filename'
+        sheet_title:
+          type: string
+          label: 'Sheet title'
+        text_granted:
+          type: string
+          label: 'Text for granted'
+        text_revoked:
+          type: string
+          label: 'Text for revoked'

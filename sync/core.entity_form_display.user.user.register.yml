@@ -1,0 +1,45 @@
+uuid: f35caf61-965e-465b-bc17-5642623bf602
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_form_mode.user.register
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - svg_image
+    - user
+  enforced:
+    module:
+      - club_user
+_core:
+  default_config_hash: e1izN1ID5x3mQomhErpKKqYuCmcWzcVYCXMxWmSh_10
+id: user.user.register
+targetEntityType: user
+bundle: user
+mode: register
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  contact:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  timezone:
+    weight: 6
+    region: content
+  user_picture:
+    type: image_image
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+hidden:
+  language: true
+  path: true
