@@ -10,7 +10,8 @@ dependencies:
     - system.menu.main
     - taxonomy.vocabulary.locations
     - user.role.administrator
-    - user.role.board
+    - user.role.rides_coordinator
+    - user.role.site_admin
   content:
     - 'taxonomy_term:locations:f4c82c8e-f89c-43a3-b26d-4037385b9d28'
   module:
@@ -351,7 +352,6 @@ display:
           data_source: field_coordinates
           entity_source: __base_table
           name_field: title
-          view_mode: full
           leaflet_map: 'OSM Mapnik'
           height: '60'
           height_unit: vh
@@ -396,8 +396,8 @@ display:
             circle_marker_options: '{"radius":6,"color":"red","fillColor":"#f03","fillOpacity":0.5}'
           leaflet_markercluster:
             control: false
-            include_path: false
             options: '{"spiderfyOnMaxZoom":true,"showCoverageOnHover":true,"removeOutsideVisibleBounds":false}'
+            include_path: false
           fullscreen:
             control: true
             options: '{"position":"topleft","pseudoFullscreen":false}'
@@ -405,6 +405,7 @@ display:
           geocoder:
             control: false
             settings:
+              popup: false
               position: topright
               input_size: 25
               providers:
@@ -414,8 +415,8 @@ display:
               min_terms: 4
               delay: 800
               zoom: 16
-              popup: false
               options: ''
+          view_mode: full
           description_field: '#rendered_view_fields'
       row:
         type: fields
@@ -1457,7 +1458,8 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
+            rides_coordinator: rides_coordinator
+            site_admin: site_admin
       sorts:
         title:
           id: title

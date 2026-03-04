@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - node.type.announcement
+    - node.type.banner
     - node.type.event
     - node.type.page
     - node.type.webform
@@ -128,6 +129,7 @@ type_settings:
   entity_types:
     node:
       - announcement
+      - banner
       - event
       - page
       - webform

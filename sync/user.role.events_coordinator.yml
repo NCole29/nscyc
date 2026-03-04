@@ -16,7 +16,6 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
-    - disable_messages
     - filter
     - help
     - layout_builder
@@ -68,12 +67,9 @@ permissions:
   - 'use text format full_html'
   - 'use text format summary_fields'
   - 'view announcement revisions'
-  - 'view error messages'
   - 'view event revisions'
   - 'view latest version'
   - 'view location revisions'
   - 'view own unpublished content'
-  - 'view status messages'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
-  - 'view warning messages'

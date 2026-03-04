@@ -1388,7 +1388,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<h4>Who should you contact with your questions?<br>Rides questions? email Rides@nscyc.org<br>Membership questions? email Membership@nscyc.org<br>Blazing Saddles Century? email BlazingSaddles@nscyc.org<br>Money or Treasury questions? email Treasurer@nscyc.org<br>Website? email web-manager@nscyc.org<br>\r\nThank you for trying to avoid contacting the volunteers directly as too often the wrong volunteer is contacted.<br>\r\n<br>\r\n2025 OFFICERS, BOARD MEMBERS AND COORDINATORS</h4>"
+          content: "<h4>Who should you contact with your questions?<br>Rides questions? email Rides@nscyc.org<br>Membership questions? email Membership@nscyc.org<br>Blazing Saddles Century? email BlazingSaddles@nscyc.org<br>Money or Treasury questions? email Treasurer@nscyc.org<br>Website? email web-manager@nscyc.org<br>\r\nThank you for trying to avoid contacting the volunteers directly as too often the wrong volunteer is contacted.<br>\r\n</h4>"
           tokenize: false
       footer: {  }
       display_extenders: {  }

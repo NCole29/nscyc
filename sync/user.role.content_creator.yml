@@ -21,7 +21,6 @@ dependencies:
     - block_content
     - content_moderation
     - contextual
-    - disable_messages
     - file
     - filter
     - help
@@ -110,7 +109,6 @@ permissions:
   - 'view any basic block content history'
   - 'view any paragraphs_block block content history'
   - 'view any unpublished content'
-  - 'view error messages'
   - 'view event revisions'
   - 'view latest version'
   - 'view media'
@@ -118,8 +116,6 @@ permissions:
   - 'view own unpublished media'
   - 'view page revisions'
   - 'view scheduled content'
-  - 'view status messages'
   - 'view unpublished paragraphs'
-  - 'view warning messages'
   - 'view webform revisions'
   - 'view webform submissions own node'

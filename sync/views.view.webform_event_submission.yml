@@ -7,9 +7,8 @@ dependencies:
     - system.menu.main
     - user.role.administrator
     - user.role.authenticated
-    - user.role.board
     - user.role.civicrm
-    - user.role.editor
+    - user.role.events_coordinator
     - user.role.rides_coordinator
     - user.role.site_admin
     - webform.webform.bike_maintenance
@@ -692,10 +691,9 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
-            editor: editor
-            rides_coordinator: rides_coordinator
+            events_coordinator: events_coordinator
             civicrm: civicrm
+            rides_coordinator: rides_coordinator
             site_admin: site_admin
       sorts: {  }
       arguments: {  }
@@ -1307,9 +1305,9 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
-            rides_coordinator: rides_coordinator
+            events_coordinator: events_coordinator
             civicrm: civicrm
+            rides_coordinator: rides_coordinator
             site_admin: site_admin
       sorts:
         completed:

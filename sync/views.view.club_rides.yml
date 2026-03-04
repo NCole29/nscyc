@@ -10,6 +10,7 @@ dependencies:
     - field.storage.node.field_show_and_go
     - node.type.recurring_ride
     - node.type.ride
+    - user.role.administrator
     - user.role.ride_leader
     - user.role.rides_coordinator
     - user.role.site_admin
@@ -411,6 +412,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 20
           total_pages: null
           id: 0
@@ -425,7 +427,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -1135,6 +1136,7 @@ display:
         type: role
         options:
           role:
+            administrator: administrator
             ride_leader: ride_leader
             rides_coordinator: rides_coordinator
             site_admin: site_admin

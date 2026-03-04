@@ -5,9 +5,9 @@ dependencies:
   config:
     - system.menu.main
     - user.role.administrator
-    - user.role.board
     - user.role.civicrm
     - user.role.rides_coordinator
+    - user.role.site_admin
   module:
     - civicrm_entity
     - datetime
@@ -425,6 +425,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 25
           total_pages: null
           id: 0
@@ -439,7 +440,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -455,9 +455,9 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
-            rides_coordinator: rides_coordinator
             civicrm: civicrm
+            rides_coordinator: rides_coordinator
+            site_admin: site_admin
       cache:
         type: tag
         options: {  }

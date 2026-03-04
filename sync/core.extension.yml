@@ -3,7 +3,6 @@ _core:
 module:
   address: 0
   admin_toolbar: 0
-  admin_toolbar_tools: 0
   allowed_formats: 0
   automated_cron: 0
   big_pipe: 0
@@ -37,9 +36,6 @@ module:
   club_user: 0
   comment: 0
   config: 0
-  config_delete: 0
-  config_partial_export: 0
-  config_single_export: 0
   contact: 0
   contact_storage: 0
   content_moderation: 0
@@ -52,13 +48,12 @@ module:
   datetime: 0
   datetimehideseconds: 0
   dblog: 0
-  devel: 0
   diff: 0
-  disable_messages: 0
   dynamic_page_cache: 0
   editor: 0
   entity_browser: 0
   entity_reference_revisions: 0
+  entity_usage: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -79,7 +74,6 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   jquery_ui: 0
-  kint: 0
   layout_builder: 0
   layout_builder_admin_theme: 0
   layout_builder_restrictions: 0
@@ -104,7 +98,6 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
-  permission_spreadsheet: 0
   phpass: 0
   quick_node_clone: 0
   responsive_image: 0
@@ -132,7 +125,6 @@ module:
   view_unpublished: 0
   views_bulk_operations: 0
   views_data_export: 0
-  views_field_view: 0
   views_infinite_scroll: 0
   views_local_tasks: 0
   views_slideshow: 0

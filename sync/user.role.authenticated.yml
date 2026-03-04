@@ -6,10 +6,8 @@ dependencies:
     - filter.format.webform_default
   module:
     - civicrm
-    - civicrm_member_roles
     - club_ride
     - contact
-    - disable_messages
     - file
     - filter
     - media
@@ -24,7 +22,6 @@ is_admin: false
 permissions:
   - 'access CiviMail subscribe/unsubscribe pages'
   - 'access all custom data'
-  - 'access civicrm member role setting'
   - 'access content'
   - 'access site-wide contact form'
   - 'access uploaded files'
@@ -38,10 +35,7 @@ permissions:
   - 'register for events'
   - 'use text format webform_default'
   - 'view club_route entity'
-  - 'view error messages'
   - 'view event info'
   - 'view event participants'
   - 'view media'
   - 'view own webform submission'
-  - 'view status messages'
-  - 'view warning messages'

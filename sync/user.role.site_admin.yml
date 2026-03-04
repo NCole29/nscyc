@@ -1,12 +1,24 @@
-uuid: ef0cc870-e58e-4055-8aa0-54a247084d91
+uuid: 2ec0f82c-07e5-4a28-a1fa-f3f935e039dc
 langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.basic
+    - block_content.type.paragraphs_block
+    - core.entity_view_display.node.event.default
+    - core.entity_view_display.node.page.default
     - filter.format.basic_html
     - filter.format.full_html
     - filter.format.ride_page
     - filter.format.summary_fields
+    - media.type.gallery
+    - media.type.image
+    - media.type.image_crop_16_9
+    - media.type.image_crop_20_7
+    - media.type.image_crop_4_3
+    - media.type.public_file
+    - media.type.remote_video
+    - media.type.restricted_file
     - node.type.announcement
     - node.type.banner
     - node.type.event
@@ -15,6 +27,8 @@ dependencies:
     - node.type.recurring_ride
     - node.type.ride
     - node.type.webform
+    - workflows.workflow.editorial
+    - workflows.workflow.rides
   module:
     - block
     - block_content
@@ -22,11 +36,11 @@ dependencies:
     - civicrm_group_roles
     - club_leader
     - club_ride
-    - comment
+    - club_schedule
     - contact
     - content_moderation
+    - content_moderation_notifications
     - contextual
-    - disable_messages
     - field_ui
     - file
     - file_delete
@@ -47,13 +61,10 @@ dependencies:
     - taxonomy
     - toolbar
     - webform
-  enforced:
-    module:
-      - club_user
 id: site_admin
 label: 'Site administrator'
 weight: 1
-is_admin: false
+is_admin: null
 permissions:
   - 'access CiviCRM'
   - 'access CiviContribute'
@@ -66,14 +77,13 @@ permissions:
   - 'access administration pages'
   - 'access block library'
   - 'access civicrm group role setting'
-  - 'access comments'
+  - 'access content'
   - 'access content overview'
   - 'access contextual links'
   - 'access deleted contacts'
   - 'access files overview'
   - 'access help pages'
   - 'access media overview'
-  - 'access own webform configuration'
   - 'access shortcuts'
   - 'access taxonomy overview'
   - 'access toolbar'
@@ -90,17 +100,17 @@ permissions:
   - 'administer Reports'
   - 'administer Tagsets'
   - 'administer block content'
-  - 'administer block types'
   - 'administer block_content display'
   - 'administer blocks'
-  - 'administer comments'
   - 'administer contact forms'
+  - 'administer content moderation notifications'
   - 'administer dedupe rules'
   - 'administer footer menu items'
   - 'administer main menu items'
   - 'administer nodes'
   - 'administer payment processors'
   - 'administer users'
+  - 'administer webform element access'
   - 'assign content_creator role'
   - 'assign editor role'
   - 'cancel smart date recur instances'
@@ -112,6 +122,8 @@ permissions:
   - 'clone ride content'
   - 'clone webform content'
   - 'configure any layout'
+  - 'configure editable event node layout overrides'
+  - 'configure editable page node layout overrides'
   - 'create and edit custom blocks'
   - 'create announcement content'
   - 'create banner content'
@@ -124,12 +136,15 @@ permissions:
   - 'create url aliases'
   - 'create webform'
   - 'create webform content'
+  - 'delete all revisions'
   - 'delete any announcement content'
   - 'delete any banner content'
+  - 'delete any basic block content revisions'
   - 'delete any event content'
   - 'delete any location content'
   - 'delete any media'
   - 'delete any page content'
+  - 'delete any paragraphs_block block content revisions'
   - 'delete any recurring_ride content'
   - 'delete any ride content'
   - 'delete any webform content'
@@ -147,10 +162,20 @@ permissions:
   - 'edit all events'
   - 'edit any announcement content'
   - 'edit any banner content'
+  - 'edit any basic block content'
   - 'edit any event content'
+  - 'edit any gallery media'
+  - 'edit any image media'
+  - 'edit any image_crop_16_9 media'
+  - 'edit any image_crop_20_7 media'
+  - 'edit any image_crop_4_3 media'
   - 'edit any location content'
   - 'edit any page content'
+  - 'edit any paragraphs_block block content'
+  - 'edit any public_file media'
   - 'edit any recurring_ride content'
+  - 'edit any remote_video media'
+  - 'edit any restricted_file media'
   - 'edit any ride content'
   - 'edit any webform content'
   - 'edit club_contact entity'
@@ -162,40 +187,58 @@ permissions:
   - 'edit inbound email basic information and content'
   - 'edit memberships'
   - 'edit message templates'
-  - 'edit own comments'
   - 'edit own webform'
   - 'edit system workflow message templates'
   - 'edit user-driven message templates'
+  - 'enter waivers'
   - 'make smart dates recur'
   - 'manage event profiles'
   - 'manage tags'
   - 'merge duplicate contacts'
-  - 'post comments'
   - 'reschedule smart date recur instances'
+  - 'revert all revisions'
+  - 'revert any basic block content revisions'
+  - 'revert any paragraphs_block block content revisions'
   - 'save Report Criteria'
   - 'schedule publishing of nodes'
-  - 'send SMS'
-  - 'skip comment approval'
   - 'update any media'
+  - 'use editorial transition archive'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition finalize_draft'
+  - 'use editorial transition needs_work'
+  - 'use editorial transition new_draft'
+  - 'use editorial transition new_draft_ready'
+  - 'use editorial transition publish'
+  - 'use editorial transition publish_notify'
+  - 'use editorial transition restore_to_draft'
+  - 'use editorial transition restore_to_published'
+  - 'use rides transition archive'
+  - 'use rides transition create_new_draft'
+  - 'use rides transition finalize_draft'
+  - 'use rides transition needs_work'
+  - 'use rides transition publish'
+  - 'use rides transition publish_notify'
+  - 'use rides transition restore_to_draft'
+  - 'use rides transition restore_to_published'
   - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format ride_page'
   - 'use text format summary_fields'
   - 'view all activities'
   - 'view all contacts'
+  - 'view all media revisions'
   - 'view all notes'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view club_contact entity'
   - 'view club_route entity'
-  - 'view error messages'
+  - 'view club_schedule entity'
   - 'view latest version'
+  - 'view media'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view public CiviMail content'
   - 'view scheduled content'
-  - 'view status messages'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
   - 'view user email addresses'
-  - 'view warning messages'

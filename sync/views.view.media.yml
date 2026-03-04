@@ -529,6 +529,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 50
           total_pages: null
           id: 0
@@ -546,7 +547,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -999,6 +999,16 @@ display:
             value: 'Thumbnail shows original uploaded image, not the cropped version. Cropped versions are displayed when selecting an image to insert on a web page. Do not edit and crop images again from the links on this page. '
             format: basic_html
           tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -1329,11 +1339,11 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'Image file'
-          exclude: false
+          label: 'File folder / filename'
+          exclude: true
           alter:
             alter_text: true
-            text: "{{ field_media_image|replace({'/sites/default/files/images/2023/':'', '%20':' ', '%28':'(', '%29':')'}) }}"
+            text: "{{ field_media_image|replace({'/sites/default/files/images':'', '%20':' ', '%28':'(', '%29':')'}) }}"
             make_link: false
             path: ''
             absolute: false

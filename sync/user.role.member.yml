@@ -5,7 +5,6 @@ dependencies:
   module:
     - comment
     - contact
-    - disable_messages
     - file
     - system
     - webform_node
@@ -24,8 +23,5 @@ permissions:
   - 'delete own files'
   - 'post comments'
   - 'skip comment approval'
-  - 'view error messages'
-  - 'view status messages'
   - 'view the administration theme'
-  - 'view warning messages'
   - 'view webform submissions own node'

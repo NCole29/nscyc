@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - user.role.administrator
-    - user.role.board
+    - user.role.events_coordinator
     - user.role.site_admin
   module:
     - civicrm_entity
@@ -1519,7 +1519,7 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
+            events_coordinator: events_coordinator
             site_admin: site_admin
       sorts: {  }
       arguments:

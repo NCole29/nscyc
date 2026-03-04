@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - user.role.administrator
+    - user.role.board
     - user.role.civicrm
     - user.role.site_admin
   module:
@@ -559,6 +560,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 20
           total_pages: null
           id: 0
@@ -576,7 +578,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -592,6 +593,7 @@ display:
         options:
           role:
             administrator: administrator
+            board: board
             civicrm: civicrm
             site_admin: site_admin
       cache:
@@ -1117,6 +1119,9 @@ display:
         options:
           role:
             administrator: administrator
+            board: board
+            civicrm: civicrm
+            site_admin: site_admin
       sorts:
         start_date:
           id: start_date
@@ -1742,6 +1747,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 25
           total_pages: null
           id: 0
@@ -1759,7 +1765,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       sorts:
         sort_name:
           id: sort_name
@@ -2035,6 +2040,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 25
           total_pages: null
           id: 0
@@ -2052,7 +2058,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       sorts:
         sort_name:
           id: sort_name

@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - user.role.administrator
-    - user.role.board
     - user.role.civicrm
+    - user.role.site_admin
   module:
     - civicrm_entity
     - datetime
@@ -2045,8 +2045,8 @@ display:
         options:
           role:
             administrator: administrator
-            board: board
             civicrm: civicrm
+            site_admin: site_admin
       empty:
         area_text_custom:
           id: area_text_custom
@@ -4417,6 +4417,5 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
       tags: {  }

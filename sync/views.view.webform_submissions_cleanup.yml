@@ -1,21 +1,29 @@
-uuid: 31e3d1cc-4a8a-40db-b49e-7090d4403934
+uuid: 3ca9b5b4-d23a-475e-a7be-a4124445437a
 langcode: en
 status: true
 dependencies:
   config:
-    - user.role.member
+    - system.menu.admin
+    - user.role.administrator
+    - webform.webform.board_meeting_minutes
+    - webform.webform.century
+    - webform.webform.century_members_
+    - webform.webform.change_log
+    - webform.webform.club_reports
+    - webform.webform.edit_contact_info
+    - webform.webform.membership
+    - webform.webform.renew_membership
   module:
-    - civicrm_entity
-    - datetime
-    - options
+    - node
     - user
-id: temp
-label: temp
+    - webform
+id: webform_submissions_cleanup
+label: 'Webform submissions - Cleanup'
 module: views
 description: ''
 tag: ''
-base_table: users_field_data
-base_field: uid
+base_table: webform_submission
+base_field: sid
 display:
   default:
     id: default
@@ -23,18 +31,19 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: 'Webform submissions - Cleanup'
       fields:
-        name:
-          id: name
-          table: users_field_data
-          field: name
+        webform_submission_bulk_form:
+          id: webform_submission_bulk_form
+          table: webform_submission
+          field: webform_submission_bulk_form
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
-          plugin_id: field
-          label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: webform_submission_bulk_form
+          label: 'Webform submission operations bulk form'
           exclude: false
           alter:
             alter_text: false
@@ -54,8 +63,8 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: false
-            ellipsis: false
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -67,7 +76,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -75,31 +84,20 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: user_name
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        id:
-          id: id
-          table: civicrm_contact
-          field: id
-          relationship: civicrm_contact
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
+        entity_id:
+          id: entity_id
+          table: webform_submission
+          field: entity_id
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: civicrm_contact
-          entity_field: id
+          entity_type: webform_submission
+          entity_field: entity_id
           plugin_id: field
-          label: ''
+          label: 'Submitted to: Entity ID'
           exclude: true
           alter:
             alter_text: false
@@ -132,403 +130,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        join_date:
-          id: join_date
-          table: civicrm_membership
-          field: join_date
-          relationship: reverse__civicrm_membership__contact_id
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_membership
-          entity_field: join_date
-          plugin_id: field
-          label: 'Member since'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
           element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_custom
-          settings:
-            timezone_override: ''
-            date_format: F-j-Y
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        end_date:
-          id: end_date
-          table: civicrm_membership
-          field: end_date
-          relationship: reverse__civicrm_membership__contact_id
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_membership
-          entity_field: end_date
-          plugin_id: field
-          label: 'Expiration Date'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_custom
-          settings:
-            timezone_override: ''
-            date_format: F-j-Y
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        uid:
-          id: uid
-          table: users_field_data
-          field: uid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: uid
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        birth_date:
-          id: birth_date
-          table: civicrm_contact
-          field: birth_date
-          relationship: civicrm_contact
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_contact
-          entity_field: birth_date
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: medium
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        id_1:
-          id: id_1
-          table: civicrm_contact
-          field: id
-          relationship: civicrm_contact
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_contact
-          entity_field: id
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        display_name:
-          id: display_name
-          table: civicrm_contact
-          field: display_name
-          relationship: civicrm_contact
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_contact
-          entity_field: display_name
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -550,10 +152,366 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: entity_id
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        webform_id:
+          id: webform_id
+          table: webform_submission
+          field: webform_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: webform_id
+          plugin_id: field
+          label: Webform
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        sid:
+          id: sid
+          table: webform_submission
+          field: sid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: sid
+          plugin_id: field
+          label: 'Submission ID'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        uid:
+          id: uid
+          table: webform_submission
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: uid
+          plugin_id: field
+          label: 'Submitted by'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        created:
+          id: created
+          table: webform_submission
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: created
+          plugin_id: field
+          label: Created
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: date_and_12_hr_time
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
-        type: none
+        type: full
         options:
           offset: 0
+          pagination_heading_level: h4
+          items_per_page: 25
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -565,9 +523,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access user profiles'
+          role:
+            administrator: administrator
       cache:
         type: tag
         options: {  }
@@ -575,30 +534,26 @@ display:
       sorts: {  }
       arguments: {  }
       filters:
-        status:
-          id: status
-          table: users_field_data
-          field: status
-          entity_type: user
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-        status_id:
-          id: status_id
-          table: civicrm_membership
-          field: status_id
-          relationship: reverse__civicrm_membership__contact_id
+        webform_id:
+          id: webform_id
+          table: webform_submission
+          field: webform_id
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: civicrm_membership
-          entity_field: status_id
-          plugin_id: list_field
-          operator: or
+          entity_type: webform_submission
+          entity_field: webform_id
+          plugin_id: bundle
+          operator: 'not in'
           value:
-            2: '2'
+            board_meeting_minutes: board_meeting_minutes
+            century: century
+            century_members_: century_members_
+            change_log: change_log
+            club_reports: club_reports
+            edit_contact_info: edit_contact_info
+            membership: membership
+            renew_membership: renew_membership
           group: 1
           exposed: false
           expose:
@@ -628,36 +583,45 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
+        webform_id_1:
+          id: webform_id_1
+          table: webform_submission
+          field: webform_id
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-          operator: or
-          value:
-            member: member
+          entity_type: webform_submission
+          entity_field: webform_id
+          plugin_id: bundle
+          operator: in
+          value: {  }
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: webform_id_1_op
+            label: Webform
             description: ''
             use_operator: false
-            operator: ''
+            operator: webform_id_1_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
+            identifier: webform_id_1
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -671,34 +635,46 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-        uid_current:
-          id: uid_current
-          table: users
-          field: uid_current
-          relationship: none
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: entity_id
           group_type: group
           admin_label: ''
-          entity_type: user
-          plugin_id: user_current
-          operator: '='
-          value: '1'
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: title_op
+            label: Title
             description: ''
             use_operator: false
-            operator: ''
+            operator: title_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
+            identifier: title
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -712,18 +688,9 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
+        type: table
       row:
         type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
       query:
         type: views_query
         options:
@@ -733,88 +700,39 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        civicrm_contact:
-          id: civicrm_contact
-          table: users_field_data
-          field: civicrm_contact
+        entity_id:
+          id: entity_id
+          table: webform_submission
+          field: entity_id
           relationship: none
           group_type: group
-          admin_label: 'CiviCRM contact'
-          entity_type: user
-          plugin_id: civicrm_entity_civicrm_contact_user
-          required: false
-          domain_id: {  }
-        reverse__civicrm_membership__contact_id:
-          id: reverse__civicrm_membership__contact_id
-          table: civicrm_contact
-          field: reverse__civicrm_membership__contact_id
-          relationship: civicrm_contact
-          group_type: group
-          admin_label: contact_id
-          entity_type: civicrm_contact
-          plugin_id: civicrm_entity_reverse
-          required: false
-        membership_type_id:
-          id: membership_type_id
-          table: civicrm_membership
-          field: membership_type_id
-          relationship: reverse__civicrm_membership__contact_id
-          group_type: group
-          admin_label: 'CiviCRM Membership type'
-          entity_type: civicrm_membership
-          entity_field: membership_type_id
+          admin_label: 'Submitted to: Content'
+          entity_type: webform_submission
+          entity_field: entity_id
           plugin_id: standard
           required: false
-        reverse__civicrm_email__contact_id:
-          id: reverse__civicrm_email__contact_id
-          table: civicrm_contact
-          field: reverse__civicrm_email__contact_id
-          relationship: civicrm_contact
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
           group_type: group
-          admin_label: Email
-          entity_type: civicrm_contact
-          plugin_id: civicrm_entity_reverse_location
-          required: false
-          location_type: '0'
-          is_billing: 0
-          is_primary: 0
-        user:
-          id: user
-          table: civicrm_contact
-          field: user
-          relationship: civicrm_contact
-          group_type: group
-          admin_label: User
-          entity_type: civicrm_contact
-          plugin_id: civicrm_entity_civicrm_contact_user
-          required: false
-          domain_id: {  }
-      header: {  }
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.query_args
         - user
-        - user.permissions
-      tags: {  }
-  block_1:
-    id: block_1
-    display_title: Block
-    display_plugin: block
-    position: 2
-    display_options:
-      display_extenders: {  }
-      block_description: testblock
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user
-        - user.permissions
+        - user.roles
       tags: {  }
   page_1:
     id: page_1
@@ -822,17 +740,30 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      access:
-        type: none
-        options: {  }
-      defaults:
-        access: false
       display_extenders: {  }
-      path: test/userxx
+      path: webform-submissions---cleanup
+      menu:
+        type: normal
+        title: 'Webform submission cleanup'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: system.admin_content
+        context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
+      use_admin_theme: true
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - url.query_args
         - user
+        - user.roles
       tags: {  }

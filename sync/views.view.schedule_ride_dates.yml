@@ -9,6 +9,9 @@ dependencies:
     - field.storage.node.field_ride_leader
     - system.menu.main
     - user.role.administrator
+    - user.role.board
+    - user.role.events_coordinator
+    - user.role.ride_leader
     - user.role.rides_coordinator
     - user.role.site_admin
   module:
@@ -306,6 +309,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 40
           total_pages: null
           id: 0
@@ -320,7 +324,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -335,9 +338,12 @@ display:
         type: role
         options:
           role:
+            administrator: administrator
+            board: board
+            events_coordinator: events_coordinator
+            ride_leader: ride_leader
             rides_coordinator: rides_coordinator
             site_admin: site_admin
-            administrator: administrator
       cache:
         type: tag
         options: {  }
@@ -926,6 +932,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      enabled: false
       title: 'Ride Schedules with routes'
       fields:
         schedule_id:
@@ -2742,18 +2749,18 @@ display:
             remember: true
             multiple: false
             remember_roles:
-              authenticated: authenticated
+              administrator: administrator
+              board: board
+              ride_leader: ride_leader
+              rides_coordinator: rides_coordinator
+              site_admin: site_admin
               anonymous: '0'
-              administrator: '0'
+              authenticated: '0'
               member: '0'
-              board: '0'
               events_coordinator: '0'
               civicrm: '0'
-              ride_leader: '0'
-              rides_coordinator: '0'
               content_creator: '0'
               editor: '0'
-              site_admin: '0'
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
