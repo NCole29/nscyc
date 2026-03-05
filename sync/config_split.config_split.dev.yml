@@ -1,0 +1,22 @@
+uuid: 06175495-50fc-40df-a04b-af09ae662691
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: Dev
+description: 'Development settings. Using config split to dev settings are imported on laptop.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../sync_dev
+module:
+  coffee: 0
+  config_delete: 0
+  config_single_export: 0
+  devel: 0
+  kint: 0
+  permission_spreadsheet: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

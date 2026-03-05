@@ -37,6 +37,7 @@ module:
   club_user: 0
   comment: 0
   config: 0
+  config_split: 0
   contact: 0
   contact_storage: 0
   content_moderation: 0
