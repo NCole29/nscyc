@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'drupal/recommended-project',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'a07d1b592818ef3e7b6fc4b49bcc1371c0ce6a3a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -532,6 +532,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/coffee' => array(
+            'pretty_version' => '2.0.1',
+            'version' => '2.0.1.0',
+            'reference' => '2.0.1',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/coffee',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/comment_notify' => array(
             'pretty_version' => '1.5.0',
             'version' => '1.5.0.0',
@@ -973,6 +982,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/key' => array(
+            'pretty_version' => '1.22.0',
+            'version' => '1.22.0.0',
+            'reference' => '8.x-1.22',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/key',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/kint' => array(
             'pretty_version' => '2.3.3',
             'version' => '2.3.3.0',
@@ -1118,9 +1136,9 @@
             'dev_requirement' => false,
         ),
         'drupal/recommended-project' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'a07d1b592818ef3e7b6fc4b49bcc1371c0ce6a3a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -74,6 +74,7 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   jquery_ui: 0
+  key: 0
   layout_builder: 0
   layout_builder_admin_theme: 0
   layout_builder_restrictions: 0
