@@ -26,9 +26,9 @@ composer require brick/money
 
 ### Requirements
 
-This library requires PHP 8.2 or later.
+This library requires PHP 8.1 or later.
 
-For PHP 8.1 compatibility, you can use version `0.10`. For PHP 8.0, you can use version `0.8`. For PHP 7.4, you can use version `0.7`. For PHP 7.1, 7.2 & 7.3, you can use version `0.5`. Note that [these PHP versions are EOL](http://php.net/supported-versions.php) and not supported anymore. If you're still using one of these PHP versions, you should consider upgrading as soon as possible.
+For PHP 8.0 compatibility, you can use version `0.8`. For PHP 7.4, you can use version `0.7`. For PHP 7.1, 7.2 & 7.3, you can use version `0.5`. Note that [these PHP versions are EOL](http://php.net/supported-versions.php) and not supported anymore. If you're still using one of these PHP versions, you should consider upgrading as soon as possible.
 
 Although not required, it is recommended that you **install the [GMP](http://php.net/manual/en/book.gmp.php) or [BCMath](http://php.net/manual/en/book.bc.php) extension** to speed up calculations.
 
@@ -40,22 +40,9 @@ The current releases are numbered `0.x.y`. When a non-breaking change is introdu
 
 **When a breaking change is introduced, a new `0.x` version cycle is always started.**
 
-It is therefore safe to lock your project to a given release cycle, such as `0.11.*`.
+It is therefore safe to lock your project to a given release cycle, such as `0.10.*`.
 
 If you need to upgrade to a newer release cycle, check the [release history](https://github.com/brick/money/releases) for a list of changes introduced by each further `0.x.0` version.
-
-#### Currency updates
-
-This library is based on the latest ISO 4217 standard. This is a living standard, so updates to currencies are expected to happen regularly.
-
-Updates to the following features **will be considered breaking changes** and **are covered by the backwards compatibility promise**:
-
-- Currencies obtained by alpha currency code such as `EUR` or `USD`, through `Currency::of()`, `Money::of()`, `ISOCurrencyProvider::getCurrency()`, etc. 
-
-The following features are evolving constantly, they will **not** be considered breaking changes and **may be updated in *minor* releases** even after version `1.0.0` has been released:
-
-- Currencies obtained by numeric currency code such as `978` or `840`, through `Currency::ofNumericCode()`, `ISOCurrencyProvider::getCurrencyByNumericCode()`, etc.
-- Currencies obtained by country code such as `FR` or `US`, through `Currency::ofCountry()`, `ISOCurrencyProvider::getCurrencyByCountry()`, etc.
 
 ## Creating a Money
 
@@ -74,7 +61,7 @@ If the given amount does not fit in the currency's default number of decimal pla
 
 ```php
 $money = Money::of('123.456', 'USD'); // RoundingNecessaryException
-$money = Money::of('123.456', 'USD', roundingMode: RoundingMode::Up); // USD 123.46
+$money = Money::of('123.456', 'USD', roundingMode: RoundingMode::UP); // USD 123.46
 ```
 
 **Note that the rounding mode is only used once**, for the value provided in `of()`; it is not stored in the `Money` object, and any subsequent operation will still need to be passed a `RoundingMode` when necessary.
@@ -136,16 +123,16 @@ use Brick\Math\RoundingMode;
 $money = Money::of(50, 'USD');
 
 $money->plus('0.999'); // RoundingNecessaryException
-$money->plus('0.999', RoundingMode::Down); // USD 50.99
+$money->plus('0.999', RoundingMode::DOWN); // USD 50.99
 
 $money->minus('0.999'); // RoundingNecessaryException
-$money->minus('0.999', RoundingMode::Up); // USD 49.01
+$money->minus('0.999', RoundingMode::UP); // USD 49.01
 
 $money->multipliedBy('1.2345'); // RoundingNecessaryException
-$money->multipliedBy('1.2345', RoundingMode::Down); // USD 61.72
+$money->multipliedBy('1.2345', RoundingMode::DOWN); // USD 61.72
 
 $money->dividedBy(3); // RoundingNecessaryException
-$money->dividedBy(3, RoundingMode::Up); // USD 16.67
+$money->dividedBy(3, RoundingMode::UP); // USD 16.67
 ```
 
 ## Money contexts
@@ -164,8 +151,8 @@ use Brick\Money\Context\CashContext;
 use Brick\Math\RoundingMode;
 
 $money = Money::of(10, 'CHF', new CashContext(step: 5)); // CHF 10.00
-$money->dividedBy(3, RoundingMode::Down); // CHF 3.30
-$money->dividedBy(3, RoundingMode::Up); // CHF 3.35
+$money->dividedBy(3, RoundingMode::DOWN); // CHF 3.30
+$money->dividedBy(3, RoundingMode::UP); // CHF 3.35
 ```
 
 ### Custom scale
@@ -178,7 +165,7 @@ use Brick\Money\Context\CustomContext;
 use Brick\Math\RoundingMode;
 
 $money = Money::of(10, 'USD', new CustomContext(scale: 4)); // USD 10.0000
-$money->dividedBy(7, RoundingMode::Up); // USD 1.4286
+$money->dividedBy(7, RoundingMode::UP); // USD 1.4286
 ```
 
 ### Auto scale
@@ -209,14 +196,14 @@ $money = Money::of('9.5', 'EUR') // EUR 9.50
   ->dividedBy(3) // EUR 950/300
   ->plus('17.795') // EUR 6288500/300000
   ->multipliedBy('1.196') // EUR 7521046000/300000000
-  ->to($money->getContext(), RoundingMode::Down) // EUR 25.07
+  ->to($money->getContext(), RoundingMode::DOWN) // EUR 25.07
 ```
 
 As you can see, the intermediate results are represented as fractions, and no rounding is ever performed. The final `to()` method converts it to a `Money`, applying a context and a rounding mode if necessary. Most of the time you want the result in the same context as the original Money, which is what the example above does. But you can really apply any context:
 
 ```php
 ...
-  ->to(new CustomContext(scale: 8), RoundingMode::Up); // EUR 25.07015334
+  ->to(new CustomContext(scale: 8), RoundingMode::UP); // EUR 25.07015334
 ```
 
 Note: as you can see in the example above, the numbers in the fractions can quickly get very large.
@@ -296,7 +283,7 @@ $exchangeRateProvider = ...;
 $converter = new CurrencyConverter($exchangeRateProvider); // optionally provide a Context here
 
 $money = Money::of('50', 'USD');
-$converter->convert($money, 'EUR', roundingMode: RoundingMode::Down);
+$converter->convert($money, 'EUR', roundingMode: RoundingMode::DOWN);
 ```
 
 The converter performs the most precise calculation possible, internally representing the result as a rational number until the very last step.

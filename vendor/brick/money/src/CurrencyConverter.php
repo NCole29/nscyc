@@ -4,56 +4,66 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
+use Brick\Money\Context\DefaultContext;
+use Brick\Money\Exception\CurrencyConversionException;
+
 use Brick\Math\BigRational;
 use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context\DefaultContext;
-use Brick\Money\Exception\CurrencyConversionException;
 
 /**
  * Converts monies into different currencies, using an exchange rate provider.
  */
-final readonly class CurrencyConverter
+final class CurrencyConverter
 {
+    /**
+     * The exchange rate provider.
+     */
+    private readonly ExchangeRateProvider $exchangeRateProvider;
+
     /**
      * @param ExchangeRateProvider $exchangeRateProvider The exchange rate provider.
      */
-    public function __construct(
-        private ExchangeRateProvider $exchangeRateProvider,
-    ) {
+    public function __construct(ExchangeRateProvider $exchangeRateProvider)
+    {
+        $this->exchangeRateProvider = $exchangeRateProvider;
     }
 
     /**
      * Converts the given money to the given currency.
      *
-     * @param Monetary            $money        The Money, RationalMoney or MoneyBag to convert.
-     * @param Currency|string|int $currency     The Currency instance, ISO currency code or ISO numeric currency code.
-     * @param Context|null        $context      A context to create the money in, or null to use the default.
-     * @param RoundingMode        $roundingMode The rounding mode, if necessary.
+     * @param MoneyContainer      $moneyContainer The Money, RationalMoney or MoneyBag to convert.
+     * @param Currency|string|int $currency       The Currency instance, ISO currency code or ISO numeric currency code.
+     * @param Context|null        $context        A context to create the money in, or null to use the default.
+     * @param RoundingMode        $roundingMode   The rounding mode, if necessary.
+     *
+     * @return Money
      *
      * @throws CurrencyConversionException If the exchange rate is not available.
-     * @throws RoundingNecessaryException  If rounding is necessary and RoundingMode::Unnecessary is used.
+     * @throws RoundingNecessaryException  If rounding is necessary and RoundingMode::UNNECESSARY is used.
      */
     public function convert(
-        Monetary $money,
+        MoneyContainer $moneyContainer,
         Currency|string|int $currency,
         ?Context $context = null,
-        RoundingMode $roundingMode = RoundingMode::Unnecessary,
-    ): Money {
+        RoundingMode $roundingMode = RoundingMode::UNNECESSARY,
+    ) : Money {
         return $this
-            ->convertToRational($money, $currency)
+            ->convertToRational($moneyContainer, $currency)
             ->to($context ?? new DefaultContext(), $roundingMode);
     }
 
     /**
      * Converts the given money to the given currency, and returns the result as a RationalMoney with no rounding.
      *
-     * @param Monetary            $money    The Money, RationalMoney or MoneyBag to convert.
-     * @param Currency|string|int $currency The Currency instance, ISO currency code or ISO numeric currency code.
+     * @param MoneyContainer      $moneyContainer The Money, RationalMoney or MoneyBag to convert.
+     * @param Currency|string|int $currency       The Currency instance, ISO currency code or ISO numeric currency code.
+     *
+     * @return RationalMoney
      *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function convertToRational(Monetary $money, Currency|string|int $currency): RationalMoney
+    public function convertToRational(MoneyContainer $moneyContainer, Currency|string|int $currency) : RationalMoney
     {
         if (! $currency instanceof Currency) {
             $currency = Currency::of($currency);
@@ -63,12 +73,7 @@ final readonly class CurrencyConverter
 
         $total = BigRational::zero();
 
-        foreach ($money->getMonies() as $containedMoney) {
-            $sourceCurrency = $containedMoney->getCurrency();
-            $sourceCurrencyCode = $sourceCurrency->getCurrencyCode();
-
-            $amount = $containedMoney->getAmount();
-
+        foreach ($moneyContainer->getAmounts() as $sourceCurrencyCode => $amount) {
             if ($sourceCurrencyCode !== $currencyCode) {
                 $exchangeRate = $this->exchangeRateProvider->getExchangeRate($sourceCurrencyCode, $currencyCode);
                 $amount = $amount->toBigRational()->multipliedBy($exchangeRate);

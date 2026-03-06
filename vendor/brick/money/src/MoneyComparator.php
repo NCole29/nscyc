@@ -16,14 +16,21 @@ use Brick\Money\Exception\CurrencyConversionException;
  * This order is important because some exchange rate providers may only have one-way rates,
  * or may use a different rate in each direction.
  */
-final readonly class MoneyComparator
+final class MoneyComparator
 {
     /**
-     * @param ExchangeRateProvider $exchangeRateProvider The exchange rate provider.
+     * The exchange rate provider.
      */
-    public function __construct(
-        private ExchangeRateProvider $exchangeRateProvider,
-    ) {
+    private readonly ExchangeRateProvider $exchangeRateProvider;
+
+    /**
+     * Class constructor.
+     *
+     * @param ExchangeRateProvider $provider The exchange rate provider.
+     */
+    public function __construct(ExchangeRateProvider $provider)
+    {
+        $this->exchangeRateProvider = $provider;
     }
 
     /**
@@ -36,11 +43,14 @@ final readonly class MoneyComparator
      * This order is important if the exchange rate provider uses different exchange rates
      * when converting back and forth two currencies.
      *
+     * @param Money $a
+     * @param Money $b
+     *
      * @return int -1, 0 or 1.
      *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function compare(Money $a, Money $b): int
+    public function compare(Money $a, Money $b) : int
     {
         $aCurrencyCode = $a->getCurrency()->getCurrencyCode();
         $bCurrencyCode = $b->getCurrency()->getCurrencyCode();
@@ -60,41 +70,66 @@ final readonly class MoneyComparator
     }
 
     /**
+     * @param Money $a
+     * @param Money $b
+     *
+     * @return bool
+     *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function isEqual(Money $a, Money $b): bool
+    public function isEqual(Money $a, Money $b) : bool
     {
         return $this->compare($a, $b) === 0;
     }
 
     /**
+     * @param Money $a
+     * @param Money $b
+     *
+     * @return bool
+     *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function isLess(Money $a, Money $b): bool
+    public function isLess(Money $a, Money $b) : bool
     {
         return $this->compare($a, $b) < 0;
     }
 
     /**
+     * @param Money $a
+     * @param Money $b
+     *
+     * @return bool
+     *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function isLessOrEqual(Money $a, Money $b): bool
+    public function isLessOrEqual(Money $a, Money $b) : bool
     {
         return $this->compare($a, $b) <= 0;
     }
 
     /**
+     * @param Money $a
+     * @param Money $b
+     *
+     * @return bool
+     *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function isGreater(Money $a, Money $b): bool
+    public function isGreater(Money $a, Money $b) : bool
     {
         return $this->compare($a, $b) > 0;
     }
 
     /**
+     * @param Money $a
+     * @param Money $b
+     *
+     * @return bool
+     *
      * @throws CurrencyConversionException If the exchange rate is not available.
      */
-    public function isGreaterOrEqual(Money $a, Money $b): bool
+    public function isGreaterOrEqual(Money $a, Money $b) : bool
     {
         return $this->compare($a, $b) >= 0;
     }
@@ -109,14 +144,14 @@ final readonly class MoneyComparator
      *
      * If several monies are equal to the minimum value, the first one is returned.
      *
-     * @param Money $money     The first money.
+     * @param Money    $money  The first money.
      * @param Money ...$monies The subsequent monies.
      *
      * @return Money The smallest Money.
      *
      * @throws CurrencyConversionException If an exchange rate is not available.
      */
-    public function min(Money $money, Money ...$monies): Money
+    public function min(Money $money, Money ...$monies) : Money
     {
         $min = $money;
 
@@ -139,14 +174,14 @@ final readonly class MoneyComparator
      *
      * If several monies are equal to the maximum value, the first one is returned.
      *
-     * @param Money $money     The first money.
+     * @param Money    $money  The first money.
      * @param Money ...$monies The subsequent monies.
      *
      * @return Money The largest Money.
      *
      * @throws CurrencyConversionException If an exchange rate is not available.
      */
-    public function max(Money $money, Money ...$monies): Money
+    public function max(Money $money, Money ...$monies) : Money
     {
         $max = $money;
 

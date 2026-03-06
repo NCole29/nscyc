@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Brick\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
-use Brick\Math\BigRational;
 use Brick\Money\ExchangeRateProvider;
-use Override;
+
+use Brick\Math\BigRational;
 
 /**
  * Calculates exchange rates relative to a base currency.
@@ -18,19 +18,31 @@ use Override;
  * using this provider on top of it would allow you to get an exchange rate from EUR to USD, GBP to USD,
  * or even EUR to GBP and GBP to EUR.
  */
-final readonly class BaseCurrencyProvider implements ExchangeRateProvider
+final class BaseCurrencyProvider implements ExchangeRateProvider
 {
+    /**
+     * The provider for rates relative to the base currency.
+     */
+    private readonly ExchangeRateProvider $provider;
+
+    /**
+     * The code of the currency all the exchanges rates are based on.
+     */
+    private readonly string $baseCurrencyCode;
+
     /**
      * @param ExchangeRateProvider $provider         The provider for rates relative to the base currency.
      * @param string               $baseCurrencyCode The code of the currency all the exchanges rates are based on.
      */
-    public function __construct(
-        private ExchangeRateProvider $provider,
-        private string $baseCurrencyCode,
-    ) {
+    public function __construct(ExchangeRateProvider $provider, string $baseCurrencyCode)
+    {
+        $this->provider         = $provider;
+        $this->baseCurrencyCode = $baseCurrencyCode;
     }
 
-    #[Override]
+    /**
+     * {@inheritdoc}
+     */
     public function getExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode): BigNumber
     {
         if ($sourceCurrencyCode === $this->baseCurrencyCode) {

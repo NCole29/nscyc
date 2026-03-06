@@ -6,7 +6,6 @@ namespace Brick\Money\ExchangeRateProvider;
 
 use Brick\Math\BigNumber;
 use Brick\Money\ExchangeRateProvider;
-use Override;
 
 /**
  * Caches the results of another exchange rate provider.
@@ -14,22 +13,31 @@ use Override;
 final class CachedProvider implements ExchangeRateProvider
 {
     /**
+     * The underlying exchange rate provider.
+     */
+    private readonly ExchangeRateProvider $provider;
+
+    /**
      * The cached exchange rates.
      *
-     * @var array<string, array<string, BigNumber|int|float|string>>
+     * @psalm-var array<string, array<string, BigNumber|int|float|string>>
      */
     private array $exchangeRates = [];
 
     /**
-     * @param ExchangeRateProvider $provider The underlying exchange rate provider.
+     * Class constructor.
+     *
+     * @param ExchangeRateProvider $provider
      */
-    public function __construct(
-        private readonly ExchangeRateProvider $provider,
-    ) {
+    public function __construct(ExchangeRateProvider $provider)
+    {
+        $this->provider = $provider;
     }
 
-    #[Override]
-    public function getExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode): BigNumber|int|float|string
+    /**
+     * {@inheritdoc}
+     */
+    public function getExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode) : BigNumber|int|float|string
     {
         if (isset($this->exchangeRates[$sourceCurrencyCode][$targetCurrencyCode])) {
             return $this->exchangeRates[$sourceCurrencyCode][$targetCurrencyCode];
@@ -46,8 +54,10 @@ final class CachedProvider implements ExchangeRateProvider
      * Invalidates the cache.
      *
      * This forces the exchange rates to be fetched again from the underlying provider.
+     *
+     * @return void
      */
-    public function invalidate(): void
+    public function invalidate() : void
     {
         $this->exchangeRates = [];
     }

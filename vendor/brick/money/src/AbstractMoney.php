@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
+use Brick\Money\Exception\MoneyMismatchException;
+
 use Brick\Math\BigNumber;
+use Brick\Math\RoundingMode;
 use Brick\Math\Exception\MathException;
 use Brick\Math\Exception\RoundingNecessaryException;
-use Brick\Math\RoundingMode;
-use Brick\Money\Exception\MoneyMismatchException;
 use JsonSerializable;
-use Override;
 use Stringable;
 
 /**
@@ -19,11 +19,11 @@ use Stringable;
  * Please consider this class sealed: extending this class yourself is not supported, and breaking changes (such as
  * adding new abstract methods) can happen at any time, even in a minor version.
  */
-abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSerializable
+abstract class AbstractMoney implements MoneyContainer, Stringable, JsonSerializable
 {
-    abstract public function getAmount(): BigNumber;
+    abstract public function getAmount() : BigNumber;
 
-    abstract public function getCurrency(): Currency;
+    abstract public function getCurrency() : Currency;
 
     /**
      * Converts this money to a Money in the given Context.
@@ -31,21 +31,26 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @param Context      $context      The context.
      * @param RoundingMode $roundingMode The rounding mode, if necessary.
      *
-     * @throws RoundingNecessaryException If RoundingMode::Unnecessary is used but rounding is necessary.
+     * @return Money
+     *
+     * @throws RoundingNecessaryException If RoundingMode::UNNECESSARY is used but rounding is necessary.
      */
-    final public function to(Context $context, RoundingMode $roundingMode = RoundingMode::Unnecessary): Money
+    final public function to(Context $context, RoundingMode $roundingMode = RoundingMode::UNNECESSARY) : Money
     {
         return Money::create($this->getAmount(), $this->getCurrency(), $context, $roundingMode);
     }
 
     /**
-     * Required by interface Monetary. Not intended for direct use.
+     * Required by interface MoneyContainer.
+     *
+     * @psalm-return array<string, BigNumber>
+     *
+     * @return BigNumber[]
      */
-    #[Override]
-    final public function getMonies(): array
+    final public function getAmounts() : array
     {
         return [
-            $this->toRational(),
+            $this->getCurrency()->getCurrencyCode() => $this->getAmount()
         ];
     }
 
@@ -54,47 +59,57 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      *
      * @return int -1 if the number is negative, 0 if zero, 1 if positive.
      */
-    final public function getSign(): int
+    final public function getSign() : int
     {
         return $this->getAmount()->getSign();
     }
 
     /**
      * Returns whether this money has zero value.
+     *
+     * @return bool
      */
-    final public function isZero(): bool
+    final public function isZero() : bool
     {
         return $this->getAmount()->isZero();
     }
 
     /**
      * Returns whether this money has a negative value.
+     *
+     * @return bool
      */
-    final public function isNegative(): bool
+    final public function isNegative() : bool
     {
         return $this->getAmount()->isNegative();
     }
 
     /**
      * Returns whether this money has a negative or zero value.
+     *
+     * @return bool
      */
-    final public function isNegativeOrZero(): bool
+    final public function isNegativeOrZero() : bool
     {
         return $this->getAmount()->isNegativeOrZero();
     }
 
     /**
      * Returns whether this money has a positive value.
+     *
+     * @return bool
      */
-    final public function isPositive(): bool
+    final public function isPositive() : bool
     {
         return $this->getAmount()->isPositive();
     }
 
     /**
      * Returns whether this money has a positive or zero value.
+     *
+     * @return bool
      */
-    final public function isPositiveOrZero(): bool
+    final public function isPositiveOrZero() : bool
     {
         return $this->getAmount()->isPositiveOrZero();
     }
@@ -107,7 +122,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function compareTo(AbstractMoney|BigNumber|int|float|string $that): int
+    final public function compareTo(AbstractMoney|BigNumber|int|float|string $that) : int
     {
         return $this->getAmount()->compareTo($this->getAmountOf($that));
     }
@@ -118,7 +133,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
+    final public function isEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
     {
         return $this->getAmount()->isEqualTo($this->getAmountOf($that));
     }
@@ -129,7 +144,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isLessThan(AbstractMoney|BigNumber|int|float|string $that): bool
+    final public function isLessThan(AbstractMoney|BigNumber|int|float|string $that) : bool
     {
         return $this->getAmount()->isLessThan($this->getAmountOf($that));
     }
@@ -140,7 +155,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isLessThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
+    final public function isLessThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
     {
         return $this->getAmount()->isLessThanOrEqualTo($this->getAmountOf($that));
     }
@@ -151,7 +166,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isGreaterThan(AbstractMoney|BigNumber|int|float|string $that): bool
+    final public function isGreaterThan(AbstractMoney|BigNumber|int|float|string $that) : bool
     {
         return $this->getAmount()->isGreaterThan($this->getAmountOf($that));
     }
@@ -162,7 +177,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      * @throws MathException          If the argument is an invalid number.
      * @throws MoneyMismatchException If the argument is a money in a different currency.
      */
-    final public function isGreaterThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that): bool
+    final public function isGreaterThanOrEqualTo(AbstractMoney|BigNumber|int|float|string $that) : bool
     {
         return $this->getAmount()->isGreaterThanOrEqualTo($this->getAmountOf($that));
     }
@@ -172,26 +187,16 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
      *
      * Unlike isEqualTo(), this method only accepts a money, and returns false if the given money is in another
      * currency, instead of throwing a MoneyMismatchException.
+     *
+     * @param AbstractMoney $that
+     *
+     * @return bool
      */
-    final public function isAmountAndCurrencyEqualTo(AbstractMoney $that): bool
+    final public function isAmountAndCurrencyEqualTo(AbstractMoney $that) : bool
     {
         return $this->getAmount()->isEqualTo($that->getAmount())
-            && $this->getCurrency()->isEqualTo($that->getCurrency());
+            && $this->getCurrency()->is($that->getCurrency());
     }
-
-    #[Override]
-    final public function jsonSerialize(): array
-    {
-        return [
-            'amount' => (string) $this->getAmount(),
-            'currency' => $this->getCurrency()->jsonSerialize(),
-        ];
-    }
-
-    /**
-     * Converts this money object to a RationalMoney.
-     */
-    abstract protected function toRational(): RationalMoney;
 
     /**
      * Returns the amount of the given parameter.
@@ -205,7 +210,7 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
     final protected function getAmountOf(AbstractMoney|BigNumber|int|float|string $that): BigNumber|int|float|string
     {
         if ($that instanceof AbstractMoney) {
-            if (! $that->getCurrency()->isEqualTo($this->getCurrency())) {
+            if (! $that->getCurrency()->is($this->getCurrency())) {
                 throw MoneyMismatchException::currencyMismatch($this->getCurrency(), $that->getCurrency());
             }
 
@@ -213,5 +218,13 @@ abstract readonly class AbstractMoney implements Monetary, Stringable, JsonSeria
         }
 
         return $that;
+    }
+
+    final public function jsonSerialize(): array
+    {
+        return [
+            'amount' => (string) $this->getAmount(),
+            'currency' => $this->getCurrency()->jsonSerialize()
+        ];
     }
 }

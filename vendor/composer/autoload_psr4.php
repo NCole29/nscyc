@@ -8,7 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'xKerman\\Restricted\\' => array($vendorDir . '/xkerman/restricted-unserialize/src'),
     'tubalmartin\\CssMin\\' => array($vendorDir . '/tubalmartin/cssmin/src'),
-    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib2_compat/src'),
+    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'phpowermove\\docblock\\' => array($vendorDir . '/phpowermove/docblock/src'),
     'phootwork\\lang\\' => array($vendorDir . '/phootwork/lang'),
     'phootwork\\collection\\' => array($vendorDir . '/phootwork/collection'),
@@ -80,6 +81,7 @@ return array(
     'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'PhpOffice\\Math\\' => array($vendorDir . '/phpoffice/math/src/Math'),
     'Peast\\' => array($vendorDir . '/mck89/peast/lib/Peast'),
+    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Padaliyajay\\PHPAutoprefixer\\' => array($vendorDir . '/padaliyajay/php-autoprefixer/src'),
     'OomphInc\\ComposerInstallersExtender\\' => array($vendorDir . '/oomphinc/composer-installers-extender/src'),
     'MimeTyper\\' => array($vendorDir . '/adrienrn/php-mimetyper/src'),

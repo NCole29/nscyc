@@ -4,16 +4,9 @@ declare(strict_types=1);
 
 namespace Brick\Money\ExchangeRateProvider;
 
-use Brick\Money\Exception\CurrencyConversionException;
+use Brick\Math\BigNumber;
 use Brick\Money\ExchangeRateProvider;
-use InvalidArgumentException;
-use Override;
-use PDO;
-use PDOStatement;
-
-use function implode;
-use function sprintf;
-use function var_export;
+use Brick\Money\Exception\CurrencyConversionException;
 
 /**
  * Reads exchange rates from a PDO database connection.
@@ -23,7 +16,7 @@ final class PDOProvider implements ExchangeRateProvider
     /**
      * The SELECT statement.
      */
-    private readonly PDOStatement $statement;
+    private readonly \PDOStatement $statement;
 
     /**
      * The source currency code if fixed, or null if dynamic.
@@ -41,9 +34,12 @@ final class PDOProvider implements ExchangeRateProvider
     private array $parameters = [];
 
     /**
-     * @throws InvalidArgumentException
+     * @param \PDO                     $pdo
+     * @param PDOProviderConfiguration $configuration
+     *
+     * @throws \InvalidArgumentException
      */
-    public function __construct(PDO $pdo, PDOProviderConfiguration $configuration)
+    public function __construct(\PDO $pdo, PDOProviderConfiguration $configuration)
     {
         $conditions = [];
 
@@ -69,13 +65,13 @@ final class PDOProvider implements ExchangeRateProvider
         $this->sourceCurrencyCode = $sourceCurrencyCode;
         $this->targetCurrencyCode = $targetCurrencyCode;
 
-        $conditions = implode(' AND ', $conditions);
+        $conditions = implode(' AND ' , $conditions);
 
         $query = sprintf(
             'SELECT %s FROM %s WHERE %s',
             $configuration->exchangeRateColumnName,
             $configuration->tableName,
-            $conditions,
+            $conditions
         );
 
         $this->statement = $pdo->prepare($query);
@@ -87,12 +83,14 @@ final class PDOProvider implements ExchangeRateProvider
      * This is used in conjunction with $whereConditions in the configuration class.
      * The number of parameters passed to this method must match the number of placeholders.
      */
-    public function setParameters(mixed ...$parameters): void
+    public function setParameters(mixed ...$parameters) : void
     {
         $this->parameters = $parameters;
     }
 
-    #[Override]
+    /**
+     * {@inheritdoc}
+     */
     public function getExchangeRate(string $sourceCurrencyCode, string $targetCurrencyCode): int|float|string
     {
         $parameters = $this->parameters;

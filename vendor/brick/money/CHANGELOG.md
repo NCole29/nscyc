@@ -1,81 +1,5 @@
 # Changelog
 
-## [0.11.1](https://github.com/brick/money/releases/tag/0.11.1) - 2026-02-12
-
-⚠️ **Deprecations**
-
-- Added explicit `trigger_deprecation()` calls to methods that were already marked as `@deprecated`, so deprecation notices are now emitted at runtime
-
-📌 **Compatibility**
-
-- Restricted compatibility to `brick/math:~0.14.4`
-
-👌 **Improvements**
-
-- Fixed calls to deprecated brick/math and brick/money APIs
-
-## [0.11.0](https://github.com/brick/money/releases/tag/0.11.0) - 2026-01-22
-
-💥 **Breaking changes**
-
-- Minimum PHP version is now 8.2
-- The following classes are now `final`:
-  - `CurrencyConversionException`
-  - `MoneyMismatchException`
-  - `UnknownCurrencyException`
-- `CustomContext` now validates the step and will throw an exception if an invalid step is given
-- Interface `MoneyContainer` has been removed (replaced with `Monetary`)
-- Method `AbstractMoney::getAmounts()` has been removed (replaced with `getMonies()`)
-- Method `MoneyBag::getAmounts()` has been removed (replaced with `getMonies()`)
-- `CurrencyConverter::convert()` and `convertToRational()` now accept a `Monetary` instance (which still includes `Money`, `RationalMoney` and `MoneyBag`)
-- `MoneyBag::add()` and `subtract()` now accept a `Monetary` instance (which still includes `Money`, `RationalMoney` and `MoneyBag`)
-
-⚠️ **Deprecations**
-
-- Calling `Currency::of()` with a numeric code is deprecated, use `Currency::ofNumericCode()` instead
-- Calling `ISOCurrencyProvider::getCurrency()` with a numeric code is deprecated, use `getCurrencyByNumericCode()` instead
-- Calling `CurrencyConverter::convert()` or `convertToRational()` with a numeric currency code is deprecated, use a `Currency` instance instead
-- Calling `Money::of()`, `ofMinor()`, `zero()` or `convertedTo()` with a numeric currency code is deprecated, use a `Currency` instance instead
-- Calling `RationalMoney::of()` with a numeric currency code is deprecated, use a `Currency` instance instead
-- `MoneyBag::getAmount()` is deprecated, use `getMoney()` instead
-- `Money::formatTo()` is deprecated, use `Money::formatToLocale()` instead
-- `Money::formatWith()` is deprecated, use `MoneyNumberFormatter::format()` instead
-- `Currency::is()` is deprecated, use `Currency::isEqualTo()` instead
-
-> [!IMPORTANT]
-> The convenience of passing a currency by ISO numeric code in addition to alphabetic code has been deprecated, leaving only alphabetic-code lookup in generic APIs. For example, `Money::of()` will accept `Currency|string` in the future, instead of `Currency|string|int` today.
-> This makes explicit the separation between retrieval by alphabetic code, which has strong backwards compatibility guarantees, and retrieval by numeric code, which may change in minor versions due to ISO reassignments.
-> This will require users to explicitly obtain a currency through `Currency::ofNumericCode()`, which is documented as not being covered by the same BC guarantees.
-
-✨ **New features**
-
-- **Support for historical currencies** in `Money::of()`, `Currency::of()`, etc. (#104 by @survik1)
-- New enum: `CurrencyType`
-- New methods:
-  - `Currency::getCurrencyType()` returns the type of the currency
-  - `Currency::ofNumericCode()` returns a currency by its numeric ISO 4217 code
-  - `Currency::isEqualTo()` compares two currencies for equality (replaces `is()`)
-  - `ISOCurrencyProvider::getCurrencyByNumericCode()` returns a currency by its numeric code
-  - `ISOCurrencyProvider::getHistoricalCurrenciesForCountry()` returns historical currencies for a country
-  - `MoneyBag::getMoney()` returns the contained amount in a given currency (replaces `getAmount()`)
-  - `MoneyBag::getMonies()` returns the contained monies (replaces `getAmounts()`)
-  - `Money::formatToLocale()` formats the amount to a locale (replaces `formatTo()`) (#105 by @mklepaczewski)
-  - `RationalMoney::zero()` returns a zero `RationalMoney` in a given currency
-- New interfaces:
-  - `Monetary` (replaces `MoneyContainer`)
-  - `MoneyFormatter` formats a given `Money` object (#105 by @mklepaczewski)
-- New classes:
-  - `MoneyLocaleFormatter` formats a given `Money` object to a locale (#105 by @mklepaczewski)
-  - `MoneyNumberFormatter` formats a given `Money` object using a `NumberFormatter` instance (#105 by @mklepaczewski)
-
-👌 **Improvements**
-
-- `MoneyException` now extends `RuntimeException` instead of `Exception`
-
-📝 **Documentation**
-
-- Backward compatibility promise notes for currency updates
-
 ## [0.10.3](https://github.com/brick/money/releases/tag/0.10.3) - 2025-09-03
 
 👌 **Improvements**
@@ -324,10 +248,11 @@ New method: `CustomContext::getScale()`
 
 Backports from 0.2.x:
 
-- `CustomContext::getScale()`
+- New method: `CustomContext::getScale()`
 - `Money::formatTo()` now always respects the scale of the Money
 - Bug fix: `Money::allocate()` incorrectly allocated negative monies
 
 ## [0.1.0](https://github.com/brick/money/releases/tag/0.1.0) - 2017-10-02
 
 First beta release!
+

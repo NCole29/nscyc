@@ -107,10 +107,10 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         '0174385c3be07e86008907d06ee66531' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Rule/Rule.php',
         '98aea6e41b9cb79b379b10f37ba1f0b7' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/RuleSet/RuleContainer.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '5897ea0ac4cccf14d323035e65887801' => __DIR__ . '/..' . '/symfony/polyfill-php82/bootstrap.php',
         'bad842bce63596a608e2623519fb382c' => __DIR__ . '/..' . '/xkerman/restricted-unserialize/src/function.php',
@@ -139,6 +139,7 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         'p' =>
         array (
             'phpseclib\\' => 10,
+            'phpseclib3\\' => 11,
             'phpowermove\\docblock\\' => 21,
             'phootwork\\lang\\' => 15,
             'phootwork\\collection\\' => 21,
@@ -234,6 +235,7 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PhpOffice\\Math\\' => 15,
             'Peast\\' => 6,
+            'ParagonIE\\ConstantTime\\' => 23,
             'Padaliyajay\\PHPAutoprefixer\\' => 28,
         ),
         'O' =>
@@ -352,6 +354,10 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
             0 => __DIR__ . '/..' . '/tubalmartin/cssmin/src',
         ),
         'phpseclib\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/phpseclib/phpseclib2_compat/src',
+        ),
+        'phpseclib3\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
@@ -640,6 +646,10 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         'Peast\\' =>
         array (
             0 => __DIR__ . '/..' . '/mck89/peast/lib/Peast',
+        ),
+        'ParagonIE\\ConstantTime\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'Padaliyajay\\PHPAutoprefixer\\' =>
         array (

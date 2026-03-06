@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - webform.webform.free_event
+    - webform.webform.free_event_nologin
     - webform.webform.picnic
   module:
     - node
@@ -362,6 +363,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 25
           total_pages: null
           id: 0
@@ -379,7 +381,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -409,7 +410,23 @@ display:
           empty: true
           content: 'No submissions available.'
           tokenize: false
-      sorts: {  }
+      sorts:
+        completed:
+          id: completed
+          table: webform_submission
+          field: completed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: completed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: minute
       arguments:
         entity_id:
           id: entity_id
@@ -908,6 +925,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
+            free_event_nologin: free_event_nologin
             free_event: free_event
           group: 1
           exposed: false

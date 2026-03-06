@@ -121,8 +121,8 @@ assets:
   javascript: ''
 form:
   limit: 50
-  filter_category: 'Free event'
-  filter_state: open
+  filter_category: ''
+  filter_state: ''
 element:
   machine_name_pattern: a-z0-9_
   empty_message: '{Empty}'

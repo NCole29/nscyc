@@ -40,7 +40,7 @@ content:
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_date:
     type: smartdate_default
@@ -62,7 +62,7 @@ content:
         decimals: 2
         suffix: h
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_location:
     type: entity_reference_entity_view
@@ -71,7 +71,7 @@ content:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_registration_form:
     type: webform_entity_reference_link
@@ -85,6 +85,18 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
+  field_registration_free_form:
+    type: webform_entity_reference_link
+    label: visually_hidden
+    settings:
+      label: 'Register Now'
+      dialog: narrow
+      attributes:
+        class:
+          - w3-dark-button
+    third_party_settings: {  }
+    weight: 5
+    region: content
   field_registration_link:
     type: link
     label: hidden
@@ -95,14 +107,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_summary:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   banner_image: true
@@ -111,7 +123,6 @@ hidden:
   field_page_access: true
   field_registration: true
   field_registration_close_date: true
-  field_registration_free_form: true
   field_results_access: true
   field_text: true
   field_type_of_page: true

@@ -212,6 +212,7 @@ content:
       default_data: true
       webforms:
         - free_event
+        - free_event_nologin
     third_party_settings: {  }
   field_registration_link:
     type: link_default

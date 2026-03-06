@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Brick\Money;
 
-use Brick\Math\BigNumber;
 use Brick\Money\Exception\CurrencyConversionException;
+
+use Brick\Math\BigNumber;
 
 /**
  * Interface for exchange rate providers.

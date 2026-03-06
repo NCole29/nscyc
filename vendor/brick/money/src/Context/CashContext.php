@@ -4,29 +4,37 @@ declare(strict_types=1);
 
 namespace Brick\Money\Context;
 
+use Brick\Money\Context;
+use Brick\Money\Currency;
+
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
-use Brick\Money\Context;
-use Brick\Money\Currency;
-use Override;
 
 /**
  * Adjusts a number to the default scale for the currency, respecting a cash rounding.
  */
-final readonly class CashContext implements Context
+final class CashContext implements Context
 {
     /**
-     * @param int $step The cash rounding step, in minor units. Must be a multiple of 2 and/or 5.
-     *                  For example, step 5 on CHF would allow CHF 0.00, CHF 0.05, CHF 0.10, etc.
+     * The cash rounding step, in minor units.
+     *
+     * For example, step 5 on CHF would allow CHF 0.00, CHF 0.05, CHF 0.10, etc.
      */
-    public function __construct(
-        private int $step,
-    ) {
+    private readonly int $step;
+
+    /**
+     * @param int $step The cash rounding step, in minor units. Must be a multiple of 2 and/or 5.
+     */
+    public function __construct(int $step)
+    {
+        $this->step = $step;
     }
 
-    #[Override]
-    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode): BigDecimal
+    /**
+     * {@inheritdoc}
+     */
+    public function applyTo(BigNumber $amount, Currency $currency, RoundingMode $roundingMode) : BigDecimal
     {
         $scale = $currency->getDefaultFractionDigits();
 
@@ -41,14 +49,18 @@ final readonly class CashContext implements Context
             ->multipliedBy($this->step);
     }
 
-    #[Override]
-    public function getStep(): int
+    /**
+     * {@inheritdoc}
+     */
+    public function getStep() : int
     {
         return $this->step;
     }
 
-    #[Override]
-    public function isFixedScale(): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function isFixedScale() : bool
     {
         return true;
     }

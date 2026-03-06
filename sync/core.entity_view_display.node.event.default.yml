@@ -117,7 +117,7 @@ third_party_settings:
                   rel: '0'
                   target: '0'
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           e5ac2c91-0a5c-433a-98c2-717cf12db1f4:
             uuid: e5ac2c91-0a5c-433a-98c2-717cf12db1f4
@@ -208,6 +208,29 @@ third_party_settings:
                     suffix: h
                 third_party_settings: {  }
             weight: 8
+            additional: {  }
+          a7eb2bcd-61c7-43f2-8ec2-5b63456e8df4:
+            uuid: a7eb2bcd-61c7-43f2-8ec2-5b63456e8df4
+            region: first
+            configuration:
+              id: 'field_block:node:event:field_registration_free_form'
+              label: 'Registration, Free event webform'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: webform_entity_reference_link
+                label: visually_hidden
+                settings:
+                  label: 'Register Now'
+                  dialog: narrow
+                  attributes:
+                    class:
+                      - w3-dark-button
+                third_party_settings: {  }
+            weight: 5
             additional: {  }
         third_party_settings: {  }
       -

@@ -1,6 +1,6 @@
 uuid: d6cd223e-39e7-4b5e-9ba1-5c2f5cf0ca5c
 langcode: en
-status: open
+status: closed
 dependencies:
   module:
     - honeypot
@@ -18,7 +18,7 @@ uid: 874
 template: false
 archive: false
 id: free_event1
-title: 'Free event'
+title: "Jack's form"
 description: ''
 categories: {  }
 elements: |-
@@ -49,7 +49,6 @@ elements: |-
       '#form_key': civicrm_1_contact_1_contact_existing
       '#parent': civicrm_1_contact_1_fieldset_fieldset
       '#extra': {  }
-      '#required': true
     flexbox:
       '#type': webform_flexbox
       civicrm_1_contact_1_contact_first_name:

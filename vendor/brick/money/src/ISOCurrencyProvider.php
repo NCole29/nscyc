@@ -6,11 +6,6 @@ namespace Brick\Money;
 
 use Brick\Money\Exception\UnknownCurrencyException;
 
-use function count;
-use function is_int;
-use function ksort;
-use function trigger_deprecation;
-
 /**
  * Provides ISO 4217 currencies.
  */
@@ -21,7 +16,7 @@ final class ISOCurrencyProvider
     /**
      * The raw currency data, indexed by currency code.
      *
-     * @var array<string, array{string, int, string, int, CurrencyType}>
+     * @psalm-var array<string, array{string, int, string, int}>
      */
     private readonly array $currencyData;
 
@@ -30,35 +25,27 @@ final class ISOCurrencyProvider
      *
      * This property is set on-demand, as soon as required.
      *
-     * @var array<int, string>|null
+     * @psalm-var array<int, string>|null
      */
     private ?array $numericToCurrency = null;
 
     /**
-     * An associative array of country code to current currency codes.
-     *
-     * This property is set on-demand, as soon as required.
-     *
-     * @var array<string, list<string>>|null
-     */
-    private ?array $countryToCurrencyCurrent = null;
-
-    /**
      * An associative array of country code to currency codes.
-     * Contains only historical currencies. The countries may no longer exist.
      *
      * This property is set on-demand, as soon as required.
      *
-     * @var array<string, list<string>>|null
+     * @psalm-var array<string, list<string>>|null
      */
-    private ?array $countryToCurrencyHistorical = null;
+    private ?array $countryToCurrency = null;
 
     /**
      * The Currency instances.
      *
      * The instances are created on-demand, as soon as they are requested.
      *
-     * @var array<string, Currency>
+     * @psalm-var array<string, Currency>
+     *
+     * @var Currency[]
      */
     private array $currencies = [];
 
@@ -79,8 +66,10 @@ final class ISOCurrencyProvider
 
     /**
      * Returns the singleton instance of ISOCurrencyProvider.
+     *
+     * @return ISOCurrencyProvider
      */
-    public static function getInstance(): ISOCurrencyProvider
+    public static function getInstance() : ISOCurrencyProvider
     {
         if (self::$instance === null) {
             self::$instance = new ISOCurrencyProvider();
@@ -98,12 +87,18 @@ final class ISOCurrencyProvider
      *
      * @throws UnknownCurrencyException If the currency code is not known.
      */
-    public function getCurrency(string|int $currencyCode): Currency
+    public function getCurrency(string|int $currencyCode) : Currency
     {
         if (is_int($currencyCode)) {
-            trigger_deprecation('brick/money', '0.11.0', 'Calling "%s()" with integer argument is deprecated, call getCurrencyByNumericCode() instead.', __METHOD__);
+            if ($this->numericToCurrency === null) {
+                $this->numericToCurrency = require __DIR__ . '/../data/numeric-to-currency.php';
+            }
 
-            return $this->getCurrencyByNumericCode($currencyCode);
+            if (isset($this->numericToCurrency[$currencyCode])) {
+                return $this->getCurrency($this->numericToCurrency[$currencyCode]);
+            }
+
+            throw UnknownCurrencyException::unknownCurrency($currencyCode);
         }
 
         if (isset($this->currencies[$currencyCode])) {
@@ -114,49 +109,24 @@ final class ISOCurrencyProvider
             throw UnknownCurrencyException::unknownCurrency($currencyCode);
         }
 
-        $currency = new Currency(...$this->currencyData[$currencyCode]);
+        $currency = new Currency(... $this->currencyData[$currencyCode]);
 
         return $this->currencies[$currencyCode] = $currency;
     }
 
     /**
-     * Returns a Currency instance matching the given ISO currency code.
-     *
-     * Note: Numeric codes often mirror the ISO 3166-1 numeric code of the issuing
-     * country/territory, so they may outlive a particular currency and be kept/reused
-     * across currency changes. The resolved Currency therefore depends on the ISO 4217
-     * dataset version and may change after an update in a minor version.
-     *
-     * @param int $currencyCode The numeric ISO 4217 currency code.
-     *
-     * @return Currency The currency.
-     *
-     * @throws UnknownCurrencyException If the currency code is not known.
-     */
-    public function getCurrencyByNumericCode(int $currencyCode): Currency
-    {
-        if ($this->numericToCurrency === null) {
-            $this->numericToCurrency = require __DIR__ . '/../data/numeric-to-currency.php';
-        }
-
-        if (isset($this->numericToCurrency[$currencyCode])) {
-            return $this->getCurrency($this->numericToCurrency[$currencyCode]);
-        }
-
-        throw UnknownCurrencyException::unknownCurrency($currencyCode);
-    }
-
-    /**
      * Returns all the available currencies.
      *
-     * @return array<string, Currency> The currencies, indexed by currency code.
+     * @psalm-return array<string, Currency>
+     *
+     * @return Currency[] The currencies, indexed by currency code.
      */
-    public function getAvailableCurrencies(): array
+    public function getAvailableCurrencies() : array
     {
         if ($this->isPartial) {
             foreach ($this->currencyData as $currencyCode => $data) {
                 if (! isset($this->currencies[$currencyCode])) {
-                    $this->currencies[$currencyCode] = new Currency(...$data);
+                    $this->currencies[$currencyCode] = new Currency(... $data);
                 }
             }
 
@@ -169,15 +139,15 @@ final class ISOCurrencyProvider
     }
 
     /**
-     * Returns the current currency for the given ISO country code.
-     *
-     * Note: This value may change in minor releases, as countries may change their official currency.
+     * Returns the currency for the given ISO country code.
      *
      * @param string $countryCode The 2-letter ISO 3166-1 country code.
      *
+     * @return Currency
+     *
      * @throws UnknownCurrencyException If the country code is not known, or the country has no single currency.
      */
-    public function getCurrencyForCountry(string $countryCode): Currency
+    public function getCurrencyForCountry(string $countryCode) : Currency
     {
         $currencies = $this->getCurrenciesForCountry($countryCode);
 
@@ -201,54 +171,24 @@ final class ISOCurrencyProvider
     }
 
     /**
-     * Returns the current currencies for the given ISO country code.
+     * Returns the currencies for the given ISO country code.
      *
      * If the country code is not known, or if the country has no official currency, an empty array is returned.
-     *
-     * Note: This value may change in minor releases, as countries may change their official currencies.
      *
      * @param string $countryCode The 2-letter ISO 3166-1 country code.
      *
      * @return Currency[]
      */
-    public function getCurrenciesForCountry(string $countryCode): array
+    public function getCurrenciesForCountry(string $countryCode) : array
     {
-        if ($this->countryToCurrencyCurrent === null) {
-            $this->countryToCurrencyCurrent = require __DIR__ . '/../data/country-to-currency.php';
+        if ($this->countryToCurrency === null) {
+            $this->countryToCurrency = require __DIR__ . '/../data/country-to-currency.php';
         }
 
         $result = [];
 
-        if (isset($this->countryToCurrencyCurrent[$countryCode])) {
-            foreach ($this->countryToCurrencyCurrent[$countryCode] as $currencyCode) {
-                $result[] = $this->getCurrency($currencyCode);
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns the historical currencies for the given ISO country code.
-     *
-     * If the country code is not known, or if the country has no official currency, an empty array is returned.
-     *
-     * Note: This value may change in minor releases, as additional currencies can be withdrawn from countries.
-     *
-     * @param string $countryCode The 2-letter ISO 3166-1 country code.
-     *
-     * @return Currency[]
-     */
-    public function getHistoricalCurrenciesForCountry(string $countryCode): array
-    {
-        if ($this->countryToCurrencyHistorical === null) {
-            $this->countryToCurrencyHistorical = require __DIR__ . '/../data/country-to-currency-historical.php';
-        }
-
-        $result = [];
-
-        if (isset($this->countryToCurrencyHistorical[$countryCode])) {
-            foreach ($this->countryToCurrencyHistorical[$countryCode] as $currencyCode) {
+        if (isset($this->countryToCurrency[$countryCode])) {
+            foreach ($this->countryToCurrency[$countryCode] as $currencyCode) {
                 $result[] = $this->getCurrency($currencyCode);
             }
         }

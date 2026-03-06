@@ -13,6 +13,7 @@ dependencies:
     - user.role.site_admin
     - webform.webform.bike_maintenance
     - webform.webform.free_event
+    - webform.webform.free_event_nologin
   module:
     - datetime
     - node
@@ -711,6 +712,7 @@ display:
           operator: in
           value:
             bike_maintenance: bike_maintenance
+            free_event_nologin: free_event_nologin
             free_event: free_event
           group: 1
           exposed: false
@@ -1381,6 +1383,7 @@ display:
           operator: in
           value:
             bike_maintenance: bike_maintenance
+            free_event_nologin: free_event_nologin
             free_event: free_event
           group: 1
           exposed: false
@@ -2000,6 +2003,7 @@ display:
           operator: in
           value:
             bike_maintenance: bike_maintenance
+            free_event_nologin: free_event_nologin
             free_event: free_event
           group: 1
           exposed: false
