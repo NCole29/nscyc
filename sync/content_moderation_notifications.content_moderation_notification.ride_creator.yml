@@ -5,10 +5,11 @@ dependencies: {  }
 id: ride_creator
 workflow: rides
 transitions:
-  publish: publish
+  publish_notify: publish_notify
 roles: {  }
 author: true
 site_mail: false
+user_fields: {  }
 emails: ''
 subject: '[node:title] is published'
 body:

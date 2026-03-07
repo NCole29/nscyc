@@ -1,8 +1,0 @@
-uuid: 4e5c18e8-9918-4fc6-94be-b0bab2d5b937
-langcode: en
-status: true
-dependencies: {  }
-id: medium
-label: 'Default medium date'
-locked: false
-pattern: 'D, m/d/Y g:i a'

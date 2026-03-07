@@ -27,13 +27,8 @@ type_settings:
       weight: -2
       published: false
       default_revision: false
-    needs_work:
-      label: 'Needs work (notified author)'
-      weight: -1
-      published: false
-      default_revision: false
     publish_and_notify:
-      label: 'Published (notified author)'
+      label: 'Published (notify author)'
       weight: 0
       published: true
       default_revision: true
@@ -54,30 +49,27 @@ type_settings:
     create_new_draft:
       label: 'Create New Draft'
       from:
+        - archived
         - draft
-        - needs_work
+        - finalize_draft
         - publish_and_notify
         - published
       to: draft
       weight: -3
     finalize_draft:
-      label: 'Finalize draft'
+      label: Review
       from:
+        - archived
         - draft
-        - needs_work
-        - publish_and_notify
       to: finalize_draft
       weight: -2
-    needs_work:
-      label: 'Needs work'
-      from:
-        - finalize_draft
-      to: needs_work
-      weight: -1
     publish:
       label: Publish
       from:
+        - archived
         - draft
+        - finalize_draft
+        - publish_and_notify
         - published
       to: published
       weight: 1
@@ -87,18 +79,6 @@ type_settings:
         - finalize_draft
       to: publish_and_notify
       weight: 0
-    restore_to_draft:
-      label: 'Restore to draft'
-      from:
-        - archived
-      to: draft
-      weight: 3
-    restore_to_published:
-      label: 'Restore to published'
-      from:
-        - archived
-      to: published
-      weight: 4
   entity_types:
     node:
       - recurring_ride

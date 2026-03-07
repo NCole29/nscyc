@@ -1,9 +1,0 @@
-name: 'Club Forum'
-type: module
-description: 'Provides configuration for forums.'
-package: Club
-core_version_requirement: ^9 || ^10
-dependencies:
-  - drupal:forum
-  - comment_notify:comment_notify
-  - theme_switcher:theme_switcher

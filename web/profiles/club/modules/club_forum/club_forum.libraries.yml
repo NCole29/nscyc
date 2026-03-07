@@ -1,8 +1,0 @@
-club-forum-comment:
-  css:
-    component:
-      css/club-forum-comment.css: { }
-club-forum-node:
-  css:
-    component:
-      css/club-forum-node.css: { }

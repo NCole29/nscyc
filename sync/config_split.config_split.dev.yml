@@ -11,12 +11,13 @@ no_patching: false
 storage: folder
 folder: ../sync_dev
 module:
+  club_test: 0
   coffee: 0
   config_delete: 0
   config_single_export: 0
-  devel: 0
   kint: 0
   permission_spreadsheet: 0
+  devel: 0
 theme: {  }
 complete_list: {  }
 partial_list: {  }

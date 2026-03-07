@@ -1,6 +1,0 @@
-club.admin_settings_form:
-  title: 'Configuration checklist'
-  route_name: club.config_checklist
-  description: 'Configuration checklist'
-  parent: system.admin_config_system
-  weight: -30

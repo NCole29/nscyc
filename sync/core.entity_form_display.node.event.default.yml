@@ -20,8 +20,10 @@ dependencies:
     - field.field.node.event.field_type_of_page
     - field.field.node.event.layout_builder__layout
     - node.type.event
+    - workflows.workflow.editorial
   module:
     - allowed_formats
+    - content_moderation
     - datetime
     - datetimehideseconds
     - field_group
@@ -115,6 +117,7 @@ third_party_settings:
         - field_registration_form
         - field_registration_link
         - field_results_access
+        - field_registration_close_date
       label: Registration
       region: content
       parent_name: group_tabs
@@ -192,7 +195,7 @@ content:
     third_party_settings: {  }
   field_registration_close_date:
     type: datetime_timestamp
-    weight: 5
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -260,6 +263,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   promote:
     type: boolean_checkbox
     weight: 9
@@ -280,7 +289,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 1
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -319,5 +328,4 @@ content:
 hidden:
   created: true
   layout_builder__layout: true
-  moderation_state: true
   path: true

@@ -33,7 +33,6 @@ module:
   club_report: 0
   club_ride: 0
   club_schedule: 0
-  club_test: 0
   club_user: 0
   comment: 0
   config: 0
