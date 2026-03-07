@@ -1425,13 +1425,15 @@ display:
     display_options:
       title: 'Club leaders'
       fields:
-        field_start_date_1:
-          id: field_start_date_1
-          table: club_contacts__field_start_date
-          field: field_start_date
+        year:
+          id: year
+          table: club_contacts
+          field: year
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: club_contacts
+          entity_field: year
           plugin_id: field
           label: Year
           exclude: false
@@ -1475,10 +1477,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: datetime_default
+          type: number_integer
           settings:
-            timezone_override: ''
-            format_type: html_year
+            thousand_separator: ''
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2243,16 +2245,24 @@ display:
           default_row_class: true
           columns:
             year: year
-            name: name
             position: position
+            name: name
+            field_start_date: field_start_date
+            field_end_date: field_end_date
+            uid: uid
             contact: contact
             roles_target_id: roles_target_id
-            start_date: start_date
-            end_date: end_date
-            operations: operations
+            edit_club_contacts: edit_club_contacts
           default: '-1'
           info:
             year:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            position:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -2266,8 +2276,22 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            position:
+            field_start_date:
               sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_end_date:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -2287,21 +2311,9 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            start_date:
-              sortable: true
+            edit_club_contacts:
+              sortable: false
               default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            end_date:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            operations:
               align: ''
               separator: ''
               empty_column: false
@@ -3480,13 +3492,21 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            year: year
             position: position
             name: name
             field_start_date: field_start_date
             field_end_date: field_end_date
-            year: year
+            field_start_date_1: field_start_date_1
           default: '-1'
           info:
+            year:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             position:
               sortable: false
               default_sort_order: asc
@@ -3515,7 +3535,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            year:
+            field_start_date_1:
               sortable: false
               default_sort_order: asc
               align: ''

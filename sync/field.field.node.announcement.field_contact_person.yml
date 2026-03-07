@@ -1,0 +1,40 @@
+uuid: 7218f556-6cd2-4c93-a7cf-d0cd13b6b6a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_person
+    - node.type.announcement
+id: node.announcement.field_contact_person
+field_name: field_contact_person
+entity_type: node
+bundle: announcement
+label: Contact
+description: "The contact's name appears <strong>without</strong> a link to their contact form if they disabled the personal contact form in their account settings."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        member: member
+        administrator: '0'
+        board: '0'
+        events_coordinator: '0'
+        civicrm: '0'
+        ride_leader: '0'
+        rides_coordinator: '0'
+        content_creator: '0'
+        editor: '0'
+        site_admin: '0'
+    include_anonymous: false
+field_type: entity_reference

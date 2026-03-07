@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\Role;
@@ -60,14 +61,21 @@ function club_leader_form_taxonomy_overview_terms_alter(&$form, FormStateInterfa
     foreach ($form['terms'] as &$term) {
       if (is_array($term) && !empty($term['#term'])) {
 
-       $disabled = ($term['#term']->get('field_disabled')->value == 1 ) ? "yes" : "-";
+        $disabled = ($term['#term']->get('field_disabled')->value == 1 ) ? "yes" : "-";
+
+        if (null != $term['#term']->get('field_website_role')->entity) {
+          $web_role = $term['#term']->get('field_website_role')->entity->label(); 
+        } 
+        else {
+          $web_role = NULL;
+        }
 
         $category['Category'] = [
           '#markup' => $term['#term']->get('field_position_category')->value,
           '#type' => 'item',
         ];
         $role['Drupal role'] = [
-          '#markup' => $term['#term']->get('field_website_role')->entity->label(),
+          '#markup' => $web_role, 
           '#type' => 'item',
         ];
         $dropped['Disabled'] = [
@@ -80,6 +88,7 @@ function club_leader_form_taxonomy_overview_terms_alter(&$form, FormStateInterfa
           $category, $role, $dropped,
           array_slice($term, 1, NULL, TRUE),
         );
+
       }
     }
   }
@@ -100,7 +109,7 @@ function club_leader_club_contacts_presave(EntityInterface $club_contacts) {
   $position = $club_contacts->position->target_id;
 
   $isCurrentPos = (empty($end) or $end > date('Y-m-d'));
-
+  
   // If contact is a Drupal user
   if ( !empty($club_contacts->contact->entity) ) {
 
@@ -108,17 +117,26 @@ function club_leader_club_contacts_presave(EntityInterface $club_contacts) {
     if ($club_contacts->name->value == NULL) {
       $club_contacts->name = $club_contacts->contact->entity->label();
     }
+
+    // Fill Year (integer) because using year of start date creates separate groups for different
+    // start date in same year.
+    $date_value = $club_contacts->field_start_date->value;
+    $date_time = new DrupalDateTime($date_value, new \DateTimeZone('UTC'));
+    $club_contacts->year = $date_time->format('Y');
+    
     // Load position, fill 'role', assign_role
     if (!is_null($position)) {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($position);
       $club_contacts->role = $term->get('field_website_role')->target_id;
 
       // Assign Drupal user role
-      $user = User::load($club_contacts->contact->target_id);
-      $role = $term->get('field_website_role')->target_id;
+      if (null != $club_contacts->role ) {
+        $user = User::load($club_contacts->contact->target_id);
+        $role = $term->get('field_website_role')->target_id;
 
- 	    // Add or delete role depending on isCurrentPos
-      assign_role($user, $role, $isCurrentPos);
+        // Add or delete role depending on isCurrentPos
+        assign_role($user, $role, $isCurrentPos);
+      }
     }
 	}
 }

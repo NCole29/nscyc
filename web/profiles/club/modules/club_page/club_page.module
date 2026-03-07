@@ -36,6 +36,11 @@ function club_page_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ':input[name^="field_type_of_page"]' => ['value' => 2],
       ],
     ];
+    $form['field_contact_person']['#states'] = [
+      'visible' => [
+        ':input[name^="field_contact_form"]' => ['value' => 'personal'],
+      ],
+    ];
 
     // Change '- None -' to '- All -' on Page visibility dropdown
     $form['field_page_access']['widget']['#options']['_none'] = '- All -';
@@ -60,6 +65,12 @@ function club_page_form_node_form_alter(&$form, FormStateInterface &$form_state,
  *
  */
 function club_page_node_presave(EntityInterface $node) {
+
+  if ($node->hasField('field_contact_person') && $node->hasField('field_contact_form')) {
+    if (isset($node->field_contact_person) && $node->field_contact_form->target_id <> 'personal') {
+        unset($node->field_contact_person);
+    } 
+  }
 
   // Parse media UUIDs from text and summary fields (Basic page, Announcement, Event)
   $fields = ['field_summary','field_text'];

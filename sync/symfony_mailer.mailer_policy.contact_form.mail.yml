@@ -8,13 +8,10 @@ id: contact_form.mail
 configuration:
   email_body:
     content:
-      value: |-
-        <p class="contact-email-intro"><a href="{{ sender_url }}">{{ sender_name }}</a> sent a message using the contact form <a href="{{ form_url }}">{{ form }}</a>.</p>
-        <hr>
-        {{ body }}
+      value: "<p class=\"contact-email-intro\"><a href=\"{{ sender_url }}\">{{ sender_name }}</a> sent a message using the <a href=\"{{ form_url }}\">{{ form }}</a> contact form.</p>\r\n<hr>\r\n{{ body }}"
       format: email_html
   email_to:
     addresses:
       -
-        value: '<site>'
+        value: info@nscyc.org
         display: ''

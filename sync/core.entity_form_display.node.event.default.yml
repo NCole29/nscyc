@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.node.event.banner_image
     - field.field.node.event.field_components
+    - field.field.node.event.field_contact_form
+    - field.field.node.event.field_contact_person
     - field.field.node.event.field_date
     - field.field.node.event.field_location
     - field.field.node.event.field_padding
@@ -26,6 +28,7 @@ dependencies:
     - content_moderation
     - datetime
     - datetimehideseconds
+    - entity_browser
     - field_group
     - layout_paragraphs
     - link
@@ -78,6 +81,7 @@ third_party_settings:
         - group_place_announcement_on_home
         - group_banner_image
         - group_registration
+        - group_contact_link
       label: Tabs
       region: content
       parent_name: ''
@@ -130,8 +134,23 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: m3xn0fZAlo3nuo4iGP_kcMOzyIWjrBdCRhFrT_AXpdw
+    group_contact_link:
+      children:
+        - field_contact_form
+        - field_contact_person
+      label: 'Contact link'
+      region: hidden
+      parent_name: group_tabs
+      weight: 14
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: "Contact forms allow site visitors to send emails to club members without revealing email addresses on the site.\r\n\r\nAfter selecting the Personal contact form, enter one or more persons in the Contact field. \r\n\r\nOther (\"sitewide\") contact forms are setup with one or more forwarding addresses at <a href=\"/admin/structure/contact\">Structure > Contact forms</a>."
+        required_fields: true
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -155,6 +174,22 @@ content:
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
+    third_party_settings: {  }
+  field_contact_form:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_contact_person:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_date:
     type: datetime_default

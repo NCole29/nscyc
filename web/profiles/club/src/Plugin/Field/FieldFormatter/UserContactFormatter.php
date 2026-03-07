@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\nscyc\Plugin\Field\FieldFormatter;
+namespace Drupal\club\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\Attribute\FieldFormatter;

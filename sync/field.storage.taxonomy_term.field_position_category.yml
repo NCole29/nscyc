@@ -31,6 +31,9 @@ settings:
     -
       value: 'Recurring ride coordinators'
       label: 'Recurring ride coordinators'
+    -
+      value: committees
+      label: Committees
   allowed_values_function: ''
 module: options
 locked: false

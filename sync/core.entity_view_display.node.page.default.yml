@@ -7,6 +7,8 @@ dependencies:
     - field.field.node.page.banner_image
     - field.field.node.page.field_comment
     - field.field.node.page.field_components
+    - field.field.node.page.field_contact_form
+    - field.field.node.page.field_contact_person
     - field.field.node.page.field_padding
     - field.field.node.page.field_page_access
     - field.field.node.page.field_summary
@@ -92,6 +94,53 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
+          b01854ca-f7a3-4924-bea8-d2c20fc57b4b:
+            uuid: b01854ca-f7a3-4924-bea8-d2c20fc57b4b
+            region: content
+            configuration:
+              id: 'extra_field_block:node:page:content_moderation_control'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 7
+            additional: {  }
+          c1d8b908-62c8-412f-948a-eb714346fb7e:
+            uuid: c1d8b908-62c8-412f-948a-eb714346fb7e
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_contact_form'
+              label: 'Contact form'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          32626fd8-b9a5-4efc-8906-f12825bc8ea3:
+            uuid: 32626fd8-b9a5-4efc-8906-f12825bc8ea3
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_contact_person'
+              label: 'Contact person'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: user_contact_link
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -114,6 +163,11 @@ content:
       link: true
     third_party_settings: {  }
     weight: 5
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
     region: content
   field_comment:
     type: comment_default
@@ -163,6 +217,8 @@ content:
     weight: 2
     region: content
 hidden:
+  field_contact_form: true
+  field_contact_person: true
   field_page_access: true
   field_summary: true
   layout_builder__layout: true

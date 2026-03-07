@@ -1,4 +1,4 @@
-uuid: 12d29f95-7238-4df0-9724-4d97f2ea5164
+uuid: b6db4493-c3bc-4794-ae59-e622e78f21f3
 langcode: en
 status: true
 dependencies:
@@ -10,4 +10,4 @@ configuration:
     addresses:
       -
         value: membership@nscyc.org
-        display: ''
+        display: 'NSC Membership'

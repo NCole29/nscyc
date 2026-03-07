@@ -98,8 +98,6 @@ permissions:
   - 'update media'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition finalize_draft'
-  - 'use editorial transition new_draft'
-  - 'use editorial transition new_draft_ready'
   - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format summary_fields'

@@ -41,8 +41,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  contact:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   google_analytics:
-    weight: 3
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -55,7 +60,6 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
 hidden:
-  contact: true
   language: true
   path: true
   timezone: true

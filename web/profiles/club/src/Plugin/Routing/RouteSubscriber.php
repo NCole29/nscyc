@@ -1,16 +1,17 @@
 <?php
 
-namespace Drupal\nscyc\Routing;
+namespace Drupal\club\Routing;
 
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
   * Class RouteSubscriber.
   *
-  * @package Drupal\nscyc\Routing
+  * @package Drupal\club\Routing
   */
-class RouteSubscriber extends RouteSubscriberBase {
+class RouteSubscriber extends RouteSubscriberBase implements EventSubscriberInterface {
 
  /**
   * {@inheritdoc}
