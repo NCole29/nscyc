@@ -75,7 +75,6 @@ permissions:
   - 'clone webform content'
   - 'create announcement content'
   - 'create media'
-  - 'create page content'
   - 'delete club_contact entity'
   - 'delete contacts'
   - 'delete in CiviContribute'

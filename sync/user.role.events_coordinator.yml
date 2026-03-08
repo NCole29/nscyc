@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_display.node.event.default
     - filter.format.basic_html
     - filter.format.full_html
     - filter.format.summary_fields
@@ -18,7 +17,6 @@ dependencies:
     - content_moderation
     - filter
     - help
-    - layout_builder
     - media
     - node
     - paragraphs
@@ -40,7 +38,6 @@ permissions:
   - 'access webform overview'
   - 'clone announcement content'
   - 'clone event content'
-  - 'configure editable event node layout overrides'
   - 'create announcement content'
   - 'create event content'
   - 'create image_crop_16_9 media'

@@ -3,12 +3,21 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.basic
+    - block_content.type.paragraphs_block
     - core.entity_view_display.node.event.default
     - core.entity_view_display.node.page.default
     - filter.format.basic_html
     - filter.format.full_html
     - filter.format.ride_page
     - filter.format.summary_fields
+    - media.type.gallery
+    - media.type.image
+    - media.type.image_crop_16_9
+    - media.type.image_crop_20_7
+    - media.type.image_crop_4_3
+    - media.type.public_file
+    - media.type.remote_video
     - node.type.announcement
     - node.type.banner
     - node.type.event
@@ -18,6 +27,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - block
+    - block_content
     - civicrm
     - content_moderation
     - contextual
@@ -36,6 +46,7 @@ dependencies:
     - system
     - taxonomy
     - toolbar
+    - view_unpublished
     - webform
     - webform_node
   enforced:
@@ -71,6 +82,8 @@ permissions:
   - 'create announcement content'
   - 'create banner content'
   - 'create event content'
+  - 'create gallery media'
+  - 'create image_crop_20_7 media'
   - 'create location content'
   - 'create media'
   - 'create page content'
@@ -90,15 +103,25 @@ permissions:
   - 'delete files'
   - 'delete in CiviMail'
   - 'delete location revisions'
+  - 'delete own image_crop_20_7 media'
   - 'delete own webform'
   - 'delete page revisions'
   - 'delete webform revisions'
   - 'edit any announcement content'
   - 'edit any banner content'
+  - 'edit any basic block content'
   - 'edit any event content'
   - 'edit any location content'
   - 'edit any page content'
+  - 'edit any paragraphs_block block content'
   - 'edit any webform content'
+  - 'edit own gallery media'
+  - 'edit own image media'
+  - 'edit own image_crop_16_9 media'
+  - 'edit own image_crop_20_7 media'
+  - 'edit own image_crop_4_3 media'
+  - 'edit own public_file media'
+  - 'edit own remote_video media'
   - 'edit own webform'
   - 'revert all revisions'
   - 'schedule publishing of nodes'
@@ -113,6 +136,7 @@ permissions:
   - 'use text format ride_page'
   - 'use text format summary_fields'
   - 'view all revisions'
+  - 'view any unpublished banner content'
   - 'view any unpublished content'
   - 'view latest version'
   - 'view own unpublished content'

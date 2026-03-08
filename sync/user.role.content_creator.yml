@@ -9,6 +9,13 @@ dependencies:
     - filter.format.full_html
     - filter.format.summary_fields
     - filter.format.webform_default
+    - media.type.gallery
+    - media.type.image
+    - media.type.image_crop_16_9
+    - media.type.image_crop_20_7
+    - media.type.image_crop_4_3
+    - media.type.public_file
+    - media.type.remote_video
     - node.type.announcement
     - node.type.banner
     - node.type.event
@@ -24,6 +31,7 @@ dependencies:
     - file
     - filter
     - help
+    - layout_builder
     - media
     - menu_admin_per_menu
     - node
@@ -34,6 +42,7 @@ dependencies:
     - system
     - taxonomy
     - toolbar
+    - view_unpublished
     - webform
     - webform_node
 id: content_creator
@@ -47,6 +56,7 @@ permissions:
   - 'access contextual links'
   - 'access files overview'
   - 'access help pages'
+  - 'access media overview'
   - 'access own webform configuration'
   - 'access shortcuts'
   - 'access taxonomy overview'
@@ -56,15 +66,17 @@ permissions:
   - 'administer blocks'
   - 'administer main menu items'
   - 'clone announcement content'
-  - 'clone banner content'
   - 'clone event content'
   - 'clone location content'
   - 'clone page content'
   - 'clone webform content'
+  - 'create and edit custom blocks'
   - 'create announcement content'
   - 'create banner content'
   - 'create basic block content'
   - 'create event content'
+  - 'create gallery media'
+  - 'create image_crop_20_7 media'
   - 'create location content'
   - 'create media'
   - 'create page content'
@@ -79,25 +91,35 @@ permissions:
   - 'delete own banner content'
   - 'delete own event content'
   - 'delete own files'
+  - 'delete own image_crop_20_7 media'
   - 'delete own location content'
   - 'delete own page content'
   - 'delete own webform'
   - 'delete own webform content'
   - 'delete webform submissions own node'
+  - 'edit any announcement content'
+  - 'edit any banner content'
   - 'edit any basic block content'
+  - 'edit any event content'
+  - 'edit any location content'
+  - 'edit any page content'
   - 'edit any paragraphs_block block content'
-  - 'edit own announcement content'
-  - 'edit own banner content'
-  - 'edit own event content'
-  - 'edit own location content'
-  - 'edit own page content'
+  - 'edit any webform content'
+  - 'edit own gallery media'
+  - 'edit own image media'
+  - 'edit own image_crop_16_9 media'
+  - 'edit own image_crop_20_7 media'
+  - 'edit own image_crop_4_3 media'
+  - 'edit own public_file media'
+  - 'edit own remote_video media'
   - 'edit own webform'
-  - 'edit own webform content'
   - 'revert all revisions'
   - 'schedule publishing of nodes'
   - 'update media'
+  - 'use editorial transition archive'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition finalize_draft'
+  - 'use editorial transition publish'
   - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format summary_fields'
@@ -106,6 +128,7 @@ permissions:
   - 'view announcement revisions'
   - 'view any basic block content history'
   - 'view any paragraphs_block block content history'
+  - 'view any unpublished banner content'
   - 'view any unpublished content'
   - 'view event revisions'
   - 'view latest version'

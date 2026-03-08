@@ -58,6 +58,7 @@ dependencies:
     - system
     - taxonomy
     - toolbar
+    - view_unpublished
     - webform
 id: site_admin
 label: 'Site administrator'
@@ -123,6 +124,8 @@ permissions:
   - 'create announcement content'
   - 'create banner content'
   - 'create event content'
+  - 'create gallery media'
+  - 'create image_crop_20_7 media'
   - 'create location content'
   - 'create media'
   - 'create page content'
@@ -136,6 +139,7 @@ permissions:
   - 'delete any banner content'
   - 'delete any basic block content revisions'
   - 'delete any event content'
+  - 'delete any image_crop_20_7 media'
   - 'delete any location content'
   - 'delete any media'
   - 'delete any page content'
@@ -216,6 +220,7 @@ permissions:
   - 'view all media revisions'
   - 'view all notes'
   - 'view all revisions'
+  - 'view any unpublished banner content'
   - 'view any unpublished content'
   - 'view club_contact entity'
   - 'view club_route entity'

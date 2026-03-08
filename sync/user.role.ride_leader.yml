@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - filter.format.full_html
     - filter.format.ride_page
+    - filter.format.summary_fields
     - node.type.location
     - node.type.recurring_ride
     - node.type.ride
@@ -56,8 +58,10 @@ permissions:
   - 'skip comment approval'
   - 'use rides transition create_new_draft'
   - 'use rides transition finalize_draft'
+  - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format ride_page'
+  - 'use text format summary_fields'
   - 'view club_schedule entity'
   - 'view latest version'
   - 'view location revisions'

@@ -14,7 +14,7 @@ third_party_settings:
 _core:
   default_config_hash: '-h9ruV3txxFXljhXa3WsCD-zBxF_HoHns_jyuh482hA'
 id: membership
-label: 'To Membership'
+label: Membership
 recipients:
   - membership@nscyc.org
 reply: ''

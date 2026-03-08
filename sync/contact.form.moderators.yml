@@ -12,7 +12,7 @@ third_party_settings:
     maximum_submissions_user: 0
     page_autoreply_format: plain_text
 id: moderators
-label: 'To Moderators'
+label: Moderators
 recipients:
   - moderators@nscyc.org
 reply: ''
