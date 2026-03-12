@@ -5745,7 +5745,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/form/renew-membership">Renew membership</a>'
+            text: '<a href="https://www.nscyc.org/civicrm/contribute/transact?reset=1&id=1">Renew membership</a>'
             make_link: false
             path: ''
             absolute: false

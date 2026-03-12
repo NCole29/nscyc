@@ -96,9 +96,10 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: user_contact_link
+                type: entity_reference_label
                 label: above
-                settings: {  }
+                settings:
+                  link: true
                 third_party_settings: {  }
             weight: 4
             additional: {  }
@@ -242,20 +243,20 @@ third_party_settings:
                   force_chronological: false
                   add_classes: false
                   time_wrapper: true
-                  localize: false
-                  parts:
-                    start: start
-                    end: end
-                    duration: '0'
-                  duration:
-                    separator: ' | '
-                    unit: ''
-                    decimals: 2
-                    suffix: h
                   past_display: 0
                   upcoming_display: 1
                   show_next: true
-                  current_upcoming: false
+                  localize: 0
+                  parts:
+                    start: start
+                    end: end
+                    duration: 0
+                  duration:
+                    separator: ' | '
+                    unit: ''
+                    decimals: '2'
+                    suffix: h
+                  current_upcoming: 0
                 third_party_settings: {  }
             weight: 2
             additional: {  }
@@ -359,7 +360,7 @@ content:
       past_display: 0
       upcoming_display: 0
       show_next: false
-      current_upcoming: false
+      current_upcoming: 0
     third_party_settings: {  }
     weight: 2
     region: content

@@ -168,8 +168,8 @@ settings:
   submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
   submission_views:
-    free_event:
-      title: 'Free event reigstrations'
+    embed_review:
+      title: Registrations
       view: 'webform_submissions_custom:embed_review'
       webform_routes:
         - entity.webform.results_submissions
