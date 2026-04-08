@@ -209,8 +209,9 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
     CRM_Core_Payment_Form::mapParams(NULL, $this->getSubmittedValues(), $paymentParams, TRUE);
     $paymentParams['contributionPageID'] = $this->getContributionPageID();
     $paymentParams['campaign_id'] = $this->getCampaignID();
-    $paymentParams['currency'] = $this->getCurrency();
+    $paymentParams['currency'] = $paymentParams['currencyID'] = $this->getCurrency();
     $paymentParams['description'] = $this->getSource();
+    $paymentParams['contactID'] = $this->getContactID();
     return $paymentParams;
   }
 
@@ -1722,7 +1723,8 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
       // be performed yet, so do it now.
       if (!$this->isSeparatePaymentSelected()) {
         $paymentParams['amount'] = $this->getMainContributionAmount();
-        $paymentParams += $this->getBasePaymentParams();
+        $paymentParams['currency'] = $this->getCurrency();
+        $paymentParams = $this->getBasePaymentParams() + $paymentParams;
         $paymentActionResult = $payment->doPayment($paymentParams);
         $paymentResults[] = ['contribution_id' => $paymentResult['contribution']->id, 'result' => $paymentActionResult];
       }

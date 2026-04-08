@@ -31,12 +31,12 @@
           this.placeholders.push({});
         }
 
-        if (this.settings.columnMode === 'auto') {
+        // This will ony be true if running the search outside of an Afform.
+        // Within an Afform, default columns will be set by AfformSearchMetadataInjector.
+        if (this.settings.columnMode === 'auto' && (!this.settings.columns || !this.settings.columns.length)) {
           // start with no columns in case we run before
           // we've fetched the right ones
           this.columns = [];
-          // TODO: default permission is access CiviCRM
-          // need to tweak permissions for frontend forms
           crmApi4('SearchDisplay', 'getDefault', {
             savedSearch: this.search
           })
@@ -59,9 +59,6 @@
           });
         }
 
-        _.each(ctrl.onInitialize, function(callback) {
-          callback.call(ctrl, $scope, $element);
-        });
         ctrl.onInitialize.forEach(callback => callback.call(ctrl, $scope, $element));
 
         // _.debounce used here to trigger the initial search immediately but prevent subsequent launches within 300ms
@@ -305,6 +302,10 @@
       getFieldTemplate: function(colIndex, colData) {
         let colType = this.columns[colIndex].type;
         if (colType === 'include') {
+          // Throw exception if path doesn't start with '~/'
+          if (/^~\/.+/.test(this.columns[colIndex].path) === false) {
+            throw 'Invalid path for include column: "' + this.columns[colIndex].path + '"';
+          }
           return this.columns[colIndex].path;
         }
         if (colType === 'field') {
