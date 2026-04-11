@@ -2,7 +2,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 
-use Drupal\club_test\CleanPermissions;
+use Drupal\club_ride\UpdateAllRoutes;
 
 /*
 use Drupal\Core\Access\AccessResult;
@@ -37,9 +37,15 @@ use Drupal\club_test\ResaveNodes;
 function club_test_help($route_name, RouteMatchInterface $route_match) {
 
   if ($route_name == 'help.page.club_test') {
+ 
+    // Update all routes.
+    $rwgps = \Drupal::getContainer()->get(update_routes::class);
+    $rwgps->updateRouteInfo();
+  }
+}
+  
 
-    CleanPermissions::dropPermissions();
-
+  // CleanPermissions::dropPermissions();
   /*
   // Add Year to Club Leader records.
     AddYear::createYear();
@@ -91,5 +97,4 @@ function club_test_help($route_name, RouteMatchInterface $route_match) {
      * ResaveNodes::loadNodes('ride');
      * ListMaxID::getMax();
      */
-  }
-}
+

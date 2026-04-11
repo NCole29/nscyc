@@ -4,8 +4,12 @@ status: true
 dependencies:
   config:
     - field.storage.club_route.field_ride_start
+    - field.storage.node.field_activity
+    - field.storage.node.field_gravel_category
     - field.storage.node.field_location
+    - taxonomy.vocabulary.activities
     - user.role.administrator
+    - user.role.events_coordinator
     - user.role.rides_coordinator
     - user.role.site_admin
   module:
@@ -14,6 +18,7 @@ dependencies:
     - node
     - rest
     - serialization
+    - taxonomy
     - user
     - views_data_export
   enforced:
@@ -436,13 +441,15 @@ display:
           columns:
             rwgps_id: rwgps_id
             name: name
+            field_gravel_category: field_gravel_category
             distance: distance
             elevation_gain: elevation_gain
-            nothing_1: nothing_1
+            terrain: terrain
+            surface: surface
+            unpaved: unpaved
             field_ride_start: field_ride_start
             locality: locality
             state: state
-            nothing: nothing
             created_at: created_at
             updated_at: updated_at
           default: '-1'
@@ -455,6 +462,13 @@ display:
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_gravel_category:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -475,7 +489,23 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            nothing_1:
+            terrain:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            surface:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            unpaved:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -495,13 +525,8 @@ display:
               empty_column: false
               responsive: ''
             state:
-              sortable: false
+              sortable: true
               default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing:
               align: ''
               separator: ''
               empty_column: false
@@ -547,6 +572,7 @@ display:
           entity_type: club_route
           plugin_id: entity_reverse
           required: false
+      group_by: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -686,6 +712,197 @@ display:
           settings:
             link_to_entity: true
           group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: reverse__node__field_rwgps_routes
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: Ride
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_activity:
+          id: field_activity
+          table: node__field_activity
+          field: field_activity
+          relationship: reverse__node__field_rwgps_routes
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Ride type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_gravel_category:
+          id: field_gravel_category
+          table: node__field_gravel_category
+          field: field_gravel_category
+          relationship: reverse__node__field_rwgps_routes
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Gravel category'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1270,71 +1487,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: reverse__node__field_rwgps_routes
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: Ride
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         delete_club_route:
           id: delete_club_route
           table: club_route
@@ -1393,7 +1545,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 50
+          items_per_page: 20
           total_pages: null
           id: 0
           tags:
@@ -1415,6 +1567,7 @@ display:
         options:
           role:
             administrator: administrator
+            events_coordinator: events_coordinator
             rides_coordinator: rides_coordinator
             site_admin: site_admin
       empty:
@@ -1429,6 +1582,37 @@ display:
           empty: true
           content: 'To populate this page, add rides to the database and enter RWGPS route numbers on the ride form.'
           tokenize: false
+      sorts:
+        name:
+          id: name
+          table: club_route
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: name
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: name
+          exposed: false
+        rwgps_id:
+          id: rwgps_id
+          table: club_route
+          field: rwgps_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: rwgps_id
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         name:
           id: name
@@ -1715,6 +1899,62 @@ display:
                   min: ''
                   max: ''
                   value: '3000'
+        field_activity_target_id:
+          id: field_activity_target_id
+          table: node__field_activity
+          field: field_activity_target_id
+          relationship: reverse__node__field_rwgps_routes
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_activity_target_id_op
+            label: 'Ride type'
+            description: ''
+            use_operator: false
+            operator: field_activity_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_activity_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: activities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       filter_groups:
         operator: AND
         groups:
@@ -1726,8 +1966,10 @@ display:
         css_class: false
         use_ajax: false
         pager: false
+        group_by: false
         relationships: false
         fields: false
+        sorts: false
         filters: false
         filter_groups: false
         header: false
@@ -1745,6 +1987,7 @@ display:
           required: false
       css_class: ''
       use_ajax: true
+      group_by: true
       display_description: ''
       header:
         area:
@@ -1797,6 +2040,8 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.club_route.field_ride_start'
+        - 'config:field.storage.node.field_activity'
+        - 'config:field.storage.node.field_gravel_category'
   data_export_1:
     id: data_export_1
     display_title: 'Data export'
@@ -2816,13 +3061,13 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.club_route.field_ride_start'
-  route_list:
-    id: route_list
-    display_title: 'Club routes'
+  page_1:
+    id: page_1
+    display_title: 'Gravel routes'
     display_plugin: page
     position: 1
     display_options:
-      title: 'Club Routes'
+      title: 'Gravel routes'
       fields:
         rwgps_id:
           id: rwgps_id
@@ -2835,7 +3080,7 @@ display:
           entity_field: rwgps_id
           plugin_id: field
           label: 'RWGPS ID'
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -2945,6 +3190,69 @@ display:
           settings:
             link_to_entity: false
           group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_gravel_category:
+          id: field_gravel_category
+          table: node__field_gravel_category
+          field: field_gravel_category
+          relationship: reverse__node__field_rwgps_routes
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Gravel category'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -3086,19 +3394,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing_1:
-          id: nothing_1
-          table: views
-          field: nothing
+        terrain:
+          id: terrain
+          table: club_route
+          field: terrain
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: custom
-          label: Download
-          exclude: true
+          entity_type: club_route
+          entity_field: terrain
+          plugin_id: field
+          label: Terrain
+          exclude: false
           alter:
-            alter_text: true
-            text: '<a href="https://ridewithgps.com/routes/{{ rwgps_id }}.gpx?sub_format=track">Download GPX</a> or <a href="https://ridewithgps.com/routes/{{ rwgps_id }}/send_to_device">Send to device</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -3134,7 +3444,152 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        surface:
+          id: surface
+          table: club_route
+          field: surface
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: surface
+          plugin_id: field
+          label: Surface
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        unpaved:
+          id: unpaved
+          table: club_route
+          field: unpaved
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: unpaved
+          plugin_id: field
+          label: 'Unpaved pct'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_ride_start:
           id: field_ride_start
           table: club_route__field_ride_start
@@ -3328,55 +3783,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: custom
-          label: Print
-          exclude: true
-          alter:
-            alter_text: true
-            text: '<a href="http://www.ridewithgps.com/routes/{{ rwgps_id }}/cue_sheet">Cue sheet</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: false
         created_at:
           id: created_at
           table: club_route
@@ -3388,7 +3794,7 @@ display:
           entity_field: created_at
           plugin_id: field
           label: 'Created on RWGPS'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -3443,6 +3849,7 @@ display:
               past_format: '@interval ago'
               granularity: 2
               refresh: 60
+              description: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -3534,7 +3941,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 25
+          items_per_page: 20
           total_pages: null
           id: 0
           tags:
@@ -3849,6 +4256,1392 @@ display:
                   min: ''
                   max: ''
                   value: '3000'
+        surface:
+          id: surface
+          table: club_route
+          field: surface
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: surface
+          plugin_id: string
+          operator: '='
+          value: unknown
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        unpaved:
+          id: unpaved
+          table: club_route
+          field: unpaved
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: unpaved
+          plugin_id: numeric
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: '5'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        terrain:
+          id: terrain
+          table: club_route
+          field: terrain
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: terrain
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: terrain_op
+            label: Terrain
+            description: null
+            use_operator: false
+            operator: terrain_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: terrain
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Terrain
+            description: ''
+            identifier: terrain
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Flat
+                operator: '='
+                value: flat
+              2:
+                title: Rolling
+                operator: '='
+                value: rolling
+              3:
+                title: Climbing
+                operator: '='
+                value: climbing
+        surface_1:
+          id: surface_1
+          table: club_route
+          field: surface
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: surface
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: surface_1_op
+            label: Surface
+            description: null
+            use_operator: false
+            operator: surface_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: surface_1
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Surface
+            description: ''
+            identifier: surface_1
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Mixed surfaces'
+                operator: '='
+                value: mixed_surfaces
+              2:
+                title: 'Mostly paved'
+                operator: '='
+                value: mostly_paved
+              3:
+                title: 'Mostly unpaved'
+                operator: '='
+                value: mostly_unpaved
+              4:
+                title: Paved
+                operator: '='
+                value: paved
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+          2: OR
+      defaults:
+        empty: false
+        title: false
+        css_class: false
+        use_ajax: false
+        pager: false
+        group_by: false
+        relationships: false
+        fields: false
+        filters: false
+        filter_groups: false
+        header: false
+        footer: false
+      relationships:
+        reverse__node__field_rwgps_routes:
+          id: reverse__node__field_rwgps_routes
+          table: club_route
+          field: reverse__node__field_rwgps_routes
+          relationship: none
+          group_type: group
+          admin_label: field_rwgps_routes
+          entity_type: club_route
+          plugin_id: entity_reverse
+          required: false
+      css_class: 'w3-table-all w3-medium'
+      use_ajax: true
+      group_by: true
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: "Routes are maintained at RideWithGPS and synced here as they appear on the calendar.\r\nClick column headers to sort the table. Best viewed in landscape on phones. "
+            format: basic_html
+          tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Total records: @total'
+      footer: {  }
+      display_extenders: {  }
+      path: club-routes/gravel
+      menu:
+        type: tab
+        title: 'Gravel routes'
+        description: ''
+        weight: -45
+        expanded: true
+        menu_name: main
+        parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'
+        context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
+      tab_options:
+        type: none
+        title: 'Route library'
+        description: 'Route library'
+        weight: 0
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+      tags:
+        - 'config:field.storage.club_route.field_ride_start'
+        - 'config:field.storage.node.field_gravel_category'
+  route_list:
+    id: route_list
+    display_title: 'Road routes'
+    display_plugin: page
+    position: 1
+    display_options:
+      title: 'Road routes'
+      fields:
+        rwgps_id:
+          id: rwgps_id
+          table: club_route
+          field: rwgps_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: null
+          entity_field: rwgps_id
+          plugin_id: field
+          label: 'RWGPS ID'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        name:
+          id: name
+          table: club_route
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: name
+          plugin_id: field
+          label: 'Route name'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="https://ridewithgps.com/routes/{{ rwgps_id }}">{{ name }}</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        distance:
+          id: distance
+          table: club_route
+          field: distance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: distance
+          plugin_id: field
+          label: Miles
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        elevation_gain:
+          id: elevation_gain
+          table: club_route
+          field: elevation_gain
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: elevation_gain
+          plugin_id: field
+          label: 'Elevation gain'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ elevation_gain }} ft'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ','
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        terrain:
+          id: terrain
+          table: club_route
+          field: terrain
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: terrain
+          plugin_id: field
+          label: Terrain
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_ride_start:
+          id: field_ride_start
+          table: club_route__field_ride_start
+          field: field_ride_start
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Starting location'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        locality:
+          id: locality
+          table: club_route
+          field: locality
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: locality
+          plugin_id: field
+          label: 'City / town'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        state:
+          id: state
+          table: club_route
+          field: state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: state
+          plugin_id: field
+          label: State
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        created_at:
+          id: created_at
+          table: club_route
+          field: created_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: created_at
+          plugin_id: field
+          label: 'Created on RWGPS'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: mm_dd_yyyy
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        updated_at:
+          id: updated_at
+          table: club_route
+          field: updated_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: updated_at
+          plugin_id: field
+          label: 'Updated on RWGPS'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: mm_dd_yyyy
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'To populate this page, add rides to the database and enter RWGPS route numbers on the ride form.'
+          tokenize: false
+      filters:
+        name:
+          id: name
+          table: club_route
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: name
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: 'Route name'
+            description: ''
+            use_operator: false
+            operator: name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              editor: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              civicrm: '0'
+              site_admin: '0'
+              board: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        locality:
+          id: locality
+          table: club_route
+          field: locality
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: locality
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: locality_op
+            label: 'City / town'
+            description: ''
+            use_operator: false
+            operator: locality_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: locality
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              editor: '0'
+              civicrm: '0'
+              site_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        distance:
+          id: distance
+          table: club_route
+          field: distance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: distance
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: distance_op
+            label: Distance
+            description: null
+            use_operator: false
+            operator: distance_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: null
+            max_placeholder: null
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Distance
+            description: ''
+            identifier: distance
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: '< 30 miles'
+                operator: '<='
+                value:
+                  min: ''
+                  max: ''
+                  value: '30'
+              2:
+                title: '30 - 50 miles'
+                operator: between
+                value:
+                  min: '30'
+                  max: '50'
+                  value: ''
+              3:
+                title: '> 50 miles'
+                operator: '>'
+                value:
+                  min: ''
+                  max: ''
+                  value: '50'
+        distance_1:
+          id: distance_1
+          table: club_route
+          field: distance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: distance
+          plugin_id: numeric
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        elevation_gain:
+          id: elevation_gain
+          table: club_route
+          field: elevation_gain
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: elevation_gain
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: elevation_gain_op
+            label: Elevation
+            description: null
+            use_operator: false
+            operator: elevation_gain_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: elevation_gain
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: null
+            max_placeholder: null
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: 'Elevation gain'
+            description: ''
+            identifier: elevation_gain
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: '< 1,000 ft'
+                operator: '<'
+                value:
+                  min: ''
+                  max: ''
+                  value: '1000'
+              2:
+                title: '1,000 to 1,999 ft '
+                operator: between
+                value:
+                  min: '1000'
+                  max: '1999'
+                  value: ''
+              3:
+                title: '2,000 to 2,999 ft'
+                operator: between
+                value:
+                  min: '2000'
+                  max: '2999'
+                  value: ''
+              4:
+                title: '> 3,000 ft'
+                operator: '>='
+                value:
+                  min: ''
+                  max: ''
+                  value: '3000'
+        unpaved:
+          id: unpaved
+          table: club_route
+          field: unpaved
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: unpaved
+          plugin_id: numeric
+          operator: between
+          value:
+            min: '0'
+            max: '5'
+            value: '5'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        terrain:
+          id: terrain
+          table: club_route
+          field: terrain
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: terrain
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: terrain_op
+            label: Terrain
+            description: null
+            use_operator: false
+            operator: terrain_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: terrain
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Terrain
+            description: ''
+            identifier: terrain
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Flat
+                operator: '='
+                value: flat
+              2:
+                title: Rolling
+                operator: '='
+                value: rolling
+              3:
+                title: Climbing
+                operator: '='
+                value: climbing
       filter_groups:
         operator: AND
         groups:
@@ -3868,6 +5661,7 @@ display:
       relationships: {  }
       css_class: 'w3-table-all w3-medium'
       use_ajax: true
+      display_description: ''
       header:
         area:
           id: area
@@ -3879,7 +5673,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "Routes are maintained at RideWithGPS and synced here as they appear on the calendar.\r\nFilter by city and/or distance. Click column headers to sort the table. Best viewed in landscape on phones. "
+            value: "Routes are maintained at RideWithGPS and synced here as they appear on the calendar.\r\nClick column headers to sort the table. Best viewed in landscape on phones. "
             format: basic_html
           tokenize: false
         result:
@@ -3893,19 +5687,25 @@ display:
           empty: false
           content: 'Total records: @total'
       footer: {  }
+      display_comment: "Unpaved pct = -1 and surface = unknown for 7 gravel rides. Recreate them in RWGPS.\r\nUnpaved, surface, and terrain = NULL if not found in RWGPS (N=12)."
       display_extenders: {  }
-      path: club-routes
+      path: club-routes/road
       menu:
-        type: none
-        title: 'Route library'
+        type: 'default tab'
+        title: 'Road routes'
         description: ''
         weight: -47
         expanded: true
         menu_name: main
-        parent: ''
+        parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'
         context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
       tab_options:
-        type: none
+        type: normal
         title: 'Route library'
         description: 'Route library'
         weight: 0
@@ -4678,6 +6478,7 @@ display:
       defaults:
         empty: false
         title: false
+        group_by: false
         style: false
         row: false
         fields: false
@@ -4687,6 +6488,7 @@ display:
         filter_groups: false
         header: false
         footer: false
+      group_by: true
       display_description: ''
       header: {  }
       footer:

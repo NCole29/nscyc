@@ -10,6 +10,7 @@
  use Symfony\Component\Yaml\Yaml;
  use Drupal\field\Entity\FieldStorageConfig;
  use Drupal\menu_link_content\Entity\MenuLinkContent;
+ use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * BE PATIENT! Add recurring_dates content type.
@@ -81,7 +82,7 @@ function club_ride_update_9002() {
 }
 
 /**
- * Update 9503 - Add items to Ride Tools menu.
+ * Update 9003 - Add items to Ride Tools menu.
  */
 function club_ride_update_9003() {
 
@@ -107,4 +108,57 @@ function club_ride_update_9003() {
       ]);
     $menu_link->save();
   }
+}
+
+
+/**
+ * Update 9004 - Add columns to club_route table.
+ */
+function club_ride_update_9004() {
+  $entity = 'club_route';
+
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $unpaved = BaseFieldDefinition::create('integer')
+    ->setLabel(t('Unpaved pct'))
+    ->setDescription(t('RWGPS unpaved percent'))
+    ->setSettings([ 
+		'max_length' => 10, 
+		'suffix' => '%', 
+		]) 
+    ->setDefaultValue('0')
+    ->setDisplayOptions('view', [
+      'label' => 'inline',
+      'type' => 'integer',
+      'weight' => 0,
+    ])
+    ->setDisplayConfigurable('view', TRUE)
+    ->setDisplayConfigurable('form', TRUE);
+
+  $terrain = BaseFieldDefinition::create('string')
+    ->setLabel(t('Terrain'))
+    ->setDescription(t('RWGPS terrain'))
+    ->setDisplayOptions('view', [
+      'label' => 'inline',
+      'type' => 'integer',
+      'weight' => 0,
+    ])
+    ->setDisplayConfigurable('view', TRUE)
+    ->setDisplayConfigurable('form', TRUE);
+
+  $surface = BaseFieldDefinition::create('string')
+    ->setLabel(t('Surface'))
+    ->setDescription(t('RWGPS surface'))
+    ->setDisplayOptions('view', [
+      'label' => 'inline',
+      'type' => 'integer',
+      'weight' => 0,
+    ])
+    ->setDisplayConfigurable('view', TRUE)
+    ->setDisplayConfigurable('form', TRUE);  
+
+  // Install the new definitions.
+  $definition_manager->installFieldStorageDefinition('unpaved', $entity, $entity, $unpaved);
+  $definition_manager->installFieldStorageDefinition('terrain', $entity, $entity, $terrain);
+  $definition_manager->installFieldStorageDefinition('surface', $entity, $entity, $surface);
 }

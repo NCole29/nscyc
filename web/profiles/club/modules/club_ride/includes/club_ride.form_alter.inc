@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -8,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   //\Drupal::messenger()->addStatus('Form ID: ' . $form_id);
 
+  // Alter form elements.  
     if ( in_array($form_id, ['node_ride_form',
                           'node_ride_edit_form',
                           'node_ride_quick_node_clone_form',
@@ -15,8 +17,7 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
                           'node_recurring_ride_edit_form',
                           'node_recurring_ride_quick_node_clone_form'] )) {
 
-
-    // Time: hide field if multiple times is unchecked.
+  // Time: hide field if multiple times is unchecked.
     $form['field_time']['#states'] = [
       'invisible' => [
         ':input[name^="field_multiple_times"]' => ['unchecked' => TRUE],
@@ -70,7 +71,25 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
 		}
     else if (in_array($form_id, ['node_ride_form','node_ride_edit_form',
                                 'node_ride_quick_node_clone_form',])) {
-          
+
+      //$form_object = $form_state->getFormObject();
+      $entity = $form_state->getFormObject()->getEntity();  
+
+      $now = \Drupal::service('date.formatter')->format(time(), 'custom', 'Y-m-d');
+      $date = $entity->field_date->value;
+
+      if (!is_null($date) and $date < $now) {
+
+        $form['custom_message'] = [
+          '#type' => 'markup',
+          '#markup' => '<div class="messages messages--status">' . 
+            t('<h5>You are editing a ride that has already occurred. Please exit the form and CLONE the ride.</h5>') .
+            '</div>',
+          '#weight' => -10, // Adjust weight to position it
+        ];
+      }  
+    }
+  
       // Show free registration form, paid registration form, or registration link - depending on type of event.
       $form['field_registration_free_form']['#states'] = [
         'visible' => [
@@ -106,4 +125,3 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
       }
     }
   }
-}

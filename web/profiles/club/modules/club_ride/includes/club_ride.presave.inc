@@ -46,14 +46,6 @@ function club_ride_node_presave(EntityInterface $node) {
   if(($bundle == 'ride' and $cancel <> 1) or $bundle == 'recurring_ride') {
     $nid = $node->id();
 
-    /*
-    // Set node AUTHOR equal to the first listed RIDE LEADER.
-    if ( !empty($node->field_ride_leader[0]->target_id) ) {
-      $ride_leader = $node->field_ride_leader[0]->target_id;
-      $node->setOwnerId($ride_leader);
-    }
-    */
-
     // If MULTIPLE TIMES is unchecked, set TIME to NULL.
     if ($node->field_multiple_times->value == FALSE) {
       foreach ($node->field_time as $item) {
@@ -92,20 +84,27 @@ function club_ride_node_presave(EntityInterface $node) {
         }
     }
 
-    $ride_start = $node->field_location->target_id;
-
     // Process RWGPS routes.
     if ($node->field_rwgps_routes) {
 
-      // When Ride is published, call RWGPS API and store data in club_route table.
-      // Ride leaders can save draft Ride pages but not publish, so they can't put junk in route table.
+      // Trim whitespace and validate route numbers as numeric.
+      foreach ($node->field_rwgps_routes as $routeId) {
+        $routeId->target_id = trim($routeId->target_id);
+        if (preg_match('/[^0-9()]/', $routeId->target_id)) {
+          \Drupal::messenger()->addStatus('A RWGPS route number has non-numeric characters and was not saved');
+          unset($routeId->target_id);
+        } 
+      }
+
+      // Store RWGPS data in club_route table when ride is published.
       if ($node->status->value == 1) {
         $rwgps = \Drupal::getContainer()->get(get_rwgps_client::class);
+        $ride_start = $node->field_location->target_id;
 
         foreach ($node->field_rwgps_routes as $routeId) {
-          // Trim to remove whitespace then call RouteInfo to save or update route entity.
-          $routeId->target_id = trim($routeId->target_id);
-          $rwgps->getRouteInfo($routeId->target_id, $ride_start);
+          if (is_numeric($routeId->target_id)) {
+            $rwgps->getRouteInfo($routeId->target_id, $ride_start);
+          }
         }
       }
     }

@@ -121,10 +121,9 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: entity_reference_label
+                type: user_contact_link
                 label: above
-                settings:
-                  link: true
+                settings: {  }
                 third_party_settings: {  }
             weight: 4
             additional: {  }

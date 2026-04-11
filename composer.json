@@ -206,6 +206,7 @@
     "drupal/webform_civicrm": "^6.2",
     "drupal/webform_views": "^5.2",
     "geocoder-php/google-maps-provider": "^4.7",
+    "kint-php/kint": "^6.1",
     "npm-asset/fonticonpicker--fonticonpicker": ">=1.0",
     "npm-asset/fortawesome--fontawesome-free": "5.15",
     "oomphinc/composer-installers-extender": "^2.0",

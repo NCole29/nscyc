@@ -38,6 +38,7 @@ dependencies:
     - link
     - options
     - text
+    - user
     - webform
   enforced:
     module:
@@ -149,14 +150,16 @@ third_party_settings:
             region: content
             configuration:
               id: 'field_block:node:ride:field_ride_leader'
+              label: Leader(s)
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                type: entity_reference_label
+                type: user_contact_link
                 label: above
-                settings:
-                  link: false
+                settings: {  }
                 third_party_settings: {  }
             weight: 6
             additional: {  }
@@ -598,16 +601,7 @@ content:
     third_party_settings: {  }
     weight: 5
     region: content
-  title:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 21
-    region: content
 hidden:
-  created: true
   field_day: true
   field_developed_by: true
   field_gravel_category: true
@@ -615,4 +609,3 @@ hidden:
   field_ride_picture: true
   field_schedule_date: true
   links: true
-  uid: true

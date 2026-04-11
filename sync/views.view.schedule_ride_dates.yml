@@ -8,6 +8,7 @@ dependencies:
     - field.storage.node.field_location
     - field.storage.node.field_ride_leader
     - system.menu.main
+    - taxonomy.vocabulary.activities
     - user.role.administrator
     - user.role.board
     - user.role.events_coordinator
@@ -21,6 +22,7 @@ dependencies:
     - datetime
     - node
     - smart_date
+    - taxonomy
     - user
   enforced:
     module:
@@ -2825,6 +2827,62 @@ display:
                 title: 'No'
                 operator: empty
                 value: ''
+        field_activity_target_id:
+          id: field_activity_target_id
+          table: node__field_activity
+          field: field_activity_target_id
+          relationship: reverse__node__field_schedule_date
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_activity_target_id_op
+            label: 'Ride type'
+            description: ''
+            use_operator: false
+            operator: field_activity_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_activity_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: activities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       filter_groups:
         operator: AND
         groups:
@@ -2868,7 +2926,7 @@ display:
         type: normal
         title: 'Ride schedules'
         description: ''
-        weight: -46
+        weight: -48
         expanded: false
         menu_name: main
         parent: 'menu_link_content:cbaa4cb1-8c81-455a-b17c-c243a2ce1960'

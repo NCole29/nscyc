@@ -1471,7 +1471,7 @@ display:
         type: normal
         title: 'Non-recurring rides'
         description: ''
-        weight: 0
+        weight: -49
         expanded: false
         menu_name: main
         parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'
@@ -1660,7 +1660,7 @@ display:
         type: normal
         title: 'Recurring rides'
         description: ''
-        weight: 0
+        weight: -48
         expanded: false
         menu_name: main
         parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'

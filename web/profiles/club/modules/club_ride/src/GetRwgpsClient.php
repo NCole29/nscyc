@@ -51,10 +51,9 @@ class GetRwgpsClient {
           ];
 
           // Determine if route exists in Drupal: if yes then UPDATE, else CREATE.
-          $oldRoute = $entity
-            ->load($routeId);
+          $oldRoute = $entity->load($routeId);
 
-          if ($oldRoute) {
+          if ($oldRoute) {      
             $oldRoute->name->value = $routeInfo['name'];
             $oldRoute->distance->value = round($routeInfo['distance']/1609);  // convert meters to miles
             $oldRoute->elevation_gain->value = round($routeInfo['elevation_gain']*3.281); // convert meters to feet
@@ -64,6 +63,9 @@ class GetRwgpsClient {
             $oldRoute->field_ride_start->target_id = $ride_start;
             $oldRoute->created_at->value = $routeInfo['created_at'];
             $oldRoute->updated_at->value = $routeInfo['updated_at'];
+            $oldRoute->unpaved->value = $routeInfo['unpaved_pct'];
+            $oldRoute->terrain->value = $routeInfo['terrain'];
+            $oldRoute->surface->value = $routeInfo['surface'];
             $oldRoute->save();
           } else {
             // Create new route entity.
@@ -77,6 +79,9 @@ class GetRwgpsClient {
               'geofield' => [$geofield_point, NULL],
               'created_at' => $routeInfo['created_at'],
               'updated_at' => $routeInfo['updated_at'],
+              'unpaved' => $routeInfo['unpaved_pct'],
+              'terrain' => $routeInfo['terrain'],
+              'surface' => $routeInfo['surface'],
             ]);
             $newRoute->save();
           }

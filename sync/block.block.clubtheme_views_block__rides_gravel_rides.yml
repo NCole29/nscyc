@@ -12,7 +12,7 @@ dependencies:
 id: clubtheme_views_block__rides_gravel_rides
 theme: clubtheme
 region: sidebar_second
-weight: 0
+weight: -10
 provider: null
 plugin: 'views_block:rides-gravel_rides'
 settings:

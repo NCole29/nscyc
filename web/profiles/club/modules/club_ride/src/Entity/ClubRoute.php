@@ -268,6 +268,44 @@ class ClubRoute extends ContentEntityBase implements ClubRouteInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
 
+  $fields['unpaved'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Unpaved pct'))
+      ->setDescription(t('RWGPS unpaved percent'))
+      ->setSettings([ 
+      'max_length' => 10, 
+      'suffix' => '%', 
+      ]) 
+      ->setDefaultValue('0')
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['terrain'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Terrain'))
+      ->setDescription(t('RWGPS terrain'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['surface'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Surface'))
+      ->setDescription(t('RWGPS surface'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);  
+
      $fields += static::publishedBaseFieldDefinitions($entity_type);
 
     return $fields;

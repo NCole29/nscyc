@@ -5,18 +5,22 @@ dependencies:
   config:
     - field.storage.node.field_activity
     - field.storage.node.field_date
+    - field.storage.node.field_gravel_category
     - field.storage.node.field_location
     - field.storage.node.field_ride_leader
     - field.storage.node.field_rwgps_routes
     - node.type.recurring_dates
     - node.type.recurring_ride
     - node.type.ride
-    - system.menu.main
     - taxonomy.vocabulary.activities
+    - taxonomy.vocabulary.gravel_categories
     - user.role.administrator
     - user.role.ride_leader
     - user.role.rides_coordinator
     - user.role.site_admin
+  content:
+    - 'taxonomy_term:activities:2113a86f-ffc6-49e4-a16b-a9d8466526a7'
+    - 'taxonomy_term:activities:8ee2608b-b4a5-4447-8add-c48dfbdfdebb'
   module:
     - address
     - csv_serialization
@@ -27,7 +31,6 @@ dependencies:
     - taxonomy
     - user
     - views_data_export
-    - views_infinite_scroll
   enforced:
     module:
       - club_ride
@@ -502,34 +505,17 @@ display:
         type: table
         options:
           grouping: {  }
-          row_class: '<h2>'
+          row_class: '<h5>'
           default_row_class: true
           columns:
-            nid: nid
-            node_bulk_form: node_bulk_form
             title: title
-            type: type
+            field_date: field_date
+            field_rwgps_routes: field_rwgps_routes
             field_location: field_location
-            field_date_1: field_date_1
-            name: name
-            status: status
-            changed: changed
-            operations: operations
-            field_dayofweek: field_dayofweek
+            field_address_locality: field_address_locality
+            field_address_administrative_area: field_address_administrative_area
           default: '-1'
           info:
-            nid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            node_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             title:
               sortable: true
               default_sort_order: asc
@@ -537,7 +523,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            type:
+            field_date:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_rwgps_routes:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -551,40 +544,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_date_1:
+            field_address_locality:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            name:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            status:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_dayofweek:
+            field_address_administrative_area:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -601,6 +568,12 @@ display:
         type: fields
       query:
         type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
       relationships:
         uid:
           id: uid
@@ -2177,6 +2150,746 @@ display:
         - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_ride_leader'
         - 'config:field.storage.node.field_rwgps_routes'
+  page_1:
+    id: page_1
+    display_title: 'Gravel rides'
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Gravel rides'
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: 'Ride name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns:
+            value: value
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_gravel_category:
+          id: field_gravel_category
+          table: node__field_gravel_category
+          field: field_gravel_category
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Gravel category'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_location:
+          id: field_location
+          table: node__field_location
+          field: field_location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Starting location'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_address_locality:
+          id: field_address_locality
+          table: node__field_address
+          field: field_address_locality
+          relationship: field_location
+          group_type: group
+          admin_label: ''
+          plugin_id: subdivision
+          label: 'City / Town, State'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          display_name: true
+        field_address_administrative_area:
+          id: field_address_administrative_area
+          table: node__field_address
+          field: field_address_administrative_area
+          relationship: field_location
+          group_type: group
+          admin_label: ''
+          plugin_id: subdivision
+          label: State
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          display_name: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      access:
+        type: none
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: ''
+          tokenize: false
+      sorts:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: title
+          exposed: false
+        field_date_value:
+          id: field_date_value
+          table: node__field_date
+          field: field_date_value
+          relationship: none
+          group_type: max
+          admin_label: ''
+          plugin_id: datetime
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: minute
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            recurring_ride: recurring_ride
+            ride: ride
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_activity_target_id:
+          id: field_activity_target_id
+          table: node__field_activity
+          field: field_activity_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            2: 2
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: activities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: 'Ride name'
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              editor: '0'
+              civicrm: '0'
+              site_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_address_locality:
+          id: field_address_locality
+          table: node__field_address
+          field: field_address_locality
+          relationship: field_location
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_address_locality_op
+            label: 'City / Town'
+            description: ''
+            use_operator: false
+            operator: field_address_locality_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_address_locality
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              editor: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              civicrm: '0'
+              site_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_gravel_category_target_id:
+          id: field_gravel_category_target_id
+          table: node__field_gravel_category
+          field: field_gravel_category_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_gravel_category_target_id_op
+            label: 'Gravel category'
+            description: ''
+            use_operator: false
+            operator: field_gravel_category_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_gravel_category_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: gravel_categories
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        empty: false
+        access: false
+        title: false
+        css_class: false
+        use_ajax: false
+        show_admin_links: false
+        pager: false
+        group_by: false
+        relationships: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+        header: false
+      relationships:
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          admin_label: author
+          plugin_id: standard
+          required: true
+        field_location:
+          id: field_location
+          table: node__field_location
+          field: field_location
+          relationship: none
+          group_type: group
+          admin_label: 'field_location: Content'
+          plugin_id: standard
+          required: false
+      css_class: 'w3-table-all w3-medium'
+      use_ajax: true
+      group_by: true
+      display_description: ''
+      show_admin_links: true
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: "<h5>A gravel ride is an event that generally offers one route option</h5>\r\nClick column headers to sort the table. Best viewed in landscape on phones."
+            format: basic_html
+          tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Total records: @total'
+      display_extenders: {  }
+      path: all-rides/gravel
+      menu:
+        type: tab
+        title: 'Gravel rides'
+        description: ''
+        weight: -45
+        expanded: false
+        menu_name: main
+        parent: 'menu_link_content:41a115dc-08f4-49d1-b775-bd63cd983af5'
+        context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.calendar.page_2'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.node.field_gravel_category'
+        - 'config:field.storage.node.field_location'
   page_2:
     id: page_2
     display_title: 'Recurring dates'
@@ -2767,7 +3480,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 25
+          items_per_page: 20
           total_pages: null
           id: 0
           tags:
@@ -3076,11 +3789,11 @@ display:
         - 'config:field.storage.node.field_date'
   ride_list:
     id: ride_list
-    display_title: 'Master list'
+    display_title: 'Road rides'
     display_plugin: page
     position: 2
     display_options:
-      title: 'Master list of rides'
+      title: 'Road rides'
       fields:
         title:
           id: title
@@ -3138,8 +3851,7 @@ display:
           settings:
             link_to_entity: true
           group_column: value
-          group_columns:
-            value: value
+          group_columns: {  }
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -3148,15 +3860,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_activity:
-          id: field_activity
-          table: node__field_activity
-          field: field_activity
+        field_date:
+          id: field_date
+          table: node__field_date
+          field: field_date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Activity
+          label: Date
           exclude: false
           alter:
             alter_text: false
@@ -3197,11 +3909,12 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: value
+          type: datetime_default
           settings:
-            link: false
-          group_column: target_id
+            timezone_override: ''
+            format_type: day_date
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -3211,6 +3924,76 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_rwgps_routes:
+          id: field_rwgps_routes
+          table: node__field_rwgps_routes
+          field: field_rwgps_routes
+          relationship: none
+          group_type: count_distinct
+          admin_label: ''
+          plugin_id: field
+          label: '# routes'
+          exclude: false
+          alter:
+            alter_text: false
+            text: "\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: entity_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: '|'
+          field_api_classes: false
+          set_precision: false
+          precision: 0
+          decimal: .
+          format_plural: 0
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
         field_location:
           id: field_location
           table: node__field_location
@@ -3265,7 +4048,8 @@ display:
           settings:
             link: false
           group_column: target_id
-          group_columns: {  }
+          group_columns:
+            target_id: target_id
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -3375,15 +4159,18 @@ display:
           hide_alter_empty: true
           display_name: false
       pager:
-        type: infinite_scroll
+        type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 20
           total_pages: null
           id: 0
           tags:
             next: 'Next ›'
             previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -3392,10 +4179,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: false
-            initially_load_all_pages: false
+          quantity: 9
       access:
         type: none
         options: {  }
@@ -3409,7 +4193,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'Add  a <a href="/node/add/ride">ride</a> or a <a href="/node/add/recurring_ride">recurring ride</a> to the database to populate this list.'
+          content: ''
           tokenize: false
       sorts:
         title:
@@ -3494,7 +4278,6 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            recurring_ride: recurring_ride
             ride: ride
           group: 1
           exposed: false
@@ -3525,6 +4308,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_activity_target_id:
+          id: field_activity_target_id
+          table: node__field_activity
+          field: field_activity_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            1: 1
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: activities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
         title:
           id: title
           table: node_field_data
@@ -3620,41 +4449,35 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_activity_target_id:
-          id: field_activity_target_id
-          table: node__field_activity
-          field: field_activity_target_id
+        title_1:
+          id: title_1
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: '!='
+          value: 'Wednesday Morning Rotating Ride'
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: field_activity_target_id_op
-            label: 'Ride type'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: field_activity_target_id_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_activity_target_id
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              member: '0'
-              editor: '0'
-              ride_leader: '0'
-              rides_coordinator: '0'
-              civicrm: '0'
-              site_admin: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -3667,12 +4490,47 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          vid: activities
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
+        title_2:
+          id: title_2
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: '!='
+          value: 'Wednesday Morning Lunch Ride'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -3712,7 +4570,7 @@ display:
       css_class: 'w3-table-all w3-medium'
       use_ajax: true
       group_by: true
-      display_description: 'List of unique ride names'
+      display_description: ''
       show_admin_links: true
       header:
         area:
@@ -3725,8 +4583,8 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: 'Filter by ride name and/or city/town. Click column headers to sort the table. Best viewed in landscape on phones.'
-            format: basic_html
+            value: "<h5>A ride is an event offering one or more route options. Rides appear multiple times if scheduled on multiple dates.</h5>\r\nClick column headers to sort the table. Best viewed in landscape on phones.\r\n<p class=\"medium\">Excludes \"Wednesday Rotating Ride\" and \"Wednesday Lunch Ride\". </p>"
+            format: full_html
           tokenize: false
         result:
           id: result
@@ -3739,13 +4597,13 @@ display:
           empty: false
           content: 'Total records: @total'
       display_extenders: {  }
-      path: all-rides
+      path: all-rides/road
       menu:
-        type: normal
-        title: 'Master list of rides'
+        type: 'default tab'
+        title: 'Road rides'
         description: ''
-        weight: 0
-        expanded: false
+        weight: -49
+        expanded: true
         menu_name: main
         parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'
         context: '0'
@@ -3754,6 +4612,11 @@ display:
         local_task_parent: 'views_view:view.calendar.page_2'
         local_task_weight: 0
         local_task_custom_parent_route: ''
+      tab_options:
+        type: normal
+        title: 'Ride library'
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -3763,7 +4626,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_activity'
+        - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_location'
   rides:
     id: rides
@@ -4342,6 +5205,83 @@ display:
           group_column: value
           group_columns:
             entity_id: entity_id
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: 'Authored on'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: short
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
           group_rows: true
           delta_limit: 0
           delta_offset: 0

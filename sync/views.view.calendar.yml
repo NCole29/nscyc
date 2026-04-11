@@ -173,10 +173,10 @@ display:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          calendar_display_rows: 0
           calendar_fields:
             field_date: field_date
-          calendar_weekday_start: '0'
+          calendar_display_rows: false
+          calendar_weekday_start: false
           calendar_timestamp: 'this month'
       row:
         type: fields
@@ -857,7 +857,7 @@ display:
         type: normal
         title: Calendar
         description: ''
-        weight: 0
+        weight: -52
         expanded: false
         menu_name: main
         parent: 'menu_link_content:63ecbaac-1209-4347-a97a-e32458c1b592'

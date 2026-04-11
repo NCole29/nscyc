@@ -34,6 +34,24 @@ function club_event_form_node_form_alter(&$form, FormStateInterface &$form_state
 
   if ( in_array($form_id, ['node_webform_form','node_webform_edit_form','node_webform_quick_node_clone_form',
                            'node_event_form','node_event_edit_form','node_event_quick_node_clone_form', ])) {
+
+      $entity = $form_state->getFormObject()->getEntity();  
+
+      $now = \Drupal::service('date.formatter')->format(time(), 'custom', 'Y-m-d');
+      $date = $entity->field_date->value;
+
+      if (!is_null($date) and $date < $now) {
+
+        $form['custom_message'] = [
+          '#type' => 'markup',
+          '#markup' => '<div class="messages messages--status">' . 
+            t('<h5>You are editing an event that has already occurred. Please exit the form and CLONE the event.</h5>') .
+            '</div>',
+          '#weight' => -10, 
+        ];
+      }  
+
+
     // Hide Summary field if Promote to front page is unchecked.
     $form['field_summary']['#states'] = [
       'invisible' => [
