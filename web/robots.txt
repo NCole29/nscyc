@@ -49,6 +49,9 @@ Disallow: /themes/README.txt
 Disallow: /web.config
 # Paths (clean URLs)
 Disallow: /admin/
+Disallow: /calendar
+Disallow: /club-routes
+Disallow: /all-rides
 Disallow: /comment/reply/
 Disallow: /filter/tips
 Disallow: /node/add/
@@ -61,6 +64,9 @@ Disallow: /media/oembed
 Disallow: /*/media/oembed
 # Paths (no clean URLs)
 Disallow: /index.php/admin/
+Disallow: /index.php//calendar
+Disallow: /index.php//club-routes
+Disallow: /index.php//all-rides
 Disallow: /index.php/comment/reply/
 Disallow: /index.php/filter/tips
 Disallow: /index.php/node/add/
