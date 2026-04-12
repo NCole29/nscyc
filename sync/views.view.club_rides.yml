@@ -2335,7 +2335,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if unpaved < '1' %}\r\n<h5>{{ distance }} miles, {{ terrain }} terrain</h5>\r\n{% else %}\r\n<h5>{{ distance }} miles,  {{ unpaved }}% unpaved, {{ terrain }} terrain</h5>\r\n{% endif %}"
+            text: "{% if unpaved < '1' %}\r\n<h5>{{ distance }} miles</h5>\r\n{% else %}\r\n<h5>{{ distance }} miles,  {{ unpaved }}% unpaved</h5>\r\n{% endif %}"
             make_link: false
             path: 'http://www.ridewithgps.com/routes/{{ field_rwgps_routes }}'
             absolute: false
