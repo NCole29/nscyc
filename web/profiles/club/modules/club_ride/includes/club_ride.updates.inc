@@ -113,7 +113,11 @@ function club_ride_update_9003() {
 
 /**
  * Update 9004 - Add columns to club_route table.
+ * Implemented in dev. Do not run in staging and production because I imported the route tables
+ *  so that I'm not "hitting" RWGPS (400 times!) to update the table in each environment.
  */
+
+/*
 function club_ride_update_9004() {
   $entity = 'club_route';
 
@@ -162,3 +166,4 @@ function club_ride_update_9004() {
   $definition_manager->installFieldStorageDefinition('terrain', $entity, $entity, $terrain);
   $definition_manager->installFieldStorageDefinition('surface', $entity, $entity, $surface);
 }
+*/
