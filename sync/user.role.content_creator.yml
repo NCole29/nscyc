@@ -130,6 +130,7 @@ permissions:
   - 'view any paragraphs_block block content history'
   - 'view any unpublished banner content'
   - 'view any unpublished content'
+  - 'view banner revisions'
   - 'view event revisions'
   - 'view latest version'
   - 'view media'

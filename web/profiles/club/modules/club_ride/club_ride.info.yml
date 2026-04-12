@@ -21,6 +21,5 @@ dependencies:
   - layout_builder_restrictions:layout_builder_restrictions
   - smart_date:smart_date
   - smart_date:smart_date_recur
-  - views_infinite_scroll:views_infinite_scroll
 libraries:
   - club_ride/toolbar-icon

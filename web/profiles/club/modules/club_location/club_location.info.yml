@@ -22,4 +22,3 @@ dependencies:
   - leaflet:leaflet
   - leaflet:leaflet_markercluster
   - leaflet:leaflet_views
-  - views_infinite_scroll:views_infinite_scroll
