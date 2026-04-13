@@ -69,8 +69,7 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
 		  // Remove "Add another" date.
 		  unset($form['field_datetime']['widget']['add_more']);
 		}
-    else if (in_array($form_id, ['node_ride_form','node_ride_edit_form',
-                                'node_ride_quick_node_clone_form',])) {
+    else if ($form_id == 'node_ride_edit_form') {
 
       //$form_object = $form_state->getFormObject();
       $entity = $form_state->getFormObject()->getEntity();  
