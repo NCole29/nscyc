@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a41db37c62a28ab8d9028abbc3cbdbed",
+    "content-hash": "3466d9210b51e011d1591f1224bd1e17",
     "packages": [
         {
             "name": "adrienrn/php-mimetyper",
@@ -413,16 +413,16 @@
         },
         {
             "name": "civicrm/civicrm-core",
-            "version": "6.12.3",
+            "version": "6.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/civicrm/civicrm-core.git",
-                "reference": "552bf205415eacb004d7b48c1b164caf90105072"
+                "reference": "655a4fa13dfbac15ad57d15ec01d6525eef6a9ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/civicrm/civicrm-core/zipball/552bf205415eacb004d7b48c1b164caf90105072",
-                "reference": "552bf205415eacb004d7b48c1b164caf90105072",
+                "url": "https://api.github.com/repos/civicrm/civicrm-core/zipball/655a4fa13dfbac15ad57d15ec01d6525eef6a9ed",
+                "reference": "655a4fa13dfbac15ad57d15ec01d6525eef6a9ed",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +921,7 @@
             ],
             "description": "Open source constituent relationship management for non-profits, NGOs and advocacy organizations.",
             "support": {
-                "source": "https://github.com/civicrm/civicrm-core/tree/6.12.3"
+                "source": "https://github.com/civicrm/civicrm-core/tree/6.13.0"
             },
             "funding": [
                 {
@@ -929,11 +929,11 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-04-02T01:18:35+00:00"
+            "time": "2026-04-02T02:15:19+00:00"
         },
         {
             "name": "civicrm/civicrm-drupal-8",
-            "version": "6.12.3",
+            "version": "6.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/civicrm/civicrm-drupal-8.git",
@@ -982,7 +982,7 @@
             ],
             "description": "Open source constituent relationship management for non-profits, NGOs and advocacy organizations.",
             "support": {
-                "source": "https://github.com/civicrm/civicrm-drupal-8/tree/6.12.3"
+                "source": "https://github.com/civicrm/civicrm-drupal-8/tree/6.13.0"
             },
             "funding": [
                 {
@@ -994,25 +994,25 @@
         },
         {
             "name": "civicrm/civicrm-packages",
-            "version": "6.12.3",
+            "version": "6.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/civicrm/civicrm-packages.git",
-                "reference": "35a8117bfd51881c08da5783208568461121d278"
+                "reference": "788bc9a98ad079c5f75d171a80f3060dff574381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/civicrm/civicrm-packages/zipball/35a8117bfd51881c08da5783208568461121d278",
-                "reference": "35a8117bfd51881c08da5783208568461121d278",
+                "url": "https://api.github.com/repos/civicrm/civicrm-packages/zipball/788bc9a98ad079c5f75d171a80f3060dff574381",
+                "reference": "788bc9a98ad079c5f75d171a80f3060dff574381",
                 "shasum": ""
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "Legacy third party dependencies for CiviCRM",
             "support": {
-                "source": "https://github.com/civicrm/civicrm-packages/tree/6.12.3"
+                "source": "https://github.com/civicrm/civicrm-packages/tree/6.13.0"
             },
-            "time": "2026-03-25T20:48:12+00:00"
+            "time": "2026-03-26T00:36:39+00:00"
         },
         {
             "name": "civicrm/cli-tools",

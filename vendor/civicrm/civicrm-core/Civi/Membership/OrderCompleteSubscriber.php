@@ -198,8 +198,9 @@ class OrderCompleteSubscriber extends AutoService implements EventSubscriberInte
       ->addWhere('entity_table', '=', 'civicrm_membership')
       ->addSelect('entity_id')
       ->execute()->indexBy('entity_id'));
-
-    $membershipIDs = \CRM_Member_BAO_MembershipPayment::getMembershipPaymentsWithMissingLineitems($contributionID, $membershipIDs);
+    if (\CRM_Price_BAO_LineItem::siteHasMembershipPaymentRecordsNotReflectedInLineItems()) {
+      $membershipIDs = \CRM_Member_BAO_MembershipPayment::getMembershipPaymentsWithMissingLineitems($contributionID, $membershipIDs);
+    }
 
     if (empty($membershipIDs)) {
       return [];
