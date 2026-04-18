@@ -214,6 +214,7 @@ abstract class WebformCivicrmBase {
         if (strpos($fid, $prefix . 'other') !== FALSE) {
           [, , , , , $ent] = explode('_', $fid);
           [, , , , , $field] = explode('_', $fid, 6);
+          $ent = ($ent === 'crmgroup') ? 'group' : $ent;
           // Cheap way to avoid fetching the same data twice from the api
           if (!is_array($api[$ent])) {
             $api[$ent] = $this->utils->wf_civicrm_api($api[$ent], 'get', ['contact_id' => $cid]);
@@ -594,6 +595,17 @@ abstract class WebformCivicrmBase {
   }
 
   /**
+   * Enable is_test if payment is made using a test processor.
+   *
+   * @param array $params
+   */
+  protected function setTestMode(&$params) {
+    if (!empty($this->data['contribution'][1]['contribution'][1]['is_test'])) {
+      $params['is_test'] = TRUE;
+    }
+  }
+
+  /**
    * Get memberships for a contact
    * @param $cid
    * @return array
@@ -620,6 +632,8 @@ abstract class WebformCivicrmBase {
     if (!empty($mid)) {
       $params['id'] = $mid;
     }
+    $this->setTestMode($params);
+
     $existing = $this->utils->wf_crm_apivalues('membership', 'get', $params);
 
     if (!$existing) {
@@ -800,9 +814,10 @@ abstract class WebformCivicrmBase {
     if ($file) {
       $config = \CRM_Core_Config::singleton();
       $copyTo = $config->customFileUploadDir;
-      if(isset($filename)) {
-        $copyTo .= '/' . $filename;
+      if(!isset($filename)) {
+        $filename = basename($file->getFileUri());
       }
+      $copyTo .= '/' . \CRM_Utils_File::makeFileName($filename, TRUE);
       $path = \Drupal::service('file_system')->copy($file->getFileUri(), $copyTo);
       if ($path) {
         $result = \Drupal::service('webform_civicrm.utils')->wf_civicrm_api('file', 'create', [
@@ -839,11 +854,17 @@ abstract class WebformCivicrmBase {
     }
     $file = $this->utils->wf_crm_apivalues('Attachment', 'get', $val);
     if (!empty($file[$val])) {
+      if (function_exists('file_icon_class')) {
+        $icon_class = file_icon_class($file[$val]['mime_type']);
+      }
+      else {
+        $icon_class = \Drupal\file\IconMimeTypes::getIconClass($file[$val]['mime_type']);
+      }
       return [
         'data_type' => 'File',
         'name' => $file[$val]['name'],
         'file_url'=> $file[$val]['url'],
-        'icon' => file_icon_class($file[$val]['mime_type']),
+        'icon' => $icon_class,
       ];
     }
     return NULL;

@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace Drupal\Tests\node_revision_delete\Kernel;
 
 use Drupal\content_moderation\Plugin\WorkflowType\ContentModerationInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the node revision delete plugins.
- *
- * @group node_revision_delete
  */
+#[Group('node_revision_delete')]
+#[RunTestsInSeparateProcesses]
 class NodeRevisionDeleteTest extends KernelTestBase {
 
   use ContentTypeCreationTrait;
@@ -45,7 +49,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installSchema('system', ['sequences']);
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
     $this->installEntitySchema('content_moderation_state');
@@ -104,7 +107,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
       ],
     ]);
     $node_type->save();
-    $this->container->get('plugin.manager.node_revision_delete')->resetCache();
 
     // Add a revision and run the queue.
     $new_revision = $node_storage->createRevision($node);
@@ -161,7 +163,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
       ],
     ]);
     $node_type->save();
-    $this->container->get('plugin.manager.node_revision_delete')->resetCache();
 
     // Add a revision and run the queue.
     $new_revision = $node_storage->createRevision($node);
@@ -230,7 +231,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
       ],
     ]);
     $node_type->save();
-    $this->container->get('plugin.manager.node_revision_delete')->resetCache();
 
     // Add a draft revision and run the queue.
     $node->set('moderation_state', 'draft');
@@ -242,6 +242,60 @@ class NodeRevisionDeleteTest extends KernelTestBase {
     // and 3 of the revisions that were created previously. The published
     // revision should also be kept.
     $this->assertRevisionCount(5, $node);
+  }
+
+  /**
+   * Test the node revision delete "only drafts" plugin.
+   */
+  public function testNodeRevisionDeleteOnlyDrafts(): void {
+    $node_storage = $this->container->get('entity_type.manager')->getStorage('node');
+    // Add the editorial workflow for the node type.
+    $workflow = $this->createEditorialWorkflow();
+    $workflow_type = $workflow->getTypePlugin();
+    $this->assertInstanceOf(ContentModerationInterface::class, $workflow_type);
+    $workflow_type->addEntityTypeAndBundle('node', 'page');
+    $workflow->save();
+
+    // Configure the default settings for the "drafts" plugin to allow draft
+    // revisions to exist for a maximum of 5 months.
+    $this->config('node_revision_delete.settings')
+      ->set('defaults', [
+        'only_drafts' => [
+          'status' => TRUE,
+          'settings' => [
+            'age' => 5,
+          ],
+        ],
+      ])
+      ->save();
+
+    // Create 10 draft revisions, each 31 days newer than the previous.
+    $node = $this->createNode([
+      'type' => 'page',
+      'created' => strtotime('-' . (10 * 31) . ' days'),
+      'changed' => strtotime('-' . (10 * 31) . ' days'),
+      'status' => NodeInterface::PUBLISHED,
+      'moderation_state' => 'published',
+    ]);
+    for ($i = 9; $i >= 0; $i--) {
+      $node = $node_storage->createRevision($node);
+      $node->set('moderation_state', 'draft');
+      $node->setChangedTime(strtotime('-' . ($i * 31) . ' days'));
+      $node->save();
+      $this->runNodeRevisionDeleteQueue();
+    }
+    // Assert that 11 revisions remain. No drafts are older than a published
+    // revision.
+    $this->assertRevisionCount(11, $node);
+
+    $node = $node_storage->createRevision($node);
+    $node->setChangedTime(time());
+    $node->set('moderation_state', 'published');
+    $node->save();
+    $this->runNodeRevisionDeleteQueue();
+    // Assert that 7 revisions remain. 2 published revisions and the 5 latest
+    // drafts are kept.
+    $this->assertRevisionCount(7, $node);
   }
 
   /**
@@ -343,7 +397,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
         ],
       ])
       ->save();
-    $this->container->get('plugin.manager.node_revision_delete')->resetCache();
 
     // Add a draft revision and run the queue.
     $node->set('moderation_state', 'draft');
@@ -381,7 +434,6 @@ class NodeRevisionDeleteTest extends KernelTestBase {
       ],
     ]);
     $node_type->save();
-    $this->container->get('plugin.manager.node_revision_delete')->resetCache();
 
     // Add a draft revision and run the queue.
     $node->set('moderation_state', 'draft');
@@ -438,6 +490,75 @@ class NodeRevisionDeleteTest extends KernelTestBase {
     // Assert that 10 revisions remain. There should be 5 Dutch revisions, and 5
     // English revisions.
     $this->assertRevisionCount(10, $node);
+  }
+
+  /**
+   * Test that revisions shared with another language are not deleted.
+   *
+   * When an untranslatable field is changed while adding a translation, both
+   * languages have revision_translation_affected = 1 on that revision. Node
+   * revision delete plugins should not delete that revision if it is still the
+   * only affected revision for the other language.
+   */
+  public function testNodeRevisionDeleteMultiLingualUntranslatableField(): void {
+    // Add the German language. Note it is important that this language comes
+    // before the English language alphabetically.
+    ConfigurableLanguage::createFromLangcode('de')->save();
+    $node_storage = $this->container->get('entity_type.manager')->getStorage('node');
+
+    // Add a non-translatable field to the page content type.
+    FieldStorageConfig::create([
+      'field_name' => 'field_untranslatable',
+      'entity_type' => 'node',
+      'type' => 'string',
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_untranslatable',
+      'entity_type' => 'node',
+      'bundle' => 'page',
+      'label' => 'Untranslatable field',
+      'translatable' => FALSE,
+    ])->save();
+
+    // Configure the amount plugin to keep 5 revisions.
+    $this->config('node_revision_delete.settings')
+      ->set('defaults', [
+        'amount' => [
+          'status' => TRUE,
+          'settings' => ['amount' => 5],
+        ],
+      ])
+      ->save();
+
+    // Step 1: Create a node in EN language (revision_translation_affected for
+    // EN = 1).
+    $node = $this->createNode([
+      'type' => 'page',
+      'langcode' => 'en',
+      'field_untranslatable' => 'initial value',
+    ]);
+
+    // Step 2: Add DE translation while changing the untranslatable field. This
+    // results in revision_translation_affected = 1 for both EN and DE.
+    $translation = $node->addTranslation('de', ['title' => 'German title']);
+    $translation->set('field_untranslatable', 'changed value');
+    $new_revision = $node_storage->createRevision($translation);
+    $new_revision->save();
+    $de_revision_id = $new_revision->getRevisionId();
+
+    // Step 3: Create more EN revisions so the 2nd revision (with the DE
+    // translation) exceeds the configured amount of revisions to keep for EN.
+    for ($i = 0; $i < 6; $i++) {
+      $new_revision = $node_storage->createRevision($node);
+      $new_revision->save();
+    }
+    $this->runNodeRevisionDeleteQueue();
+
+    // Step 4: Assert the DE translation revision was not deleted. Even though
+    // the EN amount limit causes older EN revisions to be pruned, the revision
+    // that is the only DE-affected revision must be preserved.
+    $de_revision = $node_storage->loadRevision($de_revision_id);
+    $this->assertNotNull($de_revision, 'The revision containing the DE translation must not be deleted.');
   }
 
   /**

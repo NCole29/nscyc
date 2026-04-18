@@ -102,12 +102,12 @@ Node Revision Delete plugins must be placed in:
 Display plugins must at least implement the NodeRevisionDeleteInterface.
 After creating a plugin, clear the cache to make Drupal recognize it.
 
-NodeRevisionDelete annotation should at least contain:
+NodeRevisionDelete attribute should at least contain:
 ```
- * @NodeRevisionDelete(
- *   id = "plugin_id",
- *   label = @Translation("Plugin name"),
- * )
+ * #[NodeRevisionDelete(
+ *   id: 'plugin_id',
+ *   label: new TranslatableMarkup('Plugin name'),
+ * )]
 ```
 
 

@@ -109,10 +109,12 @@ class WebformCivicrmPreProcess extends WebformCivicrmBase implements WebformCivi
     // Early return if the form (or page) was already submitted
     $triggering_element = $this->form_state->getTriggeringElement();
 
-    // When user uploads a file using a managed_file element, avoid making any change to $this->form.
+    // When user uploads a file using a managed_file element, populate
+    // contact options before returning to ensure they persist in the cached form.
     if ($this->form_state->hasFileElement()
       && is_array($triggering_element['#submit'])
       && in_array('file_managed_file_submit', $triggering_element['#submit'], TRUE)) {
+      $this->fillForm($this->form, $this->form_state->getValues());
       return;
     }
 
@@ -166,8 +168,7 @@ class WebformCivicrmPreProcess extends WebformCivicrmBase implements WebformCivi
         $this->form['#prefix'] = wf_crm_aval($this->form, '#prefix', '') . '<div class="webform-civicrm-prefix contact-unknown">' . nl2br($this->settings['prefix_unknown']) . '</div>';
       }
       if ($this->settings['block_unknown_users']) {
-        $this->form['submitted']['#access'] = $this->form['actions']['#access'] = FALSE;
-        throw new AccessDeniedHttpException();
+        $this->form['#access'] = FALSE;
       }
     }
     if (!empty($this->data['participant_reg_type'])) {

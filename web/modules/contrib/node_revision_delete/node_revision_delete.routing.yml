@@ -7,3 +7,15 @@ node_revision_delete.admin_settings:
     _permission: 'administer node_revision_delete'
   options:
     _admin_route: TRUE
+
+node_revision_delete.reset_node_type:
+  path: '/admin/config/content/node_revision_delete/reset/{node_type}'
+  defaults:
+    _form: '\Drupal\node_revision_delete\Form\ResetNodeTypeForm'
+    _title: 'Reset to defaults'
+  requirements:
+    _permission: 'administer node_revision_delete'
+  options:
+    parameters:
+      node_type:
+        type: entity:node_type

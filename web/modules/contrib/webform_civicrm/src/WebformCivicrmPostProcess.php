@@ -1312,6 +1312,7 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
       if (isset($this->ent['contribution_recur'][1]['id'])) {
         $params['contribution_recur_id'] = $this->ent['contribution_recur'][1]['id'];
       }
+      $this->setTestMode($params);
 
       $result = $this->utils->wf_civicrm_api('membership', 'create', $params);
 
@@ -2309,6 +2310,8 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
       $params['pan_truncation'] = substr($params['credit_card_number'], -4);
     }
 
+    $this->setTestMode($params);
+
     // Save this stuff for later
     unset($params['soft'], $params['soft_credit_type_id']);
     return $params;
@@ -2466,9 +2469,14 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
         if (is_array($val)) {
           $this->data[$ent][$c][$table][$n][$name] = [];
           foreach ($val as $v) {
-            if (is_numeric($v) && !empty($this->ent['contact'][$v]['id'])) {
-              $tableName = $isStandardCustom ? $ent : $table;
-              $this->data[$ent][$c][$tableName][$n][$name][] = $this->ent['contact'][$v]['id'];
+            if (is_numeric($v)) {
+              if (!empty($this->ent['contact'][$v]['id'])) {
+                $tableName = $isStandardCustom ? $ent : $table;
+                $this->data[$ent][$c][$tableName][$n][$name][] = $this->ent['contact'][$v]['id'];
+              }
+              elseif ($contactPrefillMode) {
+                $this->data[$ent][$c]['update_contact_ref'][$n][$name] = $v;
+              }
             }
           }
         }
@@ -2528,9 +2536,9 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
           if (!empty($this->data[$ent][$c][$table][$n][$name]) && is_array($this->data[$ent][$c][$table][$n][$name])) {
             $val = array_unique(array_merge($val, $this->data[$ent][$c][$table][$n][$name]));
           }
-          if (substr($name, 0, 6) === 'custom' || ($table == 'other' && in_array($name, ['group', 'tag']))) {
+          if (substr($name, 0, 6) === 'custom' || ($table == 'other' && in_array($name, ['crmgroup', 'tag']))) {
             $val = array_filter($val);
-            if ($name === 'group') {
+            if ($name === 'crmgroup') {
               unset($val['public_groups']);
             }
           }
@@ -2635,7 +2643,7 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
       $component = $this->node->getElement("civicrm_{$c}_contact_1_contact_existing");
       $existing_contact_val = $this->submissionValue($component['#form_key']);
       // Fields are hidden if value is empty (no selection) or a numeric contact id
-      if (!$existing_contact_val[0] || is_numeric($existing_contact_val[0])) {
+      if (!$existing_contact_val[0] || ((is_numeric($existing_contact_val[0])) && ((int)$existing_contact_val[0] > 0))) {
         $type = ($table == 'contact' && strpos($name, 'name')) ? 'name' : $table;
         $component += ['#hide_fields' => []];
         if (in_array($type, $component['#hide_fields'])) {
@@ -2898,20 +2906,15 @@ class WebformCivicrmPostProcess extends WebformCivicrmBase implements WebformCiv
     $updateParams = [
       'id' => $cid,
     ];
-    $skipKeys = [];
+    // Iterate over all contact refs that we should update.
     foreach ($params['update_contact_ref'] as $n => $refKeys) {
       foreach ($refKeys as $refKey => $val) {
-        // Skip contact ref that doesn't have a valid contact ids.
-        if (empty($this->ent['contact'][$val]['id'])) {
+        $contactRefValue = $this->ent['contact'][$val]['id'] ?? NULL;
+        // Skip contact ref that doesn't have a valid contact id.
+        if (!$contactRefValue) {
           continue;
         }
-        foreach ($params['contact'] as $contactParams) {
-          foreach ($contactParams as $key => $value) {
-            if (strpos($key, "{$refKey}_") === 0 && !isset($updateParams[$key]) && !in_array($key, $skipKeys)) {
-              $updateParams[$key] = $value;
-            }
-          }
-        }
+        $updateParams[$refKey] = $contactRefValue;
       }
     }
     if (count($updateParams) > 1) {

@@ -66,26 +66,6 @@ class AdminSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Retrieve an overview of settings for this content type.
-   *
-   * @param string $node_type_id
-   *   The node type id.
-   *
-   * @return string
-   *   The text.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  private function getSettingsSummary(string $node_type_id): string {
-    $settings = $this->pluginManager->getSettingsNodeType($node_type_id);
-    // @todo for 'overridden' node types, we could also show a short
-    //   summary of the settings. This should be a method on each plugin.
-    //   However, we want to be careful not to clutter the screen.
-    return 'overridden' === $settings['status'] ? $this->t('Overridden') : $this->t('Default');
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
@@ -114,7 +94,7 @@ class AdminSettingsForm extends ConfigFormBase {
     $destination = Url::fromRoute('node_revision_delete.admin_settings')->toString();
     $destination_options = [
       'query' => ['destination' => $destination],
-      'fragment' => 'edit-workflow',
+      'fragment' => 'edit-node-revision-delete',
     ];
 
     foreach ($content_types as $content_type) {
@@ -122,7 +102,8 @@ class AdminSettingsForm extends ConfigFormBase {
       $content_type_machine_name = $content_type->id();
       $route_parameters = ['node_type' => $content_type_machine_name];
 
-      $settings = $this->getSettingsSummary($content_type_machine_name);
+      $node_type_settings = $this->pluginManager->getSettingsNodeType($content_type_machine_name);
+      $settings = $node_type_settings['status'] === 'overridden' ? $this->t('Overridden') : $this->t('Default');
 
       // Operations dropbutton.
       $dropbutton = [
@@ -135,6 +116,13 @@ class AdminSettingsForm extends ConfigFormBase {
           ],
         ],
       ];
+
+      if ($node_type_settings['status'] === 'overridden') {
+        $dropbutton['#links']['reset'] = [
+          'title' => $this->t('Reset to defaults'),
+          'url' => Url::fromRoute('node_revision_delete.reset_node_type', $route_parameters),
+        ];
+      }
 
       // Setting the row values.
       $rows[] = [
@@ -186,7 +174,7 @@ class AdminSettingsForm extends ConfigFormBase {
         '#default_value' => $settings['status'] ?? 0,
       ];
       $form[$plugin_id]['settings'] = [
-        '#type' => 'fieldgroup',
+        '#type' => 'container',
         '#states' => [
           'visible' => [
             ':input[name="' . $plugin_id . '[status]"]' => ['checked' => TRUE],

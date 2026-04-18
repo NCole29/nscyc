@@ -1,4 +1,8 @@
 services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
   plugin.manager.node_revision_delete:
     class: Drupal\node_revision_delete\Plugin\NodeRevisionDeletePluginManager
     parent: default_plugin_manager
@@ -22,3 +26,5 @@ services:
       - '@language_manager'
       - '@database'
       - '@plugin.manager.node_revision_delete'
+
+  Drupal\node_revision_delete\EventSubscriber\ConfigSubscriber: ~

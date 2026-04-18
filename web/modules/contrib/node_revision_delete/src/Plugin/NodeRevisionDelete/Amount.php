@@ -3,16 +3,17 @@
 namespace Drupal\node_revision_delete\Plugin\NodeRevisionDelete;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node_revision_delete\Attribute\NodeRevisionDelete;
 use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteBase;
 
 /**
  * Determines whether to delete a revision based on the amount of revisions.
- *
- * @NodeRevisionDelete(
- *  id = "amount",
- *  label = @Translation("Delete revisions when a certain amount of revisions is reached."),
- * )
  */
+#[NodeRevisionDelete(
+  id: 'amount',
+  label: new TranslatableMarkup('Delete revisions when a certain amount of revisions is reached.'),
+)]
 class Amount extends NodeRevisionDeleteBase {
 
   /**

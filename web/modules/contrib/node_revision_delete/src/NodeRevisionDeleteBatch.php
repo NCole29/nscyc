@@ -180,7 +180,7 @@ class NodeRevisionDeleteBatch implements NodeRevisionDeleteBatchInterface {
   /**
    * {@inheritdoc}
    */
-  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id): void {
+  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): void {
     // Defining the batch builder.
     $batch = (new BatchBuilder())
       ->setTitle($this->t('Deleting revisions'))
@@ -190,7 +190,7 @@ class NodeRevisionDeleteBatch implements NodeRevisionDeleteBatchInterface {
       ->setFinishCallback([$this, 'finishPreviousRevisions']);
 
     // Get list of revisions older than current revision.
-    $revisions = $this->nodeRevisionDelete->getPreviousRevisions($nid, $currently_deleted_revision_id);
+    $revisions = $this->nodeRevisionDelete->getPreviousRevisions($nid, $currently_deleted_revision_id, $langcode);
 
     $total = count($revisions);
 

@@ -73,49 +73,41 @@ class NodeRevisionDelete implements NodeRevisionDeleteInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPreviousRevisions(int $nid, int $currently_deleted_revision_id): array {
-    // @todo check if the method can be improved.
-    // Getting the node storage.
+  public function getPreviousRevisions(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): array {
     $node_storage = $this->entityTypeManager->getStorage('node');
-    // Getting the node.
-    $node = $node_storage->load($nid);
-    // Get current language code from URL.
-    $langcode = $this->languageManager->getCurrentLanguage()->getId();
 
-    // Get all revisions of the current node, in all languages.
-    $query = $node_storage->getQuery()->allRevisions()->condition('nid', $node->id())->accessCheck(FALSE);
-    $revision_ids = array_keys($query->execute());
-    // Creating an array with the keys equal to the value.
-    $revision_ids = array_combine($revision_ids, $revision_ids);
+    // Fall back to the current language if no language code is specified.
+    if ($langcode === NULL) {
+      $langcode = $this->languageManager->getCurrentLanguage()->getId();
+    }
 
-    // Adding a placeholder for the deleted revision, as our custom submit
-    // function is executed after the core delete the current revision.
-    $revision_ids[$currently_deleted_revision_id] = $currently_deleted_revision_id;
+    // Use an entity query to find all revision IDs older than the specified
+    // revision that affected the given language. This avoids loading every
+    // revision entity individually.
+    $vids = $node_storage->getQuery()
+      ->allRevisions()
+      ->condition('nid', $nid)
+      ->condition('vid', $currently_deleted_revision_id, '<')
+      ->condition('langcode', $langcode)
+      ->condition('revision_translation_affected', 1)
+      ->sort('vid', 'DESC')
+      ->accessCheck(FALSE)
+      ->execute();
 
-    $revisions_before = [];
+    if (empty($vids)) {
+      return [];
+    }
 
-    if (count($revision_ids) > 1) {
-      // Ordering the array.
-      krsort($revision_ids);
-
-      // Getting the prior revisions.
-      $revision_ids = array_slice($revision_ids, array_search($currently_deleted_revision_id, array_keys($revision_ids)) + 1, NULL, TRUE);
-
-      // Loop through the list of revision ids, select the ones that have.
-      // Same language as the current language AND are older than the current
-      // deleted revision.
-      foreach ($revision_ids as $vid) {
-        /** @var \Drupal\Core\Entity\RevisionableInterface&\Drupal\Core\Entity\ContentEntityInterface $revision */
-        $revision = $node_storage->loadRevision($vid);
-        // Only show revisions that are affected by the language
-        // that is being displayed.
-        if ($revision->hasTranslation($langcode) && $revision->getTranslation($langcode)->isRevisionTranslationAffected()) {
-          $revisions_before[] = $revision->getTranslation($langcode);
-        }
+    // Load all matching revisions and return their translations.
+    $revisions = [];
+    /** @var \Drupal\node\NodeInterface $revision */
+    foreach ($node_storage->loadMultipleRevisions(array_keys($vids)) as $revision) {
+      if ($revision->hasTranslation($langcode)) {
+        $revisions[] = $revision->getTranslation($langcode);
       }
     }
 
-    return $revisions_before;
+    return $revisions;
   }
 
   /**

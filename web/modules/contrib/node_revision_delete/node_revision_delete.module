@@ -8,7 +8,9 @@
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -50,9 +52,46 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
   /** @var \Drupal\Core\Entity\ContentEntityFormInterface $form_object */
   $form_object = $form_state->getFormObject();
   $content_type = $form_object->getEntity();
+  assert($content_type instanceof NodeTypeInterface);
 
-  // Getting the content type settings.
-  $content_type_settings = $content_type->isNew() ? [] : $plugin_manager->getSettingsNodeType($content_type->id())['plugin'];
+  // Detect if this build is an AJAX rebuild caused by toggling the override
+  // checkbox. When that happens we always show fresh defaults so the visible
+  // form matches what would actually be saved.
+  $triggering_element = $form_state->getTriggeringElement();
+  $is_override_ajax = $form_state->isRebuilding()
+    && $triggering_element !== NULL
+    && ($triggering_element['#name'] ?? '') === 'node_revision_delete[override]';
+
+  if ($is_override_ajax) {
+    // Drop any user input the admin made for the plugin sub-forms so the
+    // rebuilt form picks up the fresh #default_value below.
+    $input = $form_state->getUserInput();
+    foreach ($plugin_definitions as $plugin_id => $plugin_definition) {
+      unset($input[$plugin_id]);
+      $form_state->unsetValue($plugin_id);
+    }
+    $form_state->setUserInput($input);
+  }
+
+  // Decide which settings to display. On the initial build the form mirrors
+  // what is saved on the node type. On an AJAX rebuild (or for new node
+  // types) we always show the defaults.
+  $has_saved_override = !$content_type->isNew() && !empty($content_type->getThirdPartySettings('node_revision_delete'));
+  if ($is_override_ajax || !$has_saved_override) {
+    $current_settings = [];
+    foreach ($plugin_definitions as $plugin_id => $plugin_definition) {
+      $current_settings[$plugin_id] = $plugin_manager->getDefaultPluginSettings($plugin_id);
+    }
+  }
+  else {
+    $current_settings = $plugin_manager->getSettingsNodeType($content_type->id())['plugin'];
+  }
+
+  // The override state comes from the form value during a rebuild and from
+  // the saved third-party settings on the initial build.
+  $override = $is_override_ajax
+    ? (bool) $form_state->getValue(['node_revision_delete', 'override'])
+    : $has_saved_override;
 
   $form['node_revision_delete'] = [
     '#type' => 'details',
@@ -65,10 +104,31 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
     '#attributes' => ['class' => ['node-revision-delete-settings-form']],
   ];
 
+  // Wrap the plugin sub-forms in a container so the AJAX callback can replace
+  // the whole group when override is toggled.
+  $form['node_revision_delete']['plugins_wrapper'] = [
+    '#type' => 'container',
+    '#attributes' => ['id' => 'node-revision-delete-plugins-wrapper'],
+  ];
+
+  $form['node_revision_delete']['plugins_wrapper']['override'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Override default settings'),
+    '#default_value' => $override,
+    '#attributes' => [
+      'class' => ['node-revision-delete-override'],
+    ],
+    '#parents' => ['node_revision_delete', 'override'],
+    '#ajax' => [
+      'callback' => 'node_revision_delete_override_ajax_callback',
+      'wrapper' => 'node-revision-delete-plugins-wrapper',
+    ],
+  ];
+
   foreach ($plugin_definitions as $plugin_id => $plugin_definition) {
     /** @var \Drupal\node_revision_delete\Plugin\NodeRevisionDeleteInterface $plugin */
-    $plugin = $plugin_manager->getPlugin($plugin_id, $content_type_settings[$plugin_id]['settings'] ?? []);
-    $form['node_revision_delete'][$plugin_id] = [
+    $plugin = $plugin_manager->getPlugin($plugin_id, $current_settings[$plugin_id]['settings'] ?? []);
+    $form['node_revision_delete']['plugins_wrapper'][$plugin_id] = [
       '#type' => 'details',
       '#title' => $plugin_definition['label'],
       '#open' => TRUE,
@@ -79,25 +139,50 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
         'class' => ['node-revision-delete-plugin-settings'],
       ],
     ];
-    $form['node_revision_delete'][$plugin_id]['status'] = [
+    $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['status'] = [
       '#type' => 'checkbox',
       '#title' => t('Enabled'),
-      '#default_value' => $content_type_settings[$plugin_id]['status'] ?? 0,
+      '#default_value' => $current_settings[$plugin_id]['status'] ?? 0,
+      '#states' => [
+        'disabled' => [
+          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
+        ],
+      ],
     ];
-    $form['node_revision_delete'][$plugin_id]['settings'] = [
-      '#type' => 'fieldgroup',
+
+    $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] = [
+      '#type' => 'container',
       '#states' => [
         'visible' => [
           ':input[name="' . $plugin_id . '[status]"]' => ['checked' => TRUE],
         ],
+        'disabled' => [
+          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
+        ],
       ],
     ];
-    $plugin_form_state = SubformState::createForSubform($form['node_revision_delete'][$plugin_id]['settings'], $form, $form_state);
-    $form['node_revision_delete'][$plugin_id]['settings'] = $plugin->buildConfigurationForm($form['node_revision_delete'][$plugin_id]['settings'] ?? [], $plugin_form_state);
+    $plugin_form_state = SubformState::createForSubform($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'], $form, $form_state);
+    $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] = $plugin->buildConfigurationForm($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] ?? [], $plugin_form_state);
+
+    // Disable all required fields if override is disabled.
+    foreach (Element::children($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings']) as $key) {
+      if (!empty($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'][$key]['#required'])) {
+        $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'][$key]['#states']['disabled'] = [
+          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
+        ];
+      }
+    }
   }
   $form['#attached']['library'][] = 'node_revision_delete/summaries';
 
   $form['#entity_builders'][] = 'node_revision_delete_form_node_type_form_builder';
+}
+
+/**
+ * AJAX callback to refresh the plugin sub-forms when override is toggled.
+ */
+function node_revision_delete_override_ajax_callback(array $form, FormStateInterface $form_state): array {
+  return $form['node_revision_delete']['plugins_wrapper'];
 }
 
 /**
@@ -113,14 +198,16 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
  *   The form state.
  */
 function node_revision_delete_form_node_type_form_builder(string $entity_type, NodeTypeInterface $type, array &$form, FormStateInterface $form_state) {
+  $override = $form_state->getValue(['node_revision_delete', 'override']);
+
   /** @var \Drupal\node_revision_delete\Plugin\NodeRevisionDeletePluginManager $plugin_manager */
   $plugin_manager = \Drupal::service('plugin.manager.node_revision_delete');
-  $plugin_definitions = $plugin_manager->getDefinitions();
-  foreach ($plugin_definitions as $plugin_id => $plugin_definition) {
-    $plugin_form_state = SubformState::createForSubform($form['node_revision_delete'][$plugin_id], $form, $form_state);
-    $content_type_values = $plugin_form_state->getValues();
-    if ($content_type_values !== $plugin_manager->getDefaultPluginSettings($plugin_id)) {
-      $type->setThirdPartySetting('node_revision_delete', $plugin_id, $plugin_form_state->getValues());
+  foreach ($plugin_manager->getDefinitions() as $plugin_id => $plugin_definition) {
+    if ($override) {
+      $plugin_form_state = SubformState::createForSubform($form['node_revision_delete']['plugins_wrapper'][$plugin_id], $form, $form_state);
+      $values = $plugin_form_state->getValues();
+      unset($values['override']);
+      $type->setThirdPartySetting('node_revision_delete', $plugin_id, $values);
     }
     else {
       $type->unsetThirdPartySetting('node_revision_delete', $plugin_id);
@@ -174,8 +261,12 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
   // Get the revision id from URL.
   $revision_id = \Drupal::routeMatch()->getRawParameter('node_revision');
 
-  // Get list of revisions older than current revision.
-  $revisions_before = \Drupal::service('node_revision_delete')->getPreviousRevisions($nid, $revision_id);
+  // Get list of revisions older than current revision for the content language.
+  // Use TYPE_CONTENT to ensure the correct language is used even when the
+  // "Account administration pages" language negotiation is active, which would
+  // cause getCurrentLanguage() (TYPE_INTERFACE) to return the admin language.
+  $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+  $revisions_before = \Drupal::service('node_revision_delete')->getPreviousRevisions($nid, $revision_id, $langcode);
   // Count sum of old revisions.
   $revision_number = count($revisions_before);
 
@@ -263,8 +354,10 @@ function _node_revision_bulk_delete_submit(array &$form, FormStateInterface $for
     $nid = \Drupal::routeMatch()->getRawParameter('node');
     // Get the revision id from URL.
     $vid = \Drupal::routeMatch()->getRawParameter('node_revision');
+    // Pass the content language to ensure the correct revisions are deleted.
+    $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 
     // Call the batch.
-    \Drupal::service('node_revision_delete.batch')->previousRevisionDeletionBatch($nid, $vid);
+    \Drupal::service('node_revision_delete.batch')->previousRevisionDeletionBatch($nid, $vid, $langcode);
   }
 }

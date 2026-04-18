@@ -3,29 +3,31 @@
  */
 
 (function ($, Drupal) {
-
   Drupal.behaviors.nodeRevisionDeleteSummaies = {
-    attach: function (context, settings) {
-
+    attach(context, settings) {
       // Display the action in the vertical tab summary.
-      $(context).find('.node-revision-delete-settings-form').drupalSetSummary(function (context) {
-        let summary = '', enabledPlugins = [];
-        $('.node-revision-delete-plugin-settings').each(function () {
-          if ($(this).find('input:checked').length) {
-            enabledPlugins.push($(this).find('summary').text());
-          }
+      $(context)
+        .find('.node-revision-delete-settings-form')
+        .drupalSetSummary((context) => {
+          const override = context.querySelector(
+            'input[name="node_revision_delete[override]"]',
+          );
+          const enabledPlugins = context.querySelectorAll(
+            '.node-revision-delete-plugin-settings input[name$="[status]"]:checked',
+          );
+
+          const isOverridden = override.checked;
+          const isEnabled = enabledPlugins.length > 0;
+
+          if (isOverridden && isEnabled)
+            return Drupal.t('Overridden, revision deletion is enabled');
+          if (isOverridden && !isEnabled)
+            return Drupal.t('Overridden, revision deletion is disabled');
+          if (!isOverridden && isEnabled)
+            return Drupal.t('Using defaults, revision deletion is enabled');
+
+          return Drupal.t('Using defaults, revision deletion is disabled');
         });
-
-        if (enabledPlugins.length > 0) {
-          summary = Drupal.t("Enabled Plugins: ") + enabledPlugins.join(" ");
-        }
-        else {
-          summary = Drupal.t("Node Revision Delete is disabled.");
-        }
-
-        return summary;
-      });
-    }
-  }
-
+    },
+  };
 })(jQuery, Drupal);

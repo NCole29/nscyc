@@ -5,7 +5,7 @@ on:
     branches:
       - 6.x
   schedule:
-    # Run Monday/Thursday at 12:13 GMT
+    # Run Monday/Thursday at 12:13 GMT.
     - cron: '13 12 * * 1,4'
   workflow_dispatch:
     inputs:
@@ -23,16 +23,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - drupal: '10.3.*'
-            civicrm: '5.78.*'
-            php: '8.2'
-          - drupal: '10.3.*'
-            civicrm: '6.1.*'
-            php: '8.2'
-          - drupal: '10.3.*'
-            civicrm: '6.2.x-dev'
-            php: '8.2'
-          - drupal: '10.3.*'
+          - drupal: '10.5.*'
+            civicrm: '6.10.*'
+            php: '8.3'
+          - drupal: '10.5.*'
+            civicrm: '6.12.x'
+            php: '8.3'
+          - drupal: '10.6.*'
+            civicrm: 'dev-master'
+            php: '8.3'
+          - drupal: '11.2.*'
+            civicrm: '6.13.x-dev'
+            php: '8.3'
+          - drupal: '11.x-dev'
             civicrm: 'dev-master'
             php: '8.3'
     name: Drupal ${{ matrix.drupal }} | CiviCRM ${{ matrix.civicrm }}
@@ -70,13 +73,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install sendmail
-      # Temp thing
-      - name: Downgrade chrome
-        run: |
-          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_127.0.6533.119-1_amd64.deb
-          sudo apt-get install libu2f-udev
-          sudo dpkg -i chrome.deb
-          google-chrome-stable --version
       - name: Setup Drupal
         run: |
           COMPOSER_MEMORY_LIMIT=-1 composer create-project drupal/recommended-project:${{ matrix.drupal }} ~/drupal --no-interaction --no-install
@@ -95,13 +91,20 @@ jobs:
           composer config repositories.0 composer https://packages.drupal.org/8
           composer config repositories.1 path $GITHUB_WORKSPACE
           composer install --no-interaction
-          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/core-dev-pinned:${{ matrix.drupal }}
+          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/core-dev:${{ matrix.drupal }} -w
+      # This is done differently in drupal 11. See BROWSERTEST_OUTPUT_VERBOSE below.
       - name: Suppress links to screenshots
         # There's so many! They can be useful locally if running one test, but they aren't useful here and cause massive scrolling.
         run: |
           cd ~/drupal
-          curl -L -O https://raw.githubusercontent.com/colemanw/webform_civicrm/def72b3dce1ea4bc7dd2cdd28a72844885727789/DrupalHtmlOutputTrait.diff
-          git apply DrupalHtmlOutputTrait.diff
+          DRUPAL11=`grep "const VERSION" web/core/lib/Drupal.php | cut -f 2 -d "'" | php -r 'echo (int) version_compare(stream_get_contents(STDIN), "11", ">=");'`
+          if [ "$DRUPAL11" == "1" ]; then
+            echo "ISDRUPAL11=1" >> $GITHUB_ENV
+          else
+            echo "ISDRUPAL11=0" >> $GITHUB_ENV
+            curl -L -O https://raw.githubusercontent.com/colemanw/webform_civicrm/def72b3dce1ea4bc7dd2cdd28a72844885727789/DrupalHtmlOutputTrait.diff
+            git apply DrupalHtmlOutputTrait.diff
+          fi
       - name: Install CiviCRM ${{ matrix.civicrm }}
         run: |
           cd ~/drupal
@@ -109,7 +112,13 @@ jobs:
       - name: Download Webform
         run: |
           cd ~/drupal
-          COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:^6.2'
+          # Use 6.x-dev to deal with newer chromedriver issues
+          COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:6.x-dev'
+          #if [ "${{ env.ISDRUPAL11 }}" == "1" ]; then
+          #  COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:6.3.x-dev@dev'
+          #else
+          #  COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:^6.2'
+          #fi
       - name: Install webform_civicrm
         run: |
           cd ~/drupal
@@ -150,7 +159,7 @@ jobs:
           chmod +x /home/runner/civicrm-cv/cv
           ./vendor/drush/drush/drush -y -l http://civi.localhost site-install standard --db-url='mysql://root:@127.0.0.1:${{ job.services.mysql.ports[3306] }}/fakedb' --site-name=FakeCivi
           chmod +w web/sites/default
-          /home/runner/civicrm-cv/cv core:install --cms-base-url=http://civi.localhost
+          /home/runner/civicrm-cv/cv core:install --url=http://civi.localhost
       - name: Download Civi extensions
         run: |
           mkdir -p ~/drupal/web/sites/default/files/civicrm/ext
@@ -161,16 +170,16 @@ jobs:
           # Apparently we have to install it, otherwise stripe gives a dependency error even with install=0. I think that's a bug, but let's just do it. This is a fake install anyway.
           /home/runner/civicrm-cv/cv api3 Extension.download install=1 key=mjwshared
           /home/runner/civicrm-cv/cv api3 Extension.download install=1 key=firewall
-          /home/runner/civicrm-cv/cv api3 Extension.download install=1 key=com.drastikbydesign.stripe
+          # [Temporary]: we need stripe master - it has an unreleased fix for a Brick deprecation
+          # /home/runner/civicrm-cv/cv api3 Extension.download install=1 key=com.drastikbydesign.stripe
+          git clone https://lab.civicrm.org/extensions/stripe.git com.drastikbydesign.stripe
+          /home/runner/civicrm-cv/cv api3 Extension.download install=1 key=com.donordepot.authnetecheck
           /home/runner/civicrm-cv/cv api3 Extension.download install=0 key=com.iatspayments.civicrm
           # For uscounties, it hasn't had a release in a few years so no longer appears in the ext feed, so just download directly. If it ever does need an update, would need to update here.
           # /home/runner/civicrm-cv/cv api3 Extension.download install=0 key=com.aghstrategies.uscounties
           curl -L -O https://github.com/agh1/com.aghstrategies.uscounties/archive/2.1.zip
           unzip 2.1.zip
       - uses: nanasess/setup-chromedriver@master
-        with:
-          # temporary to match downgraded chrome
-          chromedriver-version: '127.0.6533.119'
       - name: Run chromedriver
         run: chromedriver --port=9515 &
       - name: Run php built-in server
@@ -179,12 +188,19 @@ jobs:
         run: |
           mkdir -p $BROWSERTEST_OUTPUT_DIRECTORY
           cd ~/drupal/web
-          ../vendor/bin/phpunit --verbose -c core modules/contrib/webform_civicrm
+          PHPUNITARGS=--verbose
+          PHPUNIT10=`~/drupal/vendor/bin/phpunit --version | cut -d ' ' -f 2 | php -r 'echo (int) version_compare(stream_get_contents(STDIN), "10", ">=");'`
+          if [ "$PHPUNIT10" == "1" ]; then
+            PHPUNITARGS="--display-skipped --display-deprecations --display-errors --display-warnings --display-notices"
+          fi
+          ../vendor/bin/phpunit $PHPUNITARGS -c core modules/contrib/webform_civicrm
         env:
           SYMFONY_DEPRECATIONS_HELPER: 999999
           SIMPLETEST_DB: mysql://root:@127.0.0.1:${{ job.services.mysql.ports[3306] }}/db
           SIMPLETEST_BASE_URL: http://127.0.0.1:8080
           MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu", "--no-sandbox", "--headless"]}}, "http://127.0.0.1:9515"]'
+          BROWSERTEST_OUTPUT_FILE: 'true'
+          BROWSERTEST_OUTPUT_VERBOSE: 'false'
           BROWSERTEST_OUTPUT_DIRECTORY: '/home/runner/drupal/web/sites/simpletest/browser_output'
           DEV_EXTENSION_DIR: /home/runner/drupal/web/sites/default/files/civicrm/ext
           DEV_EXTENSION_URL: http://127.0.0.1:8080/sites/default/files/civicrm/ext

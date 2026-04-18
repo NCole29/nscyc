@@ -12,18 +12,21 @@ interface NodeRevisionDeleteInterface {
   /**
    * Get all revision that are older than current deleted revision.
    *
-   * The revisions should have the same language as the current language of the
-   * page.
+   * The revisions should have the same language as the specified language code.
+   * If no language code is specified, the current language is used.
    *
    * @param int $nid
    *   The node id.
    * @param int $currently_deleted_revision_id
    *   The current revision.
+   * @param string|null $langcode
+   *   (optional) The language code to filter revisions by. Defaults to the
+   *   current language if not specified.
    *
    * @return array
    *   An array with the previous revisions.
    */
-  public function getPreviousRevisions(int $nid, int $currently_deleted_revision_id): array;
+  public function getPreviousRevisions(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): array;
 
   /**
    * Check if a node exists in the queue.

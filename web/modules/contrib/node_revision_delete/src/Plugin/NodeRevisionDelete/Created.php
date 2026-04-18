@@ -3,16 +3,17 @@
 namespace Drupal\node_revision_delete\Plugin\NodeRevisionDelete;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node_revision_delete\Attribute\NodeRevisionDelete;
 use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteBase;
 
 /**
  * Determines whether to delete a revision based on the revision creation time.
- *
- * @NodeRevisionDelete(
- *  id = "created",
- *  label = @Translation("Delete revisions after a specific amount of time."),
- * )
  */
+#[NodeRevisionDelete(
+  id: 'created',
+  label: new TranslatableMarkup('Delete revisions after a specific amount of time.'),
+)]
 class Created extends NodeRevisionDeleteBase {
 
   /**
@@ -60,7 +61,6 @@ class Created extends NodeRevisionDeleteBase {
       '#title' => $this->t('The minimum amount of months a revision must be kept for'),
       '#description' => $this->t('After this time, older revisions can be deleted. The minimum age of revisions is always respected, regardless of other settings. Inactive revisions (like drafts) created after the active revision will not be deleted.'),
       '#options' => $options,
-      '#required' => TRUE,
       '#default_value' => $this->configuration['age'] ?? 0,
     ];
     return $form;

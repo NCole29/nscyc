@@ -32,6 +32,7 @@ function node_revision_delete_update_9001() {
 
   /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
   $storage = \Drupal::entityTypeManager()->getStorage('node_type');
+  /** @var \Drupal\node\NodeTypeInterface[] $content_types */
   $content_types = $storage->loadMultipleOverrideFree();
   foreach ($content_types as $content_type) {
 

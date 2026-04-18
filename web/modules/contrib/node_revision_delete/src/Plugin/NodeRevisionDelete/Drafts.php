@@ -3,16 +3,17 @@
 namespace Drupal\node_revision_delete\Plugin\NodeRevisionDelete;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node_revision_delete\Attribute\NodeRevisionDelete;
 use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteBase;
 
 /**
  * Determines whether to delete revisions newer than the active revision.
- *
- * @NodeRevisionDelete(
- *  id = "drafts",
- *  label = @Translation("Delete revisions newer than the current revision."),
- * )
  */
+#[NodeRevisionDelete(
+  id: 'drafts',
+  label: new TranslatableMarkup('Delete revisions newer than the current revision.'),
+)]
 class Drafts extends NodeRevisionDeleteBase {
 
   /**
@@ -60,7 +61,6 @@ class Drafts extends NodeRevisionDeleteBase {
       '#title' => $this->t('The minimum amount of months a new revision must be kept for'),
       '#description' => $this->t('After this time, revisions newer than the active revision (like draft revisions) can be deleted. The minimum age of revisions is always respected, regardless of other settings. Only revisions created after the active revision will be deleted.'),
       '#options' => $options,
-      '#required' => TRUE,
       '#default_value' => $this->configuration['age'] ?? 0,
     ];
     return $form;

@@ -51,7 +51,7 @@ class NodeRevisionDeletePluginManager extends DefaultPluginManager {
    *   The config factory.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory) {
-    parent::__construct('Plugin/NodeRevisionDelete', $namespaces, $module_handler, 'Drupal\node_revision_delete\Plugin\NodeRevisionDeleteInterface', 'Drupal\node_revision_delete\Annotation\NodeRevisionDelete');
+    parent::__construct('Plugin/NodeRevisionDelete', $namespaces, $module_handler, 'Drupal\node_revision_delete\Plugin\NodeRevisionDeleteInterface', 'Drupal\node_revision_delete\Attribute\NodeRevisionDelete', 'Drupal\node_revision_delete\Annotation\NodeRevisionDelete');
     $this->alterInfo('node_revision_delete_info');
     $this->setCacheBackend($cache_backend, 'node_revision_delete_plugins');
     $this->entityTypeManager = $entity_type_manager;
@@ -158,9 +158,24 @@ class NodeRevisionDeletePluginManager extends DefaultPluginManager {
 
   /**
    * Resets the static cache for the plugin settings.
+   *
+   * @deprecated in node_revision_delete:2.0.3 and is removed from
+   *   node_revision_delete:3.0.0. Use
+   *   NodeRevisionDeletePluginManager::clearCachedDefinitions() instead.
+   *
+   * @see https://www.drupal.org/node/3541101
    */
   public function resetCache(): void {
+    @trigger_error('\Drupal\node_revision_delete\Plugin\NodeRevisionDeletePluginManager::resetCache() is deprecated in node_revision_delete:2.0.3 and is removed from node_revision_delete:3.0.0. Use NodeRevisionDeletePluginManager::clearCachedDefinitions() instead. See https://www.drupal.org/node/3541101', E_USER_DEPRECATED);
     $this->settings = [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function clearCachedDefinitions() {
+    $this->settings = [];
+    parent::clearCachedDefinitions();
   }
 
 }

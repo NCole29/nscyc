@@ -53,8 +53,11 @@ interface NodeRevisionDeleteBatchInterface {
    *   The node id.
    * @param int $currently_deleted_revision_id
    *   The current revision.
+   * @param string|null $langcode
+   *   (optional) The language code to filter revisions by. Defaults to the
+   *   current language if not specified.
    */
-  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id): void;
+  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): void;
 
   /**
    * Batch step definition to delete previous revisions.

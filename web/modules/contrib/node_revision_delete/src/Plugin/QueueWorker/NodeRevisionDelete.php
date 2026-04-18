@@ -5,7 +5,10 @@ namespace Drupal\node_revision_delete\Plugin\QueueWorker;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Queue\Attribute\QueueWorker;
+use Drupal\Core\Queue\DelayedRequeueException;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -13,13 +16,12 @@ use Drupal\node_revision_delete\Plugin\NodeRevisionDeletePluginManager;
 
 /**
  * Delete revisions for a node.
- *
- * @QueueWorker(
- *   id = "node_revision_delete",
- *   title = @Translation("Node revision delete"),
- *   cron = {"time" = 300}
- * )
  */
+#[QueueWorker(
+    id: 'node_revision_delete',
+    title: new TranslatableMarkup('Node revision delete'),
+    cron: ['time' => 300]
+)]
 class NodeRevisionDelete extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
   /**
@@ -96,22 +98,37 @@ class NodeRevisionDelete extends QueueWorkerBase implements ContainerFactoryPlug
       /** @var \Drupal\node\NodeInterface $revision */
       $revision = $this->entityTypeManager->getStorage('node')->loadRevision($vid);
 
+      if (!$revision instanceof NodeInterface) {
+        // A revision might be deleted by another process, so we need to requeue
+        // if one goes missing. Retry in 1 hour.
+        throw new DelayedRequeueException(3600, sprintf('Revision %d for node %d is missing.', $vid, $node->id()));
+      }
+
       // We have to track revisions per language, otherwise unexpected behavior
       // and even loss of data might occur. Try to find the revision language
       // by checking which translation was affected.
       // See https://www.drupal.org/project/node_revision_delete/issues/3118464
+      $has_revision_translation_affected = FALSE;
       foreach ($revision->getTranslationLanguages() as $langcode => $language) {
         if ($revision->hasTranslation($langcode) && $revision->getTranslation($langcode)->isRevisionTranslationAffected()) {
+          $has_revision_translation_affected = TRUE;
           $revision = $revision->getTranslation($langcode);
-          break;
+          // Set the active revision ID for the language.
+          if (($revision->isDefaultRevision() && $revision->isLatestTranslationAffectedRevision()) || ($revision->wasDefaultRevision() && $revision->isLatestTranslationAffectedRevision())) {
+            $active_vids[$revision->language()->getId()] = $vid;
+          }
+          $revisions_per_language[$revision->language()->getId()][] = $vid;
         }
       }
 
-      // Set the active revision ID for the language.
-      if (($revision->isDefaultRevision() && $revision->isLatestTranslationAffectedRevision()) || ($revision->wasDefaultRevision() && $revision->isLatestTranslationAffectedRevision())) {
-        $active_vids[$revision->language()->getId()] = $vid;
+      if (!$has_revision_translation_affected) {
+        // If revision has revision_translation_affected = NULL for all
+        // languages, then assign it to current node language.
+        if (($revision->isDefaultRevision() && $revision->isLatestTranslationAffectedRevision()) || ($revision->wasDefaultRevision() && $revision->isLatestTranslationAffectedRevision())) {
+          $active_vids[$revision->language()->getId()] = $vid;
+        }
+        $revisions_per_language[$revision->language()->getId()][] = $vid;
       }
-      $revisions_per_language[$revision->language()->getId()][] = $vid;
     }
 
     // Load all enabled plugins, and check all revisions per language.
