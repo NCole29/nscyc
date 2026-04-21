@@ -2353,7 +2353,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "Club leaders are:\r\n<li>Displayed on the <strong>Contacts</strong> page.</li>\r\n<li>Assigned a Drupal role based on position, and the role is removed based on position end date. See <a href=\"/admin/structure/taxonomy/manage/positions/overview\">default role per position.</a> Additional roles may be assigned to a person from the Drupal user account page (click their name in the Drupal user column), but must be cleared manually.</li>\r\n<br>\r\nName is filled with the Drupal username but may be edited for the contacts page (click <strong>edit</strong> after saving entry).<br>\r\nPast leaders may appear on this page with a Drupal role if the person is also a current leader. \r\n"
+            value: "Club leaders are:\r\n<li>Displayed on the <strong>Contacts</strong> page.</li>\r\n<li>Assigned a Drupal role based on position, and the role is removed based on position end date. See <a href=\"/admin/structure/taxonomy/manage/positions/overview\">default role per position.</a> Additional roles may be assigned to a person from the Drupal user account page (click their name in the Drupal user column), but must be cleared manually.</li>\r\nName is filled with the Drupal username but may be edited for the contacts page (click <strong>edit</strong> after saving entry).<br>\r\nPast leaders may appear on this page with a Drupal role if the person is also a current leader. \r\n"
             format: basic_html
           tokenize: false
       display_extenders: {  }

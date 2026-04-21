@@ -20,6 +20,7 @@ label: 'Authenticated user'
 weight: -9
 is_admin: false
 permissions:
+  - 'access AJAX API'
   - 'access CiviMail subscribe/unsubscribe pages'
   - 'access all custom data'
   - 'access content'

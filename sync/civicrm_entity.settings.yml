@@ -1,9 +1,23 @@
 _core:
   default_config_hash: ALrmD1SCpEpTvkP6L2jqsOPnHOGPciQIIu3lgtjGHtU
 filter_format: plain_text
-enabled_entity_types: {  }
+enabled_entity_types:
+  - civicrm_contribution
+  - civicrm_participant
 disable_hooks: false
-enable_links_per_type: {  }
+enable_links_per_type:
+  civicrm_contribution:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_participant:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
 disable_links: false
 disable_hooks_per_type:
   civicrm_action_schedule: 0

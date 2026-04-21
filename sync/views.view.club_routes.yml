@@ -3408,7 +3408,7 @@ display:
           exclude: false
           alter:
             alter_text: false
-            text: ''
+            text: "\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -4126,18 +4126,21 @@ display:
                   min: ''
                   max: ''
                   value: '3000'
-        surface:
-          id: surface
+        unpaved_1:
+          id: unpaved_1
           table: club_route
-          field: surface
+          field: unpaved
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: club_route
-          entity_field: surface
-          plugin_id: string
-          operator: '='
-          value: unknown
+          entity_field: unpaved
+          plugin_id: numeric
+          operator: '<'
+          value:
+            min: ''
+            max: ''
+            value: '0'
           group: 2
           exposed: false
           expose:
@@ -4154,6 +4157,8 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
             placeholder: ''
           is_grouped: false
           group_info:
@@ -4213,116 +4218,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        terrain:
-          id: terrain
-          table: club_route
-          field: terrain
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: club_route
-          entity_field: terrain
-          plugin_id: string
-          operator: '='
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: terrain_op
-            label: Terrain
-            description: null
-            use_operator: false
-            operator: terrain_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: terrain
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: null
-          is_grouped: true
-          group_info:
-            label: Terrain
-            description: ''
-            identifier: terrain
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: Flat
-                operator: '='
-                value: flat
-              2:
-                title: Rolling
-                operator: '='
-                value: rolling
-              3:
-                title: Climbing
-                operator: '='
-                value: climbing
-        surface_1:
-          id: surface_1
-          table: club_route
-          field: surface
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: club_route
-          entity_field: surface
-          plugin_id: string
-          operator: '='
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: surface_1_op
-            label: Surface
-            description: null
-            use_operator: false
-            operator: surface_1_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: surface_1
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: null
-          is_grouped: true
-          group_info:
-            label: Surface
-            description: ''
-            identifier: surface_1
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: 'Mixed surfaces'
-                operator: '='
-                value: mixed_surfaces
-              2:
-                title: 'Mostly paved'
-                operator: '='
-                value: mostly_paved
-              3:
-                title: 'Mostly unpaved'
-                operator: '='
-                value: mostly_unpaved
-              4:
-                title: Paved
-                operator: '='
-                value: paved
       filter_groups:
         operator: AND
         groups:
@@ -4367,7 +4262,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "Routes are maintained at RideWithGPS and synced here as they appear on the calendar.\r\nClick column headers to sort the table. Best viewed in landscape on phones. "
+            value: "Routes are maintained at RideWithGPS and synced here as they appear on the calendar.\r\nClick column headers to sort the table. Best viewed in landscape on phones. \r\n\r\nUnpaved pct = -1% indicates missing data in the RWGPS download file. These routes display a value for unpaved in RWGPS."
             format: basic_html
           tokenize: false
         result:
@@ -5394,59 +5289,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        terrain:
-          id: terrain
-          table: club_route
-          field: terrain
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: club_route
-          entity_field: terrain
-          plugin_id: string
-          operator: '='
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: terrain_op
-            label: Terrain
-            description: null
-            use_operator: false
-            operator: terrain_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: terrain
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: null
-          is_grouped: true
-          group_info:
-            label: Terrain
-            description: ''
-            identifier: terrain
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: Flat
-                operator: '='
-                value: flat
-              2:
-                title: Rolling
-                operator: '='
-                value: rolling
-              3:
-                title: Climbing
-                operator: '='
-                value: climbing
       filter_groups:
         operator: AND
         groups:

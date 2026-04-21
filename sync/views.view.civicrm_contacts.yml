@@ -578,8 +578,12 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            administrator: administrator
+            civicrm: civicrm
+            site_admin: site_admin
       cache:
         type: tag
         options: {  }
@@ -961,6 +965,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags: {  }
   contacts:
     id: contacts
@@ -1521,6 +1526,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags: {  }
   members_by_status:
     id: members_by_status
@@ -1672,6 +1678,9 @@ display:
         type: none
         options:
           offset: 0
+      access:
+        type: none
+        options: {  }
       empty:
         area_text_custom:
           id: area_text_custom
@@ -1841,6 +1850,7 @@ display:
           1: AND
       defaults:
         empty: false
+        access: false
         title: false
         css_class: false
         use_ajax: false
@@ -2041,12 +2051,8 @@ display:
         options:
           offset: 0
       access:
-        type: role
-        options:
-          role:
-            administrator: administrator
-            civicrm: civicrm
-            site_admin: site_admin
+        type: none
+        options: {  }
       empty:
         area_text_custom:
           id: area_text_custom
@@ -2189,7 +2195,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
       tags: {  }
   participants:
     id: participants
@@ -2199,6 +2204,72 @@ display:
     display_options:
       title: 'Event participants'
       fields:
+        id_1:
+          id: id_1
+          table: civicrm_participant
+          field: id
+          relationship: reverse__civicrm_participant__contact_id
+          group_type: group
+          admin_label: ''
+          entity_type: civicrm_participant
+          entity_field: id
+          plugin_id: field
+          label: 'Participant ID'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         id:
           id: id
           table: civicrm_contact
@@ -2279,7 +2350,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/civicrm/contact/view?reset=1&cid={{ id }}">{{ sort_name }}</a>'
+            text: "<a href=\"/civicrm-participant/{{ id_1 }}/edit?destination=/admin/people/participants\">{{ sort_name }}</a>\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -2318,8 +2389,7 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings:
-            link_to_entity: false
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2450,70 +2520,6 @@ display:
           type: string
           settings:
             link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        fee_level:
-          id: fee_level
-          table: civicrm_participant
-          field: fee_level
-          relationship: reverse__civicrm_participant__contact_id
-          group_type: group
-          admin_label: ''
-          entity_type: civicrm_participant
-          entity_field: fee_level
-          plugin_id: field
-          label: 'Fee level'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: basic_string
-          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -3137,6 +3143,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags: {  }
   past_participants:
     id: past_participants
@@ -4089,6 +4096,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags: {  }
   total_current_and_new:
     id: total_current_and_new

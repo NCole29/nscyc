@@ -10,4 +10,4 @@ fetch:
 notification:
   emails:
     - NancyCole29@gmail.com
-  threshold: all
+  threshold: security

@@ -3,6 +3,7 @@ langcode: en
 status: closed
 dependencies:
   module:
+    - webform_civicrm
     - webform_options_limit
 weight: 0
 open: null
@@ -71,15 +72,6 @@ elements: |-
           '#parent': civicrm_1_contact_1_fieldset_fieldset
           '#title': 'Last Name'
           '#required': true
-      civicrm_1_contact_1_email_email:
-        '#type': email
-        '#title': Email
-        '#size': 25
-        '#form_key': civicrm_1_contact_1_email_email
-        '#extra':
-          width: 20
-        '#parent': civicrm_1_contact_1_fieldset_fieldset
-        '#required': true
       civicrm_1_contact_1_cg1_fieldset:
         '#type': fieldset
         '#title': '<h3>Emergency Contact</h3>'
@@ -87,25 +79,6 @@ elements: |-
         '#parent': contact_pagebreak
         emerg_flex:
           '#type': webform_flexbox
-          civicrm_1_contact_1_cg1_custom_1:
-            '#type': textfield
-            '#data_type': String
-            '#form_key': civicrm_1_contact_1_cg1_custom_1
-            '#extra':
-              width: 20
-            '#parent': civicrm_1_contact_1_cg1_fieldset
-            '#title': Name
-            '#required': true
-          civicrm_1_contact_1_cg1_custom_2:
-            '#type': textfield
-            '#title': Phone
-            '#input_mask': '(999) 999-9999'
-            '#required': true
-            '#data_type': String
-            '#form_key': civicrm_1_contact_1_cg1_custom_2
-            '#extra':
-              width: 20
-            '#parent': civicrm_1_contact_1_cg1_fieldset
       registration_section:
         '#type': webform_section
         '#title': Registration
@@ -119,24 +92,6 @@ elements: |-
             '#description_display': after
             '#default_value': true
             '#return_value': '1'
-          civicrm_1_participant_1_participant_fee_amount:
-            '#type': civicrm_number
-            '#title': Fee
-            '#title_display': invisible
-            '#field_prefix': $
-            '#autocomplete': ''
-            '#readonly': true
-            '#states':
-              invisible:
-                ':input[name="century_registration"]':
-                  unchecked: true
-            '#default_value': '60'
-            '#options': yes_no
-            '#extra':
-              aslist: 1
-              multiple: 0
-            '#form_key': civicrm_1_participant_1_participant_fee_amount
-            '#parent': contact_pagebreak
       section_waiver:
         '#type': webform_section
         '#title': 'Agree to the waiver'
@@ -150,23 +105,6 @@ elements: |-
           '#title': 'I have read the waiver'
           '#title_display': inline
           '#required': true
-        civicrm_1_participant_1_cg5_custom_7:
-          '#type': civicrm_options
-          '#title': 'Agree to the waiver'
-          '#title_display': none
-          '#civicrm_live_options': 0
-          '#options':
-            1: 'I agree to the waiver'
-          '#required': true
-          '#required_error': 'You must agree to the waiver'
-          '#states':
-            visible:
-              ':input[name="i_have_read_the_waiver"]':
-                checked: true
-          '#form_key': civicrm_1_participant_1_cg5_custom_7
-          '#parent': contact_pagebreak
-          '#default_option': ''
-          '#default_value': ''
       civicrm_1_contact_1_contact_contact_id:
         '#type': hidden
         '#form_key': civicrm_1_contact_1_contact_contact_id
@@ -420,4 +358,117 @@ handlers:
       option_unlimited_message: ''
       option_error_message: '@name: @label is unavailable.'
       tableselect_header: ''
+  webform_civicrm:
+    id: webform_civicrm
+    handler_id: webform_civicrm
+    label: CiviCRM
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: null
+    settings:
+      disable: 'Leave Fields and Save Settings'
+      nid: 1
+      number_of_contacts: '1'
+      1_contact_type: individual
+      1_webform_label: 'Contact 1'
+      civicrm_1_contact_1_contact_contact_sub_type: {  }
+      civicrm_1_contact_1_contact_existing: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_middle_name: 0
+      civicrm_1_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_nick_name: 0
+      civicrm_1_contact_1_contact_gender_id: 0
+      civicrm_1_contact_1_contact_job_title: 0
+      civicrm_1_contact_1_contact_birth_date: 0
+      civicrm_1_contact_1_contact_preferred_communication_method: 0
+      civicrm_1_contact_1_contact_privacy: 0
+      civicrm_1_contact_1_contact_preferred_language: 0
+      civicrm_1_contact_1_contact_communication_style_id: 0
+      civicrm_1_contact_1_contact_image_url: 0
+      civicrm_1_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_user_id: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_external_identifier: 0
+      civicrm_1_contact_1_contact_source: 0
+      civicrm_1_contact_1_contact_cs: 0
+      civicrm_1_contact_1_contact_employer_id: 0
+      civicrm_1_contact_1_contact_is_deceased: 0
+      civicrm_1_contact_1_contact_deceased_date: 0
+      contact_1_settings_matching_rule: Unsupervised
+      contact_1_number_of_cg1: '0'
+      contact_1_number_of_other: '0'
+      contact_1_number_of_address: '0'
+      contact_1_number_of_phone: '0'
+      contact_1_number_of_email: '0'
+      contact_1_number_of_website: '0'
+      contact_1_number_of_im: '0'
+      contact_1_number_of_cg6: '0'
+      prefix_known: ''
+      prefix_unknown: ''
+      toggle_message: 0
+      message: ''
+      activity_number_of_activity: '0'
+      participant_reg_type: '0'
+      reg_options:
+        event_type:
+          any: any
+        show_past_events: now
+        show_future_events: '1'
+        show_public_events: all
+        title_display: title
+        show_full_events: 1
+        event_sort_field: start_date
+        show_remaining: '0'
+        validate: 1
+        block_form: 0
+        disable_unregister: 0
+        allow_url_load: 0
+        disable_primary_participant: 0
+      membership_1_number_of_membership: '0'
+      civicrm_1_contribution_1_contribution_enable_contribution: '0'
+      checksum_text: ''
+      create_fieldsets: 1
+      confirm_subscription: 1
+      block_unknown_users: 0
+      create_new_relationship: 0
+      disable_contact_paging: 0
+      new_contact_source: Century
+      data:
+        contact:
+          1:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+                webform_label: 'Contact 1'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '0'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '0'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_cg6: '0'
+        activity:
+          number_of_activity: '0'
+        membership:
+          1:
+            number_of_membership: '0'
+        participant_reg_type: '0'
+        reg_options:
+          event_type:
+            any: any
+          show_past_events: now
+          show_future_events: '1'
+          show_public_events: all
+          title_display: title
+          show_full_events: 1
+          event_sort_field: start_date
+          show_remaining: '0'
+          validate: 1
+          block_form: 0
+          disable_unregister: 0
+          allow_url_load: 0
+          disable_primary_participant: 0
 variants: {  }
