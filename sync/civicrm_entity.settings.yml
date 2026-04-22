@@ -3,10 +3,17 @@ _core:
 filter_format: plain_text
 enabled_entity_types:
   - civicrm_contribution
+  - civicrm_membership
   - civicrm_participant
 disable_hooks: false
 enable_links_per_type:
   civicrm_contribution:
+    values:
+      view: view
+      add: add
+      edit: edit
+      delete: delete
+  civicrm_membership:
     values:
       view: view
       add: add

@@ -1388,7 +1388,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<h4>Who should you contact with your questions?<br>Rides questions? email Rides@nscyc.org<br>Membership questions? email Membership@nscyc.org<br>Blazing Saddles Century? email BlazingSaddles@nscyc.org<br>Money or Treasury questions? email Treasurer@nscyc.org<br>Website? email web-manager@nscyc.org<br>\r\nThank you for trying to avoid contacting the volunteers directly as too often the wrong volunteer is contacted.<br>\r\n</h4>"
+          content: "<big>To ensure your questions are answered quickly, please use the links on the <a href=\"/contact-us\">Contact Us</a> page rather than contacting volunteers directly.\r\n</big>"
           tokenize: false
       footer: {  }
       display_extenders: {  }

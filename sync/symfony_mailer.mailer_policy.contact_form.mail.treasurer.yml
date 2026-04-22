@@ -1,0 +1,13 @@
+uuid: b84240f9-a357-49fa-8307-8c73a908cd69
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.treasurer
+id: contact_form.mail.treasurer
+configuration:
+  email_to:
+    addresses:
+      -
+        value: treasurer@nscyc.org
+        display: 'NSC Treasurer'

@@ -24,79 +24,36 @@ content:
     third_party_settings: {  }
   end_date:
     type: datetime_default
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  is_override:
-    type: boolean_checkbox
-    weight: 5
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  is_pay_later:
-    type: boolean_checkbox
-    weight: 10
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  join_date:
+  start_date:
     type: datetime_default
     weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
-  membership_type_id:
-    type: options_select
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  num_terms:
-    type: number
-    weight: 8
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  skipStatusCal:
-    type: boolean_checkbox
-    weight: 11
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  source:
-    type: string_textfield
-    weight: 9
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  start_date:
-    type: datetime_default
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status_id:
     type: options_select
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  status_override_end_date:
-    type: datetime_default
-    weight: 6
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   campaign_id: true
   contribution_recur_id: true
+  custom_18: true
+  custom_6: true
+  is_override: true
+  is_pay_later: true
   is_test: true
+  join_date: true
   max_related: true
+  membership_type_id: true
+  num_terms: true
   owner_membership_id: true
+  path: true
+  skipStatusCal: true
+  source: true
+  status_override_end_date: true

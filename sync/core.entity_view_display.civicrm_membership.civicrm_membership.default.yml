@@ -26,76 +26,40 @@ content:
     label: inline
     settings:
       timezone_override: ''
-      format_type: day_and_date
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  join_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: day_and_date
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  membership_type_id:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  num_terms:
-    type: number_integer
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      format_type: mm_dd_yyyy
     third_party_settings: {  }
     weight: 3
-    region: content
-  source:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 8
     region: content
   start_date:
     type: datetime_default
     label: inline
     settings:
       timezone_override: ''
-      format_type: day_and_date
+      format_type: mm_dd_yyyy
     third_party_settings: {  }
-    weight: 6
+    weight: 2
     region: content
   status_id:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 2
-    region: content
-  status_override_end_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: day_and_date
-    third_party_settings: {  }
-    weight: 4
+    weight: 1
     region: content
 hidden:
   campaign_id: true
   contribution_recur_id: true
+  custom_18: true
+  custom_6: true
   id: true
   is_override: true
   is_pay_later: true
   is_test: true
+  join_date: true
   max_related: true
+  membership_type_id: true
+  num_terms: true
   owner_membership_id: true
   skipStatusCal: true
+  source: true
+  status_override_end_date: true
