@@ -731,7 +731,7 @@ display:
         type: normal
         title: 'Nonmember riders'
         description: ''
-        weight: -48
+        weight: -47
         expanded: false
         menu_name: main
         parent: 'menu_link_content:820d68a6-cdf0-4d17-82e5-32c5d7a1ec91'
