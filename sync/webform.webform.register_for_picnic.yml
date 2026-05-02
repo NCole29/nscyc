@@ -9,8 +9,8 @@ uid: 1
 template: false
 archive: false
 id: register_for_picnic
-title: 'Register for Picnic'
-description: '<p>Registration for paid $10 picnic. To create a form with a different fee, select the Picnic template and follow instructions in the template description.</p>'
+title: Picnic
+description: '<p>Registration for paid $5 picnic. To create a form with a different fee, select the Picnic template and follow instructions in the template description.</p>'
 categories:
   - 'Paid event'
 elements: |-

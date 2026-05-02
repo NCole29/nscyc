@@ -6,6 +6,10 @@ dependencies:
     - contact.form.feedback
 id: contact_form.mail.feedback
 configuration:
+  email_body:
+    content:
+      value: '<p>{{ body }}</p><p>&nbsp;</p>'
+      format: basic_html
   email_to:
     addresses:
       -

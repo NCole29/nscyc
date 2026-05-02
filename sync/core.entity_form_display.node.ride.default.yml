@@ -51,11 +51,12 @@ third_party_settings:
         - field_multiple_times
         - field_date
         - field_time
+        - field_cancel
         - group_master_ride_or_variation_
       label: 'Basic info'
       region: content
       parent_name: group_ta
-      weight: 1
+      weight: 39
       format_type: tab
       format_settings:
         classes: ''
@@ -72,7 +73,7 @@ third_party_settings:
       label: 'Location and routes'
       region: content
       parent_name: group_ta
-      weight: 3
+      weight: 41
       format_type: tab
       format_settings:
         classes: ''
@@ -87,27 +88,29 @@ third_party_settings:
         - field_gravel_category
         - field_description
         - field_additional_information
-        - field_ride_picture
+        - group_ride_picture
         - field_developed_by
       label: Description
       region: content
       parent_name: group_ta
-      weight: 4
+      weight: 42
       format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
         formatter: closed
-        description: 'Documents, such as cue sheets, may be added in the description or additional information fields by clicking the media icon on the editor toolbar.'
+        description: "<big>Use the <strong>Description</strong> field to describe the routes.\r\nUse the <strong>Additional information</strong> field for items such as directions, parking information, details about planned cookouts, and road conditions.</big>"
         required_fields: true
     group_ride_leader_s_:
       children:
+        - field_lunch_place
         - field_ride_leader
       label: 'Ride leader(s)'
       region: content
       parent_name: group_ta
-      weight: 2
+      weight: 40
       format_type: tab
       format_settings:
         classes: ''
@@ -144,7 +147,7 @@ third_party_settings:
       label: Registration
       region: content
       parent_name: group_ta
-      weight: 6
+      weight: 43
       format_type: tab
       format_settings:
         classes: ''
@@ -156,11 +159,10 @@ third_party_settings:
     group_lunch:
       children:
         - field_lunch_same
-        - field_lunch_place
       label: Lunch
       region: hidden
       parent_name: group_location_and_routes
-      weight: 7
+      weight: 48
       format_type: details
       format_settings:
         classes: ''
@@ -173,18 +175,35 @@ third_party_settings:
       children:
         - field_master
         - field_based_on
-      label: 'Variation on another ride?'
+      label: 'Master ride or variation?'
       region: hidden
       parent_name: group_date_and_time
-      weight: 36
+      weight: 4
       format_type: details
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
         open: false
         description: "Help keep the Master ride list clean of duplicates!<br>\r\nIf adding a new ride (not cloning a ride), please code if its a \"master ride\" or variation of an existing ride.<br>Variations have slightly different routes, or they start from a different place along the route."
         required_fields: true
+    group_ride_picture:
+      children:
+        - field_ride_picture
+      label: 'Ride picture'
+      region: hidden
+      parent_name: group_description
+      weight: 52
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: "<details class=\"info-details\">\r\n<summary>HOW TO ADD A RIDE PICTURE</summary>\r\nClick <strong>Add media</strong> and search for an existing image or upload a new one. \r\n<p>\r\nWhen uploading images:<br>\r\n1) <strong>File size:</strong> Images are capped at 2MB and auto-optimized for display, making larger files unnecessary. If needed, resize images to \"Large\" (max 1920x1080) using Apple Preview (Mac) or <a href=\"https://learn.microsoft.com/en-us/windows/powertoys/image-resizer\">Microsoft PowerToys</a> (Windows).</p\r\n<p>\r\n2)  <strong>Alternative text:</strong> Add a description to make images searchable and easy to re-use.</p>\r\n<p>\r\n3) <strong>Crop:</strong> Click <strong>Crop image</strong> and adjust the frame to ensure a consistent, standard look across all ride pages. </p>\r\n</details>"
+        required_fields: false
 _core:
   default_config_hash: dehOIVUVbvF3zUiSvBPcL5EgwlPj95Thwp9Q7xA4aro
 id: node.ride.default
@@ -194,13 +213,13 @@ mode: default
 content:
   field_activity:
     type: options_select
-    weight: 42
+    weight: 48
     region: content
     settings: {  }
     third_party_settings: {  }
   field_additional_information:
     type: text_textarea
-    weight: 45
+    weight: 51
     region: content
     settings:
       rows: 5
@@ -219,9 +238,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_cancel:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_date:
     type: datetime_default
-    weight: 40
+    weight: 6
     region: content
     settings: {  }
     third_party_settings:
@@ -229,7 +255,7 @@ content:
         hide: true
   field_description:
     type: text_textarea
-    weight: 44
+    weight: 50
     region: content
     settings:
       rows: 5
@@ -240,7 +266,7 @@ content:
         hide_guidelines: '1'
   field_developed_by:
     type: string_textfield
-    weight: 47
+    weight: 54
     region: content
     settings:
       size: 60
@@ -248,13 +274,13 @@ content:
     third_party_settings: {  }
   field_gravel_category:
     type: options_select
-    weight: 43
+    weight: 49
     region: content
     settings: {  }
     third_party_settings: {  }
   field_location:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 47
     region: content
     settings:
       match_operator: CONTAINS
@@ -274,7 +300,7 @@ content:
     third_party_settings: {  }
   field_lunch_same:
     type: options_select
-    weight: 50
+    weight: 49
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -286,20 +312,20 @@ content:
     third_party_settings: {  }
   field_multiple_times:
     type: boolean_checkbox
-    weight: 39
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_registration:
     type: options_buttons
-    weight: 42
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   field_registration_form:
     type: webform_entity_reference_select
-    weight: 44
+    weight: 7
     region: content
     settings:
       default_data: true
@@ -307,7 +333,7 @@ content:
     third_party_settings: {  }
   field_registration_free_form:
     type: webform_entity_reference_select
-    weight: 43
+    weight: 6
     region: content
     settings:
       default_data: true
@@ -315,7 +341,7 @@ content:
     third_party_settings: {  }
   field_registration_link:
     type: link_default
-    weight: 45
+    weight: 9
     region: content
     settings:
       placeholder_url: ''
@@ -323,7 +349,7 @@ content:
     third_party_settings: {  }
   field_results_access:
     type: entity_reference_autocomplete
-    weight: 46
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -333,7 +359,7 @@ content:
     third_party_settings: {  }
   field_ride_leader:
     type: entity_reference_autocomplete
-    weight: 35
+    weight: 53
     region: content
     settings:
       match_operator: CONTAINS
@@ -343,14 +369,14 @@ content:
     third_party_settings: {  }
   field_ride_picture:
     type: media_library_widget
-    weight: 46
+    weight: 53
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_rwgps_routes:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 50
     region: content
     settings:
       match_operator: CONTAINS
@@ -360,7 +386,7 @@ content:
     third_party_settings: {  }
   field_time:
     type: string_textfield
-    weight: 41
+    weight: 7
     region: content
     settings:
       size: 60
@@ -368,7 +394,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 40
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -381,7 +407,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: 3
     region: content
     settings:
       size: 60
@@ -397,9 +423,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
-  field_cancel: true
   field_day: true
   field_dayofweek: true
   field_schedule_date: true

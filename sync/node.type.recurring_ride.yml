@@ -39,12 +39,16 @@ third_party_settings:
       status: false
       settings:
         age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
 _core:
   default_config_hash: s_jdxYtNol-ZeqvN8DynOBcIPzzSWST296K9aUS-k5A
 name: 'Recurring ride'
 type: recurring_ride
-description: "Use <em>recurring ride</em> to add a recurring weekly ride to the calendar.<br>\r\nRides automatically appear in the <em>upcoming</em> block on the home page."
-help: "<h5>Instructions</h5>\r\nComplete the form to create a <strong>NEW</strong> recurring ride. To update an <strong>existing</strong> ride <a href=\"/admin/content/rides\">find the ride</a> and edit it (for existing dates) or clone it for a new year.<br>\r\n<li><strong>Cancel</strong> a recurring ride date at <a href=\"/node/add/cancellation\">Content > Add content > Cancellation</a>.</li>\r\n<li><strong>Restore</strong> a canceled date at <a href=\"/admin/content/cancellations\">Content > Cancellations</a>.</li><br>"
+description: '<em>Recurring rides</em> (weekly, biweekly, monthly, etc.) automatically appear on the calendar and on the home page. To change start times or delete specific dates, save the ride, then use the "Manage Instances" button.'
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: false

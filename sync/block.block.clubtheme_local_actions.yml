@@ -9,7 +9,7 @@ _core:
 id: clubtheme_local_actions
 theme: clubtheme
 region: content
-weight: -10
+weight: -12
 provider: null
 plugin: local_actions_block
 settings:

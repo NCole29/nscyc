@@ -51,7 +51,7 @@ third_party_settings:
         id: ''
         label_as_html: false
         open: false
-        description: "Contact forms allow site visitors to send emails to club members without revealing email addresses on the site.\r\n\r\nAfter selecting the Personal contact form, enter one or more persons in the Contact field. \r\n\r\nOther (\"sitewide\") contact forms are setup with one or more forwarding addresses at <a href=\"/admin/structure/contact\">Structure > Contact forms</a>."
+        description: 'Contact forms allow visitors to email club members without exposing personal email addresses. After selecting the "Personal contact form", enter one or more recipients in the exposed "Club member(s)" field.'
         required_fields: true
 _core:
   default_config_hash: 5ZsYEpBw6wBm_vVx9SV5QSjwXrMvLVr0HKMHagGWKZo
@@ -135,6 +135,11 @@ content:
   unpublish_on:
     type: datetime_timestamp_no_default
     weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }

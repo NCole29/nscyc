@@ -39,11 +39,15 @@ third_party_settings:
       status: false
       settings:
         age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
 _core:
   default_config_hash: dxkJD1kRKKC1aodNRfDvuV9lKhaA5WDig_zq2DviR3Q
 name: Ride
 type: ride
-description: 'Use <em>ride</em> to add a nonrecurring ride to the calendar. If adding an existing ride on a new date, find that ride in <em>Content</em> and clone it.<br> Rides automatically appear in the <em>upcoming</em> block on the home page.'
+description: '<em>Rides</em> are scheduled for a single date and automatically appear on the calendar and home page. Use the Clone feature to repeat a ride on a new date.'
 help: null
 new_revision: true
 preview_mode: 1

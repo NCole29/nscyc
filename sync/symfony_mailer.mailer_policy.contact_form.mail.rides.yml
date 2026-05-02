@@ -6,6 +6,10 @@ dependencies:
     - contact.form.rides
 id: contact_form.mail.rides
 configuration:
+  email_body:
+    content:
+      value: '<p>{{body}}</p>'
+      format: basic_html
   email_to:
     addresses:
       -

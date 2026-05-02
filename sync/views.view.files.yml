@@ -1311,6 +1311,16 @@ display:
           empty: false
           content: "Media files are listed here and on the Media tab:\r\n<li>Files tab provides information from the server (filename, type, size, status, and dates), plus the number of places used on the website.</li> <li>Media tab provides information from the database (filename is set equal to the \"alt text\" and category may be assigned).</li> \r\n<p>Files deleted from the Media tab are not deleted from the server but may be deleted from this list if not used. When deleted, file status changes to temporary. Temporary files are deleted after 6 hours through periodic system clean-up.</p>\r\nUpload files using the <a href=\"/admin/content/media\">Add Media</a> button on the Media tab."
           tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       path: admin/content/files
       menu:

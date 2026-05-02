@@ -46,9 +46,9 @@ third_party_settings:
     group_tabs:
       children:
         - group_banner_image
-        - group_contact_link
         - group_page_content
         - group_place_summary_on_home_page
+        - group_contact_link
       label: Tabs
       region: content
       parent_name: ''
@@ -111,7 +111,7 @@ third_party_settings:
         id: ''
         label_as_html: false
         formatter: closed
-        description: "Contact forms allow site visitors to send emails to club members without revealing email addresses on the site.\r\n\r\nAfter selecting the Personal contact form, enter one or more persons in the Contact field. \r\n\r\nOther (\"sitewide\") contact forms are setup with one or more forwarding addresses at <a href=\"/admin/structure/contact\">Structure > Contact forms</a>."
+        description: 'Contact forms allow visitors to email club members without exposing personal email addresses. After selecting the "Personal contact form", enter one or more recipients in the exposed "Club member(s)" field.'
         required_fields: true
 id: node.page.default
 targetEntityType: node
@@ -247,6 +247,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   layout_builder__layout: true

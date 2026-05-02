@@ -30,8 +30,8 @@ _core:
   default_config_hash: nj5FbXHhClnJ1L_5KVpa0yMnDo0h20JjAVGgPbAPBQU
 name: 'Webform page'
 type: webform
-description: "<em>Webform pages</em> allow you to use the same webform multiple times and keep results separate - e.g., a volunteer signup form used each year:<br>\r\n-- Results for <strong>EACH</strong> year are on the Results tab of the webform page (go to Content).<br>\r\n-- Results for <strong>ALL</strong> years together are on the Results tab of the webform (go to Structure > Webform)."
+description: "<em>Webform pages</em> allow you to use the same webform multiple times and keep results separate - e.g., a volunteer signup form used each year.<br>\r\n-- Results for <strong>EACH</strong> year are on the Results tab of the webform page.<br>\r\n-- Results for <strong>ALL</strong> years together are on the Results tab of the webform."
 help: "<h5>Instructions</h5>\r\n<li>Use page <em>Components</em> to display information above the selected webform.</li>\r\n<li>Don't forget to set a Menu link, or link to this page from another page or block.</li>\r\n<li>Scheduling publication is optional.</li>\r\n"
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false

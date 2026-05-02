@@ -16,7 +16,7 @@ field_name: field_activity
 entity_type: node
 bundle: ride
 label: 'Ride type'
-description: "Type of ride or other activity.\r\nThis is labelled \"Description\" to display it as part of the Description field."
+description: 'Type of ride or other activity.'
 required: false
 translatable: false
 default_value: {  }

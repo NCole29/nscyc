@@ -16,7 +16,7 @@ field_name: field_ride_picture
 entity_type: node
 bundle: ride
 label: 'Ride picture'
-description: "Select a picture from the library or \"Choose file\" to upload a new image.<br>\r\nImages may be cropped upon upload; a 16:9 aspect ratio is enforced and the image is resized to 500 x 281 pixels for display."
+description: ''
 required: false
 translatable: false
 default_value: {  }

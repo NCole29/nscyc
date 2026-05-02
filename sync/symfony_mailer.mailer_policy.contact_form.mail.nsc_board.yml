@@ -6,6 +6,10 @@ dependencies:
     - contact.form.nsc_board
 id: contact_form.mail.nsc_board
 configuration:
+  email_body:
+    content:
+      value: '<p>{{body}}</p>'
+      format: basic_html
   email_to:
     addresses:
       -

@@ -6,6 +6,10 @@ dependencies:
     - contact.form.treasurer
 id: contact_form.mail.treasurer
 configuration:
+  email_body:
+    content:
+      value: '<p>{{ body }}</p>'
+      format: basic_html
   email_to:
     addresses:
       -

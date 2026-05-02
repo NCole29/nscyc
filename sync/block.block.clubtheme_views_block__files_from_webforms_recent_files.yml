@@ -12,7 +12,7 @@ dependencies:
 id: clubtheme_views_block__files_from_webforms_recent_files
 theme: clubtheme
 region: content
-weight: -6
+weight: -8
 provider: null
 plugin: 'views_block:files_from_webforms-recent_files'
 settings:

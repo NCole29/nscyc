@@ -6,6 +6,10 @@ dependencies:
     - contact.form.membership
 id: contact_form.mail.membership
 configuration:
+  email_body:
+    content:
+      value: '<p>{{body}}</p>'
+      format: basic_html
   email_to:
     addresses:
       -

@@ -9,8 +9,8 @@ id: node.webform.field_contact_person
 field_name: field_contact_person
 entity_type: node
 bundle: webform
-label: Contact
-description: "The contact's name appears <strong>without</strong> a link to their contact form if they disabled the personal contact form in their account settings."
+label: 'Club member(s)'
+description: 'If a member has disabled their personal contact form, their name appears without a link.'
 required: false
 translatable: false
 default_value: {  }
@@ -27,11 +27,14 @@ settings:
       type: role
       role:
         member: member
-        events_coordinator: '0'
         administrator: '0'
+        board: '0'
+        events_coordinator: '0'
+        civicrm: '0'
         ride_leader: '0'
-        membership: '0'
-        site_admin: '0'
         rides_coordinator: '0'
+        content_creator: '0'
+        editor: '0'
+        site_admin: '0'
     include_anonymous: false
 field_type: entity_reference

@@ -1388,7 +1388,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<big>Have questions?</big> Please use the links on the <big><a href=\"/contact-us\">Contact Us</a></big> page to get the quickest response.\r\n"
+          content: "<big>Have questions?</big> Please use the links on the <big><a href=\"/contact\">Contact Us</a></big> page to get the quickest response.\r\n"
           tokenize: false
       footer: {  }
       display_extenders: {  }

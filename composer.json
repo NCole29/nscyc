@@ -158,7 +158,7 @@
     "drupal/entity_reference_revisions": "^1.11",
     "drupal/entity_usage": "^2.0@beta",
     "drupal/faqfield": "^7.1",
-    "drupal/field_group": "^3.2",
+    "drupal/field_group": "^4.0",
     "drupal/file_delete": "^2.0",
     "drupal/fontawesome": "^2.26",
     "drupal/geocoder": "^4.21",

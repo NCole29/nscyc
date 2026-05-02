@@ -14,8 +14,8 @@ id: node.ride.field_cancel
 field_name: field_cancel
 entity_type: node
 bundle: ride
-label: Cancel
-description: 'Checkbox is disabled when creating a new ride. Canceled rides remain on the calendar and are marked canceled.'
+label: Cancelled
+description: 'Checkbox is enabled for cloned rides to uncheck a cancellation.'
 required: false
 translatable: false
 default_value:

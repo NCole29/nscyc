@@ -29,8 +29,8 @@ _core:
   default_config_hash: ZNdrfNR5nBK-QnojdcE1Rk_dXAI88pqhHbIYKgxPv44
 name: 'Home page banner'
 type: banner
-description: '<em>Banner</em> displays one or more images across the top of the <strong>home page</strong>.'
-help: null
-new_revision: false
+description: '<em>Banner</em> displays one or more images across the top of the <strong>home page</strong>. Use the scheduling tool to rotate them seasonally.'
+help: 'The <strong>Title</strong> is used only for identification on the administrative Content list. It does not appear on the website alongside the banner images.'
+new_revision: true
 preview_mode: 1
 display_submitted: false

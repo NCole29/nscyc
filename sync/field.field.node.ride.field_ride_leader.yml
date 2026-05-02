@@ -15,7 +15,7 @@ field_name: field_ride_leader
 entity_type: node
 bundle: ride
 label: Leader(s)
-description: "Enter one name per text box. Begin typing name in field to get a list of ride leaders matching your search string and select from list. Leader must be a club member and designated ride leader.\r\n<p><strong>Ride page AUTHOR is automatically set to the first listed ride leader because ride leaders may edit only their OWN rides (i.e., for which they are author).</strong></p>"
+description: 'Enter one name per text box. Begin typing name in field to get a list of ride leaders matching your search string and select from list. Leader must be a club member and designated ride leader.'
 required: false
 translatable: true
 default_value: {  }
@@ -35,10 +35,11 @@ settings:
         administrator: '0'
         member: '0'
         board: '0'
-        rides_editor: '0'
-        editor: '0'
-        rides_coordinator: '0'
+        events_coordinator: '0'
         civicrm: '0'
+        rides_coordinator: '0'
+        content_creator: '0'
+        editor: '0'
         site_admin: '0'
     include_anonymous: true
 field_type: entity_reference
