@@ -5,6 +5,7 @@ namespace Drupal\node_revision_delete\Commands;
 use Consolidation\AnnotatedCommand\CommandData;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\node_revision_delete\NodeRevisionDeleteBatch;
 use Drupal\node_revision_delete\NodeRevisionDeleteInterface;
 use Drush\Commands\DrushCommands;
 
@@ -17,6 +18,7 @@ class PriorRevisions extends DrushCommands {
 
   public function __construct(
     protected NodeRevisionDeleteInterface $nodeRevisionDelete,
+    protected NodeRevisionDeleteBatch $nodeRevisionDeleteBatch,
     protected EntityTypeManagerInterface $entityTypeManager,
     protected LanguageManagerInterface $languageManager,
   ) {
@@ -48,48 +50,11 @@ class PriorRevisions extends DrushCommands {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function deletePriorRevisions(int $nid = 0, int $vid = 0, array $options = ['langcode' => NULL]): void {
-    // Get list of prior revisions.
-    $previousRevisions = $this->nodeRevisionDelete->getPreviousRevisions($nid, $vid, $options['langcode']);
-
-    if (count($previousRevisions) === 0) {
-      $this->output()->writeln(dt('<error>No prior revision(s) found to delete.</error>'));
-      return;
+    if ($this->nodeRevisionDeleteBatch->previousRevisionDeletionBatch($nid, $vid, $options['langcode'] ?? NULL)) {
+      drush_backend_batch_process();
     }
-
-    $storage = $this->entityTypeManager->getStorage('node');
-    // Get active VID for this language: latest revision that was the default
-    // and is translation-affected.
-    $active_result = $storage->getQuery()
-      ->allRevisions()
-      ->condition('nid', $nid)
-      ->condition('langcode', $options['langcode'])
-      ->condition('revision_translation_affected', 1)
-      ->condition('revision_default', 1)
-      ->sort('vid', 'DESC')
-      ->range(0, 1)
-      ->accessCheck(FALSE)
-      ->execute();
-    $default_revision_id = (int) key($active_result);
-
-    if ($this->io()->confirm(dt('Confirm deleting @count revision(s)?', ['@count' => count($previousRevisions)]))) {
-      if ($vid !== $default_revision_id) {
-        // Check if current revision should be deleted, too.
-        if ($this->io()
-          ->confirm(dt('Additionally, do you want to delete the revision @vid? @count revision(s) will be deleted.', [
-            '@vid' => $vid,
-            '@count' => count($previousRevisions) + 1,
-          ]))) {
-          $this->entityTypeManager->getStorage('node')->deleteRevision($vid);
-        }
-      }
-
-      foreach ($previousRevisions as $revision) {
-        // Skip the default revision.
-        if ($revision->getRevisionId() === $default_revision_id) {
-          continue;
-        }
-        $this->entityTypeManager->getStorage('node')->deleteRevision($revision->getRevisionId());
-      }
+    else {
+      $this->io()->error(dt('No prior revision(s) found to delete.'));
     }
   }
 

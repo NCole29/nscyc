@@ -10,7 +10,6 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node_revision_delete\Plugin\NodeRevisionDeletePluginManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\node_revision_delete\NodeRevisionDeleteBatchInterface;
 
 /**
  * Provide a settings form for default node revision delete settings.
@@ -32,20 +31,12 @@ class AdminSettingsForm extends ConfigFormBase {
   protected NodeRevisionDeletePluginManager $pluginManager;
 
   /**
-   * The batch helper service.
-   *
-   * @var \Drupal\node_revision_delete\NodeRevisionDeleteBatchInterface
-   */
-  protected NodeRevisionDeleteBatchInterface $nodeRevisionDeleteBatch;
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
     $instance->entityTypeManager = $container->get('entity_type.manager');
     $instance->pluginManager = $container->get('plugin.manager.node_revision_delete');
-    $instance->nodeRevisionDeleteBatch = $container->get('node_revision_delete.batch');
     return $instance;
   }
 
@@ -185,11 +176,6 @@ class AdminSettingsForm extends ConfigFormBase {
       $form[$plugin_id]['settings'] = $plugin->buildConfigurationForm($form[$plugin_id]['settings'], $plugin_form_state);
     }
 
-    $form['queue_nodes'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Queue all content to delete revisions in the background.'),
-    ];
-
     $config = $this->config('node_revision_delete.settings');
 
     $form['disable_automatic_queueing'] = [
@@ -234,11 +220,6 @@ class AdminSettingsForm extends ConfigFormBase {
     $config->set('verbose_log', $form_state->getValue('verbose_log'));
     $config->save();
     parent::submitForm($form, $form_state);
-
-    if ($form_state->getValue('queue_nodes')) {
-      $this->nodeRevisionDeleteBatch->queueBatch();
-    }
-
   }
 
 }

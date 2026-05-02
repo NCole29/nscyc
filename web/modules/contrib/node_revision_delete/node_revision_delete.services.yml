@@ -12,12 +12,6 @@ services:
 
   node_revision_delete.batch:
     class: Drupal\node_revision_delete\NodeRevisionDeleteBatch
-    arguments:
-      - '@messenger'
-      - '@entity_type.manager'
-      - '@queue'
-      - '@logger.factory'
-      - '@node_revision_delete'
 
   node_revision_delete:
     class: Drupal\node_revision_delete\NodeRevisionDelete
@@ -26,5 +20,8 @@ services:
       - '@language_manager'
       - '@database'
       - '@plugin.manager.node_revision_delete'
+      - '@queue'
+
+  Drupal\node_revision_delete\NodeRevisionDeleteInterface: '@node_revision_delete'
 
   Drupal\node_revision_delete\EventSubscriber\ConfigSubscriber: ~

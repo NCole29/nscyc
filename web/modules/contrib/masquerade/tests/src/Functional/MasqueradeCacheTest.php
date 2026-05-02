@@ -3,12 +3,14 @@
 namespace Drupal\Tests\masquerade\Functional;
 
 use Drupal\block\Entity\Block;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests caching for masquerade.
  *
  * @group masquerade
  */
+#[RunTestsInSeparateProcesses]
 class MasqueradeCacheTest extends MasqueradeWebTestBase {
 
   /**

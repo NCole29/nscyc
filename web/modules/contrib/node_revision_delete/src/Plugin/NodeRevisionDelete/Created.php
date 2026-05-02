@@ -2,10 +2,16 @@
 
 namespace Drupal\node_revision_delete\Plugin\NodeRevisionDelete;
 
+use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node\NodeInterface;
 use Drupal\node_revision_delete\Attribute\NodeRevisionDelete;
 use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteBase;
+use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteQueryInterface;
+use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteTimeBasedInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Determines whether to delete a revision based on the revision creation time.
@@ -14,12 +20,69 @@ use Drupal\node_revision_delete\Plugin\NodeRevisionDeleteBase;
   id: 'created',
   label: new TranslatableMarkup('Delete revisions after a specific amount of time.'),
 )]
-class Created extends NodeRevisionDeleteBase {
+class Created extends NodeRevisionDeleteBase implements NodeRevisionDeleteQueryInterface, NodeRevisionDeleteTimeBasedInterface {
+
+  /**
+   * The time service.
+   */
+  protected TimeInterface $time;
 
   /**
    * {@inheritdoc}
    */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $plugin = new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+    );
+    $plugin->time = $container->get('datetime.time');
+    return $plugin;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRevisionsToDelete(QueryInterface $query, int $active_vid, NodeInterface $node): array {
+    $age = strtotime('-' . $this->configuration['age'] . ' months', $this->time->getCurrentTime());
+
+    return $this->getVidsFromQuery($query
+      ->condition('vid', $active_vid, '<')
+      ->condition('changed', $age, '<'));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRevisionsToProtect(QueryInterface $query, int $active_vid, NodeInterface $node): array {
+    $age = strtotime('-' . $this->configuration['age'] . ' months', $this->time->getCurrentTime());
+
+    return $this->getVidsFromQuery($query
+      ->condition('vid', $active_vid, '<')
+      ->condition('changed', $age, '>='));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDelay(NodeInterface $revision): int {
+    $changed = $revision->getChangedTime();
+    $age = strtotime('+' . $this->configuration['age'] . ' months', $changed);
+    return max(0, $age - $this->time->getCurrentTime());
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @deprecated in node_revision_delete:2.1.0 and is removed from
+   *   node_revision_delete:3.0.0. Use getRevisionsToDelete() and
+   *   getRevisionsToProtect() instead.
+   *
+   * @see https://www.drupal.org/node/3581259
+   */
   public function checkRevisions(array $revision_ids, int $active_vid): array {
+    @trigger_error(__METHOD__ . '() is deprecated in node_revision_delete:2.1.0 and is removed from node_revision_delete:3.0.0. Use getRevisionsToDelete() and getRevisionsToProtect() instead. See https://www.drupal.org/node/3581259', E_USER_DEPRECATED);
     $revision_statuses = [];
 
     foreach ($revision_ids as $vid) {
@@ -28,7 +91,7 @@ class Created extends NodeRevisionDeleteBase {
       $revision = $this->entityTypeManager->getStorage('node')->loadRevision($revision_id);
       $can_delete = NULL;
 
-      $age = strtotime('-' . $this->configuration['age'] . 'months');
+      $age = strtotime('-' . $this->configuration['age'] . ' months', $this->time->getCurrentTime());
 
       // The timestamp of the created revision is stored in the changed field.
       $creation_time = $revision->getChangedTimeAcrossTranslations();
@@ -52,9 +115,8 @@ class Created extends NodeRevisionDeleteBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
-    $options = [1 => '1 ' . $this->t('month')];
-    for ($i = 2; $i <= 24; $i++) {
-      $options[$i] = $i . ' ' . $this->t('months');
+    for ($i = 1; $i <= 24; $i++) {
+      $options[$i] = $this->formatPlural($i, '@count month', '@count months');
     }
     $form['age'] = [
       '#type' => 'select',

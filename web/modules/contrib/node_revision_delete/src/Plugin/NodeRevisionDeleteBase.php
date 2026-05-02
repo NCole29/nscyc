@@ -4,6 +4,7 @@ namespace Drupal\node_revision_delete\Plugin;
 
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -86,6 +87,19 @@ abstract class NodeRevisionDeleteBase extends PluginBase implements NodeRevision
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
     // We do not actually use this at this point.
     $this->configuration[$this->getPluginId()] = $form_state->getValues();
+  }
+
+  /**
+   * Helper function to get the VIDs from an entity query.
+   *
+   * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The query to get the VIDs from.
+   *
+   * @return int[]
+   *   The VIDs from the entity query.
+   */
+  protected function getVidsFromQuery(QueryInterface $query): array {
+    return array_map('intval', array_keys($query->execute()));
   }
 
 }

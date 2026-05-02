@@ -95,8 +95,14 @@ class AdminSettingsFormTest extends BrowserTestBase {
 
     // Override settings for the page content type via the node type form.
     $this->drupalGet('admin/structure/types/manage/page');
+    $this->assertSession()->fieldDisabled('amount[status]');
     $this->submitForm([
       'node_revision_delete[override]' => TRUE,
+    ], 'Save');
+
+    $this->drupalGet('admin/structure/types/manage/page');
+    $this->assertSession()->fieldEnabled('amount[status]');
+    $this->submitForm([
       'amount[status]' => TRUE,
       'amount[settings][amount]' => 10,
     ], 'Save');

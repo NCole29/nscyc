@@ -5,6 +5,28 @@
  * Install, update and uninstall functions.
  */
 
+use Drupal\Core\Queue\DatabaseQueue;
+use Drupal\node_revision_delete\NodeRevisionDeleteInterface;
+
+/**
+ * Implements hook_schema().
+ */
+function node_revision_delete_schema() {
+  $schema[NodeRevisionDeleteInterface::QUEUE_SEMAPHORE_TABLE] = [
+    'description' => 'Indicates node IDs are in the node_revision_delete queue.',
+    'fields' => [
+      'nid' => [
+        'description' => 'The node ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['nid'],
+  ];
+  return $schema;
+}
+
 /**
  * Add config option to disable automatic queueing.
  */
@@ -76,4 +98,87 @@ function node_revision_delete_update_9001() {
     // Save the changes.
     $content_type->save();
   }
+}
+
+/**
+ * Create the queue map lookup table.
+ */
+function node_revision_delete_update_21000() {
+  $schema = \Drupal::database()->schema();
+  if (!$schema->tableExists(NodeRevisionDeleteInterface::QUEUE_SEMAPHORE_TABLE)) {
+    $schema->createTable(NodeRevisionDeleteInterface::QUEUE_SEMAPHORE_TABLE, [
+      'description' => 'Indicates node IDs are in the node_revision_delete queue.',
+      'fields' => [
+        'nid' => [
+          'description' => 'The node ID.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['nid'],
+    ]);
+  }
+}
+
+/**
+ * Backfill the queue map table from existing queue items.
+ */
+function node_revision_delete_update_21001(&$sandbox) {
+  $database = \Drupal::database();
+
+  // Only backfill if the queue is using the database backend. The odd method
+  // of selecting directly from the queue table relied on this.
+  if (!$database->schema()->tableExists(DatabaseQueue::TABLE_NAME)) {
+    return;
+  }
+
+  if (!isset($sandbox['last_item_id'])) {
+    $sandbox['last_item_id'] = 0;
+    $sandbox['total'] = $database->select(DatabaseQueue::TABLE_NAME, 'q')
+      ->fields('q', ['item_id'])
+      ->condition('name', 'node_revision_delete')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+
+    // Nothing to do.
+    if ($sandbox['total'] === 0) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+
+    $sandbox['processed'] = 0;
+  }
+
+  $items = $database->select(DatabaseQueue::TABLE_NAME, 'q')
+    ->fields('q', ['item_id', 'data'])
+    ->condition('name', 'node_revision_delete')
+    ->condition('item_id', $sandbox['last_item_id'], '>')
+    ->orderBy('item_id')
+    ->range(0, 100)
+    ->execute()
+    ->fetchAll();
+
+  if (empty($items)) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  $insert = $database->insert(NodeRevisionDeleteInterface::QUEUE_SEMAPHORE_TABLE)
+    ->fields(['nid']);
+
+  foreach ($items as $item) {
+    $nid = unserialize($item->data, ['allowed_classes' => FALSE]);
+    if (is_int($nid)) {
+      $insert->values([$nid]);
+    }
+    $sandbox['processed']++;
+    $sandbox['last_item_id'] = (int) $item->item_id;
+  }
+  if ($insert->count()) {
+    $insert->execute();
+  }
+
+  $sandbox['#finished'] = $sandbox['processed'] / $sandbox['total'];
 }

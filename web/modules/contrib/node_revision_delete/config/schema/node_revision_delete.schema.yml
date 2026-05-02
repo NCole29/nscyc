@@ -15,6 +15,9 @@ node_revision_delete.settings:
     verbose_log:
       type: boolean
       label: 'Generates a log of deleted nodes'
+    bulk_delete_threshold:
+      type: integer
+      label: 'Bulk delete threshold'
 
 node.type.*.third_party.node_revision_delete:
   type: sequence

@@ -11,7 +11,14 @@ use Drupal\field\FieldStorageConfigInterface;
  * Implements hook_field_views_data().
  */
 function smart_date_field_views_data(FieldStorageConfigInterface $field) {
-  $data = views_field_default_views_data($field);
+  if (\Drupal::hasService('views.field_data_provider')) {
+    $data = \Drupal::service('views.field_data_provider')
+      ->defaultFieldImplementation($field);
+  }
+  else {
+    /** @phpstan-ignore function.deprecated */
+    $data = views_field_default_views_data($field);
+  }
   $field_name = $field->getName();
   $entity_type_id = $field->getTargetEntityTypeId();
   $entity_manager = \Drupal::entityTypeManager();

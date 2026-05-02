@@ -22,7 +22,7 @@ use Drupal\smart_date_recur\Entity\SmartDateRule;
 /**
  * Base class for the 'smartdate_*' widgets.
  */
-class SmartDateWidgetBase extends DateTimeWidgetBase {
+abstract class SmartDateWidgetBase extends DateTimeWidgetBase {
 
   use SmartDatePluginTrait;
 

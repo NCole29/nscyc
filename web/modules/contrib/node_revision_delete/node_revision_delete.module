@@ -10,7 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -143,11 +142,6 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
       '#type' => 'checkbox',
       '#title' => t('Enabled'),
       '#default_value' => $current_settings[$plugin_id]['status'] ?? 0,
-      '#states' => [
-        'disabled' => [
-          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
-        ],
-      ],
     ];
 
     $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] = [
@@ -156,21 +150,18 @@ function node_revision_delete_form_node_type_form_alter(&$form, FormStateInterfa
         'visible' => [
           ':input[name="' . $plugin_id . '[status]"]' => ['checked' => TRUE],
         ],
-        'disabled' => [
-          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
-        ],
       ],
     ];
     $plugin_form_state = SubformState::createForSubform($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'], $form, $form_state);
     $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] = $plugin->buildConfigurationForm($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'] ?? [], $plugin_form_state);
 
-    // Disable all required fields if override is disabled.
-    foreach (Element::children($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings']) as $key) {
-      if (!empty($form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'][$key]['#required'])) {
-        $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings'][$key]['#states']['disabled'] = [
-          ':input[name="node_revision_delete[override]"]' => ['checked' => FALSE],
-        ];
-      }
+    // When override is off, disable the plugin sub-form server-side. This
+    // ensures Drupal substitutes the #default_value for any user input before
+    // validation, so required fields (whose values come from the global
+    // defaults) do not block saving the node type.
+    if (!$override) {
+      $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['status']['#disabled'] = TRUE;
+      $form['node_revision_delete']['plugins_wrapper'][$plugin_id]['settings']['#disabled'] = TRUE;
     }
   }
   $form['#attached']['library'][] = 'node_revision_delete/summaries';
@@ -228,26 +219,9 @@ function node_revision_delete_node_update(NodeInterface $node) {
   // Add updated nodes to the queue to determine if any revisions are ready to
   // be deleted.
   $nid = (int) $node->id();
-  if (!\Drupal::service('node_revision_delete')->nodeExistsInQueue($nid)) {
-    \Drupal::queue('node_revision_delete')->createItem($nid);
+  if (\Drupal::service('node_revision_delete')->createQueueItem($nid)->queued()) {
     if (\Drupal::config('node_revision_delete.settings')->get('verbose_log')) {
       \Drupal::logger('node_revision_delete')->info('Node @id was added to the Node Revision Delete queue.', ['@id' => $node->id()]);
-    }
-  }
-}
-
-/**
- * Implements hook_node_delete().
- */
-function node_revision_delete_node_delete(NodeInterface $node) {
-  // Remove the node from the queue if is there.
-  $nid = (int) $node->id();
-  $node_revision_delete = \Drupal::service('node_revision_delete');
-  $item_id = $node_revision_delete->nodeExistsInQueue($nid);
-  if ($item_id) {
-    $node_revision_delete->deleteItemFromQueue($item_id);
-    if (\Drupal::config('node_revision_delete.settings')->get('verbose_log')) {
-      \Drupal::logger('node_revision_delete')->info('Node @id was deleted from the Node Revision Delete queue.', ['@id' => $node->id()]);
     }
   }
 }
@@ -261,14 +235,17 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
   // Get the revision id from URL.
   $revision_id = \Drupal::routeMatch()->getRawParameter('node_revision');
 
-  // Get list of revisions older than current revision for the content language.
-  // Use TYPE_CONTENT to ensure the correct language is used even when the
-  // "Account administration pages" language negotiation is active, which would
-  // cause getCurrentLanguage() (TYPE_INTERFACE) to return the admin language.
+  // Get list of revision IDs older than current revision for the content
+  // language. Use TYPE_CONTENT to ensure the correct language is used even when
+  // the "Account administration pages" language negotiation is active, which
+  // would cause getCurrentLanguage() (TYPE_INTERFACE) to return the admin
+  // language.
   $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
-  $revisions_before = \Drupal::service('node_revision_delete')->getPreviousRevisions($nid, $revision_id, $langcode);
+  /** @var \Drupal\node_revision_delete\NodeRevisionDeleteInterface $service */
+  $service = \Drupal::service('node_revision_delete');
+  $vids_before = $service->getPreviousRevisionIds($nid, $revision_id, $langcode);
   // Count sum of old revisions.
-  $revision_number = count($revisions_before);
+  $revision_number = count($vids_before);
 
   // If there are old revisions.
   if ($revision_number > 0) {
@@ -295,15 +272,27 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
     $renderer = \Drupal::service('renderer');
     $dateFormatter = \Drupal::service('date.formatter');
 
+    // Only load and display the 20 most recent prior revisions to avoid
+    // unbounded entity loads on nodes with many revisions.
+    $display_vids = array_slice($vids_before, 0, 20);
+    $remaining = $revision_number - count($display_vids);
+
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
     $rows = [];
-    foreach ($revisions_before as $revision) {
+    /** @var \Drupal\node\NodeInterface[] $revisions */
+    $revisions = $node_storage->loadMultipleRevisions($display_vids);
+    krsort($revisions);
+    foreach ($revisions as $revision) {
+      if ($revision->hasTranslation($langcode)) {
+        $revision = $revision->getTranslation($langcode);
+      }
       $username = [
         '#theme' => 'username',
         '#account' => $revision->getRevisionUser(),
       ];
 
       // Build link to view revision.
-      $date = $dateFormatter->format($revision->revision_timestamp->value, 'short');
+      $date = $dateFormatter->format($revision->getRevisionCreationTime(), 'short');
       $revision_url = new Url('entity.node.revision', [
         'node' => $revision->id(),
         'node_revision' => $revision->getRevisionId(),
@@ -317,7 +306,7 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
           'date' => $renderer->renderInIsolation($revision_link),
           'username' => $renderer->renderInIsolation($username),
           'message' => [
-            '#markup' => $revision->revision_log->value,
+            '#markup' => $revision->getRevisionLogMessage(),
             '#allowed_tags' => Xss::getHtmlTagList(),
           ],
         ],
@@ -326,6 +315,15 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
       $rows[] = [
         $revision->getRevisionId(),
         ['data' => $revision_info],
+      ];
+    }
+
+    if ($remaining > 0) {
+      $rows[] = [
+        [
+          'data' => \Drupal::translation()->formatPlural($remaining, 'And @count more revision that will also be deleted.', 'And @count more revisions that will also be deleted.'),
+          'colspan' => 2,
+        ],
       ];
     }
 
@@ -351,9 +349,9 @@ function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, Fo
 function _node_revision_bulk_delete_submit(array &$form, FormStateInterface $form_state) {
   if ($form_state->getValue('delete_prior_revisions') == 1) {
     // Get the node id from URL.
-    $nid = \Drupal::routeMatch()->getRawParameter('node');
+    $nid = (int) \Drupal::routeMatch()->getRawParameter('node');
     // Get the revision id from URL.
-    $vid = \Drupal::routeMatch()->getRawParameter('node_revision');
+    $vid = (int) \Drupal::routeMatch()->getRawParameter('node_revision');
     // Pass the content language to ensure the correct revisions are deleted.
     $langcode = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 

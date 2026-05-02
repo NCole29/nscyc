@@ -240,5 +240,4 @@ class Masquerade {
     return $this->entityTypeManager->getStorage('user');
   }
 
-
 }

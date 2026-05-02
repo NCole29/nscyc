@@ -3,6 +3,7 @@
 namespace Drupal\Tests\masquerade\Functional;
 
 use Drupal\Core\Session\AccountInterface;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests masquerade access mechanism.
@@ -12,6 +13,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @group masquerade
  */
+#[RunTestsInSeparateProcesses]
 class MasqueradeAccessTest extends MasqueradeWebTestBase {
 
   /**

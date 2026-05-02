@@ -7,6 +7,7 @@ namespace Drupal\Tests\node_revision_delete\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\NodeInterface;
+use Drupal\node_revision_delete\NodeRevisionDeleteInterface;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use PHPUnit\Framework\Attributes\Group;
@@ -45,6 +46,7 @@ class NodeRevisionDeleteServiceTest extends KernelTestBase {
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
     $this->installSchema('node', ['node_access']);
+    $this->installSchema('node_revision_delete', [NodeRevisionDeleteInterface::QUEUE_SEMAPHORE_TABLE]);
     $this->installConfig([
       'system',
       'filter',
@@ -59,9 +61,10 @@ class NodeRevisionDeleteServiceTest extends KernelTestBase {
   }
 
   /**
-   * Test getPreviousRevisions() with explicit langcode parameter.
+   * Test getPreviousRevisionIds() with explicit langcode parameter.
    */
-  public function testGetPreviousRevisionsWithLangcode(): void {
+  public function testGetPreviousRevisionIdsWithLangcode(): void {
+    /** @var \Drupal\node\NodeStorageInterface $node_storage */
     $node_storage = $this->container->get('entity_type.manager')->getStorage('node');
     /** @var \Drupal\node_revision_delete\NodeRevisionDeleteInterface $service */
     $service = $this->container->get('node_revision_delete');
@@ -92,30 +95,32 @@ class NodeRevisionDeleteServiceTest extends KernelTestBase {
     $latest_nl_vid = (int) $new_revision->getRevisionId();
 
     // Get previous English revisions before the latest English VID.
-    $en_revisions = $service->getPreviousRevisions((int) $node->id(), $latest_en_vid, 'en');
+    $en_revisions = $service->getPreviousRevisionIds((int) $node->id(), $latest_en_vid, 'en');
     // Should return 4 English revisions (VIDs 1-4, all before VID 5).
     $this->assertCount(4, $en_revisions);
-    foreach ($en_revisions as $revision) {
-      $this->assertEquals('en', $revision->language()->getId(), 'Revision should be in English.');
+    foreach ($node_storage->loadMultipleRevisions($en_revisions) as $revision) {
+      $this->assertInstanceOf(NodeInterface::class, $revision);
+      $this->assertTrue((bool) $revision->getTranslation('en')->isRevisionTranslationAffected(), 'Revision have a Dutch translation.');
     }
 
     // Get previous Dutch revisions before the latest Dutch VID.
-    $nl_revisions = $service->getPreviousRevisions((int) $node->id(), $latest_nl_vid, 'nl');
+    $nl_revisions = $service->getPreviousRevisionIds((int) $node->id(), $latest_nl_vid, 'nl');
     // Should return 2 Dutch revisions (VIDs 6-7, since VID 8 is excluded).
     $this->assertCount(2, $nl_revisions);
-    foreach ($nl_revisions as $revision) {
-      $this->assertEquals('nl', $revision->language()->getId(), 'Revision should be in Dutch.');
+    foreach ($node_storage->loadMultipleRevisions($nl_revisions) as $revision) {
+      $this->assertInstanceOf(NodeInterface::class, $revision);
+      $this->assertTrue((bool) $revision->getTranslation('nl')->isRevisionTranslationAffected(), 'Revision have a Dutch translation.');
     }
 
     // Get previous Dutch revisions before the latest English VID. Since all
     // Dutch revisions were created after the latest English VID, none should
     // be returned.
-    $nl_revisions_before_en = $service->getPreviousRevisions((int) $node->id(), $latest_en_vid, 'nl');
+    $nl_revisions_before_en = $service->getPreviousRevisionIds((int) $node->id(), $latest_en_vid, 'nl');
     $this->assertCount(0, $nl_revisions_before_en);
 
     // Get previous English revisions before the latest Dutch VID. All 5
     // English revisions are older than the latest Dutch VID.
-    $en_revisions_before_nl = $service->getPreviousRevisions((int) $node->id(), $latest_nl_vid, 'en');
+    $en_revisions_before_nl = $service->getPreviousRevisionIds((int) $node->id(), $latest_nl_vid, 'en');
     $this->assertCount(5, $en_revisions_before_nl);
   }
 
@@ -136,8 +141,8 @@ class NodeRevisionDeleteServiceTest extends KernelTestBase {
     $latest_vid = (int) $node->getRevisionId();
 
     // Without langcode, should use the current language (English in tests).
-    $revisions_default = $service->getPreviousRevisions((int) $node->id(), $latest_vid);
-    $revisions_explicit = $service->getPreviousRevisions((int) $node->id(), $latest_vid, 'en');
+    $revisions_default = $service->getPreviousRevisionIds((int) $node->id(), $latest_vid);
+    $revisions_explicit = $service->getPreviousRevisionIds((int) $node->id(), $latest_vid, 'en');
     $this->assertCount(count($revisions_explicit), $revisions_default);
   }
 

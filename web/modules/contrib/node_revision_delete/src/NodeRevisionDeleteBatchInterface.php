@@ -2,7 +2,6 @@
 
 namespace Drupal\node_revision_delete;
 
-use Drupal\node\NodeInterface;
 use Drupal\node\NodeTypeInterface;
 
 /**
@@ -14,8 +13,11 @@ interface NodeRevisionDeleteBatchInterface {
 
   /**
    * Prepares and executes the plugin revision deletion batch.
+   *
+   * @param \Drupal\node\NodeTypeInterface[] $node_types
+   *   The node types to process.
    */
-  public function queueBatch(): void;
+  public function queueBatch(array $node_types = []): void;
 
   /**
    * Batch step definition to process the plugin revision deletion queue.
@@ -24,15 +26,13 @@ interface NodeRevisionDeleteBatchInterface {
    *
    * @param \Drupal\node\NodeTypeInterface $node_type
    *   The node type.
-   * @param int $nid
-   *   The node id.
    * @param array $context
    *   An associative array.
    *
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function queue(NodeTypeInterface $node_type, int $nid, &$context): void;
+  public function queue(NodeTypeInterface $node_type, &$context): void;
 
   /**
    * Callback when finishing a plugin revision deletion batch job.
@@ -56,26 +56,29 @@ interface NodeRevisionDeleteBatchInterface {
    * @param string|null $langcode
    *   (optional) The language code to filter revisions by. Defaults to the
    *   current language if not specified.
+   *
+   * @return bool
+   *   TRUE if the batch has been set, FALSE if there are no revisions to delete
+   *   and the batch is not set.
    */
-  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): void;
+  public function previousRevisionDeletionBatch(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): bool;
 
   /**
-   * Batch step definition to delete previous revisions.
+   * Batch step definition to previous revisions.
    *
-   * Once the revision is deleted the context is updated with the total number
-   * of revisions deleted and the node object.
-   *
-   * @param \Drupal\node\NodeInterface $revision
-   *   The revision to delete.
-   * @param int $total
-   *   The total number of items to be processed.
-   * @param mixed $context
+   * @param int $nid
+   *   The node id.
+   * @param int $original_revision_id
+   *   The original revision the batch starts with.
+   * @param string $langcode
+   *   The language code to filter revisions by.
+   * @param array $context
    *   The context of the current batch.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function deletePreviousRevision(NodeInterface $revision, int $total, &$context): void;
+  public function deletePreviousRevision(int $nid, int $original_revision_id, string $langcode, array &$context): void;
 
   /**
    * Callback when finishing the batch of previous revisions.

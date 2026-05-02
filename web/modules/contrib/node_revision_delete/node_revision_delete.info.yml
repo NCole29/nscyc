@@ -10,7 +10,7 @@ dependencies:
 
 configure: node_revision_delete.admin_settings
 
-# Information added by Drupal.org packaging script on 2026-04-15
-version: '2.0.3'
+# Information added by Drupal.org packaging script on 2026-04-24
+version: '2.1.1'
 project: 'node_revision_delete'
-datestamp: 1776255127
+datestamp: 1777019703

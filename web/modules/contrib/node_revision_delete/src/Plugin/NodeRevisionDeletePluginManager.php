@@ -72,7 +72,12 @@ class NodeRevisionDeletePluginManager extends DefaultPluginManager {
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   public function getPlugin(string $plugin_id, ?array $configuration = NULL): NodeRevisionDeleteInterface {
-    return $this->createInstance($plugin_id, $configuration ?? $this->getDefaultPluginSettings($plugin_id)['settings'] ?? []);
+    $plugin = $this->createInstance($plugin_id, $configuration ?? $this->getDefaultPluginSettings($plugin_id)['settings'] ?? []);
+
+    if (!$plugin instanceof NodeRevisionDeleteQueryInterface) {
+      @trigger_error('Plugins not implementing \Drupal\node_revision_delete\Plugin\NodeRevisionDeleteQueryInterface is deprecated in node_revision_delete:2.1.0 and will not be supported from node_revision_delete:3.0.0. See https://www.drupal.org/node/3581259', E_USER_DEPRECATED);
+    }
+    return $plugin;
   }
 
   /**

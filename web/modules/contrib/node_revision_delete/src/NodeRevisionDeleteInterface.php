@@ -2,6 +2,8 @@
 
 namespace Drupal\node_revision_delete;
 
+use Drupal\node\NodeInterface;
+
 /**
  * The Node Revision Delete Interface.
  *
@@ -10,7 +12,14 @@ namespace Drupal\node_revision_delete;
 interface NodeRevisionDeleteInterface {
 
   /**
-   * Get all revision that are older than current deleted revision.
+   * The table name for the queue semaphore table.
+   *
+   * This starts with 'queue_' to avoid confusion with 'node_revision_' tables.
+   */
+  const QUEUE_SEMAPHORE_TABLE = 'queue_node_revision_delete';
+
+  /**
+   * Get all revision IDs that are older than the specified revision.
    *
    * The revisions should have the same language as the specified language code.
    * If no language code is specified, the current language is used.
@@ -23,8 +32,32 @@ interface NodeRevisionDeleteInterface {
    *   (optional) The language code to filter revisions by. Defaults to the
    *   current language if not specified.
    *
-   * @return array
+   * @return int[]
+   *   An array of previous revision IDs, sorted by VID descending.
+   */
+  public function getPreviousRevisionIds(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): array;
+
+  /**
+   * Get all revisions that are older than current deleted revision.
+   *
+   * The revisions should have the same language as the specified language code.
+   * If no language code is specified, the current language is used.
+   *
+   * @param int $nid
+   *   The node id.
+   * @param int $currently_deleted_revision_id
+   *   The current revision.
+   * @param string|null $langcode
+   *   (optional) The language code to filter revisions by. Defaults to the
+   *   current language if not specified.
+   *
+   * @return \Drupal\Core\Entity\RevisionableInterface[]
    *   An array with the previous revisions.
+   *
+   * @deprecated in node_revision_delete:2.1.0 and is removed from
+   *   node_revision_delete:3.0.0. Use getPreviousRevisionIds() instead.
+   *
+   * @see https://www.drupal.org/node/3584874
    */
   public function getPreviousRevisions(int $nid, int $currently_deleted_revision_id, ?string $langcode = NULL): array;
 
@@ -34,18 +67,31 @@ interface NodeRevisionDeleteInterface {
    * @param int $nid
    *   The node id.
    *
-   * @return int
-   *   The queue item id if exists, 0 otherwise.
+   * @return bool
+   *   TRUE if the node is in the queue, FALSE otherwise.
    */
-  public function nodeExistsInQueue(int $nid): int;
+  public function nodeExistsInQueue(int $nid): bool;
 
   /**
-   * Force the deletion of a specified queue item.
+   * Create a queue item for a node if it is not already queued.
    *
-   * @param int $item_id
-   *   The item id to be deleted.
+   * @param int $nid
+   *   The node id.
+   *
+   * @return \Drupal\node_revision_delete\QueueItemCreationResult
+   *   The result of the queue item creation attempt.
    */
-  public function deleteItemFromQueue(int $item_id): void;
+  public function createQueueItem(int $nid): QueueItemCreationResult;
+
+  /**
+   * Remove a node from the queue map.
+   *
+   * Called after queue processing to clean up the map entry.
+   *
+   * @param int $nid
+   *   The node id.
+   */
+  public function removeNodeFromQueueMap(int $nid): void;
 
   /**
    * Check if a content type has at least one plugin enabled.
@@ -57,5 +103,16 @@ interface NodeRevisionDeleteInterface {
    *   TRUE if the content type has at least one plugin enabled.
    */
   public function contentTypeHasEnabledPlugins(string $content_type_id): bool;
+
+  /**
+   * Gets the active revision IDs per language.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   The node to get the active revision IDs for.
+   *
+   * @return array<string, int>
+   *   An array mapping language codes to active revision IDs.
+   */
+  public function getActiveVidsPerLanguage(NodeInterface $node): array;
 
 }

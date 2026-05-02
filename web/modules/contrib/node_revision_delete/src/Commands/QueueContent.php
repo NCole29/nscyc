@@ -4,9 +4,8 @@ namespace Drupal\node_revision_delete\Commands;
 
 use Consolidation\AnnotatedCommand\CommandData;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\node_revision_delete\NodeRevisionDeleteInterface;
+use Drupal\node_revision_delete\NodeRevisionDeleteBatchInterface;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -24,34 +23,24 @@ class QueueContent extends DrushCommands {
   protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
-   * The NodeRevisionDelete service.
+   * The NodeRevisionDeleteBatch service.
    *
-   * @var \Drupal\node_revision_delete\NodeRevisionDeleteInterface
+   * @var \Drupal\node_revision_delete\NodeRevisionDeleteBatchInterface
    */
-  protected NodeRevisionDeleteInterface $nodeRevisionDelete;
-
-  /**
-   * The queue service.
-   *
-   * @var \Drupal\Core\Queue\QueueFactory
-   */
-  protected QueueFactory $queue;
+  protected NodeRevisionDeleteBatchInterface $nodeRevisionDeleteBatch;
 
   /**
    * Constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
-   * @param \Drupal\node_revision_delete\NodeRevisionDeleteInterface $node_revision_delete
-   *   The node revision delete service.
-   * @param \Drupal\Core\Queue\QueueFactory $queue
-   *   The queue service.
+   * @param \Drupal\node_revision_delete\NodeRevisionDeleteBatchInterface $node_revision_delete_batch
+   *   The node revision delete batch service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, NodeRevisionDeleteInterface $node_revision_delete, QueueFactory $queue) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, NodeRevisionDeleteBatchInterface $node_revision_delete_batch) {
     parent::__construct();
     $this->entityTypeManager = $entity_type_manager;
-    $this->nodeRevisionDelete = $node_revision_delete;
-    $this->queue = $queue;
+    $this->nodeRevisionDeleteBatch = $node_revision_delete_batch;
   }
 
   /**
@@ -113,44 +102,9 @@ class QueueContent extends DrushCommands {
       $content_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
     }
 
-    foreach ($content_types as $content_type) {
-      // Check whether at least one plugin is enabled for this content type.
-      $has_enabled_plugins = $this->nodeRevisionDelete->contentTypeHasEnabledPlugins($content_type->id());
-      if ($has_enabled_plugins) {
-        // Create a queue for all nodes in this content type.
-        $this->createQueue($content_type->id());
-      }
-    }
-  }
+    $this->nodeRevisionDeleteBatch->queueBatch($content_types);
 
-  /**
-   * Create queue items for all nodes of a content type.
-   *
-   * @param string $node_type
-   *   The content type machine name.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  protected function createQueue(string $node_type): void {
-    // Get all node IDs for this node type.
-    $nids = $this->entityTypeManager->getStorage('node')->getQuery()
-      ->condition('type', $node_type)
-      ->accessCheck(FALSE)
-      ->execute();
-    $counter = 0;
-    foreach ($nids as $nid) {
-      $nid = (int) $nid;
-      // Create a queue item only if it does not exist.
-      if (!$this->nodeRevisionDelete->nodeExistsInQueue($nid)) {
-        $counter++;
-        $this->queue->get('node_revision_delete')->createItem($nid);
-      }
-    }
-    $this->output()->writeln(dt('<info>Created <comment>@count</comment> queue items for content-type: <comment>@node_type.</comment></info>', [
-      '@count' => $counter,
-      '@node_type' => $node_type,
-    ]));
+    drush_backend_batch_process();
   }
 
 }

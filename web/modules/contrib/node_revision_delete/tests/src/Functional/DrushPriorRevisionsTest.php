@@ -42,6 +42,7 @@ class DrushPriorRevisionsTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
     $this->drupalCreateContentType(['type' => 'page', 'revision' => TRUE]);
+    $this->config('node_revision_delete.settings')->set('bulk_delete_threshold', 2)->save();
   }
 
   /**
@@ -62,14 +63,47 @@ class DrushPriorRevisionsTest extends BrowserTestBase {
     $this->assertCount(5, $all_vids);
 
     // With --no-interaction (always set by DrushTestTrait), confirm() defaults
-    // to TRUE. Both confirms will be accepted: prior revisions are deleted AND
-    // the target revision itself. So VIDs 1-4 will all be deleted.
+    // to TRUE. All prior revisions are deleted, so VIDs 1-3 will all be
+    // deleted.
     $this->drush('nrd:delete-prior-revisions', [$nid, $all_vids[3]]);
 
-    // Only the latest revision (VID 5) should remain.
     $remaining = $this->getRevisionIds($nid);
-    $this->assertCount(1, $remaining);
-    $this->assertContains($all_vids[4], $remaining);
+    $this->assertCount(2, $remaining);
+    $this->assertSame([$all_vids[3], $all_vids[4]], $remaining);
+  }
+
+  /**
+   * Tests deleting prior revisions when the default revision is prior.
+   */
+  public function testDefaultRevision(): void {
+    // Create a node with 5 revisions (VIDs 1-5).
+    $node = $this->drupalCreateNode(['type' => 'page', 'title' => 'Test v1']);
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    for ($i = 2; $i <= 5; $i++) {
+      $node->setTitle('Test v' . $i);
+      $node = $node_storage->createRevision($node);
+      $node->save();
+    }
+    // Create 2 draft revisions.
+    for ($i = 1; $i <= 2; $i++) {
+      /** @var \Drupal\node\NodeInterface $node */
+      $node = $node_storage->createRevision($node);
+      $node->setUnpublished()->isDefaultRevision(FALSE);
+      $node->save();
+    }
+    $nid = (int) $node->id();
+
+    $all_vids = $this->getRevisionIds($nid);
+    $this->assertCount(7, $all_vids);
+
+    // With --no-interaction (always set by DrushTestTrait), confirm() defaults
+    // to TRUE. All prior revisions are deleted, so VIDs 1-6 will all be
+    // processed - VID 5 is the default revision, so it is not deleted.
+    $this->drush('nrd:delete-prior-revisions', [$nid, $node->getRevisionId()]);
+    // Ensure that the default revision is not deleted.
+    $this->assertStringContainsString('Revision 5 [nid: 1] cannot be deleted as it is the default revision.', $this->getErrorOutput());
+    $remaining = $this->getRevisionIds($nid);
+    $this->assertCount(2, $remaining);
   }
 
   /**

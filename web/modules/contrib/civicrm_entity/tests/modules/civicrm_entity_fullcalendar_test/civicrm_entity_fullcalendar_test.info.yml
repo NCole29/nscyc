@@ -11,7 +11,7 @@ dependencies:
   - civicrm_entity:civicrm_entity
   - fullcalendar_view:fullcalendar_view
 
-# Information added by Drupal.org packaging script on 2026-04-10
-version: '4.0.4'
+# Information added by Drupal.org packaging script on 2026-04-27
+version: '4.0.5'
 project: 'civicrm_entity'
-datestamp: 1775835170
+datestamp: 1777328844

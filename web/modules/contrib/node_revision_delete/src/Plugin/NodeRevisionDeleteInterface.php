@@ -27,6 +27,12 @@ interface NodeRevisionDeleteInterface extends PluginInspectionInterface, Configu
    *   - FALSE: The revision must be kept according the plugin.
    *   - NULL: The plugin has no opinion on whether to keep or delete the
    *     revision.
+   *
+   * @deprecated in node_revision_delete:2.1.0 and is removed from
+   *   node_revision_delete:3.0.0. Use getRevisionsToDelete() and
+   *   getRevisionsToProtect() instead.
+   *
+   * @see https://www.drupal.org/node/3581259
    */
   public function checkRevisions(array $revision_ids, int $active_vid): array;
 

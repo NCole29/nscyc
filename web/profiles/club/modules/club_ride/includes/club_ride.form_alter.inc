@@ -17,6 +17,8 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
                           'node_recurring_ride_edit_form',
                           'node_recurring_ride_quick_node_clone_form'] )) {
 
+  $form['#attached']['library'][] = 'club_ride/content_form_styles';
+  
   // Time: hide field if multiple times is unchecked.
     $form['field_time']['#states'] = [
       'invisible' => [
@@ -118,7 +120,7 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
       // Remove instructions "begin typing" ...
       $form['field_registration_link']['widget'][0]['uri']['#description'] = NULL;
 
-      if ($form_id == 'node_ride_form') {
+      if ( in_array($form_id,['node_ride_form','node_ride_edit_form'])) {
         // Disable cancel checkbox when creating new ride; keep for clone to allow it unchecked.
         $form['field_cancel']['#disabled'] = TRUE;
       }

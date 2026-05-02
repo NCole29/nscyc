@@ -80,6 +80,27 @@ class NodeTypeOverrideTest extends WebDriverTestBase {
     // Verify the initial summary text.
     $this->assertVerticalTabSummary('Using defaults, revision deletion is disabled');
 
+    $assert_session->fieldValueEquals('amount[settings][amount]', '0');
+
+    // Save without overriding anything.
+    $this->submitForm([], 'Save');
+
+    $assert_session->pageTextContains('The content type Basic page has been updated.');
+    $assert_session->pageTextNotContains('field is required');
+
+    // No third-party settings should have been stored.
+    $node_type = $this->container->get('entity_type.manager')
+      ->getStorage('node_type')
+      ->load('page');
+    $this->assertEmpty($node_type->getThirdPartySettings('node_revision_delete'));
+
+    $this->drupalGet('admin/structure/types/manage/page');
+
+    // Click on the vertical tab to ensure the summary element is rendered.
+    $tab = $assert_session->waitForElement('css', 'a[href="#edit-node-revision-delete"]');
+    $this->assertNotNull($tab, 'Node Revision Delete vertical tab is present.');
+    $tab->click();
+
     // Check the override checkbox; this triggers an AJAX rebuild.
     $override->check();
     $assert_session->assertWaitOnAjaxRequest();
