@@ -48,6 +48,8 @@ settings:
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<drupal-media data-caption title>'
+        - '<details>'
+        - '<summary>'
     ckeditor5_style:
       styles:
         -

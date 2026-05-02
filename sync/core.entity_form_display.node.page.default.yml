@@ -111,7 +111,7 @@ third_party_settings:
         id: ''
         label_as_html: false
         formatter: closed
-        description: 'Contact forms allow visitors to email club members without exposing personal email addresses. After selecting the "Personal contact form", enter one or more recipients in the exposed "Club member(s)" field.'
+        description: "Contact forms allow visitors to email club members without exposing personal email addresses. Choose a form for club officials, or select 'Personal contact form' to list specific club members in the field provided."
         required_fields: true
 id: node.page.default
 targetEntityType: node

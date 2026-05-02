@@ -57,6 +57,16 @@ function club_media_node_presave(EntityInterface $node) {
     }
   }
 }
+/**
+ * Implements hook_local_actions_alter().
+ */
+function club_media_menu_local_actions_alter(&$local_actions) {
+  // Check if the 'media.add' action exists and unset it.
+  // Media should be added only via content pages.
+  if (isset($local_actions['media.add'])) {
+    unset($local_actions['media.add']);
+  }
+}
 
 /**
  * Implements hook_file_download().

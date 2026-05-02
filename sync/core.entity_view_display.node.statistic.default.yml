@@ -1,0 +1,19 @@
+uuid: 83a8f811-c279-4844-91f5-d842a9f9a09d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.statistic
+  module:
+    - user
+id: node.statistic.default
+targetEntityType: node
+bundle: statistic
+mode: default
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

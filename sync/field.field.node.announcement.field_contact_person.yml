@@ -9,7 +9,7 @@ id: node.announcement.field_contact_person
 field_name: field_contact_person
 entity_type: node
 bundle: announcement
-label: 'Club member(s)'
+label: Contact
 description: 'If a member has disabled their personal contact form, their name appears without a link.'
 required: false
 translatable: false
