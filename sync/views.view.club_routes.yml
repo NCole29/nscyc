@@ -1614,6 +1614,58 @@ display:
             field_identifier: ''
           exposed: false
       filters:
+        rwgps_id:
+          id: rwgps_id
+          table: club_route
+          field: rwgps_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: club_route
+          entity_field: rwgps_id
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: rwgps_id_op
+            label: 'RWGPS ID'
+            description: ''
+            use_operator: false
+            operator: rwgps_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: rwgps_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              member: '0'
+              board: '0'
+              events_coordinator: '0'
+              civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
+              site_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         name:
           id: name
           table: club_route

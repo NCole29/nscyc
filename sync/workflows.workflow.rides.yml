@@ -61,6 +61,7 @@ type_settings:
       from:
         - archived
         - draft
+        - published
       to: finalize_draft
       weight: -2
     publish:

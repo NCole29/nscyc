@@ -64,6 +64,7 @@ type_settings:
       from:
         - archived
         - draft
+        - published
       to: ready_for_review
       weight: -4
     publish:

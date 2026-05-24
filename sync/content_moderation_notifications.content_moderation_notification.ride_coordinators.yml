@@ -1,6 +1,6 @@
 uuid: 77f38b67-75a1-483f-a507-23a2bbad29b4
 langcode: en
-status: false
+status: true
 dependencies: {  }
 id: ride_coordinators
 workflow: rides
@@ -10,6 +10,7 @@ roles:
   rides_coordinator: rides_coordinator
 author: false
 site_mail: false
+user_fields: {  }
 emails: ''
 subject: 'Review: [node:title]'
 body:
