@@ -29,6 +29,7 @@ dependencies:
     - datetimehideseconds
     - field_group
     - media_library
+    - path
     - smart_date
     - smart_date_recur
     - text
@@ -359,6 +360,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 1
@@ -394,7 +401,6 @@ hidden:
   field_day: true
   field_dayofweek: true
   field_show_and_go: true
-  path: true
   promote: true
   publish_on: true
   sticky: true

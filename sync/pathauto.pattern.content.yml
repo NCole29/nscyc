@@ -2,6 +2,11 @@ uuid: 1e16f480-c1f8-45ba-8eb6-9e3e971075cc
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.announcement
+    - node.type.event
+    - node.type.location
+    - node.type.page
   module:
     - node
 id: content
@@ -12,7 +17,6 @@ selection_criteria:
   37ca2391-58e6-4f17-b974-f20980389de4:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 37ca2391-58e6-4f17-b974-f20980389de4
     context_mapping:
       node: node
     bundles:
@@ -21,5 +25,5 @@ selection_criteria:
       location: location
       page: page
 selection_logic: and
-weight: -5
+weight: -9
 relationships: {  }

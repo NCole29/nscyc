@@ -123,7 +123,7 @@ return array(
     'Drupal\\Component\\' => array($baseDir . '/web/core/lib/Drupal/Component'),
     'DrupalCodeGenerator\\' => array($vendorDir . '/chi-teck/drupal-code-generator/src'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
-    'Doctrine\\Persistence\\' => array($vendorDir . '/doctrine/persistence/src/Persistence'),
+    'Doctrine\\Persistence\\' => array($vendorDir . '/doctrine/persistence/src'),
     'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/src'),
