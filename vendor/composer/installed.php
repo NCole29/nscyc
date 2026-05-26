@@ -3,7 +3,7 @@
         'name' => 'drupal/recommended-project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '84e33d4b7b47f815b06e5077e8c83b7c74118d83',
+        'reference' => '0307e3b637b96b8e628adec95e9fe68b477e97ba',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -1090,6 +1090,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/multiple_fields_remove_button' => array(
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => '8.x-2.3',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/multiple_fields_remove_button',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/node_revision_delete' => array(
             'pretty_version' => '2.1.1',
             'version' => '2.1.1.0',
@@ -1147,7 +1156,7 @@
         'drupal/recommended-project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '84e33d4b7b47f815b06e5077e8c83b7c74118d83',
+            'reference' => '0307e3b637b96b8e628adec95e9fe68b477e97ba',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

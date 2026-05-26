@@ -1,0 +1,12 @@
+name: Multiple Fields Remove Button
+type: module
+description: Add remove button for multi showing fields.
+core_version_requirement: ^9.2 || ^10 || ^11
+package: Fields
+dependencies:
+ - drupal:field
+
+# Information added by Drupal.org packaging script on 2025-05-05
+version: '8.x-2.3'
+project: 'multiple_fields_remove_button'
+datestamp: 1746461725

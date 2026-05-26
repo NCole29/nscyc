@@ -178,6 +178,7 @@
     "drupal/mail_login": "^4.0",
     "drupal/masquerade": "^2.2",
     "drupal/menu_admin_per_menu": "^1.5",
+    "drupal/multiple_fields_remove_button": "^2.3",
     "drupal/node_revision_delete": "^2.1",
     "drupal/paragraphs": "^1.17",
     "drupal/pathauto": "^1.15",
