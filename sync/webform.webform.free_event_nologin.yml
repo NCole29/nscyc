@@ -171,8 +171,7 @@ settings:
     embed_review:
       title: Registrations
       view: 'webform_submissions_custom:embed_review'
-      webform_routes:
-        - entity.webform.results_submissions
+      webform_routes: {  }
       node_routes:
         - entity.node.webform.results_submissions
   submission_views_replace: {  }

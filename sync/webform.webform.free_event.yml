@@ -207,9 +207,7 @@ settings:
     free_event:
       title: 'Free event reigstrations'
       view: 'webform_submissions_custom:embed_review'
-      webform_routes:
-        - entity.webform.results_submissions
-        - entity.webform.user.submissions
+      webform_routes: {  }
       node_routes:
         - entity.node.webform.results_submissions
         - entity.node.webform.user.submissions
