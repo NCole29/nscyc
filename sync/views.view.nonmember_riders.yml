@@ -738,7 +738,7 @@ display:
             description: ''
             use_operator: true
             operator: start_date_op
-            operator_limit_selection: true
+            operator_limit_selection: false
             operator_list:
               empty: empty
               'not empty': 'not empty'
@@ -762,18 +762,34 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Became a member'
             description: ''
-            identifier: ''
+            identifier: start_date
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: 'No'
+                operator: empty
+                value:
+                  min: ''
+                  max: ''
+                  value: ''
+                  type: date
+              2:
+                title: 'Yes'
+                operator: 'not empty'
+                value:
+                  min: ''
+                  max: ''
+                  value: ''
+                  type: date
       style:
         type: table
         options:

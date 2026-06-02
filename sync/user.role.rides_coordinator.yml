@@ -57,7 +57,6 @@ permissions:
   - 'access shortcuts'
   - 'access toolbar'
   - 'access user contact forms'
-  - 'access user profiles'
   - 'administer Reports'
   - 'cancel smart date recur instances'
   - 'clone recurring_ride content'

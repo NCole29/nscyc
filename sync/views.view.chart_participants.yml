@@ -450,6 +450,49 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        status_id:
+          id: status_id
+          table: civicrm_participant
+          field: status_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: civicrm_participant
+          entity_field: status_id
+          plugin_id: list_field
+          operator: or
+          value:
+            1: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       style:
         type: chart
         options:
@@ -464,22 +507,23 @@ display:
                 title:
                   enabled: false
                   color: '#006fb0'
-                  weight: 4
+                  weight: 2
                 contact_id:
                   enabled: true
-                  color: '#342e9c'
-                  weight: 4
+                  color: '#f07c33'
+                  weight: 2
             display:
               title: ''
               title_position: out
               subtitle: ''
               data_labels: false
               data_markers: false
-              legend_position: bottom
+              connect_nulls: false
+              legend_position: right
               background: ''
               three_dimensional: 0
               polar: 0
-              tooltips: false
+              tooltips: true
               dimensions:
                 width: ''
                 width_units: '%'
@@ -495,6 +539,11 @@ display:
                 red_from: '0'
                 red_to: '50'
               color_changer: false
+              figure_caption: ''
+              chart_summary: ''
+              accessible_table: disabled
+              accessible_table_button_text: ''
+              accessible_table_button_class: ''
             xaxis:
               title: ''
               labels_rotation: '0'
@@ -508,6 +557,11 @@ display:
               labels_rotation: '0'
       row:
         type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -691,6 +745,7 @@ display:
       display_description: ''
       display_extenders: {  }
       block_description: 'Century registrations'
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:

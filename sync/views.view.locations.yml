@@ -2459,6 +2459,19 @@ display:
       use_ajax: true
       display_description: ''
       header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: 'These starting locations are not used on any ride pages.'
+            format: basic_html
+          tokenize: false
         result:
           id: result
           table: views
