@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_location_info
-    - filter.format.full_html
+    - filter.format.basic_html
     - node.type.location
   module:
     - text
@@ -25,5 +25,5 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
-    - full_html
+    - basic_html
 field_type: text_long

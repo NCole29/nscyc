@@ -463,6 +463,269 @@ handlers:
     conditions: {  }
     weight: null
     settings:
+      nid: 1
+      number_of_contacts: '5'
+      1_contact_type: individual
+      1_webform_label: 'Contact 1'
+      civicrm_1_contact_1_contact_contact_sub_type: {  }
+      civicrm_1_contact_1_contact_existing: 0
+      civicrm_1_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_middle_name: 0
+      civicrm_1_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_nick_name: 0
+      civicrm_1_contact_1_contact_gender_id: 0
+      civicrm_1_contact_1_contact_job_title: 0
+      civicrm_1_contact_1_contact_birth_date: 0
+      civicrm_1_contact_1_contact_preferred_communication_method: 0
+      civicrm_1_contact_1_contact_privacy: 0
+      civicrm_1_contact_1_contact_preferred_language: 0
+      civicrm_1_contact_1_contact_communication_style_id: 0
+      civicrm_1_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_user_id: 0
+      civicrm_1_contact_1_contact_external_identifier: 0
+      civicrm_1_contact_1_contact_source: 0
+      civicrm_1_contact_1_contact_cs: 0
+      civicrm_1_contact_1_contact_employer_id: 0
+      civicrm_1_contact_1_contact_is_deceased: 0
+      civicrm_1_contact_1_contact_deceased_date: 0
+      contact_1_settings_matching_rule: Unsupervised
+      contact_1_number_of_cg1: '0'
+      contact_1_number_of_other: '1'
+      civicrm_1_contact_1_other_group:
+        '': ''
+      civicrm_1_contact_1_other_tag:
+        7: '7'
+      contact_1_number_of_address: '0'
+      contact_1_number_of_phone: '0'
+      contact_1_number_of_email: '1'
+      civicrm_1_contact_1_email_email: create_civicrm_webform_element
+      civicrm_1_contact_1_email_location_type_id: '5'
+      civicrm_1_contact_1_email_is_primary: '1'
+      contact_1_number_of_website: '0'
+      contact_1_number_of_im: '0'
+      contact_1_number_of_cg6: '0'
+      2_contact_type: individual
+      2_webform_label: 'Contact 2'
+      civicrm_2_contact_1_contact_contact_sub_type: {  }
+      civicrm_2_contact_1_contact_existing: 0
+      civicrm_2_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_2_contact_1_contact_middle_name: 0
+      civicrm_2_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_2_contact_1_contact_nick_name: 0
+      civicrm_2_contact_1_contact_gender_id: 0
+      civicrm_2_contact_1_contact_job_title: 0
+      civicrm_2_contact_1_contact_birth_date: 0
+      civicrm_2_contact_1_contact_preferred_communication_method: 0
+      civicrm_2_contact_1_contact_privacy: 0
+      civicrm_2_contact_1_contact_preferred_language: 0
+      civicrm_2_contact_1_contact_communication_style_id: 0
+      civicrm_2_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_2_contact_1_contact_user_id: 0
+      civicrm_2_contact_1_contact_external_identifier: 0
+      civicrm_2_contact_1_contact_source: 0
+      civicrm_2_contact_1_contact_cs: 0
+      civicrm_2_contact_1_contact_employer_id: 0
+      civicrm_2_contact_1_contact_is_deceased: 0
+      civicrm_2_contact_1_contact_deceased_date: 0
+      contact_2_settings_matching_rule: Unsupervised
+      contact_2_number_of_cg1: '0'
+      contact_2_number_of_other: '1'
+      civicrm_2_contact_1_other_group:
+        '': ''
+      civicrm_2_contact_1_other_tag:
+        7: '7'
+      contact_2_number_of_address: '0'
+      contact_2_number_of_phone: '0'
+      contact_2_number_of_email: '1'
+      civicrm_2_contact_1_email_email: create_civicrm_webform_element
+      civicrm_2_contact_1_email_location_type_id: '5'
+      civicrm_2_contact_1_email_is_primary: '1'
+      contact_2_number_of_website: '0'
+      contact_2_number_of_im: '0'
+      contact_2_number_of_relationship: '0'
+      contact_2_number_of_cg6: '0'
+      3_contact_type: individual
+      3_webform_label: 'Contact 3'
+      civicrm_3_contact_1_contact_contact_sub_type: {  }
+      civicrm_3_contact_1_contact_existing: 0
+      civicrm_3_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_3_contact_1_contact_middle_name: 0
+      civicrm_3_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_3_contact_1_contact_nick_name: 0
+      civicrm_3_contact_1_contact_gender_id: 0
+      civicrm_3_contact_1_contact_job_title: 0
+      civicrm_3_contact_1_contact_birth_date: 0
+      civicrm_3_contact_1_contact_preferred_communication_method: 0
+      civicrm_3_contact_1_contact_privacy: 0
+      civicrm_3_contact_1_contact_preferred_language: 0
+      civicrm_3_contact_1_contact_communication_style_id: 0
+      civicrm_3_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_3_contact_1_contact_user_id: 0
+      civicrm_3_contact_1_contact_external_identifier: 0
+      civicrm_3_contact_1_contact_source: 0
+      civicrm_3_contact_1_contact_cs: 0
+      civicrm_3_contact_1_contact_employer_id: 0
+      civicrm_3_contact_1_contact_is_deceased: 0
+      civicrm_3_contact_1_contact_deceased_date: 0
+      contact_3_settings_matching_rule: Unsupervised
+      contact_3_number_of_cg1: '0'
+      contact_3_number_of_other: '1'
+      civicrm_3_contact_1_other_group:
+        '': ''
+      civicrm_3_contact_1_other_tag:
+        7: '7'
+      contact_3_number_of_address: '0'
+      contact_3_number_of_phone: '0'
+      contact_3_number_of_email: '1'
+      civicrm_3_contact_1_email_email: create_civicrm_webform_element
+      civicrm_3_contact_1_email_location_type_id: '5'
+      civicrm_3_contact_1_email_is_primary: '1'
+      contact_3_number_of_website: '0'
+      contact_3_number_of_im: '0'
+      contact_3_number_of_relationship: '0'
+      contact_3_number_of_cg6: '0'
+      4_contact_type: individual
+      4_webform_label: 'Contact 4'
+      civicrm_4_contact_1_contact_contact_sub_type: {  }
+      civicrm_4_contact_1_contact_existing: 0
+      civicrm_4_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_4_contact_1_contact_middle_name: 0
+      civicrm_4_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_4_contact_1_contact_nick_name: 0
+      civicrm_4_contact_1_contact_gender_id: 0
+      civicrm_4_contact_1_contact_job_title: 0
+      civicrm_4_contact_1_contact_birth_date: 0
+      civicrm_4_contact_1_contact_preferred_communication_method: 0
+      civicrm_4_contact_1_contact_privacy: 0
+      civicrm_4_contact_1_contact_preferred_language: 0
+      civicrm_4_contact_1_contact_communication_style_id: 0
+      civicrm_4_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_4_contact_1_contact_user_id: 0
+      civicrm_4_contact_1_contact_external_identifier: 0
+      civicrm_4_contact_1_contact_source: 0
+      civicrm_4_contact_1_contact_cs: 0
+      civicrm_4_contact_1_contact_employer_id: 0
+      civicrm_4_contact_1_contact_is_deceased: 0
+      civicrm_4_contact_1_contact_deceased_date: 0
+      contact_4_settings_matching_rule: Unsupervised
+      contact_4_number_of_cg1: '0'
+      contact_4_number_of_other: '1'
+      civicrm_4_contact_1_other_group:
+        '': ''
+      civicrm_4_contact_1_other_tag:
+        7: '7'
+      contact_4_number_of_address: '0'
+      contact_4_number_of_phone: '0'
+      contact_4_number_of_email: '1'
+      civicrm_4_contact_1_email_email: create_civicrm_webform_element
+      civicrm_4_contact_1_email_location_type_id: '5'
+      civicrm_4_contact_1_email_is_primary: '1'
+      contact_4_number_of_website: '0'
+      contact_4_number_of_im: '0'
+      contact_4_number_of_relationship: '0'
+      contact_4_number_of_cg6: '0'
+      5_contact_type: individual
+      5_webform_label: 'Contact 5'
+      civicrm_5_contact_1_contact_contact_sub_type: {  }
+      civicrm_5_contact_1_contact_existing: 0
+      civicrm_5_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_5_contact_1_contact_middle_name: 0
+      civicrm_5_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_5_contact_1_contact_nick_name: 0
+      civicrm_5_contact_1_contact_gender_id: 0
+      civicrm_5_contact_1_contact_job_title: 0
+      civicrm_5_contact_1_contact_birth_date: 0
+      civicrm_5_contact_1_contact_preferred_communication_method: 0
+      civicrm_5_contact_1_contact_privacy: 0
+      civicrm_5_contact_1_contact_preferred_language: 0
+      civicrm_5_contact_1_contact_communication_style_id: 0
+      civicrm_5_contact_1_contact_contact_id: create_civicrm_webform_element
+      civicrm_5_contact_1_contact_user_id: 0
+      civicrm_5_contact_1_contact_external_identifier: 0
+      civicrm_5_contact_1_contact_source: 0
+      civicrm_5_contact_1_contact_cs: 0
+      civicrm_5_contact_1_contact_employer_id: 0
+      civicrm_5_contact_1_contact_is_deceased: 0
+      civicrm_5_contact_1_contact_deceased_date: 0
+      contact_5_settings_matching_rule: Unsupervised
+      contact_5_number_of_cg1: '0'
+      contact_5_number_of_other: '1'
+      civicrm_5_contact_1_other_group:
+        '': ''
+      civicrm_5_contact_1_other_tag:
+        7: '7'
+      contact_5_number_of_address: '0'
+      contact_5_number_of_phone: '0'
+      contact_5_number_of_email: '1'
+      civicrm_5_contact_1_email_email: create_civicrm_webform_element
+      civicrm_5_contact_1_email_location_type_id: '5'
+      civicrm_5_contact_1_email_is_primary: '1'
+      contact_5_number_of_website: '0'
+      contact_5_number_of_im: '0'
+      contact_5_number_of_relationship: '0'
+      contact_5_number_of_cg6: '0'
+      prefix_known: ''
+      prefix_unknown: ''
+      toggle_message: 0
+      message: ''
+      activity_number_of_activity: '1'
+      activity_1_settings_existing_activity_status:
+        '': ''
+      activity_1_settings_details:
+        entire_result: 0
+        view_link: 0
+        edit_link: 0
+        update_existing: 0
+      civicrm_1_activity_1_activity_activity_type_id: '57'
+      civicrm_1_activity_1_activity_target_contact_id:
+        1: '1'
+        2: '2'
+        3: '3'
+        4: '4'
+        5: '5'
+      civicrm_1_activity_1_activity_source_contact_id: '0'
+      civicrm_1_activity_1_activity_subject: create_civicrm_webform_element
+      civicrm_1_activity_1_activity_details: 0
+      civicrm_1_activity_1_activity_status_id: '0'
+      civicrm_1_activity_1_activity_priority_id: '0'
+      civicrm_1_activity_1_activity_assignee_contact_id:
+        '': ''
+      civicrm_1_activity_1_activity_location: 0
+      civicrm_1_activity_1_activity_activity_date_time: create_civicrm_webform_element
+      civicrm_1_activity_1_activity_duration: 0
+      civicrm_1_activity_1_activity_tag:
+        '': ''
+      civicrm_1_activity_1_activityupload_file_1: 0
+      civicrm_1_activity_1_activityupload_file_2: 0
+      civicrm_1_activity_1_activityupload_file_3: 0
+      participant_reg_type: '0'
+      reg_options:
+        event_type:
+          any: any
+        show_past_events: now
+        show_future_events: '1'
+        show_public_events: all
+        title_display: title
+        show_full_events: 1
+        event_sort_field: start_date
+        show_remaining: '0'
+        validate: 1
+        block_form: 0
+        disable_unregister: 0
+        allow_url_load: 0
+      membership_1_number_of_membership: '0'
+      membership_2_number_of_membership: '0'
+      membership_3_number_of_membership: '0'
+      membership_4_number_of_membership: '0'
+      membership_5_number_of_membership: '0'
+      civicrm_1_contribution_1_contribution_enable_contribution: '0'
+      checksum_text: ''
+      create_fieldsets: 1
+      confirm_subscription: 1
+      block_unknown_users: 0
+      create_new_relationship: 0
+      disable_contact_paging: 0
+      new_contact_source: 'Nonmember riders'
       data:
         contact:
           1:
@@ -470,12 +733,158 @@ handlers:
               1:
                 contact_type: individual
                 contact_sub_type: {  }
+                webform_label: 'Contact 1'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '1'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '1'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_cg6: '0'
+            other:
+              1:
+                tag:
+                  7: '7'
+            email:
+              1:
+                location_type_id: '5'
+                is_primary: '1'
+          2:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+                webform_label: 'Contact 2'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '1'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '1'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_relationship: '0'
+            number_of_cg6: '0'
+            other:
+              1:
+                tag:
+                  7: '7'
+            email:
+              1:
+                location_type_id: '5'
+                is_primary: '1'
+          3:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+                webform_label: 'Contact 3'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '1'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '1'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_relationship: '0'
+            number_of_cg6: '0'
+            other:
+              1:
+                tag:
+                  7: '7'
+            email:
+              1:
+                location_type_id: '5'
+                is_primary: '1'
+          4:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+                webform_label: 'Contact 4'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '1'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '1'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_relationship: '0'
+            number_of_cg6: '0'
+            other:
+              1:
+                tag:
+                  7: '7'
+            email:
+              1:
+                location_type_id: '5'
+                is_primary: '1'
+          5:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+                webform_label: 'Contact 5'
+            matching_rule: Unsupervised
+            number_of_cg1: '0'
+            number_of_other: '1'
+            number_of_address: '0'
+            number_of_phone: '0'
+            number_of_email: '1'
+            number_of_website: '0'
+            number_of_im: '0'
+            number_of_relationship: '0'
+            number_of_cg6: '0'
+            other:
+              1:
+                tag:
+                  7: '7'
+            email:
+              1:
+                location_type_id: '5'
+                is_primary: '1'
+        activity:
+          number_of_activity: '1'
+          1:
+            existing_activity_status: {  }
+            details: {  }
+            activity:
+              1:
+                activity_type_id: '57'
+                target_contact_id:
+                  1: '1'
+                  2: '2'
+                  3: '3'
+                  4: '4'
+                  5: '5'
+        membership:
+          1:
+            number_of_membership: '0'
+          2:
+            number_of_membership: '0'
+          3:
+            number_of_membership: '0'
+          4:
+            number_of_membership: '0'
+          5:
+            number_of_membership: '0'
+        participant_reg_type: '0'
         reg_options:
+          event_type:
+            any: any
+          show_past_events: now
+          show_future_events: '1'
+          show_public_events: all
+          title_display: title
+          show_full_events: 1
+          event_sort_field: start_date
+          show_remaining: '0'
           validate: 1
-      confirm_subscription: 1
-      create_fieldsets: 1
-      new_contact_source: ''
-      civicrm_1_contact_1_contact_first_name: create_civicrm_webform_element
-      civicrm_1_contact_1_contact_last_name: create_civicrm_webform_element
-      civicrm_1_contact_1_contact_existing: create_civicrm_webform_element
+          block_form: 0
+          disable_unregister: 0
+          allow_url_load: 0
 variants: {  }

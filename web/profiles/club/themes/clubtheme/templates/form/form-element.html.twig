@@ -43,10 +43,11 @@
  *
  * @see template_preprocess_form_element()
  */
+ * removed from classes (to remove top/bottom margins): 'w3-section',
+
 #}
 {%
   set classes = [
-    'w3-section',
     'js-form-item',
     'form-item',
     'js-form-type-' ~ type|clean_class,
