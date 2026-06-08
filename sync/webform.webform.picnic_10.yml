@@ -1,4 +1,4 @@
-uuid: 5f3e73f9-8793-4d44-a57a-0d16f9a50c58
+uuid: 3aff7171-c9bb-49d9-b0cc-1787789915ff
 langcode: en
 status: open
 dependencies:
@@ -10,9 +10,9 @@ close: null
 uid: 1
 template: false
 archive: false
-id: register_for_picnic
-title: 'Picnic - $5'
-description: '<p>Registration for paid $5 picnic. To create a form with a different fee: Duplicate the form. Select Build. Edit&nbsp;"Participant Fee", click Advanced, and change default value.&nbsp;Save form with a new name.</p>'
+id: picnic_10
+title: 'Picnic - $10'
+description: '<p>Registration for paid $10 picnic. To create a form with a different fee: Duplicate the form. Select Build. Edit&nbsp;"Participant Fee", click Advanced, and change default value.&nbsp;Save form with a new name.</p>'
 categories:
   - 'Paid event'
 elements: |-
@@ -92,7 +92,7 @@ elements: |-
         '#field_prefix': $
         '#size': '1'
         '#readonly': true
-        '#default_value': '5'
+        '#default_value': '10'
         '#attributes':
           style: 'width: 40px;font-weight:bold;color:black;border-width:0 !important;background: unset;-webkit-box-shadow:unset;padding-left:0; '
         '#data_type': Money
