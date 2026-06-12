@@ -149,3 +149,16 @@ function club_page_node_presave(EntityInterface $node) {
     }
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function club_page_theme() {
+  return [
+    // Create custom suggestion from existing template suggestion
+    'page__page' => [
+      'template' => 'page--report',
+      'base hook' => 'page',
+    ],
+  ];
+}

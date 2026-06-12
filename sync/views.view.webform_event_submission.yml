@@ -4,9 +4,10 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_date
-    - system.menu.main
+    - system.menu.club-reports
     - user.role.administrator
     - user.role.authenticated
+    - user.role.board
     - user.role.civicrm
     - user.role.events_coordinator
     - user.role.rides_coordinator
@@ -692,6 +693,7 @@ display:
         options:
           role:
             administrator: administrator
+            board: board
             events_coordinator: events_coordinator
             civicrm: civicrm
             rides_coordinator: rides_coordinator
@@ -841,16 +843,21 @@ display:
           empty: false
           content: '<em>Click event name for a list of registrants.</em><br><br>'
       display_extenders: {  }
-      path: event-registrations
+      path: report/event-registrations
       menu:
         type: normal
-        title: 'Event registrations, Free'
+        title: 'Event Registrations, Free'
         description: ''
-        weight: -51
+        weight: 0
         expanded: false
-        menu_name: main
-        parent: 'menu_link_content:820d68a6-cdf0-4d17-82e5-32c5d7a1ec91'
+        menu_name: club-reports
+        parent: ''
         context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
     cache_metadata:
       max-age: -1
       contexts:

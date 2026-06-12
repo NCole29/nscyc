@@ -568,7 +568,7 @@ display:
         type: normal
         title: 'Website change log'
         description: ''
-        weight: -47
+        weight: -45
         enabled: false
         expanded: false
         menu_name: main

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.main
+    - system.menu.club-reports
     - user.role.administrator
     - user.role.board
     - user.role.civicrm
@@ -693,15 +693,15 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: civicrm-mail
+      path: report/civicrm-mail
       menu:
         type: normal
         title: 'CiviCRM Mailings'
         description: ''
-        weight: -49
+        weight: 0
         expanded: false
-        menu_name: main
-        parent: 'menu_link_content:cbaa4cb1-8c81-455a-b17c-c243a2ce1960'
+        menu_name: club-reports
+        parent: ''
         context: '0'
         as_local_task: false
         local_task_link_title: ''

@@ -3,8 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.main
+    - system.menu.club-reports
     - user.role.administrator
+    - user.role.board
     - user.role.civicrm
     - user.role.rides_coordinator
     - user.role.site_admin
@@ -27,7 +28,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Nonmember riders'
+      title: 'Nonmember Riders'
       fields:
         id:
           id: id
@@ -587,6 +588,7 @@ display:
         options:
           role:
             administrator: administrator
+            board: board
             civicrm: civicrm
             rides_coordinator: rides_coordinator
             site_admin: site_admin
@@ -945,16 +947,21 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: nonmember-riders
+      path: report/nonmember-riders
       menu:
         type: normal
-        title: 'Nonmember riders'
+        title: 'Nonmember Riders'
         description: ''
-        weight: -47
+        weight: 0
         expanded: false
-        menu_name: main
-        parent: 'menu_link_content:820d68a6-cdf0-4d17-82e5-32c5d7a1ec91'
+        menu_name: club-reports
+        parent: ''
         context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
     cache_metadata:
       max-age: -1
       contexts:
