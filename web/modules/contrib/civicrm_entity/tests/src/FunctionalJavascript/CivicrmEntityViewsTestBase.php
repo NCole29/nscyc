@@ -98,11 +98,13 @@ abstract class CivicrmEntityViewsTestBase extends CivicrmEntityTestBase {
     //
     // We also want the advanced column to be open, so that it's easier to add
     // relationships.
-    \Drupal::configFactory()
-      ->getEditable('views.settings')
-      ->set('ui.always_live_preview', FALSE)
-      ->set('ui.show.advanced_column', TRUE)
-      ->save();
+    $viewsSettings = \Drupal::configFactory()->getEditable('views.settings');
+    $viewsSettings->set('ui.always_live_preview', FALSE);
+    // ui.show.advanced_column was removed in Drupal 11.2.
+    if (version_compare(\Drupal::VERSION, '11.2', '<')) {
+      $viewsSettings->set('ui.show.advanced_column', TRUE);
+    }
+    $viewsSettings->save();
 
     $date_format = DateFormat::load('medium');
     $date_format

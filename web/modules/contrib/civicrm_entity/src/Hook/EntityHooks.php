@@ -110,7 +110,7 @@ class EntityHooks {
             'canonical' => sprintf('/%s/{%s}', $clean_entity_type_id, $entity_type_id),
             'delete-form' => sprintf('/%s/{%s}/delete', $clean_entity_type_id, $entity_type_id),
             'edit-form' => sprintf('/%s/{%s}/edit', $clean_entity_type_id, $entity_type_id),
-            'add-form' => sprintf('/%s/add', $clean_entity_type_id, $entity_type_id),
+            'add-form' => sprintf('/%s/add', $clean_entity_type_id),
             'collection' => sprintf('/admin/structure/civicrm-entity/%s', $clean_entity_type_id),
           ],
           'field_ui_base_route' => "entity.$entity_type_id.collection",
@@ -145,8 +145,8 @@ class EntityHooks {
           );
         }
       }
-      
-      // Add inline_form handler for all civicrm entity types if inline_entity_form module is enabled.
+
+      // Add inline_form handler when inline_entity_form module is enabled.
       if ($this->moduleHandler->moduleExists('inline_entity_form')) {
         $entity_type_info['handlers']['inline_form'] = '\Drupal\inline_entity_form\Form\EntityInlineForm';
       }

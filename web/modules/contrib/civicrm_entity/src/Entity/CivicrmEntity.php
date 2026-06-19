@@ -2,6 +2,7 @@
 
 namespace Drupal\civicrm_entity\Entity;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\civicrm_entity\Plugin\Field\ActivityEndDateFieldItemList;
 use Drupal\civicrm_entity\Plugin\Field\BundleFieldItemList;
 use Drupal\civicrm_entity\SupportedEntities;
@@ -132,9 +133,14 @@ class CivicrmEntity extends ContentEntityBase {
       $fields[$name] = $field_definition_provider->getBaseFieldDefinition($civicrm_field);
       $fields[$name]->setRequired(isset($civicrm_required_fields[$name]));
 
-      if (str_starts_with($name, 'custom_') && $values = \Drupal::service('civicrm_entity.api')->getCustomFieldMetadata($name)) {
-        $fields[$name]->setSetting('civicrm_entity_field_metadata', $values);
-        $fields[$name]->setRequired((bool) $civicrm_field['is_required']);
+      if (str_starts_with($name, 'custom_')) {
+        [, $custom_field_id] = explode('_', $name, 2);
+        if (is_numeric($custom_field_id)) {
+          if ($values = \Drupal::service('civicrm_entity.api')->getCustomFieldMetadata($name)) {
+            $fields[$name]->setSetting('civicrm_entity_field_metadata', $values);
+            $fields[$name]->setRequired((bool)$civicrm_field['is_required']);
+          }
+        }
       }
     }
 
@@ -199,7 +205,10 @@ class CivicrmEntity extends ContentEntityBase {
         $field_label = $definition->getLabel();
         $message = $civicrm_violation['message'] ?? '';
         // Create a TranslatableMarkup object to safely handle the replacement.
-        $translated_message = new \Drupal\Core\StringTranslation\TranslatableMarkup($message, [':' . $civicrm_field => $field_label]);
+        // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
+        $translated_message = new TranslatableMarkup($message, [
+          ':' . $civicrm_field => $field_label,
+        ]);
         $violation = new ConstraintViolation(
           $translated_message,
           $translated_message,

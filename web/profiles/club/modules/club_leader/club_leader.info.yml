@@ -10,4 +10,3 @@ dependencies:
   - drupal:taxonomy
   - drupal:views
   - drupal:user
-  - views_infinite_scroll:views_infinite_scroll

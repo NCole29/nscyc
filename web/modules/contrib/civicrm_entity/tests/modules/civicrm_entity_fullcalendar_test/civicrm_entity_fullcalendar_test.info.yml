@@ -2,6 +2,7 @@ name: CiviCRM Entity Fullcalendar Test
 type: module
 description: 'Test module for CiviCRM Entity and Fullcalendar View.'
 package: CiviCRM
+container_rebuild_required: true
 core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:datetime
@@ -11,7 +12,7 @@ dependencies:
   - civicrm_entity:civicrm_entity
   - fullcalendar_view:fullcalendar_view
 
-# Information added by Drupal.org packaging script on 2026-04-27
-version: '4.0.5'
+# Information added by Drupal.org packaging script on 2026-06-16
+version: '4.0.6'
 project: 'civicrm_entity'
-datestamp: 1777328844
+datestamp: 1781651382
