@@ -130,6 +130,7 @@
     "drupal/admin_toolbar": "^3.4",
     "drupal/allowed_formats": "^3.0",
     "drupal/anchor_link": "^3.0@alpha",
+    "drupal/auto_entitylabel": "^3.4",
     "drupal/calendar_view": "^2.1",
     "drupal/charts": "^5.2",
     "drupal/civicrm_entity": "^4.0",

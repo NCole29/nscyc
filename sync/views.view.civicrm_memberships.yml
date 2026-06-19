@@ -599,7 +599,12 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
       sorts:
         sort_name:
           id: sort_name
@@ -1122,6 +1127,7 @@ display:
             board: board
             civicrm: civicrm
             site_admin: site_admin
+      empty: {  }
       sorts:
         start_date:
           id: start_date
@@ -1255,6 +1261,7 @@ display:
           separator: ' - '
           hide_empty: false
       defaults:
+        empty: false
         access: false
         title: false
         css_class: false
@@ -1765,6 +1772,18 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'None found.'
+          tokenize: false
       sorts:
         sort_name:
           id: sort_name
@@ -1949,6 +1968,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
         css_class: false
         use_ajax: false
@@ -2647,6 +2667,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+      empty: {  }
       sorts:
         sort_name:
           id: sort_name
@@ -2926,6 +2947,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
         use_ajax: false
         pager: false

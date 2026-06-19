@@ -12,6 +12,7 @@ dependencies:
     - node.type.recurring_dates
     - node.type.recurring_ride
     - node.type.ride
+    - system.menu.admin
     - taxonomy.vocabulary.activities
     - taxonomy.vocabulary.gravel_categories
     - user.role.administrator
@@ -4088,16 +4089,21 @@ display:
       display_extenders: {  }
       path: admin/content/recurring_dates
       menu:
-        type: tab
+        type: normal
         title: 'Recurring dates'
         description: ''
-        weight: -10
+        weight: 0
         expanded: false
         menu_name: admin
-        parent: system.admin
+        parent: system.admin_content
         context: '0'
+        as_local_task: false
+        local_task_link_title: ''
+        local_task_parent: 'views_view:view.block_content.page_1'
+        local_task_weight: 0
+        local_task_custom_parent_route: ''
       tab_options:
-        type: normal
+        type: none
         title: Content
         description: 'Find and manage content'
         weight: -10

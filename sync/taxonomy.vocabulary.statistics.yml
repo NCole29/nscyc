@@ -1,0 +1,9 @@
+uuid: c6a42227-fb5f-4306-bf10-0eb3320f1843
+langcode: en
+status: true
+dependencies: {  }
+name: Statistics
+vid: statistics
+description: 'Annual statistics. Member and ride counts are added programmatically.'
+weight: 0
+new_revision: false

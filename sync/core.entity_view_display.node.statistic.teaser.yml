@@ -1,0 +1,26 @@
+uuid: 2bff18b5-a79f-4bd4-b90d-3ce69b69a573
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.statistic.field_category
+    - field.field.node.statistic.field_number
+    - field.field.node.statistic.field_year
+    - node.type.statistic
+  module:
+    - user
+id: node.statistic.teaser
+targetEntityType: node
+bundle: statistic
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_category: true
+  field_number: true
+  field_year: true

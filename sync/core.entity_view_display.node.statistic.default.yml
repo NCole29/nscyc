@@ -1,0 +1,49 @@
+uuid: b8c0588a-8e27-4ad8-b5a7-f0452e1cce65
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.statistic.field_category
+    - field.field.node.statistic.field_number
+    - field.field.node.statistic.field_year
+    - node.type.statistic
+  module:
+    - datetime
+    - user
+id: node.statistic.default
+targetEntityType: node
+bundle: statistic
+mode: default
+content:
+  field_category:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_number:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_year:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: html_year
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

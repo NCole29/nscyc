@@ -195,6 +195,7 @@ access:
   create:
     roles:
       - administrator
+      - board
       - content_creator
       - editor
       - site_admin

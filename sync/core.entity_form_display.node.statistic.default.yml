@@ -1,0 +1,56 @@
+uuid: 4a2b977c-cc14-44a1-96a9-5f6e15887082
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.statistic.field_category
+    - field.field.node.statistic.field_number
+    - field.field.node.statistic.field_year
+    - node.type.statistic
+  module:
+    - datetime
+    - datetimehideseconds
+id: node.statistic.default
+targetEntityType: node
+bundle: statistic
+mode: default
+content:
+  field_category:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_number:
+    type: number
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_year:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings:
+      datetimehideseconds:
+        hide: true
+  status:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  moderation_state: true
+  path: true
+  promote: true
+  publish_on: true
+  sticky: true
+  title: true
+  uid: true
+  unpublish_on: true
+  url_redirects: true

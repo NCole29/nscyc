@@ -1,0 +1,24 @@
+uuid: d68de18a-ffc9-4068-a803-ad4aef215771
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_year
+    - node.type.statistic
+  module:
+    - datetime
+id: node.statistic.field_year
+field_name: field_year
+entity_type: node
+bundle: statistic
+label: Year
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

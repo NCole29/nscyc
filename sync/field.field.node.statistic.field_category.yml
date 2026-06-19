@@ -1,0 +1,29 @@
+uuid: 7ee6e09e-78bd-4dfa-aa82-517a81a21932
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.statistic
+    - taxonomy.vocabulary.statistics
+id: node.statistic.field_category
+field_name: field_category
+entity_type: node
+bundle: statistic
+label: Category
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      statistics: statistics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

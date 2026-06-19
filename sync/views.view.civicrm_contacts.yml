@@ -1811,7 +1811,7 @@ display:
           value:
             min: ''
             max: ''
-            value: '2025'
+            value: '2026'
             type: date_year
           group: 1
           exposed: false
