@@ -6,6 +6,7 @@ dependencies:
     - comment
     - contact
     - file
+    - file_delete
     - system
     - webform_node
   enforced:
@@ -20,6 +21,8 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access user contact forms'
+  - 'delete files immediately'
+  - 'delete files override usage'
   - 'delete own files'
   - 'post comments'
   - 'skip comment approval'

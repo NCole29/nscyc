@@ -29,6 +29,7 @@ dependencies:
     - content_moderation
     - contextual
     - file
+    - file_delete
     - filter
     - help
     - layout_builder
@@ -86,6 +87,8 @@ permissions:
   - 'delete all revisions'
   - 'delete any basic block content'
   - 'delete any paragraphs_block block content'
+  - 'delete files immediately'
+  - 'delete files override usage'
   - 'delete media'
   - 'delete own announcement content'
   - 'delete own banner content'

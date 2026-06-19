@@ -21,6 +21,7 @@ dependencies:
     - content_moderation
     - contextual
     - file
+    - file_delete
     - filter
     - help
     - media
@@ -77,6 +78,8 @@ permissions:
   - 'create media'
   - 'delete club_contact entity'
   - 'delete contacts'
+  - 'delete files immediately'
+  - 'delete files override usage'
   - 'delete in CiviContribute'
   - 'delete in CiviEvent'
   - 'delete in CiviMail'

@@ -7,4 +7,4 @@ _core:
 id: day_and_date
 label: 'Day and date'
 locked: false
-pattern: 'l - F j, Y'
+pattern: 'l, F j, Y'

@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.past_event
     - field.field.node.event.banner_image
     - field.field.node.event.field_components
+    - field.field.node.event.field_contact_form
+    - field.field.node.event.field_contact_person
     - field.field.node.event.field_date
     - field.field.node.event.field_location
     - field.field.node.event.field_padding
@@ -13,6 +15,7 @@ dependencies:
     - field.field.node.event.field_registration
     - field.field.node.event.field_registration_close_date
     - field.field.node.event.field_registration_form
+    - field.field.node.event.field_registration_free_form
     - field.field.node.event.field_registration_link
     - field.field.node.event.field_results_access
     - field.field.node.event.field_summary
@@ -96,7 +99,7 @@ third_party_settings:
                 label: above
                 settings:
                   timezone_override: ''
-                  format_type: medium
+                  format_type: day_and_date
                 third_party_settings: {  }
             weight: 1
             additional: {  }
@@ -171,11 +174,14 @@ content:
 hidden:
   banner_image: true
   field_components: true
+  field_contact_form: true
+  field_contact_person: true
   field_date: true
   field_padding: true
   field_page_access: true
   field_registration: true
   field_registration_close_date: true
+  field_registration_free_form: true
   field_results_access: true
   field_text: true
   field_type_of_page: true

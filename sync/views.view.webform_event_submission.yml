@@ -19,7 +19,6 @@ dependencies:
     - datetime
     - node
     - user
-    - views_infinite_scroll
     - webform
     - webform_views
 _core:
@@ -667,15 +666,18 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: infinite_scroll
+        type: full
         options:
           offset: 0
-          items_per_page: 30
+          pagination_heading_level: h4
+          items_per_page: 25
           total_pages: null
           id: 0
           tags:
             next: ››
             previous: ‹‹
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -684,10 +686,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: true
-            initially_load_all_pages: false
+          quantity: 9
       access:
         type: role
         options:
@@ -1288,15 +1287,18 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: infinite_scroll
+        type: full
         options:
           offset: 0
-          items_per_page: 30
+          pagination_heading_level: h4
+          items_per_page: 25
           total_pages: null
           id: 0
           tags:
             next: ››
             previous: ‹‹
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -1305,10 +1307,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          views_infinite_scroll:
-            button_text: 'Load More'
-            automatically_load_content: true
-            initially_load_all_pages: false
+          quantity: 9
       access:
         type: role
         options:

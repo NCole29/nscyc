@@ -9,6 +9,7 @@ dependencies:
     - club_ride
     - contact
     - file
+    - file_delete
     - filter
     - media
     - system
@@ -27,6 +28,8 @@ permissions:
   - 'access site-wide contact form'
   - 'access uploaded files'
   - 'access user contact forms'
+  - 'delete files immediately'
+  - 'delete files override usage'
   - 'delete own files'
   - 'edit my contact'
   - 'make online contributions'

@@ -130,7 +130,6 @@ module:
   view_unpublished: 0
   views_bulk_operations: 0
   views_data_export: 0
-  views_infinite_scroll: 0
   views_local_tasks: 0
   views_slideshow: 0
   views_slideshow_cycle: 0
