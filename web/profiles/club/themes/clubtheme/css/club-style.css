@@ -247,25 +247,26 @@ ul.breadcrumb {
    Reduced margin-bottom, negative left/right margins.
    Removed word-break and reduced padding in comment content.
   -----------------------------------------------------------*/
-.comment {
-  margin-bottom: 8px;
-  margin-left: -16px;
-  margin-right: -16px;
-  vertical-align: top;
-  display: table;
-}
 .comment__content {
-  position: relative;
-  display: table-cell;
-  padding: 8px 8px;
-  vertical-align: top;
-  width: 100%;
-  border: 1px solid #d3d7d9;
-  font-size: 0.8em;
-  word-break: normal;
+    position: relative;
+    display: table-cell;
+    padding: 4px;
+    vertical-align: top;
+    width: 100%;
+    border: 1px solid #EDE9E8;
+    word-break: break-all;
+    hyphens: auto;
 }
-.add-comment {
-	margin-bottom: 0!important;
+.comment__content h3 {
+  font-size: 20px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.comment__content p {
+  font-size: 15px;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 /* FOOTERS

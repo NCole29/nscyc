@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
-    - filter.format.full_html
     - filter.format.ride_page
     - filter.format.summary_fields
     - node.type.location
@@ -38,7 +37,7 @@ dependencies:
       - club_user
 id: rides_coordinator
 label: 'Rides coordinator'
-weight: -2
+weight: -3
 is_admin: false
 permissions:
   - 'access CiviCRM'
@@ -97,7 +96,6 @@ permissions:
   - 'use rides transition publish'
   - 'use rides transition publish_notify'
   - 'use text format basic_html'
-  - 'use text format full_html'
   - 'use text format ride_page'
   - 'use text format summary_fields'
   - 'view all contacts'

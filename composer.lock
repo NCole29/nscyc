@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b25010a55e3382a24dc94669b26e0849",
+    "content-hash": "8f86ed0642f28e1d7c1bed08e65a53e3",
     "packages": [
         {
             "name": "adrienrn/php-mimetyper",
@@ -5458,6 +5458,59 @@
                 "source": "https://www.drupal.org/project/image_widget_crop",
                 "issues": "https://www.drupal.org/project/issues/image_widget_crop",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
+            "name": "drupal/imce",
+            "version": "3.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/imce.git",
+                "reference": "3.1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/imce-3.1.5.zip",
+                "reference": "3.1.5",
+                "shasum": "197c4e6181581e00ed92d35f7f6a873531892636"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10 || ^11"
+            },
+            "require-dev": {
+                "drupal/bueditor": "^3.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.1.5",
+                    "datestamp": "1777846923",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://www.drupal.org/node/2841111/committers",
+                    "role": "Developer"
+                },
+                {
+                    "name": "ufku",
+                    "homepage": "https://www.drupal.org/user/9910"
+                }
+            ],
+            "description": "Provides a file manager supporting personal folders.",
+            "homepage": "https://drupal.org/project/imce",
+            "support": {
+                "source": "https://git.drupalcode.org/project/imce",
+                "issues": "https://www.drupal.org/project/issues/imce"
             }
         },
         {
@@ -16317,48 +16370,6 @@
                 "source": "https://github.com/TYPO3/phar-stream-wrapper/tree/v4.0.0"
             },
             "time": "2024-12-10T00:00:25+00:00"
-        },
-        {
-            "name": "vardot/ckeditor5-anchor-drupal",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Vardot/ckeditor5-anchor-drupal.git",
-                "reference": "6853b37ba98f04cc313537ef616e989c09ada92d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/ckeditor5-anchor-drupal/zipball/6853b37ba98f04cc313537ef616e989c09ada92d",
-                "reference": "6853b37ba98f04cc313537ef616e989c09ada92d",
-                "shasum": ""
-            },
-            "require": {
-                "drupal/core": "^9 || <=10.4 || <=11.1"
-            },
-            "type": "drupal-library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vardot",
-                    "homepage": "https://github.com/vardot",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Anchor feature for CKEditor 5, adapted for Drupal",
-            "homepage": "https://github.com/vardot/ckeditor5-anchor-drupal",
-            "keywords": [
-                "ckeditor5",
-                "drupal",
-                "plugin"
-            ],
-            "support": {
-                "issues": "http://drupal.org/project/issues/anchor_link",
-                "source": "http://cgit.drupalcode.org/anchor_link"
-            },
-            "time": "2025-07-04T22:14:17+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",

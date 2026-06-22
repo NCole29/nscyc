@@ -14,6 +14,7 @@
 # Ignore paths that may contain user-generated content
 /web/sites
 /private
+/keys
 
 # Ignore paths that may contain temporary files
 /tmp

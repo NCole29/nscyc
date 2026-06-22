@@ -167,6 +167,7 @@
     "drupal/google_analytics": "*",
     "drupal/honeypot": "^2.1",
     "drupal/image_widget_crop": "^3.0",
+    "drupal/imce": "^3.1",
     "drupal/inline_entity_form": "^3.0@RC",
     "drupal/key": "^1.22",
     "drupal/kint": "^2.3",

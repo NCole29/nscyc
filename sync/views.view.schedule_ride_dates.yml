@@ -2926,7 +2926,7 @@ display:
         type: normal
         title: 'Ride schedules'
         description: ''
-        weight: -46
+        weight: -47
         enabled: false
         expanded: false
         menu_name: main

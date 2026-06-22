@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
-    - filter.format.full_html
     - filter.format.ride_page
     - filter.format.summary_fields
     - node.type.location
@@ -30,7 +29,7 @@ dependencies:
       - club_user
 id: ride_leader
 label: 'Ride leader'
-weight: -3
+weight: -4
 is_admin: false
 permissions:
   - 'access comments'
@@ -59,7 +58,6 @@ permissions:
   - 'use rides transition create_new_draft'
   - 'use rides transition finalize_draft'
   - 'use text format basic_html'
-  - 'use text format full_html'
   - 'use text format ride_page'
   - 'use text format summary_fields'
   - 'view club_schedule entity'

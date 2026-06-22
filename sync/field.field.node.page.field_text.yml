@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_text
-    - filter.format.admin_html
     - filter.format.full_html
     - node.type.page
   module:
@@ -23,6 +22,5 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
-    - admin_html
     - full_html
 field_type: text_long
