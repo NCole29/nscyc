@@ -86,25 +86,19 @@ function club_ride_node_presave(EntityInterface $node) {
 
     // Process RWGPS routes.
     if ($node->field_rwgps_routes) {
+      $rwgps = \Drupal::getContainer()->get(get_rwgps_client::class);
 
       // Trim whitespace and validate route numbers as numeric.
       foreach ($node->field_rwgps_routes as $routeId) {
         $routeId->target_id = trim($routeId->target_id);
+
         if (preg_match('/[^0-9()]/', $routeId->target_id)) {
           \Drupal::messenger()->addStatus('A RWGPS route number has non-numeric characters and was not saved');
           unset($routeId->target_id);
-        } 
-      }
-
-      // Store RWGPS data in club_route table when ride is published.
-      if ($node->status->value == 1) {
-        $rwgps = \Drupal::getContainer()->get(get_rwgps_client::class);
-        $ride_start = $node->field_location->target_id;
-
-        foreach ($node->field_rwgps_routes as $routeId) {
-          if (is_numeric($routeId->target_id)) {
-            $rwgps->getRouteInfo($routeId->target_id, $ride_start);
-          }
+        }
+        elseif (is_numeric($routeId->target_id) and $node->status->value == 1) {
+          $ride_start = $node->field_location->target_id;
+          $rwgps->getRouteInfo($routeId->target_id, $ride_start);
         }
       }
     }

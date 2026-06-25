@@ -167,3 +167,21 @@ function club_ride_update_9004() {
   $definition_manager->installFieldStorageDefinition('surface', $entity, $entity, $surface);
 }
 */
+/**
+ * Update the field definition for my custom entity.
+ */
+function club_ride_update_9005() {
+  $entity_type_id = 'club_route';
+  $fields = ['unpaved','terrain','surface'];
+
+  foreach ($fields as $field_name) {
+    $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+    $field_storage_definition = $entity_definition_update_manager->getFieldStorageDefinition($field_name, $entity_type_id);
+
+    if ($field_storage_definition) {
+      // This forces Drupal to read the updated definitions from your PHP class code
+      $entity_definition_update_manager->updateFieldStorageDefinition($field_storage_definition);
+    }
+  }
+
+}
