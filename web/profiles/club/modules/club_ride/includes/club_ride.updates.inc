@@ -110,15 +110,33 @@ function club_ride_update_9003() {
   }
 }
 
+/**
+ * Update the field definition for club_route on dev.
+ */
+function club_ride_update_9005() {
+  $entity_type_id = 'club_route';
+  $fields = ['unpaved','terrain','surface'];
+
+  foreach ($fields as $field_name) {
+    $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+    $field_storage_definition = $entity_definition_update_manager->getFieldStorageDefinition($field_name, $entity_type_id);
+
+    if ($field_storage_definition) {
+      // This forces Drupal to read the updated definitions from your PHP class code
+      $entity_definition_update_manager->updateFieldStorageDefinition($field_storage_definition);
+    }
+  }
+
+}
+
 
 /**
- * Update 9004 - Add columns to club_route table.
- * Implemented in dev. Do not run in staging and production because I imported the route tables
- *  so that I'm not "hitting" RWGPS (400 times!) to update the table in each environment.
+ * Update 9006 - Add columns to club_route table.
+ *  Ran this as 9004 on dev but not staging & prod.
+ *  Then ran 9005 on dev to fix "Mismatched entity and/or field definitions". 
+ *  Running this on staging & prod,  renumbered as 9006.
  */
-
-/*
-function club_ride_update_9004() {
+function club_ride_update_9006() {
   $entity = 'club_route';
 
   $definition_manager = \Drupal::entityDefinitionUpdateManager();
@@ -165,23 +183,4 @@ function club_ride_update_9004() {
   $definition_manager->installFieldStorageDefinition('unpaved', $entity, $entity, $unpaved);
   $definition_manager->installFieldStorageDefinition('terrain', $entity, $entity, $terrain);
   $definition_manager->installFieldStorageDefinition('surface', $entity, $entity, $surface);
-}
-*/
-/**
- * Update the field definition for my custom entity.
- */
-function club_ride_update_9005() {
-  $entity_type_id = 'club_route';
-  $fields = ['unpaved','terrain','surface'];
-
-  foreach ($fields as $field_name) {
-    $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
-    $field_storage_definition = $entity_definition_update_manager->getFieldStorageDefinition($field_name, $entity_type_id);
-
-    if ($field_storage_definition) {
-      // This forces Drupal to read the updated definitions from your PHP class code
-      $entity_definition_update_manager->updateFieldStorageDefinition($field_storage_definition);
-    }
-  }
-
 }
