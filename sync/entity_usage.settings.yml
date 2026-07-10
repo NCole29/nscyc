@@ -7,6 +7,7 @@ track_enabled_source_entity_types:
   - node
   - paragraph
 track_enabled_target_entity_types:
+  - file
   - media
 track_enabled_plugins:
   - block_field
