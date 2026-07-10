@@ -63,7 +63,7 @@ function club_user_menu_local_tasks_alter(&$data, $route_name, RefinableCacheabl
     if ($path_id === $user_id) {
 
     $db = \Drupal::database();
-    $match = $db->query("SELECT contact_id FROM {civicrm_uf_match} WHERE id = :user_id", [':user_id' => $user_id, ])
+    $match = $db->query("SELECT contact_id FROM {civicrm_uf_match} WHERE uf_id = :user_id", [':user_id' => $user_id, ])
     ->fetch();
     $contact_id = json_decode(json_encode($match), true);
 
@@ -78,7 +78,8 @@ function club_user_menu_local_tasks_alter(&$data, $route_name, RefinableCacheabl
         $status_id = reset($status_id);
 
         if ($status_id > 2) {
-          \Drupal::messenger()->addError("Your membership is not current. See MEMBERSHIP INFO at lower left on this page");
+          \Drupal::messenger()->addError("Your membership is not current. See MEMBERSHIP INFO at lower left on this page. 
+          User id = $user_id, Contact id = $contact_id, Status_id = $status_id.");
         }
       }
     }

@@ -79,7 +79,6 @@ class CRM_Core_BAO_Navigation extends CRM_Core_DAO_Navigation {
     if (empty($params['id'])) {
       $params['is_active'] ??= FALSE;
       $params['has_separator'] ??= FALSE;
-      $params['domain_id'] = $params['domain_id'] ?? CRM_Core_Config::domainID();
     }
 
     if (!isset($params['id']) ||
@@ -430,6 +429,15 @@ class CRM_Core_BAO_Navigation extends CRM_Core_DAO_Navigation {
    */
   private static function isNotFullyFormedUrl($url) {
     return substr($url, 0, 4) !== 'http' && $url[0] !== '/' && $url[0] !== '#';
+  }
+
+  /**
+   * Lightweight cache flush for just the navigation menu.
+   *
+   * Note: This function must never take any arguments, as it's called from an `on_change` settings callback.
+   */
+  public static function flushCache(): void {
+    Civi::cache('navigation')->flush();
   }
 
   /**

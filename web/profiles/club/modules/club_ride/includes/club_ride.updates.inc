@@ -131,11 +131,13 @@ function club_ride_update_9005() {
 
 
 /**
- * Update 9006 - Add columns to club_route table.
+ * Update 9006 - Run on staging & prod only.
+ *  Add columns to club_route table.
  *  Ran this as 9004 on dev but not staging & prod.
  *  Then ran 9005 on dev to fix "Mismatched entity and/or field definitions". 
  *  Running this on staging & prod,  renumbered as 9006.
  */
+/*
 function club_ride_update_9006() {
   $entity = 'club_route';
 
@@ -184,3 +186,4 @@ function club_ride_update_9006() {
   $definition_manager->installFieldStorageDefinition('terrain', $entity, $entity, $terrain);
   $definition_manager->installFieldStorageDefinition('surface', $entity, $entity, $surface);
 }
+*/

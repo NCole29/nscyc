@@ -16,6 +16,8 @@
  */
 use Civi\Api4\Contribution;
 use Civi\Api4\Membership;
+use Civi\Api4\Payment;
+use Civi\Payment\Exception\PaymentProcessorException;
 
 /**
  * form to process actions on the group aspect of Custom Data
@@ -59,6 +61,55 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
    */
   private function getSelectedProductOption(): mixed {
     return $this->getSubmittedValue('options_' . $this->getSelectedProductID());
+  }
+
+  /**
+   * @return array
+   * @throws \CRM_Core_Exception
+   */
+  private function processPaymentOnExistingContribution(): array {
+    try {
+      $paymentParams = [
+        'amount' => $this->getSubmittedValue('total_amount'),
+        'contributionID' => $this->getExistingContributionID(),
+      ] + $this->getBasePaymentParams() + $this->prepareParamsForPaymentProcessor($this->getSubmittedValues());
+      $payment = Civi\Payment\System::singleton()->getById($this->getPaymentProcessorID());
+      $result = $payment->doPayment($paymentParams);
+      if ($result['payment_status'] == 'Completed') {
+        Payment::create(FALSE)
+          ->addValue('contribution_id', $this->getExistingContributionID())
+          ->addValue('total_amount', $this->getSubmittedValue('total_amount'))
+          ->addValue('payment_processor_id', $this->getPaymentProcessorID())
+          ->addValue('trxn_id', $result['trxn_id'])
+          ->addValue('fee_amount', $result['fee_amount'] ?? NULL)
+          ->addValue('card_type_id', $paymentParams['card_type_id'])
+          ->addValue('pan_truncation', $paymentParams['pan_truncation'])
+          ->execute();
+      }
+    }
+    catch (PaymentProcessorException $e) {
+      // Clean up DB as appropriate.
+      if (!empty($paymentParams['contributionID'])) {
+        CRM_Contribute_BAO_Contribution::failPayment($paymentParams['contributionID'],
+          $paymentParams['contactID'], $e->getMessage());
+      }
+      if (!empty($paymentParams['contributionRecurID'])) {
+        CRM_Contribute_BAO_ContributionRecur::deleteRecurContribution($paymentParams['contributionRecurID']);
+      }
+
+      $result['is_payment_failure'] = TRUE;
+      $result['error'] = $e;
+    }
+    return $result;
+  }
+
+  /**
+   * @return bool
+   * @throws \CRM_Core_Exception
+   */
+  public function isRecordPaymentOnly(): bool {
+    $isRecordPaymentOnly = $this->getSubmittedValue('total_amount') && $this->getSubmittedValue('total_amount') !== $this->getExistingContributionValue('total_amount');
+    return $isRecordPaymentOnly;
   }
 
   /**
@@ -133,7 +184,14 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
    * @throws \CRM_Core_Exception
    */
   protected function getExistingMembership(int $membershipTypeID): array|false {
-    $contactID = $this->_membershipContactID ?: $this->getContactID();
+    $contactID = $this->getSubmittedValue('onbehalfof_id') ?: $this->getContactID();
+    if (!empty($this->_membershipContactID) && $contactID !== $this->_membershipContactID) {
+      // We don't really expect this to be true anymore - perhaps we should add logging to confirm this.
+      // the $this->_membershipContactID property is probably on it's way out.
+      if (!$this->getSubmittedValue('onbehalfof_id')) {
+        $contactID = $this->_membershipContactID;
+      }
+    }
 
     // Find dedupe ContactId when anonymous form submission.
     if (empty($contactID)) {
@@ -152,7 +210,7 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
    */
   public function getSubmittedPcpValues(): ?array {
     $pcp = $this->getPcpID() ? [
-      'pcp_mode_through_id' => $this->getPcpID(),
+      'pcp_made_through_id' => $this->getPcpID(),
       'pcp_display_in_roll' => $this->getSubmittedValue('pcp_display_in_roll'),
       'pcp_roll_nickname' => $this->getSubmittedValue('pcp_roll_nickname'),
       'pcp_personal_note' => $this->getSubmittedValue('pcp_personal_note'),
@@ -450,9 +508,9 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
     parent::preProcess();
     $this->_ccid = $this->getExistingContributionID();
 
-    $this->_params = $this->controller->exportValues('Main');
     $this->_params['ip_address'] = CRM_Utils_System::ipAddress();
     $this->_params['amount'] = $this->getMainContributionAmount();
+    $this->assign('paymentAmount', $this->getSubmittedValue('total_amount'));
     if (isset($this->_params['amount'])) {
       $this->setFormAmountFields($this->getPriceSetID());
     }
@@ -1204,7 +1262,7 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
 
     //create contribution activity w/ individual and target
     //activity w/ organisation contact id when onbelf, CRM-4027
-    if ($this->getSubmittedValue('onbehalf_contact_id')) {
+    if (!empty($params['onbehalf_contact_id'])) {
       $this->addActivity([
         'source_contact_id' => $params['onbehalf_contact_id'],
         'source_record_id' => $contribution->id,
@@ -2315,8 +2373,17 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
 
     $this->_useForMember = $this->get('useForMember');
 
+    if ($this->isRecordPaymentOnly()) {
+      // A payment is being made against an existing contribution - do not pass go
+      // Only process & record the payment. Note that if the payment === the contribution amount
+      // we go through the normal flow but ,we should consolidate on using
+      // separate handling for payment only vs full contribution (even if
+      // some bits have to be extracted to share) cos overloading this form with payment handling
+      // was one of the original sins here.
+      return $this->processPaymentOnExistingContribution();
+    }
     // store the fact that this is a membership and membership type is selected
-    if ($this->isMembershipSelected()) {
+    elseif ($this->isMembershipSelected()) {
       $this->doMembershipProcessing($contactID, $membershipParams);
     }
     else {
@@ -2452,7 +2519,7 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
         $membershipParams['amount'] = $this->getMainContributionAmount();
         $this->processMembership($membershipParams, $contactID);
       }
-      catch (\Civi\Payment\Exception\PaymentProcessorException $e) {
+      catch (PaymentProcessorException $e) {
         CRM_Core_Session::singleton()->setStatus($e->getMessage());
         if ($this->getContributionID()) {
           CRM_Contribute_BAO_Contribution::failPayment($this->getContributionID(),
@@ -2658,7 +2725,7 @@ class CRM_Contribute_Form_Contribution_Confirm extends CRM_Contribute_Form_Contr
       }
       return $result;
     }
-    catch (\Civi\Payment\Exception\PaymentProcessorException $e) {
+    catch (PaymentProcessorException $e) {
       // Clean up DB as appropriate.
       if (!empty($paymentParams['contributionID'])) {
         CRM_Contribute_BAO_Contribution::failPayment($paymentParams['contributionID'],

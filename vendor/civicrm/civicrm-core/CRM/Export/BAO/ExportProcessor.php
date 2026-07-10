@@ -576,7 +576,7 @@ class CRM_Export_BAO_ExportProcessor {
    * @return bool
    */
   public function isRelationshipTypeKey($fieldName) {
-    return array_key_exists($fieldName, $this->relationshipTypes);
+    return $fieldName && array_key_exists($fieldName, $this->relationshipTypes);
   }
 
   /**
@@ -845,6 +845,7 @@ class CRM_Export_BAO_ExportProcessor {
       $field = trim($field);
       if (!empty($this->getReturnProperties()[$field])) {
         //CRM-15301
+        $order = CRM_Utils_Type::escape($order, 'MysqlOrderBy');
         $queryString .= " ORDER BY $order";
       }
     }
@@ -1005,7 +1006,7 @@ class CRM_Export_BAO_ExportProcessor {
         $fieldValue = $iterationDAO->$field;
         // to get phone type from phone type id
         if ($field == 'provider_id' || $field == 'im_provider') {
-          $fieldValue = $imProviders[$fieldValue] ?? NULL;
+          $fieldValue = CRM_Core_PseudoConstant::getLabel('CRM_Core_BAO_IM', 'provider_id', $fieldValue);
         }
         elseif (str_contains($field, 'master_id')) {
           // @todo - why not just $field === 'master_id'  - what else would it be?
@@ -1171,6 +1172,9 @@ class CRM_Export_BAO_ExportProcessor {
     }
     elseif ($this->isExportSpecifiedPaymentFields() && array_key_exists($field, $this->getcomponentPaymentFields())) {
       $paymentTableId = $this->getPaymentTableID();
+      if (!$iterationDAO->$paymentTableId) {
+        return NULL;
+      }
       $paymentData = $paymentDetails[$iterationDAO->$paymentTableId] ?? NULL;
       $payFieldMapper = [
         'componentPaymentField_total_amount' => 'total_amount',

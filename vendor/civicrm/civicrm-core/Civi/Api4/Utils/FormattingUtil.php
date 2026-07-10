@@ -123,7 +123,7 @@ class FormattingUtil {
     // Special handling for 'current_user' and user lookups
     $exactMatch = [NULL, '=', '!=', '<>', 'IN', 'NOT IN', 'CONTAINS', 'NOT CONTAINS'];
     if (is_string($fk) && CoreUtil::isContact($fk) && in_array($operator, $exactMatch, TRUE)) {
-      $value = self::resolveContactID($fieldSpec['name'], $value);
+      $value = self::resolveContactID($fieldSpec['name'], $value) ?? $value;
     }
 
     switch ($fieldSpec['data_type'] ?? NULL) {
@@ -576,6 +576,25 @@ class FormattingUtil {
       return substr($fieldName, 0, -1 - strlen($suffix));
     }
     return $fieldName;
+  }
+
+  /**
+   * Check if a field name (or suffix representation of it) exists in the record.
+   *
+   * @param string $fieldName
+   * @param array $params
+   * @return bool
+   */
+  public static function hasField(string $fieldName, array $params): bool {
+    if (array_key_exists($fieldName, $params)) {
+      return TRUE;
+    }
+    foreach (array_keys($params) as $key) {
+      if (str_starts_with($key, $fieldName . ':')) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
 }

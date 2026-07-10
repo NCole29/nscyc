@@ -118,9 +118,9 @@
     "billboardjs/billboard": "3.4.1",
     "c3js/c3": "0.7.20",
     "civicrm/civicrm-asset-plugin": "^1.1",
-    "civicrm/civicrm-core": "~6.13.1",
-    "civicrm/civicrm-drupal-8": "~6.13.1",
-    "civicrm/civicrm-packages": "~6.13.1",
+    "civicrm/civicrm-core": "~6.16.0",
+    "civicrm/civicrm-drupal-8": "~6.16.0",
+    "civicrm/civicrm-packages": "~6.16.0",
     "civicrm/cli-tools": "*",
     "civicrm/composer-downloads-plugin": "^3.0",
     "ckeditor/autogrow": "^4.18",
@@ -183,7 +183,6 @@
     "drupal/node_revision_delete": "^2.1",
     "drupal/paragraphs": "^1.21",
     "drupal/pathauto": "^1.15",
-    "drupal/permission_spreadsheet": "^2.0",
     "drupal/quick_node_clone": "^1.17",
     "drupal/redirect": "^1.13",
     "drupal/role_delegation": "^1.2",
@@ -199,7 +198,7 @@
     "drupal/typed_data": "^2.1",
     "drupal/view_unpublished": "^1.1",
     "drupal/views_bulk_operations": "^4.2",
-    "drupal/views_data_export": "^1.4",
+    "drupal/views_data_export": "^1.10",
     "drupal/views_local_tasks": "^1.0",
     "drupal/views_slideshow": "^5.0",
     "drupal/views_year_filter": "^2.1",
@@ -234,7 +233,16 @@
       "php-http/discovery": true,
       "wikimedia/composer-merge-plugin": true
     },
-    "sort-packages": true
+    "sort-packages": true,
+    "audit": {
+      "ignore": {
+          "PKSA-gz3f-3cz3-3wsw": "phpoffice/phpspreadsheet: CiviCRM conflict but little or no impact", 
+          "PKSA-x13r-n4wc-4gcr": "phpoffice/phpspreadsheet: same", 
+          "PKSA-8cfg-tzhf-fr83": "phpoffice/phpspreadsheet: same", 
+          "PKSA-hznc-gbby-6w16": "phpoffice/phpspreadsheet: same", 
+          "PKSA-jtdk-dcr5-f11n": "phpoffice/phpspreadsheet: same."
+      }
+    }
   },
   "extra": {
       "drupal-scaffold": {

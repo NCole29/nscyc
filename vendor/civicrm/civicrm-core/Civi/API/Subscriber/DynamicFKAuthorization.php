@@ -40,7 +40,7 @@ class DynamicFKAuthorization implements EventSubscriberInterface {
   /**
    * @return array
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       'civi.api.authorize' => [
         ['onApiAuthorize', Events::W_EARLY],
@@ -225,7 +225,7 @@ class DynamicFKAuthorization implements EventSubscriberInterface {
     $self = $this;
     \CRM_Core_Transaction::create(TRUE)->run(function($tx) use ($entity, $action, $entityId, &$exception, $self) {
       // Just to be safe.
-      //$tx->rollback();
+      $tx->rollback();
 
       $params = [
         'version' => 3,
