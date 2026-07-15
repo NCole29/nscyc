@@ -55,7 +55,7 @@ phpunit:
         CIVICRM: "5.81.*"
         CHROMEDRIVER_VERSION: "133.0.6943.126"
       - PHP: "8.4"
-        DRUPAL: "^11.3"
+        DRUPAL: "^11.4"
         CIVICRM: "^6.0"
         CHROMEDRIVER_VERSION: "133.0.6943.126"
   services:
@@ -104,7 +104,7 @@ phpunit:
       composer config repositories.0 composer https://packages.drupal.org/8
       composer config repositories.1 path "$CI_PROJECT_DIR"
       composer install --no-interaction
-      COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/core-dev:$DRUPAL" "composer/composer:2.8.6" sebastian/diff
+      COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/core-dev:$DRUPAL" sebastian/diff
     - |
       cd ~/drupal
       COMPOSER_MEMORY_LIMIT=-1 composer require \
