@@ -29,8 +29,6 @@ club_ride.admin_ride_tools:
   enabled: 1
   menu_name: admin
   options:
-    query:
-      uid: 1
     attributes:
       class:
         - toolbar-icon
