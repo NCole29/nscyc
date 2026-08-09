@@ -14,7 +14,7 @@ _core:
 id: views_block__banner_banner_home
 theme: clubtheme
 region: content
-weight: -15
+weight: -16
 provider: null
 plugin: 'views_block:banner-banner_home'
 settings:

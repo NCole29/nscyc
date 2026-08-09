@@ -297,8 +297,7 @@ settings:
 access:
   create:
     roles:
-      - anonymous
-      - authenticated
+      - member
     users: {  }
     permissions: {  }
   view_any:

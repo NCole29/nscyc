@@ -9,7 +9,7 @@ _core:
 id: clubtheme_local_tasks
 theme: clubtheme
 region: content
-weight: -13
+weight: -14
 provider: null
 plugin: local_tasks_block
 settings:

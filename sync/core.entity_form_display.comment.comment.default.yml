@@ -16,13 +16,13 @@ bundle: comment
 mode: default
 content:
   author:
-    weight: 1
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   comment_body:
     type: text_textarea
-    weight: 2
+    weight: 1
     region: content
     settings:
       rows: 2
@@ -31,12 +31,5 @@ content:
       allowed_formats:
         hide_help: '1'
         hide_guidelines: '1'
-  subject:
-    type: string_textfield
-    weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  subject: true

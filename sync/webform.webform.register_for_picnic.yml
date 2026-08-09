@@ -3,6 +3,7 @@ langcode: en
 status: open
 dependencies:
   module:
+    - club_user
     - webform_civicrm
 weight: 0
 open: null
@@ -112,6 +113,9 @@ elements: |-
         '#extra':
           width: 20
         '#parent': civicrm_1_contact_1_fieldset_fieldset
+      payment_status:
+        '#type': hidden
+        '#title': 'Payment status'
   contribution_pagebreak:
     '#type': webform_wizard_page
     '#form_key': contribution_pagebreak
@@ -320,7 +324,7 @@ handlers:
     notes: ''
     status: true
     conditions: {  }
-    weight: null
+    weight: -50
     settings:
       nid: 1
       number_of_contacts: '1'
@@ -484,4 +488,13 @@ handlers:
           disable_unregister: 0
           allow_url_load: 0
           disable_primary_participant: 0
+  add_civicrm_payment_status:
+    id: add_civicrm_payment_status
+    handler_id: add_civicrm_payment_status
+    label: 'Add CiviCRM Payment Status'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: -49
+    settings: {  }
 variants: {  }

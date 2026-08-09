@@ -12,7 +12,7 @@ dependencies:
 id: clubtheme_views_block__rides_weekday_rides
 theme: clubtheme
 region: sidebar_second
-weight: -11
+weight: -13
 provider: null
 plugin: 'views_block:rides-weekday_rides'
 settings:

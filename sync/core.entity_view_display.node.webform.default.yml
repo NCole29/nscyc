@@ -75,7 +75,7 @@ content:
     label: hidden
     settings:
       label: '[webform:title]'
-      dialog: narrow
+      dialog: normal
       attributes:
         class:
           - w3-dark-button

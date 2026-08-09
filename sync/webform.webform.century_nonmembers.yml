@@ -3,8 +3,8 @@ langcode: en
 status: open
 dependencies:
   module:
+    - club_user
     - webform_civicrm
-    - webform_options_limit
 weight: 0
 open: null
 close: null
@@ -280,6 +280,9 @@ elements: |-
         '#parent': civicrm_1_contact_1_fieldset_fieldset
         '#extra': {  }
         '#title': 'User ID'
+      payment_status:
+        '#type': hidden
+        '#title': 'Payment status'
   contribution_pagebreak:
     '#type': webform_wizard_page
     '#form_key': contribution_pagebreak
@@ -475,52 +478,6 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  t_shirt_limits:
-    id: options_limit
-    handler_id: t_shirt_limits
-    label: "Men's T-shirt limits"
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      element_key: size
-      limit: null
-      limits: {  }
-      limit_reached_message: '@name is not available'
-      limit_source_entity: true
-      limit_user: false
-      option_none_action: disable
-      option_message_display: none
-      option_multiple_message: ''
-      option_single_message: ''
-      option_none_message: ''
-      option_unlimited_message: ''
-      option_error_message: '@name: @label is unavailable.'
-      tableselect_header: ''
-  women_s_t_shirt_limits:
-    id: options_limit
-    handler_id: women_s_t_shirt_limits
-    label: "Women's T-shirt limits"
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      element_key: women_s_size
-      limit: null
-      limits: {  }
-      limit_reached_message: '@name is not available'
-      limit_source_entity: true
-      limit_user: false
-      option_none_action: disable
-      option_message_display: none
-      option_multiple_message: ''
-      option_single_message: ''
-      option_none_message: ''
-      option_unlimited_message: ''
-      option_error_message: '@name: @label is unavailable.'
-      tableselect_header: ''
   webform_civicrm:
     id: webform_civicrm
     handler_id: webform_civicrm
@@ -528,7 +485,7 @@ handlers:
     notes: ''
     status: true
     conditions: {  }
-    weight: null
+    weight: -50
     settings:
       nid: 1
       number_of_contacts: '1'
@@ -674,4 +631,13 @@ handlers:
           disable_unregister: 0
           allow_url_load: 0
           disable_primary_participant: 0
+  add_civicrm_payment_status:
+    id: add_civicrm_payment_status
+    handler_id: add_civicrm_payment_status
+    label: 'Add CiviCRM Payment Status'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: -49
+    settings: {  }
 variants: {  }

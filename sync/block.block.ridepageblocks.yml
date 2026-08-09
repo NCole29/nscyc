@@ -12,7 +12,7 @@ dependencies:
 id: ridepageblocks
 theme: clubtheme
 region: content
-weight: -9
+weight: -10
 provider: null
 plugin: 'block_content:caafdc56-4fa6-4ca5-8d5b-c2e1f2b29bea'
 settings:

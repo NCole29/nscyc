@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies:
   module:
-    - webform_options_limit
+    - webform_civicrm
 weight: 0
 open: null
 close: null
@@ -370,50 +370,28 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  t_shirt_limits:
-    id: options_limit
-    handler_id: t_shirt_limits
-    label: "Men's T-shirt limits"
+  webform_civicrm:
+    id: webform_civicrm
+    handler_id: webform_civicrm
+    label: CiviCRM
     notes: ''
     status: true
     conditions: {  }
-    weight: 0
+    weight: null
     settings:
-      element_key: size
-      limit: null
-      limits: {  }
-      limit_reached_message: '@name is not available'
-      limit_source_entity: true
-      limit_user: false
-      option_none_action: disable
-      option_message_display: none
-      option_multiple_message: ''
-      option_single_message: ''
-      option_none_message: ''
-      option_unlimited_message: ''
-      option_error_message: '@name: @label is unavailable.'
-      tableselect_header: ''
-  women_s_t_shirt_limits:
-    id: options_limit
-    handler_id: women_s_t_shirt_limits
-    label: "Women's T-shirt limits"
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      element_key: women_s_size
-      limit: null
-      limits: {  }
-      limit_reached_message: '@name is not available'
-      limit_source_entity: true
-      limit_user: false
-      option_none_action: disable
-      option_message_display: none
-      option_multiple_message: ''
-      option_single_message: ''
-      option_none_message: ''
-      option_unlimited_message: ''
-      option_error_message: '@name: @label is unavailable.'
-      tableselect_header: ''
+      data:
+        contact:
+          1:
+            contact:
+              1:
+                contact_type: individual
+                contact_sub_type: {  }
+        reg_options:
+          validate: 1
+      confirm_subscription: 1
+      create_fieldsets: 1
+      new_contact_source: ''
+      civicrm_1_contact_1_contact_first_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_last_name: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_existing: create_civicrm_webform_element
 variants: {  }

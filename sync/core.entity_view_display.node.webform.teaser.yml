@@ -7,6 +7,8 @@ dependencies:
     - field.field.node.webform.banner_image
     - field.field.node.webform.body
     - field.field.node.webform.field_components
+    - field.field.node.webform.field_contact_form
+    - field.field.node.webform.field_contact_person
     - field.field.node.webform.field_padding
     - field.field.node.webform.field_page_access
     - field.field.node.webform.field_summary
@@ -26,6 +28,11 @@ targetEntityType: node
 bundle: webform
 mode: teaser
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_summary:
     type: text_default
     label: hidden
@@ -42,7 +49,7 @@ content:
     type: webform_entity_reference_link
     label: visually_hidden
     settings:
-      label: 'Go to [webform:title]'
+      label: '[webform:title]'
       dialog: narrow
       attributes:
         class:
@@ -54,6 +61,8 @@ hidden:
   banner_image: true
   body: true
   field_components: true
+  field_contact_form: true
+  field_contact_person: true
   field_padding: true
   field_page_access: true
   field_text: true

@@ -1,6 +1,6 @@
 uuid: 0b676f26-1567-44f4-bcdc-7aab06fc075d
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - user.role.administrator
@@ -779,6 +779,55 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
+        contribution_source:
+          id: contribution_source
+          table: civicrm_contribution
+          field: contribution_source
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: civicrm_contribution
+          entity_field: contribution_source
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: contribution_source_op
+            label: 'Contribution Source'
+            description: null
+            use_operator: false
+            operator: contribution_source_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: contribution_source
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: 'Contribution Source'
+            description: ''
+            identifier: contribution_source
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Picnic
+                operator: '='
+                value: Picnic
+              3:
+                title: T-shirts
+                operator: '='
+                value: 'Blazing Saddles T-shirt'
       filter_groups:
         operator: AND
         groups:
