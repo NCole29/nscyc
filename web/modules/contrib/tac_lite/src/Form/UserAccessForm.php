@@ -1,11 +1,11 @@
 <?php
 namespace Drupal\tac_lite\Form;
 
-use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\tac_lite\Form\SchemeForm;
 use Drupal\user\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -27,12 +27,14 @@ class UserAccessForm extends ConfigFormBase {
   public function getFormId() {
     return 'tac_lite_user_access_form';
   }
+
   /**
    * {@inheritdoc}
    */
   public function getEditableConfigNames() {
     return ['tac_lite.settings'];
   }
+
   /**
    * {@inheritdoc}
    */
@@ -43,17 +45,21 @@ class UserAccessForm extends ConfigFormBase {
 
     $this->uid = $user->id();
     $vocabularies = Vocabulary::loadMultiple();
-    $config = \Drupal::config('tac_lite.settings');
-    $vids = $config->get('tac_lite_categories');
-    $schemes = $config->get('tac_lite_schemes');
+    $config_factory = $this->configFactory->get('tac_lite.settings');
+    $vids = $config_factory->get('tac_lite_categories') ?: [];
+    $schemes = $config_factory->get('tac_lite_schemes');
+    $user_data_service = \Drupal::service('user.data');
+
     if ($vids) {
       for ($i = 1; $i <= $schemes; $i++) {
         $config = SchemeForm::tacLiteConfig($i);
         if ($config['name']) {
           $perms = $config['perms'];
+
           if ($config['term_visibility']) {
             $perms[] = $this->t('term visibility');
           }
+
           $form['tac_lite'][$config['realm']] = [
             '#type' => 'details',
             '#title' => $config['name'],
@@ -61,17 +67,18 @@ class UserAccessForm extends ConfigFormBase {
             '#open' => TRUE,
             '#tree' => TRUE,
           ];
-          // Create a form element for each vocabulary.
+
+          // Fetch user data ONCE per scheme, not per vocabulary.
+          $all_scheme_data = $user_data_service->get('tac_lite', $user->id(), 'tac_lite_scheme_' . $i) ?: [];
+
           foreach ($vids as $vid) {
+            if (!isset($vocabularies[$vid])) continue;
+
             $v = $vocabularies[$vid];
-            $default_values = [];
-            $data = \Drupal::service('user.data')->get('tac_lite', $user->id(), 'tac_lite_scheme_' . $i) ?: [];
-            if (!empty($data) && $data[$vid]) {
-              $default_values = $data[$vid];
-            }
+            // Use the data we already fetched above.
+            $default_values = $all_scheme_data[$vid] ?? [];
             $form['tac_lite'][$config['realm']][$vid] = SchemeForm::tacLiteTermSelect($v, $default_values);
-            $form['tac_lite'][$config['realm']][$vid]['#description']
-              = $this->t('Grant permission to this user by selecting terms.  Note that permissions are in addition to those granted based on user roles.');
+            $form['tac_lite'][$config['realm']][$vid]['#description'] = $this->t('Grant permission to this user by selecting terms.  Note that permissions are in addition to those granted based on user roles.');
           }
         }
       }
@@ -99,15 +106,31 @@ class UserAccessForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $uid = $this->uid;
-    // Go through each scheme and copy the form value into the data element.
-    $settings = \Drupal::config('tac_lite.settings');
+    $settings = $this->config('tac_lite.settings');
     $schemes = $settings->get('tac_lite_schemes');
+    $user_data = \Drupal::service('user.data');
+
     for ($i = 1; $i <= $schemes; $i++) {
-      $config = SchemeForm::tacLiteConfig($i);
-      if ($config['name']) {
-        \Drupal::service('user.data')->set('tac_lite', $uid, $config['realm'], $form_state->getValue($config['realm']));
+      $scheme_config = SchemeForm::tacLiteConfig($i);
+      if ($scheme_config['name']) {
+        $values = $form_state->getValue($scheme_config['realm']);
+
+        if (is_array($values)) {
+          foreach ($values as $vid => $tids) {
+            // Remove the '<none>' (0) option and filter empty values.
+            $values[$vid] = array_filter($tids);
+          }
+        }
+
+        $user_data->set('tac_lite', $uid, $scheme_config['realm'], $values);
       }
     }
+
+    // In Drupal 11+, if you change user access, you may need
+    // to invalidate node access cache tags for this specific user.
+    Cache::invalidateTags(['user:' . $uid]);
+
+    parent::submitForm($form, $form_state);
   }
 
 }

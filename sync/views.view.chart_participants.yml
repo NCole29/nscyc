@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - charts
-    - charts_c3
+    - charts_billboard
     - civicrm_entity
     - datetime
     - options
@@ -498,7 +498,7 @@ display:
         options:
           grouping: {  }
           chart_settings:
-            library: c3
+            library: billboard
             type: column
             fields:
               label: title
@@ -555,6 +555,7 @@ display:
               suffix: ''
               decimal_count: ''
               labels_rotation: '0'
+            library_configs: {  }
       row:
         type: fields
         options:

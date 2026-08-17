@@ -7,6 +7,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Component\Utility\Html;
+use Drupal\user\Entity\Role;
 
 /**
  * Builds the scheme configuration form.
@@ -36,7 +37,7 @@ class SchemeForm extends ConfigFormBase {
     $settings = $this->configFactory->get('tac_lite.settings');
     $this->scheme = $scheme;
     $vids = $settings->get('tac_lite_categories');
-    $roles = user_roles();
+    $roles = Role::loadMultiple();
     $config = self::tacLiteConfig($scheme);
     $form['#tac_lite_config'] = $config;
     if ($vids) {
@@ -168,6 +169,7 @@ class SchemeForm extends ConfigFormBase {
     ];
     return $config;
   }
+
   /**
    * Helper function to build a taxonomy term select element for a form.
    *
@@ -178,15 +180,30 @@ class SchemeForm extends ConfigFormBase {
    *   form element.
    */
   public static function tacLiteTermSelect($v, $default_values = []) {
-    $tree = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadTree($v->get('vid'));
+    $storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
+    $tree = $storage->loadTree($v->get('vid'));
+
+    $config = \Drupal::config('tac_lite.settings');
+    $storage_type = $config->get('tac_lite_storage_type') ?: 'tid';
+
     $options = [0 => '<none>'];
     if ($tree) {
+      // Collect TIDs to bulk load UUIDs if needed.
+      $tids = array_map(fn($term) => $term->tid, $tree);
+      $loaded_terms = ($storage_type === 'uuid') ? $storage->loadMultiple($tids) : [];
+
       foreach ($tree as $term) {
+        // Determine the identifier based on config.
+        $id = ($storage_type === 'uuid' && isset($loaded_terms[$term->tid]))
+          ? $loaded_terms[$term->tid]->uuid()
+          : $term->tid;
+
         $choice = new \stdClass();
-        $choice->option = [$term->tid => str_repeat('-', $term->depth) . $term->name];
+        $choice->option = [$id => str_repeat('-', $term->depth) . $term->name];
         $options[] = $choice;
       }
     }
+
     $field_array = [
       '#type' => 'select',
       '#title' => $v->get('name'),

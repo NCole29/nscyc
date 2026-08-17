@@ -241,38 +241,3 @@ function geofield_map_preprocess_select(&$variables) {
     }
   }
 }
-
-/**
- * Checks that the file is recognized as a valid image.
- *
- * @param \Drupal\file\FileInterface $file
- *   A file entity.
- *
- * @return array
- *   An empty array if the file is a valid image or an array containing an error
- *   message if it's not.
- *
- * @see file_validate_is_image()
- */
-function geofield_map_file_validate_is_image(FileInterface $file) {
-  $errors = [];
-
-  /** @var \Drupal\Core\Image\ImageFactory $image_factory */
-  $image_factory = \Drupal::service('image.factory');
-  $image = $image_factory->get($file->getFileUri());
-  $supported_extensions = $image_factory->getSupportedExtensions();
-  if ($svg_image_support = \Drupal::service('module_handler')->moduleExists('svg_image')) {
-    $supported_extensions[] = 'svg';
-  }
-
-  // Check before if it is an SVG file, when might be handled.
-  /** @var \Drupal\file\Entity\File $file */
-  if ($svg_image_support && svg_image_is_file_svg($file)) {
-    $errors = [];
-  }
-  elseif (!$image->isValid()) {
-    $errors[] = t('The image file is invalid or the image type is not allowed. Allowed types: %types', ['%types' => implode(', ', $supported_extensions)]);
-  }
-
-  return $errors;
-}

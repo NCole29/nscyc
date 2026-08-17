@@ -1,11 +1,20 @@
 # Drupal components, module names and programming terms
+commerceproduct
+commerceguys
+mediatype
 nodetype
+taxonomyterm
 ctools
 phplint
 csslint
 interdif
 nomsg
+nolog
+drupalspoons
 backported
+tnid
+randomstring
+logfile
 oneline
 mkdocs
 testgroup
@@ -23,3 +32,13 @@ hHgGisaA
 
 # Test user names
 Admolly
+Taximayne
+Vicenza
+Webisa
+Wenlock
+
+# Real words missing from dictionary
+unrequired
+
+# Other
+Rnnn

@@ -9,7 +9,7 @@
    */
   Drupal.behaviors.scheduler_settings = {
     attach(context) {
-      // Provide summary when editing a node. This is only applicable to
+      // Provide summary when editing an entity. This is only applicable to
       // themes that provide vertical tabs or modal details blocks with a
       // summary area, such as Bartik or Claro. It does nothing in Stark.
       $('details#edit-scheduler-settings', context).drupalSetSummary(
@@ -21,10 +21,10 @@
             '#edit-unpublish-on-0-value-date',
           );
           const values = [];
-          if (publishOn.value) {
+          if (publishOn?.value) {
             values.push(Drupal.t('Scheduled for publishing'));
           }
-          if (unpublishOn.value) {
+          if (unpublishOn?.value) {
             values.push(Drupal.t('Scheduled for unpublishing'));
           }
           if (!values.length) {
@@ -34,7 +34,7 @@
         },
       );
 
-      // Provide summary during content type configuration.
+      // Provide summary during entity type configuration.
       $('#edit-scheduler', context).drupalSetSummary(function (context) {
         const publishingEnabled = document.querySelector(
           '#edit-scheduler-publish-enable',

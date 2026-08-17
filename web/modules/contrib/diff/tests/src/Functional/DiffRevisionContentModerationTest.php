@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\diff\Functional;
 
 use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
 use Drupal\workflows\Entity\Workflow;
+use Drupal\workflows\WorkflowInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the revision overview with content moderation enabled.
- *
- * @group diff
  */
+#[Group('diff')]
+#[RunTestsInSeparateProcesses]
 class DiffRevisionContentModerationTest extends DiffRevisionTest {
   use ContentModerationTestTrait;
 
@@ -26,15 +31,15 @@ class DiffRevisionContentModerationTest extends DiffRevisionTest {
 
     // Enable moderation on articles.
     $this->createEditorialWorkflow();
-    /** @var \Drupal\workflows\WorkflowInterface $workflow */
     $workflow = Workflow::load('editorial');
+    $this->assertInstanceOf(WorkflowInterface::class, $workflow);
     /** @var \Drupal\content_moderation\Plugin\WorkflowType\ContentModeration $plugin */
     $plugin = $workflow->getTypePlugin();
     $plugin->addEntityTypeAndBundle('node', 'article');
     $workflow->save();
 
     // Add necessary admin permissions for moderated content.
-    $this->adminPermissions = array_merge([
+    $this->adminPermissions = \array_merge([
       'use editorial transition create_new_draft',
       'use editorial transition publish',
       'use editorial transition archive',
@@ -43,17 +48,6 @@ class DiffRevisionContentModerationTest extends DiffRevisionTest {
       'view latest version',
       'view any unpublished content',
     ], $this->adminPermissions);
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * Override form submission to work with content moderation.
-   */
-  protected function drupalPostNodeForm($path, array $edit, $submit): void {
-    // New revisions are automatically enabled, so remove the manual value.
-    unset($edit['revision']);
-    parent::drupalPostNodeForm($path, $edit, $submit);
   }
 
   /**

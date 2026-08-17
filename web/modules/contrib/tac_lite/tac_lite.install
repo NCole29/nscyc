@@ -10,3 +10,34 @@
 function tac_lite_install() {
   module_set_weight('tac_lite', 100);
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function tac_lite_requirements($phase) {
+  $requirements = [];
+  if ($phase == 'runtime') {
+    $config = \Drupal::config('tac_lite.settings');
+    if ($config->get('tac_lite_storage_type') === 'uuid') {
+      $requirements['tac_lite_uuid'] = [
+        'title' => t('TAC Lite Storage'),
+        'value' => t('UUID Mode'),
+        'severity' => REQUIREMENT_INFO,
+        'description' => t('Tac_lite is configured to use UUIDs. Ensure your node access table is rebuilt if you recently changed this.'),
+      ];
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Add the tac_lite_storage_type setting to configuration.
+ */
+function tac_lite_update_11001() {
+  $config = \Drupal::configFactory()->getEditable('tac_lite.settings');
+
+  // Only set the default if it doesn't exist yet.
+  if ($config->get('tac_lite_storage_type') === NULL) {
+    $config->set('tac_lite_storage_type', 'tid')->save();
+  }
+}

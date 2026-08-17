@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - system.menu.club-reports
+    - system.menu.main
     - user.role.administrator
     - user.role.events_coordinator
     - user.role.site_admin
@@ -568,6 +569,7 @@ display:
     display_plugin: block
     position: 5
     display_options:
+      enabled: false
       title: 'Century revenue'
       fields:
         title:
@@ -3819,7 +3821,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "Event date is not available for Events using Webform registration, except insofar as the date is included in the Drupal event page title shown in the Event column. \r\nWhy? Because the table displays CiviCRM data and a single CiviCRM event may be used as the backend for a Drupal Webform used by multiple Drupal events.\r\n"
+            value: "Event date is not available for Events using Webform registration, except insofar as the date is included in the Drupal event page title shown in the Event column. \r\nWhy? Because the table displays CiviCRM data and a single CiviCRM event may be used as the backend for a Drupal Webform used by multiple Drupal events.\r\n\r\nEvents using Webform registration do not show a separate date column. The date only appears if it is in the Drupal event page title. The table shows CiviCRM data. One CiviCRM event can link to many Drupal events.\r\n"
             format: basic_html
           tokenize: false
       footer:

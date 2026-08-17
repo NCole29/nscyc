@@ -1,0 +1,11 @@
+{
+    "name": "drupal/magnific_popup",
+    "license": "GPL-2.0-or-later",
+    "type": "drupal-module",
+    "description": "Provides Magnific Popup formatter for File Entity and Image fields.",
+    "support": {
+      "issues": "https://drupal.org/project/issues/magnific_popup",
+      "source": "https://drupal.org/project/magnific_popup"
+    }
+  }
+  

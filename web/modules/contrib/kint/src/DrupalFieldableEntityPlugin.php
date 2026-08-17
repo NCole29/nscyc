@@ -73,7 +73,6 @@ class DrupalFieldableEntityPlugin implements PluginBeginInterface, PluginComplet
   public function parseBegin(&$var, ContextInterface $c): ?AbstractValue {
     if ($var instanceof FieldItemListInterface && !$this->currentlyInPlugin && $c->getDepth()) {
       $b = new InstanceValue($c, \get_class($var), \spl_object_hash($var), \spl_object_id($var));
-      /* @phpstan-ignore assign.propertyType */
       $b->flags |= AbstractValue::FLAG_BLACKLIST;
       return $b;
     }

@@ -7,7 +7,6 @@
 
 use Composer\Autoload\ClassLoader;
 use Drupal\Component\Plugin\PluginManagerInterface;
-use Drupal\Core\Config\ConfigBase;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\FieldableEntityInterface;
@@ -17,6 +16,7 @@ use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\TypedData\TypedDataManager;
 use Drupal\kint\DrupalFieldableEntityPlugin;
+use Drupal\kint\KintEventSubscriber;
 use Kint\Kint;
 use Kint\Parser\BlacklistPlugin;
 use Kint\Parser\IteratorPlugin;
@@ -55,12 +55,14 @@ foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
   }
 }
 
-// Ideally we want to set these settings every time, but occasionally
-// the container won't be initialized at this point (Mostly when running
-// updb) If the container doesn't exist we'll fall back to an early
-// constructed service instead.
+// Ideally we want to initialize these settings every time, but occasionally
+// the container won't be initialized at this point (Mostly when running updb)
+// If the container doesn't exist the event subscriber will initialize it when
+// it's constructed.
+// If there isn't any config factory in the container when the event subscriber
+// is constructed there's nothing we can do, so we ignore the settings entirely.
 if (\Drupal::hasContainer() && \Drupal::hasService('config.factory')) {
-  \kint_initialize_kint_settings(\Drupal::config('kint.settings'));
+  KintEventSubscriber::initializeKint(\Drupal::config('kint.settings'));
 }
 
 // CSP nonces.
@@ -87,29 +89,4 @@ function kint_help(string $route_name): string {
   }
 
   return '';
-}
-
-/**
- * Sets kint settings based on drupal/kint configuration.
- */
-function kint_initialize_kint_settings(ConfigBase $config): void {
-  if (NULL !== $config->get('early_enable')) {
-    assert(is_bool($config->get('early_enable')));
-    Kint::$enabled_mode = $config->get('early_enable');
-  }
-
-  if (NULL !== $config->get('rich_theme')) {
-    assert(is_string($config->get('rich_theme')));
-    RichRenderer::$theme = $config->get('rich_theme');
-  }
-
-  if (NULL !== $config->get('date_format')) {
-    $date_format = $config->get('date_format');
-    assert(is_string($date_format));
-    RichRenderer::$timestamp = $date_format;
-    TextRenderer::$timestamp = $date_format;
-  }
-
-  // Initializes configured helpers on construction.
-  \Drupal::service('kint.helper.manager');
 }

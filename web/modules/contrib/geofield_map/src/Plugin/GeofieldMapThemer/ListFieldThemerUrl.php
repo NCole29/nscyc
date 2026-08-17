@@ -212,10 +212,10 @@ class ListFieldThemerUrl extends MapThemerBase {
           'header' => [
             'label' => $this->t('Option'),
             'label_alias' => Markup::create($this->t('Option Alias @description', [
-              '@description' => $this->renderer->renderPlain($label_alias_upload_help),
+              '@description' => $this->renderer->renderInIsolation($label_alias_upload_help),
             ])),
             'marker_icon' => Markup::create($this->t('Marker Icon @file_select_help', [
-              '@file_select_help' => $this->renderer->renderPlain($file_select_help),
+              '@file_select_help' => $this->renderer->renderInIsolation($file_select_help),
             ])),
             'image_style' => '',
           ],

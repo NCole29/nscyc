@@ -42,6 +42,7 @@ class ConfigForm extends ConfigFormBase {
       foreach ($vocabularies as $vocab) {
         $options[$vocab->get('vid')] = $vocab->get('name');
       }
+
       $form['tac_lite_categories'] = [
         '#type' => 'select',
         '#title' => $this->t('Vocabularies'),
@@ -51,12 +52,14 @@ class ConfigForm extends ConfigFormBase {
         '#multiple' => TRUE,
         '#required' => TRUE,
       ];
+
       $scheme_options = [];
       // Currently only view, edit, delete permissions possible, so 7
       // permutations will be more than enough.
       for ($i = 1; $i < 8; $i++) {
         $scheme_options[$i] = $i;
       }
+
       $form['tac_lite_schemes'] = [
         '#type' => 'select',
         '#title' => $this->t('Number of Schemes'),
@@ -65,6 +68,7 @@ class ConfigForm extends ConfigFormBase {
         '#options' => $scheme_options,
         '#required' => TRUE,
       ];
+
       $form['tac_lite_rebuild'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Rebuild content permissions now'),
@@ -73,9 +77,21 @@ class ConfigForm extends ConfigFormBase {
         '#default_value' => FALSE,
         '#description' => $this->t('Do this once, after you have fully configured access by taxonomy.'),
       ];
+
+      $form['tac_lite_storage_type'] = [
+        '#type' => 'radios',
+        '#title' => $this->t('Term Identifier Storage'),
+        '#options' => [
+          'tid' => $this->t('Term ID (Original / Default)'),
+          'uuid' => $this->t('UUID (Portable across environments)'),
+        ],
+        '#default_value' => $settings->get('tac_lite_storage_type') ?: 'tid',
+        '#description' => $this->t('Use UUID if you need to deploy configuration between different environments. Changing this will require re-saving scheme settings.'),
+      ];
     }
     return parent::buildForm($form, $form_state);
   }
+
   /**
    * {@inheritdoc}
    */
@@ -89,6 +105,7 @@ class ConfigForm extends ConfigFormBase {
     $this->config('tac_lite.settings')
       ->set('tac_lite_categories', $form_state->getValue('tac_lite_categories'))
       ->set('tac_lite_schemes', $form_state->getValue('tac_lite_schemes'))
+      ->set('tac_lite_storage_type', $form_state->getValue('tac_lite_storage_type'))
       ->save();
 
     // Rebuild the node_access table.
@@ -101,6 +118,7 @@ class ConfigForm extends ConfigFormBase {
         ':url' => Url::fromRoute('node.configure_rebuild_confirm')->toString(),
       ]));
     }
+
     // And rebuild menus, in case the number of schemes has changed.
     \Drupal::service('router.builder')->rebuild();
     parent::submitForm($form, $form_state);

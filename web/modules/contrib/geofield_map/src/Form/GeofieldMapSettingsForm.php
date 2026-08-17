@@ -3,6 +3,7 @@
 namespace Drupal\geofield_map\Form;
 
 use Drupal\Component\Utility\Environment;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Site\Settings;
@@ -24,11 +25,19 @@ class GeofieldMapSettingsForm extends ConfigFormBase {
   protected LinkGeneratorInterface $link;
 
   /**
+   * The Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected ModuleHandlerInterface $moduleHandler;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
     $instance->link = $container->get('link_generator');
+    $instance->moduleHandler = $container->get('module_handler');
     return $instance;
   }
 
@@ -42,6 +51,12 @@ class GeofieldMapSettingsForm extends ConfigFormBase {
 
     $form['#attached']['library'][] = 'geofield_map/geofield_map_settings';
 
+    $gmap_api_key_description = $this->t('A unique Google Map Api Key is required for both Google Mapping and Geocoding operations, all performed client-side by js.<br>@gmap_api_restrictions_link', [
+      '@gmap_api_restrictions_link' => $this->link->generate($this->t('It might/should be restricted using the Website Domain / HTTP referrers method'), Url::fromUri('https://developers.google.com/maps/documentation/javascript/get-api-key#key-restrictions', [
+        'absolute' => TRUE,
+        'attributes' => ['target' => 'blank'],
+      ])),
+    ]);
     $form['gmap_api_key'] = [
       '#type' => 'textfield',
       '#default_value' => $config->get('gmap_api_key'),
@@ -51,14 +66,21 @@ class GeofieldMapSettingsForm extends ConfigFormBase {
           'attributes' => ['target' => 'blank'],
         ])),
       ]),
-      '#description' => $this->t('A unique Gmap Api Key is required for both Google Mapping and Geocoding operations, all performed client-side by js.<br>@gmap_api_restrictions_link.', [
-        '@gmap_api_restrictions_link' => $this->link->generate($this->t('It might/should be restricted using the Website Domain / HTTP referrers method'), Url::fromUri('https://developers.google.com/maps/documentation/javascript/get-api-key#key-restrictions', [
-          'absolute' => TRUE,
-          'attributes' => ['target' => 'blank'],
-        ])),
-      ]),
       '#placeholder' => $this->t('Input a valid Gmap API Key'),
     ];
+
+    if ($this->moduleHandler->moduleExists('key')) {
+      $form['gmap_api_key']['#type'] = 'key_select';
+      $form['gmap_api_key']['#description'] = '<br>' .$gmap_api_key_description;
+    }
+    else {
+      $form['gmap_api_key']['#description'] = $gmap_api_key_description . '<br>' . $this->t('Note: <b>The @key_module is supported</b>. When installed you can store the Gmap Api Key into it and use the corresponding key id here.', [
+        '@key_module' => $this->link->generate($this->t('Key module'), Url::fromUri('https://www.drupal.org/project/key', [
+        'absolute' => TRUE,
+        'attributes' => ['target' => 'blank'],
+      ]))
+      ]);
+    }
 
     $form['gmap_api_localization'] = [
       '#type' => 'select',

@@ -83,7 +83,7 @@ abstract class MapThemerBase extends PluginBase implements MapThemerInterface, C
           'group' => $table_settings['tabledrag_group'],
         ],
       ],
-      '#caption' => $this->renderer->renderPlain($table_settings['caption']),
+      '#caption' => $this->renderer->renderInIsolation($table_settings['caption']),
     ];
   }
 

@@ -1,17 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\layout_builder_restrictions_by_region\FunctionalJavascript;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Tests\block_content\Traits\BlockContentCreationTrait;
+use Drupal\Tests\layout_builder_restrictions\FunctionalJavascript\LayoutBuilderRestrictionsTestBase;
 use Drupal\block_content\Entity\BlockContent;
-use Drupal\block_content\Entity\BlockContentType;
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\filter\FilterFormatRepositoryInterface;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Demonstrate that blocks can be restricted by category.
- *
- * @group layout_builder_restrictions_by_region
  */
-class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
+#[Group('layout_builder_restrictions_by_region')]
+#[RunTestsInSeparateProcesses]
+class BlockPlacementCategoryRestrictionTest extends LayoutBuilderRestrictionsTestBase {
+
+  use BlockContentCreationTrait;
 
   /**
    * {@inheritdoc}
@@ -39,9 +47,6 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // Create a node bundle.
-    $this->createContentType(['type' => 'bundle_with_section_field']);
-
     $this->drupalLogin($this->drupalCreateUser([
       'access administration pages',
       'administer blocks',
@@ -66,7 +71,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     ];
     $config = \Drupal::service('config.factory')->getEditable('layout_builder_restrictions.plugins');
     $config->set('plugin_config', $layout_builder_restrictions_plugins)->save();
-    $this->getSession()->resizeWindow(900, 2000);
+    $this->getSession()->resizeWindow(1600, 2000);
   }
 
   /**
@@ -75,7 +80,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
   public function testBlockRestriction() {
     $this->blockTestSetup();
 
-    $this->getSession()->resizeWindow(1200, 4000);
+    $this->getSession()->resizeWindow(1600, 4000);
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
     $field_ui_prefix = 'admin/structure/types/manage/bundle_with_section_field';
@@ -118,13 +123,13 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-onecol-table"]/tbody/tr[@data-region="all_regions"]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Allowed blocks'));
     // Set 'Content' fields category to be restricted.
     $element = $page->find('xpath', '//*[contains(@class, "form-item-allowed-blocks-content-fields-restriction")]/input[@value="restrict_all"]');
     $element->click();
     $element = $page->find('xpath', '//*[starts-with(@id,"edit-submit--")]');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Save'));
     $page->pressButton('Save');
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-onecol"]/summary');
     $element->click();
@@ -133,21 +138,25 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $this->clickLink('Manage layout');
     // Remove default one-column layout and replace with two-column layout.
     $this->clickLink('Remove Section 1');
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Remove'));
     $page->pressButton('Remove');
-    $assert_session->assertWaitOnAjaxRequest();
+    $page->pressButton('Save layout');
+    $this->assertNotEmpty($assert_session->waitForText('Manage layout'));
+    $this->clickLink('Manage layout');
+    $this->assertNotEmpty($assert_session->waitForLink('Add section'));
+    $this->assertNotEmpty($element);
     $this->clickLink('Add section');
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForLink('Two column'));
     $this->clickLink('Two column');
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Column widths'));
     $element = $page->find('xpath', '//*[contains(@class, "ui-dialog-off-canvas")]//*[starts-with(@id,"edit-actions-submit--")]');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForElementRemoved('css', '.ui-dialog-off-canvas'));
 
     // Select 'Add block' link in First region.
     $element = $page->find('xpath', '//*[contains(@class, "layout__region--first")]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Choose a block'));
 
     // Initially, the body field is available.
     $assert_session->linkExists('Body');
@@ -157,7 +166,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $assert_session->linkExists('Alternate Block 1');
     // Initially, all inline block types are allowed.
     $this->clickLink('Create content block');
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForLink('Basic'));
     $assert_session->linkExists('Basic');
     $assert_session->linkExists('Alternate');
     $page->pressButton('Close');
@@ -171,7 +180,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-twocol-section-table"]/tbody/tr[@data-region="first"]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Allowed blocks'));
 
     // Impose Custom Block type restrictions.
     $assert_session->checkboxChecked('Allow all existing & new Content fields blocks.');
@@ -187,7 +196,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[starts-with(@id,"edit-submit--")]');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Save'));
     $page->pressButton('Save');
 
     $this->drupalGet("$field_ui_prefix/display/default");
@@ -204,14 +213,14 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     // Select 'Add block' link in First region.
     $element = $page->find('xpath', '//*[contains(@class, "layout__region--first")]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Choose a block'));
     $assert_session->linkNotExists('Body');
     $assert_session->linkNotExists('Basic Block 1');
     $assert_session->linkNotExists('Basic Block 2');
     $assert_session->linkNotExists('Alternate Block 1');
     // Inline block types are still allowed.
     $this->clickLink('Create content block');
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForLink('Basic'));
     $assert_session->linkExists('Basic');
     $assert_session->linkExists('Alternate');
 
@@ -223,7 +232,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-twocol-section-table"]/tbody/tr[@data-region="first"]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Allowed blocks'));
 
     // Impose Custom Block type restrictions.
     $assert_session->checkboxChecked('Allow all existing & new Inline blocks blocks.');
@@ -234,7 +243,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[starts-with(@id,"edit-submit--")]');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Save'));
     $page->pressButton('Save');
 
     $this->drupalGet("$field_ui_prefix/display/default");
@@ -251,7 +260,7 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
     // Select 'Add block' link in First region.
     $element = $page->find('xpath', '//*[contains(@class, "layout__region--first")]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Choose a block'));
     // Inline block types are restricted.
     $assert_session->linkNotExists('Create content block');
 
@@ -273,22 +282,25 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
    */
   protected function blockTestSetup() {
     // Create 2 custom block types, with 3 block instances.
-    $bundle = BlockContentType::create([
+    $this->createBlockContentType([
       'id' => 'basic',
       'label' => 'Basic',
     ]);
-    $bundle->save();
-    $bundle = BlockContentType::create([
+    $this->createBlockContentType([
       'id' => 'alternate',
       'label' => 'Alternate',
-    ]);
-    $bundle->save();
-    block_content_add_body_field($bundle->id());
+    ], TRUE);
     $blocks = [
       'Basic Block 1' => 'basic',
       'Basic Block 2' => 'basic',
       'Alternate Block 1' => 'alternate',
     ];
+    $default_format = DeprecationHelper::backwardsCompatibleCall(
+      \Drupal::VERSION,
+      '11.4.0',
+      fn() => \Drupal::service(FilterFormatRepositoryInterface::class)->getDefaultFormat()->id(),
+      fn() => filter_default_format(),
+    );
     foreach ($blocks as $info => $type) {
       $block = BlockContent::create([
         'info' => $info,
@@ -296,14 +308,13 @@ class BlockPlacementCategoryRestrictionTest extends WebDriverTestBase {
         'body' => [
           [
             'value' => 'This is the block content',
-            'format' => filter_default_format(),
+            'format' => $default_format,
           ],
         ],
       ]);
       $block->save();
       $blocks[$info] = $block->uuid();
     }
-    $this->blocks = $blocks;
   }
 
 }

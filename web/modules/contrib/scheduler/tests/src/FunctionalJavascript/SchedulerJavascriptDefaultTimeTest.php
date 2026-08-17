@@ -2,11 +2,17 @@
 
 namespace Drupal\Tests\scheduler\FunctionalJavascript;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
 /**
  * Tests the JavaScript functionality for default dates.
  *
  * @group scheduler_js
  */
+#[Group('scheduler_js')]
+#[RunTestsInSeparateProcesses]
 class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
 
   /**
@@ -31,8 +37,9 @@ class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
     $this->nodetype->setThirdPartySetting('scheduler', 'fields_display_mode', 'fieldset')
       ->setThirdPartySetting('scheduler', 'expand_fieldset', 'always')->save();
     $this->drupalGet('node/add/' . $this->type);
+    $this->assertSession()->waitForText("Create {$this->typeName}");
     $page = $this->getSession()->getPage();
-    $title = "Add a node to determine the date-picker format";
+    $title = "Add a {$this->typeName} to determine the date-picker format";
     $page->fillField('edit-title-0-value', $title);
     // Set the date using a day and month which could be correctly interpreted
     // either way. Set the year to be next year to ensure a future date.
@@ -41,7 +48,10 @@ class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
     $page->fillField('edit-publish-on-0-value-date', '05/02/' . (date('Y') + 1));
     $page->fillField('edit-publish-on-0-value-time', '06:00:00pm');
     $page->pressButton('Save');
+    // Show the content via the users own view.
+    $this->drupalGet("user/{$this->schedulerUser->id()}/scheduled");
     $node = $this->drupalGetNodeByTitle($title);
+    $this->assertNotEmpty($node, "The test node in setUp() failed to be found using title '{$title}'. This is a random problem.");
     // If the saved month is 2 then the format is d/m/Y, otherwise it is m/d/Y.
     $this->datepickerFormat = (date('n', $node->publish_on->value) == 2 ? 'd/m/Y' : 'm/d/Y');
   }
@@ -51,8 +61,11 @@ class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
    *
    * @dataProvider dataTimeWhenSchedulingIsRequired
    */
-  public function testTimeWhenSchedulingIsRequired($field) {
+  #[DataProvider('dataTimeWhenSchedulingIsRequired')]
+  public function testTimeWhenSchedulingIsRequired($entityTypeId, $bundle, $field) {
     $config = $this->config('scheduler.settings');
+    $titleField = $this->titleField($entityTypeId);
+    $entityType = $this->entityTypeObject($entityTypeId);
 
     // This test is only relevant when the configuration allows a date only with
     // a default time specified. Testing with 'allow_date_only' = false is
@@ -68,33 +81,39 @@ class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
     $scheduling_time = new \DateTime();
     $scheduling_time->add(new \DateInterval('P1D'))->setTime(19, 30, 20);
 
-    foreach ([TRUE, FALSE] as $required) {
-      // Set the publish-on/unpublish-on date to the $required setting.
-      $this->nodetype->setThirdPartySetting('scheduler', $field . '_required', $required)->save();
+    // Node and Media entities are revisionable and the 'Revision Information'
+    // tab is the default active one, so needs a click on 'Scheduling Options'.
+    // Products do not have this link, so the click would fail. A simple way to
+    // resolve this is display the scheduler options as a separate fieldset.
+    $entityType->setThirdPartySetting('scheduler', 'fields_display_mode', 'fieldset')->save();
 
-      // Create a node.
-      $this->drupalGet('node/add/' . $this->type);
+    foreach ([TRUE, FALSE] as $required) {
+      // Set the publish_on/unpublish_on required setting.
+      $entityType->setThirdPartySetting('scheduler', $field . '_required', $required)->save();
+
+      // Create an entity.
+      $this->drupalGet($this->entityAddUrl($entityTypeId, $bundle));
       $page = $this->getSession()->getPage();
       $title = ucfirst($field) . ($required ? ' required' : ' not required') . ', datepickerFormat = ' . $this->datepickerFormat;
-      $page->fillField('edit-title-0-value', $title);
+      $page->fillField("edit-{$titleField}-0-value", $title);
       if ($required) {
         // Fill in the date value but do nothing with the time field.
         $page->fillField('edit-' . $field . '-on-0-value-date', $scheduling_time->format($this->datepickerFormat));
       }
       $page->pressButton('Save');
 
-      // Test that the content has saved properly.
-      $this->assertSession()->pageTextContains(sprintf('%s %s has been created', $this->typeName, $title));
+      // Test that the entity has saved properly.
+      $this->assertSession()->pageTextMatches($this->entitySavedMessage($entityTypeId, $title));
 
-      $node = $this->drupalGetNodeByTitle($title);
-      $this->assertNotEmpty($node, 'The node could not be found');
+      $entity = $this->getEntityByTitle($entityTypeId, $title);
+      $this->assertNotEmpty($entity, 'The entity object can be found by title');
       if ($required) {
         // Check that the scheduled date and time are correct.
-        $this->assertEquals($scheduling_time->getTimestamp(), (int) $node->{$field . '_on'}->value);
+        $this->assertEquals($scheduling_time->getTimestamp(), (int) $entity->{$field . '_on'}->value);
       }
       else {
         // Check that no scheduled date was stored.
-        $this->assertEmpty($node->{$field . '_on'}->value);
+        $this->assertEmpty($entity->{$field . '_on'}->value);
       }
     }
   }
@@ -102,14 +121,19 @@ class SchedulerJavascriptDefaultTimeTest extends SchedulerJavascriptTestBase {
   /**
    * Provides data for testTimeWhenSchedulingIsRequired().
    *
+   * The data in dataStandardEntityTypes() is expanded to test each entity type
+   * with each of the scheduler date fields.
+   *
    * @return array
-   *   The test data.
+   *   Each array item has the values: [entity type id, bundle id, field name].
    */
   public static function dataTimeWhenSchedulingIsRequired() {
-    return [
-      ['publish'],
-      ['unpublish'],
-    ];
+    $data = [];
+    foreach (self::dataStandardEntityTypes() as $key => $values) {
+      $data["$key-1"] = array_merge($values, ['publish']);
+      $data["$key-2"] = array_merge($values, ['unpublish']);
+    }
+    return $data;
   }
 
 }

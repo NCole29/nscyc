@@ -39,7 +39,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Entity\Plugin\DataType\EntityAdapter;
-use Drupal\core\Entity\FieldableEntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\views\ResultRow;
 
 /**
@@ -498,7 +498,7 @@ class GeofieldGoogleMapViewStyle extends DefaultStyle implements ContainerFactor
   /**
    * Set the langcode to be used for rendering the entity.
    *
-   * @param \Drupal\core\Entity\FieldableEntityInterface $entity
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
    *   The fieldable Entity.
    * @param \Drupal\views\ResultRow $result
    *   The view Row result.
@@ -911,7 +911,7 @@ class GeofieldGoogleMapViewStyle extends DefaultStyle implements ContainerFactor
               }
 
               // Render the entity with the selected view mode.
-              /** @var \Drupal\core\Entity\FieldableEntityInterface $entity */
+              /** @var \Drupal\Core\Entity\FieldableEntityInterface $entity */
               if (isset($entity)) {
                 // Get and set (if not set) the Geofield cardinality.
                 /** @var \Drupal\Core\Field\FieldItemList $geofield_entity */
@@ -969,7 +969,7 @@ class GeofieldGoogleMapViewStyle extends DefaultStyle implements ContainerFactor
                       $renderedRow = [
                         $this->view->rowPlugin->render($result),
                       ];
-                      $description[] = $this->renderer->renderPlain($renderedRow);
+                      $description[] = $this->renderer->renderInIsolation($renderedRow);
                       break;
 
                     case '#rendered_entity_ajax':

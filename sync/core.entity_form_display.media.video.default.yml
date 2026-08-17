@@ -37,4 +37,6 @@ content:
 hidden:
   created: true
   path: true
+  publish_on: true
   uid: true
+  unpublish_on: true

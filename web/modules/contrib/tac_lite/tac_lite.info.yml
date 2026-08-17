@@ -3,11 +3,11 @@ description: Simple access control based on categories.
 package: Access control
 configure: tac_lite.administration
 type: module
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:taxonomy
 
 # Information added by Drupal.org packaging script on 2026-02-18
-version: '8.x-1.9'
+version: '2.0.2'
 project: 'tac_lite'
-datestamp: 1771378098
+datestamp: 1771378148

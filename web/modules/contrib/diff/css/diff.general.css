@@ -16,8 +16,8 @@ table.diff-revisions td input {
 }
 
 .diff-responsive-table-wrapper {
-  min-height: 0%;
   overflow-x: auto;
+  min-height: 0;
 }
 .diff-responsive-table {
   max-width: 100%;
@@ -42,8 +42,8 @@ table.diff-revisions td input {
 
 .diff-controls {
   display: flex;
-  margin-bottom: 1em;
   width: 100%;
+  margin-bottom: 1em;
 }
 .diff-controls__item {
   padding-right: 1em;
@@ -59,16 +59,16 @@ table.diff-revisions td input {
 @media screen and (min-width: 560px) {
   .diff-revision__items {
     display: table;
-    margin-left: -1em;
     margin-right: -1em;
+    margin-left: -1em;
   }
   .diff-revision__items-group {
     display: table-row;
   }
   .diff-revision__item {
     display: table-cell;
-    padding-left: 1em;
     padding-right: 1em;
+    padding-left: 1em;
   }
   .diff-revision__item-date {
     float: none;

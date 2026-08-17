@@ -137,7 +137,7 @@ class TaxonomyTermThemerUrl extends MapThemerBase {
 
     $taxonomy_ref_fields = [];
     foreach ($view_fields as $field_id => $field_label) {
-      /** @var \Drupal\field\Entity\FieldStorageConfig $field_storage */
+      /** @var \Drupal\field\Entity\FieldStorageConfig $field_storage_definitions */
       if (isset($field_storage_definitions[$field_id])
         && $field_storage_definitions[$field_id] instanceof FieldStorageConfig
         && $field_storage_definitions[$field_id]->getType() == 'entity_reference'
@@ -246,10 +246,10 @@ class TaxonomyTermThemerUrl extends MapThemerBase {
           'header' => [
             'label' => $this->t('Taxonomy term'),
             'label_alias' => Markup::create($this->t('Term Alias @description', [
-              '@description' => $this->renderer->renderPlain($label_alias_upload_help),
+              '@description' => $this->renderer->renderInIsolation($label_alias_upload_help),
             ])),
             'marker_icon' => Markup::create($this->t('Marker Icon @file_select_help', [
-              '@file_select_help' => $this->renderer->renderPlain($file_select_help),
+              '@file_select_help' => $this->renderer->renderInIsolation($file_select_help),
             ])),
             'image_style' => '',
           ],

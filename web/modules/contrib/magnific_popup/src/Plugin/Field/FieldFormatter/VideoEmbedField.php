@@ -2,14 +2,14 @@
 
 namespace Drupal\magnific_popup\Plugin\Field\FieldFormatter;
 
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FormatterInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\Html;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -156,11 +156,13 @@ class VideoEmbedField extends FormatterBase implements ContainerFactoryPluginInt
         $element[$delta] = [
           '#type' => 'container',
           '#attributes' => [
-            'data-mfp-video-embed' => (string) $this->renderer->renderPlain($videos[$delta]),
+            'data-mfp-video-embed' => (string) $this->renderer->renderInIsolation($videos[$delta]),
             'class' => ['mfp-video-embed-popup'],
           ],
           '#attached' => [
-            'library' => ['magnific_popup/magnific_popup', 'magnific_popup/video_embed_field'],
+            'library' => ['magnific_popup/magnific_popup',
+              'magnific_popup/video_embed_field',
+            ],
           ],
         ];
       }
@@ -168,11 +170,13 @@ class VideoEmbedField extends FormatterBase implements ContainerFactoryPluginInt
         $element[$delta] = [
           '#type' => 'container',
           '#attributes' => [
-            'data-mfp-video-embed' => (string) $this->renderer->renderPlain($videos[$delta]),
+            'data-mfp-video-embed' => (string) $this->renderer->renderInIsolation($videos[$delta]),
             'class' => ['mfp-video-embed-popup'],
           ],
           '#attached' => [
-            'library' => ['magnific_popup/magnific_popup', 'magnific_popup/video_embed_field'],
+            'library' => ['magnific_popup/magnific_popup',
+              'magnific_popup/video_embed_field',
+            ],
           ],
           'children' => $thumbnails[$delta],
         ];

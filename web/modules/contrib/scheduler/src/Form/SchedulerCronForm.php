@@ -7,6 +7,7 @@ use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\State\State;
 use Drupal\Core\Url;
 use Drupal\scheduler\SchedulerManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Scheduler Lightweight Cron form.
  */
 class SchedulerCronForm extends ConfigFormBase {
+
+  public const CRON_ACCESS_KEY = 'scheduler_lightweight_cron_access_key';
 
   /**
    * The module handler service.
@@ -31,6 +34,13 @@ class SchedulerCronForm extends ConfigFormBase {
   protected $schedulerManager;
 
   /**
+   * The state service.
+   *
+   * @var \Drupal\Core\State\State
+   */
+  protected $state;
+
+  /**
    * Creates a SchedulerCronForm instance.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -41,11 +51,14 @@ class SchedulerCronForm extends ConfigFormBase {
    *   The module handler service.
    * @param \Drupal\scheduler\SchedulerManager $scheduler_manager
    *   The scheduler manager service.
+   * @param \Drupal\Core\State\State $state
+   *   The state service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, ModuleHandlerInterface $module_handler, SchedulerManager $scheduler_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, ModuleHandlerInterface $module_handler, SchedulerManager $scheduler_manager, State $state) {
     parent::__construct($config_factory, $typed_config_manager);
     $this->moduleHandler = $module_handler;
     $this->schedulerManager = $scheduler_manager;
+    $this->state = $state;
   }
 
   /**
@@ -56,7 +69,8 @@ class SchedulerCronForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('config.typed'),
       $container->get('module_handler'),
-      $container->get('scheduler.manager')
+      $container->get('scheduler.manager'),
+      $container->get('state')
     );
   }
 
@@ -80,6 +94,17 @@ class SchedulerCronForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('scheduler.settings');
 
+    $timecheck = array_merge([$this->t('Server time: %utc', _scheduler_timecheck())], _scheduler_timecheck('description'));
+    $form['timecheck'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Timecheck'),
+      'description' => [
+        '#type' => 'inline_template',
+        '#template' => '{{ description|raw }}',
+        '#context' => ['description' => implode('<br />', $timecheck)],
+      ],
+    ];
+
     $form['cron_settings'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Lightweight cron settings'),
@@ -93,7 +118,7 @@ class SchedulerCronForm extends ConfigFormBase {
     $form['cron_settings']['lightweight_access_key'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Lightweight cron access key'),
-      '#default_value' => $config->get('lightweight_cron_access_key'),
+      '#default_value' => $this->state->get($this::CRON_ACCESS_KEY, ''),
       '#required' => TRUE,
       '#size' => 25,
       '#description' => $this->t("Similar to Drupal's cron key this acts as a security token to prevent unauthorized calls to scheduler/cron. The key should be passed as scheduler/cron/{access key}"),
@@ -126,8 +151,8 @@ class SchedulerCronForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('scheduler.settings');
     $config->set('log', $form_state->getValue('lightweight_log'));
-    $config->set('lightweight_cron_access_key', $form_state->getValue('lightweight_access_key'));
     $config->save();
+    $this->state->set($this::CRON_ACCESS_KEY, $form_state->getValue('lightweight_access_key'));
     parent::submitForm($form, $form_state);
   }
 
@@ -142,9 +167,7 @@ class SchedulerCronForm extends ConfigFormBase {
    *   The current state of the form.
    */
   public function generateRandomKey(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('scheduler.settings');
-    $config->set('lightweight_cron_access_key', substr(md5(rand()), 0, 20));
-    $config->save();
+    $this->state->set($this::CRON_ACCESS_KEY, substr(md5(rand()), 0, 20));
     parent::submitForm($form, $form_state);
   }
 

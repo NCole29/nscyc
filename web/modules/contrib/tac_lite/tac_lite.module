@@ -116,8 +116,9 @@ function _tac_lite_get_terms($node) {
   }
   return $tids;
 }
+
 /**
- * We organize our data structure by vid and tid.
+ * Organizes our data structure by vid and tid.
  */
 function tac_lite_node_get_terms($node) {
   $terms = &drupal_static(__FUNCTION__);
@@ -168,6 +169,7 @@ function tac_lite_node_grants(AccountInterface $account, $op) {
     return $grants;
   }
 }
+
 /**
  * Return the term ids of terms this user is allowed to access.
  *
@@ -179,28 +181,38 @@ function _tac_lite_user_tids($account, $scheme) {
   // when they were created. By adding 0 to the grant id, we let the
   // user view those nodes.
   $grants = [0];
+  $config = \Drupal::config('tac_lite.settings');
+  $storage_type = $config->get('tac_lite_storage_type') ?: 'tid';
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+  // Gather all raw identifiers from User Data and Role Defaults.
   $data = \Drupal::service('user.data')->get('tac_lite', $account->id(), 'tac_lite_scheme_' . $scheme) ?: [];
-  if (count($data)) {
-    foreach ($data as $tids) {
-      if (count($tids)) {
-        $grants = array_merge($grants, $tids);
-      }
-    }
+  $defaults = $config->get('tac_lite_grants_scheme_' . $scheme) ?: [];
+  $roles = $account->getRoles();
+
+  $raw_ids = [];
+  foreach ($data as $ids) {
+    $raw_ids = array_merge($raw_ids, $ids);
   }
 
-  // Add per-role grants in addition to per-user grants.
-  $settings = \Drupal::config('tac_lite.settings');
-  $defaults = $settings->get('tac_lite_grants_scheme_' . $scheme);
-  $defaults = $defaults ? $defaults : [];
-  $roles = $account->getRoles();
   foreach ($roles as $rid) {
-    if (isset($defaults[$rid]) && count($defaults[$rid])) {
-      foreach ($defaults[$rid] as $tids) {
-        if (count($tids)) {
-          $grants = array_merge($grants, $tids);
-        }
-      }
+    if (isset($defaults[$rid])) {
+      foreach ($defaults[$rid] as $ids) { $raw_ids = array_merge($raw_ids, $ids); }
     }
+  }
+  $raw_ids = array_unique(array_filter($raw_ids));
+
+  // Resolve to TIDs in bulk if stored as UUIDs.
+  if ($storage_type === 'uuid' && !empty($raw_ids)) {
+    // Single query: SELECT tid FROM taxonomy_term_data WHERE uuid IN (...)
+    $terms = $storage->loadByProperties(['uuid' => $raw_ids]);
+    foreach ($terms as $term) {
+      $grants[] = $term->id();
+    }
+  }
+  else {
+    // They are already TIDs.
+    $grants = array_merge($grants, $raw_ids);
   }
 
   // Remove any duplicates.
@@ -212,6 +224,7 @@ function _tac_lite_user_tids($account, $scheme) {
   unset($grants['']);
   return $grants;
 }
+
 /**
  * Implements hook_query_TAG_alter().
  */

@@ -32,7 +32,6 @@ dependencies:
     - layout_paragraphs
     - link
     - media_library
-    - scheduler
     - text
     - webform
   enforced:
@@ -310,12 +309,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   scheduler_settings:
     weight: 7
     region: content
@@ -353,12 +346,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
     weight: 50
     region: content
@@ -368,3 +355,5 @@ hidden:
   created: true
   layout_builder__layout: true
   path: true
+  publish_on: true
+  unpublish_on: true

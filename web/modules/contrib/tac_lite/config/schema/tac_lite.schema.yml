@@ -1,0 +1,75 @@
+tac_lite.settings:
+  type: config_object
+  label: 'Tac_lite settings'
+  mapping:
+    tac_lite_categories:
+      type: sequence
+      label: 'Vocabularies used by tac_lite'
+      sequence:
+        type: string
+        label: 'Vocabulary ID'
+    tac_lite_schemes:
+      type: integer
+      label: 'Number of schemes'
+    tac_lite_storage_type:
+      type: string
+      label: 'Term Identifier Storage'
+      constraints:
+        Choice:
+          choices:
+            - 'tid'
+            - 'uuid'
+    # Dynamic mapping for schemes (e.g., tac_lite_grants_scheme_1)
+    # This allows for 1 to 7 schemes as defined in your ConfigForm.
+    tac_lite_grants_scheme_1:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_2:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_3:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_4:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_5:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_6:
+      type: tac_lite_scheme_grants
+    tac_lite_grants_scheme_7:
+      type: tac_lite_scheme_grants
+
+# Define the structure for scheme-specific grants
+tac_lite_scheme_grants:
+  type: sequence
+  label: 'Scheme grants'
+  sequence:
+    type: sequence
+    label: 'Role grants'
+    sequence:
+      type: sequence
+      label: 'Vocabulary terms'
+      sequence:
+        type: string
+        label: 'Term ID or UUID'
+
+# Schema for the individual scheme settings (usually stored via SchemeForm)
+tac_lite.scheme.*:
+  type: config_object
+  label: 'Tac_lite scheme configuration'
+  mapping:
+    name:
+      type: label
+      label: 'Scheme name'
+    perms:
+      type: sequence
+      label: 'Permissions'
+      sequence:
+        type: string
+        label: 'Permission (view, update, delete)'
+    term_visibility:
+      type: boolean
+      label: 'Visibility of terms'
+    unpublished:
+      type: boolean
+      label: 'Apply to unpublished content'
+    realm:
+      type: string
+      label: 'Node access realm'

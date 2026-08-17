@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\diff\Functional;
 
 use Drupal\Tests\BrowserTestBase;
-use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
 
 /**
  * Base class for Diff web tests.
@@ -68,18 +70,15 @@ abstract class DiffTestBase extends BrowserTestBase {
    * @param bool $reset_permissions
    *   Flag to determine if default admin permissions will be replaced by
    *   $additional_permissions.
-   *
-   * @return \Drupal\user\Entity\User|false
-   *   Newly created and logged in user object.
    */
-  protected function loginAsAdmin(array $additional_permissions = [], bool $reset_permissions = FALSE): User|false {
+  protected function loginAsAdmin(array $additional_permissions = [], bool $reset_permissions = FALSE): UserInterface {
     $permissions = $this->adminPermissions;
 
     if ($reset_permissions) {
       $permissions = $additional_permissions;
     }
     elseif (!empty($additional_permissions)) {
-      $permissions = array_merge($permissions, $additional_permissions);
+      $permissions = \array_merge($permissions, $additional_permissions);
     }
 
     $this->adminUser = $this->drupalCreateUser($permissions);

@@ -3,6 +3,8 @@
 namespace Drupal\scheduler\Plugin\Validation\Constraint;
 
 use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Validation\Attribute\Constraint;
 
 /**
  * Validates publish on values.
@@ -10,13 +12,18 @@ use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
  * @Constraint(
  *   id = "SchedulerPublishOn",
  *   label = @Translation("Scheduler publish on", context = "Validation"),
- *   type = "entity:node"
+ *   type = "entity"
  * )
  */
+#[Constraint(
+  id: 'SchedulerPublishOn',
+  label: new TranslatableMarkup('Scheduler publish on', [], ['context' => 'Validation']),
+  type: 'entity'
+)]
 class SchedulerPublishOnConstraint extends CompositeConstraintBase {
 
   /**
-   * Message shown when publish_on is not the future.
+   * Message shown when publish_on is not in the future.
    *
    * @var string
    */

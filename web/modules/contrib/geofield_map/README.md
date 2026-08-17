@@ -206,6 +206,8 @@ contextual rules.
    module integration is not enabled), all performed client-side by js.
   It might/should be restricted using the
   [Website Domain / HTTP referrers method](https://developers.google.com/maps/documentation/javascript/get-api-key#key-restrictions).
+  Note: The [Key module](https://www.drupal.org/project/key) is supported. When installed you can store the Gmap Api
+  Key into it and use the corresponding key id.
 
 
 ## Maintainers

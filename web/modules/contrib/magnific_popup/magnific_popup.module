@@ -34,9 +34,5 @@ function magnific_popup_library_info_alter(&$libraries, $extension) {
  *   TRUE if the legacy path should be used.
  */
 function _magnific_popup_use_legacy_path() {
-  if (file_exists(DRUPAL_ROOT . '/libraries/magnific-popup/jquery.magnific-popup.min.js') && file_exists(DRUPAL_ROOT . '/libraries/magnific-popup/magnific-popup.css')) {
-    return TRUE;
-  }
-
-  return FALSE;
+  return (file_exists(DRUPAL_ROOT . '/libraries/magnific-popup/jquery.magnific-popup.min.js') && file_exists(DRUPAL_ROOT . '/libraries/magnific-popup/magnific-popup.css'));
 }

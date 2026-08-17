@@ -10,9 +10,11 @@ dependencies:
     - field.field.node.location.field_location_type
     - field.field.node.location.field_restrooms
     - node.type.location
+    - workflows.workflow.editorial
   module:
     - address
     - allowed_formats
+    - content_moderation
     - text
   enforced:
     module:
@@ -26,7 +28,8 @@ content:
     type: address_default
     weight: 4
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: details
     third_party_settings: {  }
   field_location_info:
     type: text_textarea
@@ -57,6 +60,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 5
@@ -71,6 +80,11 @@ content:
     settings:
       size: 60
       placeholder: 'Enter place name'
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

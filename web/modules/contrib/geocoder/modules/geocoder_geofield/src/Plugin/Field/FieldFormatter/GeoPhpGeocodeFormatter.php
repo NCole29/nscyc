@@ -180,7 +180,11 @@ abstract class GeoPhpGeocodeFormatter extends FileGeocodeFormatter {
           /** @var \Geometry $collection */
           if ($collection = $this->geocoder->geocode($item->value, $providers)) {
             $elements[$delta] = [
-              '#markup' => $collection->out($adapter),
+              '#type' => 'html_tag',
+              '#tag' => 'code',
+              '#value' => \Drupal\Core\Render\Markup::create(
+                htmlspecialchars($collection->out($adapter), ENT_QUOTES | ENT_XML1, 'UTF-8')
+              ),
             ];
           }
         }

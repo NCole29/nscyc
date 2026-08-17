@@ -784,7 +784,15 @@ class GeofieldMapWidget extends GeofieldLatLonWidget implements ContainerFactory
     if (empty($geofield_item) || $geofield_item['geo_type'] == 'Point') {
 
       $gmap_api_key = $this->getGmapApiKey();
-
+      // If api key is the id of a key stored in the key module, load that.
+      if ($this->moduleHandler->moduleExists('key')) {
+        $keyRepository = \Drupal::service('key.repository');
+        $key = $keyRepository->getKey($gmap_api_key);
+        if ($key) {
+          $gmap_api_key = $key->getKeyValue();
+        };
+      }
+      
       $latlon_value = [];
 
       foreach ($this->components as $component) {

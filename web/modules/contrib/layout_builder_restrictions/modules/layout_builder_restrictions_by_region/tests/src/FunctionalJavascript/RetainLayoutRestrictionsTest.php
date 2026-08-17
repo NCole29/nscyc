@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\layout_builder_restrictions_by_region\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Block restrictions can be removed or preserved based on config setting.
- *
- * @group layout_builder_restrictions_by_region
  */
+#[Group('layout_builder_restrictions_by_region')]
+#[RunTestsInSeparateProcesses]
 class RetainLayoutRestrictionsTest extends WebDriverTestBase {
 
   /**
@@ -55,7 +59,7 @@ class RetainLayoutRestrictionsTest extends WebDriverTestBase {
    * Demonstrate that layout restrictions are removed after layout removal.
    */
   public function testRemovedRestrictions() {
-    $this->getSession()->resizeWindow(1200, 4000);
+    $this->getSession()->resizeWindow(1600, 4000);
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
 
@@ -73,7 +77,7 @@ class RetainLayoutRestrictionsTest extends WebDriverTestBase {
    * Demonstrate that layout restrictions can be retained after removal.
    */
   public function testRetainedRestrictions() {
-    $this->getSession()->resizeWindow(1200, 4000);
+    $this->getSession()->resizeWindow(1600, 4000);
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
 
@@ -117,13 +121,13 @@ class RetainLayoutRestrictionsTest extends WebDriverTestBase {
     $element->click();
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-onecol-table"]/tbody/tr[@data-region="all_regions"]//a');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Allowed blocks'));
     // Set 'Content' fields category to be restricted.
     $element = $page->find('xpath', '//*[contains(@class, "form-item-allowed-blocks-content-fields-restriction")]/input[@value="restrict_all"]');
     $element->click();
     $element = $page->find('xpath', '//*[starts-with(@id,"edit-submit--")]');
     $element->click();
-    $assert_session->assertWaitOnAjaxRequest();
+    $this->assertNotEmpty($assert_session->waitForText('Save'));
     $page->pressButton('Save');
     $element = $page->find('xpath', '//*[@id="edit-layout-builder-restrictions-allowed-blocks-by-layout-layout-onecol"]/summary');
     $element->click();

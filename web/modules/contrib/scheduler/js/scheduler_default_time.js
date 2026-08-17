@@ -3,11 +3,11 @@
  * JQuery to set default time for Scheduler DateTime Widget.
  */
 
-(function ($, drupalSettings) {
+(function ($, drupalSettings, once) {
   /**
    * Provide default time if schedulerDefaultTime is set.
    *
-   * schedulerDefaultTime is defined in scheduler_form_node_form_alter when the
+   * schedulerDefaultTime is defined in _scheduler_entity_form_alter when the
    * user is allowed to enter just a date. The values need to be pre-filled here
    * to avoid the browser validation 'please fill in this field' pop-up error
    * which is produced before the date widget valueCallback() can set the value.
@@ -15,7 +15,19 @@
    */
   Drupal.behaviors.setSchedulerDefaultTime = {
     attach(context) {
-      if (typeof drupalSettings.schedulerDefaultTime !== 'undefined') {
+      // Drupal.behaviors are called many times per page. Using .once() adds the
+      // class onto the matched DOM element and uses this to prevent it running
+      // on subsequent calls.
+      const $defaultTime = once(
+        'default-time-done',
+        '#edit-scheduler-settings',
+        context,
+      );
+
+      if (
+        $defaultTime.length &&
+        typeof drupalSettings.schedulerDefaultTime !== 'undefined'
+      ) {
         const operations = ['publish', 'unpublish'];
         operations.forEach(function (value) {
           const element = $(`input#edit-${value}-on-0-value-time`, context);
@@ -47,4 +59,4 @@
       }
     },
   };
-})(jQuery, drupalSettings);
+})(jQuery, drupalSettings, once);

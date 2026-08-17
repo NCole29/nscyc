@@ -358,6 +358,7 @@ class SettingsForm extends ConfigFormBase {
       ];
     }
 
+    /** @var string[] $helper_configs */
     $helper_configs = $this->configFactory()->listAll(HelperManager::HELPER_CONFIG_PREFIX);
 
     /** @var string[] $remove_configs */

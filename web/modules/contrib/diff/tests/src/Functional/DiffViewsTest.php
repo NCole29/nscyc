@@ -1,19 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\diff\Functional;
 
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\views\Functional\ViewTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the diff views integration.
  *
  * Loads optional config of views.
- *
- * @group diff
  */
+#[Group('diff')]
+#[RunTestsInSeparateProcesses]
 class DiffViewsTest extends ViewTestBase {
 
   /**

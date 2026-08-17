@@ -4,14 +4,26 @@ namespace Drupal\Tests\scheduler\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\DocumentElement;
+use Drupal\Tests\scheduler\Traits\SchedulerCommerceProductSetupTrait;
+use Drupal\Tests\scheduler\Traits\SchedulerMediaSetupTrait;
+use Drupal\Tests\scheduler\Traits\SchedulerNoBundleEntitySetupTrait;
 use Drupal\Tests\scheduler\Traits\SchedulerSetupTrait;
+use Drupal\Tests\scheduler\Traits\SchedulerTaxonomyTermSetupTrait;
 
 /**
  * Base class for Scheduler javascript tests.
  */
 abstract class SchedulerJavascriptTestBase extends WebDriverTestBase {
 
+  use SchedulerCommerceProductSetupTrait;
+  use SchedulerMediaSetupTrait;
+  // SchedulerSetupTrait::createEntity() and getEntityByTitle() dispatch the
+  // no-bundle entity type to methods defined in this trait, so it must be used
+  // here even though the javascript tests do not exercise no-bundle entities
+  // directly (there is no javascript-specific UI for them).
+  use SchedulerNoBundleEntitySetupTrait;
   use SchedulerSetupTrait;
+  use SchedulerTaxonomyTermSetupTrait;
 
   /**
    * The standard modules to load for all javascript tests.
@@ -20,7 +32,12 @@ abstract class SchedulerJavascriptTestBase extends WebDriverTestBase {
    *
    * @var array
    */
-  protected static $modules = ['scheduler'];
+  protected static $modules = [
+    'scheduler',
+    'media',
+    'commerce_product',
+    'taxonomy',
+  ];
 
   /**
    * The profile to install as a basis for testing.
@@ -43,8 +60,21 @@ abstract class SchedulerJavascriptTestBase extends WebDriverTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // Call the common set-up function defined in the trait.
+    // Call the common set-up functions defined in the traits.
     $this->schedulerSetUp();
+    // $this->toString() includes the test class and the dataProvider key.
+    // We can use this to save time and resources by avoiding calls to the
+    // entity-specific setup functions when they are not needed.
+    $testName = $this->toString();
+    if (stristr($testName, 'media')) {
+      $this->schedulerMediaSetUp();
+    }
+    if (stristr($testName, 'product')) {
+      $this->SchedulerCommerceProductSetUp();
+    }
+    if (stristr($testName, 'taxonomy')) {
+      $this->SchedulerTaxonomyTermSetup();
+    }
   }
 
   /**

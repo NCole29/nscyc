@@ -3,6 +3,8 @@
 namespace Drupal\scheduler\Plugin\Validation\Constraint;
 
 use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Validation\Attribute\Constraint;
 
 /**
  * Validates unpublish on values.
@@ -10,9 +12,14 @@ use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
  * @Constraint(
  *   id = "SchedulerUnpublishOn",
  *   label = @Translation("Scheduler unpublish on", context = "Validation"),
- *   type = "entity:node"
+ *   type = "entity"
  * )
  */
+#[Constraint(
+  id: 'SchedulerUnpublishOn',
+  label: new TranslatableMarkup('Scheduler unpublish on', [], ['context' => 'Validation']),
+  type: 'entity'
+)]
 class SchedulerUnpublishOnConstraint extends CompositeConstraintBase {
 
   /**
@@ -23,11 +30,11 @@ class SchedulerUnpublishOnConstraint extends CompositeConstraintBase {
   public $messageUnpublishOnRequiredIfPublishOnEntered = "If you set a 'publish on' date then you must also set an 'unpublish on' date.";
 
   /**
-   * Message shown when unpublish_on is missing but node is published directly.
+   * Message shown when unpublish_on is missing but trying to save as published.
    *
    * @var string
    */
-  public $messageUnpublishOnRequiredIfPublishing = "Either you must set an 'unpublish on' date or save this node as unpublished.";
+  public $messageUnpublishOnRequiredIfPublishing = "Either you must set an 'unpublish on' date or save as unpublished.";
 
   /**
    * Message shown when unpublish_on is not in the future.

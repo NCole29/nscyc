@@ -1,13 +1,7 @@
 tac_lite_categories:
   page_access: page_access
-tac_lite_schemes: '1'
-menu_rebuild_needed: true
-tac_lite_config_scheme_1:
-  name: 'View access'
-  perms:
-    grant_view: grant_view
-  unpublished: 0
-  term_visibility: 0
+tac_lite_schemes: 1
+tac_lite_storage_type: tid
 tac_lite_grants_scheme_1:
   anonymous:
     page_access: {  }
@@ -44,3 +38,10 @@ tac_lite_grants_scheme_1:
     page_access:
       31: '31'
       20: '20'
+menu_rebuild_needed: true
+tac_lite_config_scheme_1:
+  name: 'View access'
+  perms:
+    grant_view: grant_view
+  unpublished: 0
+  term_visibility: 0

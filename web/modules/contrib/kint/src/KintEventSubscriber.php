@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\kint;
 
+use Drupal\Core\Config\ConfigBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\EventSubscriber\AuthenticationSubscriber;
 use Drupal\Core\Session\AccountEvents;
@@ -14,6 +15,8 @@ use Drupal\csp\CspEvents;
 use Drupal\csp\Event\PolicyAlterEvent;
 use Drupal\csp\PolicyHelper;
 use Kint\Kint;
+use Kint\Renderer\RichRenderer;
+use Kint\Renderer\TextRenderer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -31,7 +34,7 @@ class KintEventSubscriber implements EventSubscriberInterface {
     // We already try to set this in kint.module but since
     // the container might not exist yet we'll do it here too.
     if ($config_factory) {
-      \kint_initialize_kint_settings($config_factory->get('kint.settings'));
+      self::initializeKint($config_factory->get('kint.settings'));
     }
   }
 
@@ -65,6 +68,31 @@ class KintEventSubscriber implements EventSubscriberInterface {
       $this->policyHelper->appendNonce($csp, 'style', [Csp::POLICY_UNSAFE_INLINE]);
       $this->policyHelper->appendNonce($csp, 'script', [Csp::POLICY_UNSAFE_INLINE]);
     }
+  }
+
+  /**
+   * Sets kint settings based on drupal/kint configuration.
+   */
+  public static function initializeKint(ConfigBase $config): void {
+    if (NULL !== $config->get('early_enable')) {
+      assert(is_bool($config->get('early_enable')));
+      Kint::$enabled_mode = $config->get('early_enable');
+    }
+
+    if (NULL !== $config->get('rich_theme')) {
+      assert(is_string($config->get('rich_theme')));
+      RichRenderer::$theme = $config->get('rich_theme');
+    }
+
+    if (NULL !== $config->get('date_format')) {
+      $date_format = $config->get('date_format');
+      assert(is_string($date_format));
+      RichRenderer::$timestamp = $date_format;
+      TextRenderer::$timestamp = $date_format;
+    }
+
+    // Initializes configured helpers on construction.
+    \Drupal::service('kint.helper.manager');
   }
 
   /**

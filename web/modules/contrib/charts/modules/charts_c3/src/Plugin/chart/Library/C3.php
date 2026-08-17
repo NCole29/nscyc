@@ -2,10 +2,11 @@
 
 namespace Drupal\charts_c3\Plugin\chart\Library;
 
+use Drupal\charts\ApplyRawOptionsTrait;
 use Drupal\charts\Attribute\Chart;
+use Drupal\charts\BackgroundColorTrait;
 use Drupal\charts\Plugin\chart\Library\ChartBase;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -36,6 +37,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   ]
 )]
 class C3 extends ChartBase implements ContainerFactoryPluginInterface {
+
+  use ApplyRawOptionsTrait;
+  use BackgroundColorTrait;
 
   /**
    * The element info manager.
@@ -161,6 +165,12 @@ class C3 extends ChartBase implements ContainerFactoryPluginInterface {
       $chart_definition = $this->populateData($element, $chart_definition);
       $chart_definition = $this->populateAxes($element, $chart_definition);
     }
+
+    // Workaround because C3.js does not natively support background color.
+    $element = $this->applyBackgroundColor($element);
+
+    // Merge in chart raw options (applies to both methods).
+    $chart_definition = $this->applyRawOptions($element, $chart_definition);
 
     // Ensure the chart knows where to render.
     // This must happen regardless of how the definition was built.
@@ -361,15 +371,9 @@ class C3 extends ChartBase implements ContainerFactoryPluginInterface {
       }
     }
     $chart_definition['data']['type'] = $type;
-    // Merge in chart raw options.
-    if (!empty($element['#raw_options'])) {
-      $chart_definition = NestedArray::mergeDeepArray([
-        $chart_definition,
-        $element['#raw_options'],
-      ]);
-    }
 
-    return $chart_definition;
+    // Merge in chart raw options and return the definition.
+    return $this->applyRawOptions($element, $chart_definition);
   }
 
   /**

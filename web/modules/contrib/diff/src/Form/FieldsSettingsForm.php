@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\diff\Form;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -13,6 +16,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\diff\DiffBuilderManager;
+use Drupal\diff\FieldDiffBuilderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -25,50 +29,18 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class FieldsSettingsForm extends ConfigFormBase {
 
   /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
-   * The entity field manager.
-   *
-   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
-   */
-  protected $entityFieldManager;
-
-  /**
-   * The field type plugin manager service.
-   *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface
-   */
-  protected $fieldTypePluginManager;
-
-  /**
-   * The field diff plugin manager service.
-   *
-   * @var \Drupal\diff\DiffBuilderManager
-   */
-  protected $diffBuilderManager;
-
-  /**
    * Constructs a FieldsSettingsForm object.
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,
     TypedConfigManagerInterface $typedConfigManager,
-    PluginManagerInterface $plugin_manager,
-    DiffBuilderManager $diff_builder_manager,
-    EntityTypeManagerInterface $entity_type_manager,
-    EntityFieldManagerInterface $entity_field_manager,
+    protected PluginManagerInterface $fieldTypePluginManager,
+    protected DiffBuilderManager $diffBuilderManager,
+    protected EntityTypeManagerInterface $entityTypeManager,
+    protected EntityFieldManagerInterface $entityFieldManager,
+    protected EntityTypeBundleInfoInterface $bundleInfo,
   ) {
     parent::__construct($config_factory, $typedConfigManager);
-
-    $this->fieldTypePluginManager = $plugin_manager;
-    $this->diffBuilderManager = $diff_builder_manager;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->entityFieldManager = $entity_field_manager;
   }
 
   /**
@@ -82,27 +54,28 @@ class FieldsSettingsForm extends ConfigFormBase {
       $container->get('plugin.manager.diff.builder'),
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
+      $container->get('entity_type.bundle.info'),
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'diff_admin_plugins';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return ['diff.plugins'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
     // The table containing all the field types discovered in the system.
     $form['fields'] = [
@@ -166,7 +139,7 @@ class FieldsSettingsForm extends ConfigFormBase {
    * @return array
    *   A table row for the field type listing table.
    */
-  protected function buildFieldRow(EntityTypeInterface $entity_type, FieldStorageDefinitionInterface $field_definition, FormStateInterface $form_state) {
+  protected function buildFieldRow(EntityTypeInterface $entity_type, FieldStorageDefinitionInterface $field_definition, FormStateInterface $form_state): array {
     $entity_type_label = $entity_type->getLabel();
     $field_name = $field_definition->getName();
     $field_type = $field_definition->getType();
@@ -190,9 +163,9 @@ class FieldsSettingsForm extends ConfigFormBase {
     $field_row['entity_type'] = [
       '#markup' => $entity_type_label,
     ];
-    $labels = _diff_field_label($entity_type->id(), $field_name);
+    $labels = $this->getFieldLabels($entity_type->id(), $field_name);
     $field_row['field_label'] = [
-      '#markup' => array_shift($labels),
+      '#markup' => \array_shift($labels),
     ];
 
     $field_type_label = $this->fieldTypePluginManager->getDefinitions()[$field_type]['label'];
@@ -322,7 +295,7 @@ class FieldsSettingsForm extends ConfigFormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state object.
    */
-  public function multiStepSubmit(array $form, FormStateInterface $form_state) {
+  public function multiStepSubmit(array $form, FormStateInterface $form_state): void {
     $trigger = $form_state->getTriggeringElement();
     $op = $trigger['#op'];
 
@@ -362,7 +335,7 @@ class FieldsSettingsForm extends ConfigFormBase {
    * @return array
    *   The fields form for a plugin.
    */
-  public function multiStepAjax(array $form, FormStateInterface $form_state) {
+  public function multiStepAjax(array $form, FormStateInterface $form_state): array {
     $trigger = $form_state->getTriggeringElement();
     if (isset($trigger['#op'])) {
       $op = $trigger['#op'];
@@ -396,9 +369,45 @@ class FieldsSettingsForm extends ConfigFormBase {
   }
 
   /**
+   * Returns the label of a certain field.
+   *
+   * Therefore it looks up in all bundles to find the most used field.
+   *
+   * @param string $entity_type
+   *   The entity type id.
+   * @param string $field_name
+   *   The field name.
+   *
+   * @return array
+   *   Array of labels used for the field sorted by the most used.
+   */
+  protected function getFieldLabels(string $entity_type, string $field_name): array {
+    $labels = [];
+    // Count the amount of instances of each label per field storage.
+    $bundles = $this->bundleInfo->getBundleInfo($entity_type);
+    foreach (\array_keys($bundles) as $bundle) {
+      $bundle_instances = $this->entityFieldManager->getFieldDefinitions($entity_type, $bundle);
+      if (isset($bundle_instances[$field_name])) {
+        $instance = $bundle_instances[$field_name];
+        $label = (string) $instance->getLabel();
+        $labels[$label] = isset($labels[$label]) ? ++$labels[$label] : 1;
+      }
+    }
+
+    if (\count($labels) === 0) {
+      // Return the original field name if there is no other label found.
+      return [$field_name];
+    }
+
+    // Return the labels sorted by the most used.
+    \arsort($labels);
+    return \array_keys($labels);
+  }
+
+  /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     $form_values = $form_state->getValues();
     $plugin_settings = $form_state->get('plugin_settings');
     $fields = $form_values['fields'];
@@ -442,7 +451,7 @@ class FieldsSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $form_values = $form_state->getValues();
     $plugin_settings = $form_state->get('plugin_settings');
     $fields = $form_values['fields'];
@@ -451,7 +460,7 @@ class FieldsSettingsForm extends ConfigFormBase {
 
     // Save the settings.
     foreach ($fields as $field_key => $field_values) {
-      $config_key = preg_replace('/__/', '.', $field_key, 1);
+      $config_key = \preg_replace('/__/', '.', (string) $field_key, 1);
       if ($field_values['plugin']['type'] == 'hidden') {
         $config->set('fields.' . $config_key, ['type' => 'hidden', 'settings' => []]);
       }
@@ -500,20 +509,16 @@ class FieldsSettingsForm extends ConfigFormBase {
 
   /**
    * Returns a plugin object or NULL if no plugin could be found.
-   *
-   * @param array $configuration
-   *   The plugin configuration.
-   *
-   * @return \Drupal\diff\FieldDiffBuilderInterface|null
-   *   The plugin.
    */
-  protected function getPlugin(array $configuration) {
+  protected function getPlugin(array $configuration): ?FieldDiffBuilderInterface {
     if ($configuration && isset($configuration['type']) && $configuration['type'] != 'hidden') {
       if (!isset($configuration['settings'])) {
         $configuration['settings'] = [];
       }
+      /** @var \Drupal\diff\FieldDiffBuilderInterface */
       return $this->diffBuilderManager->createInstance(
-        $configuration['type'], $configuration['settings'],
+        $configuration['type'],
+        $configuration['settings'],
       );
     }
 
@@ -523,7 +528,7 @@ class FieldsSettingsForm extends ConfigFormBase {
   /**
    * Returns the header for the table.
    */
-  protected function getTableHeader() {
+  protected function getTableHeader(): array {
     return [
       'entity_type' => $this->t('Entity Type'),
       'field_name' => $this->t('Field'),

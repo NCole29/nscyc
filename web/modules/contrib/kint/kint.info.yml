@@ -7,7 +7,7 @@ configure: kint.form
 tags:
   - developer
 
-# Information added by Drupal.org packaging script on 2026-01-27
-version: '2.3.3'
+# Information added by Drupal.org packaging script on 2026-07-30
+version: '2.3.4'
 project: 'kint'
-datestamp: 1769536756
+datestamp: 1785407747

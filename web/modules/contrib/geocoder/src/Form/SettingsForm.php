@@ -4,11 +4,14 @@ namespace Drupal\geocoder\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * The geocoder settings form.
  */
 class SettingsForm extends ConfigFormBase {
+
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -46,26 +49,28 @@ class SettingsForm extends ConfigFormBase {
       'geocoder/general',
     ];
 
+    // phpcs:disable Drupal.Semantics.FunctionT.NotLiteralString
     $form['geocoder_presave_disabled'] = [
       '#type' => 'checkbox',
-      '#title' => $geocoder_config_schema['geocoder_presave_disabled']['label'],
-      '#description' => $geocoder_config_schema['geocoder_presave_disabled']['description'],
+      '#title' => $this->t($geocoder_config_schema['geocoder_presave_disabled']['label']),
+      '#description' => $this->t($geocoder_config_schema['geocoder_presave_disabled']['description']),
       '#default_value' => $config->get('geocoder_presave_disabled'),
     ];
 
     $form['cache'] = [
       '#type' => 'checkbox',
-      '#title' => $geocoder_config_schema['cache']['label'],
-      '#description' => $geocoder_config_schema['cache']['description'],
+      '#title' => $this->t($geocoder_config_schema['cache']['label']),
+      '#description' => $this->t($geocoder_config_schema['cache']['description']),
       '#default_value' => $config->get('cache'),
     ];
 
     $form['queue'] = [
       '#type' => 'checkbox',
-      '#title' => $geocoder_config_schema['queue']['label'],
-      '#description' => $geocoder_config_schema['queue']['description'],
+      '#title' => $this->t($geocoder_config_schema['queue']['label']),
+      '#description' => $this->t($geocoder_config_schema['queue']['description']),
       '#default_value' => $config->get('queue'),
     ];
+    // phpcs:enable Drupal.Semantics.FunctionT.NotLiteralString
 
     return parent::buildForm($form, $form_state);
   }

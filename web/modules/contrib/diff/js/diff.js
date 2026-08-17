@@ -1,70 +1,63 @@
-(function ($, Drupal, drupalSettings, once) {
+/**
+ * @file
+ * Defines JavaScript behaviors for the diff module.
+ */
 
-  'use strict';
-
+(function (Drupal, drupalSettings, once) {
   Drupal.behaviors.diffRevisions = {
-    attach: function (context, settings) {
-      // drupalSettings in not anymore bound to attached functions.
-      // It is available outside the scope of this anonymous function also.
-      var rows = once('diff-revisions', 'table.diff-revisions tbody tr');
-      var $rows = $(rows);
-      if ($rows.length === 0) {
+    attach() {
+      const rows = once('diff-revisions', 'table.diff-revisions tbody tr');
+      if (rows.length === 0) {
         return;
       }
 
       function updateDiffRadios() {
-        var newTd = false;
-        var oldTd = false;
-        if (!$rows.length) {
-          return true;
-        }
-        $rows.each(function () {
-          var $row = $(this);
-          var $inputs = $row.find('input[type="radio"]');
-          var $oldRadio = $inputs.filter('[name="radios_left"]').eq(0);
-          var $newRadio = $inputs.filter('[name="radios_right"]').eq(0);
-          if (!$oldRadio.length || !$newRadio.length) {
-            return true;
+        let newTd = false;
+        let oldTd = false;
+
+        rows.forEach((row) => {
+          const oldRadio = row.querySelector(
+            'input[type="radio"][name="radios_left"]',
+          );
+          const newRadio = row.querySelector(
+            'input[type="radio"][name="radios_right"]',
+          );
+
+          if (!oldRadio || !newRadio) {
+            return;
           }
-          if ($oldRadio.prop('checked')) {
+
+          oldRadio.classList.remove('js-hide');
+          newRadio.classList.remove('js-hide');
+
+          if (oldRadio.checked) {
             oldTd = true;
-            $oldRadio.css('visibility', 'visible');
-            $newRadio.css('visibility', 'hidden');
-          }
-          else if ($newRadio.prop('checked')) {
+            newRadio.classList.add('js-hide');
+          } else if (newRadio.checked) {
             newTd = true;
-            $oldRadio.css('visibility', 'hidden');
-            $newRadio.css('visibility', 'visible');
-          }
-          else {
-            if (drupalSettings.diffRevisionRadios === 'linear') {
-              if (newTd && oldTd) {
-                $oldRadio.css('visibility', 'visible');
-                $newRadio.css('visibility', 'hidden');
-              }
-              else if (newTd) {
-                $newRadio.css('visibility', 'visible');
-                $oldRadio.css('visibility', 'visible');
-              }
-              else {
-                $newRadio.css('visibility', 'visible');
-                $oldRadio.css('visibility', 'hidden');
-              }
-            }
-            else {
-              $newRadio.css('visibility', 'visible');
-              $oldRadio.css('visibility', 'visible');
+            oldRadio.classList.add('js-hide');
+          } else if (drupalSettings.diffRevisionRadios === 'linear') {
+            if (newTd && oldTd) {
+              newRadio.classList.add('js-hide');
+            } else if (!newTd) {
+              oldRadio.classList.add('js-hide');
             }
           }
         });
-        return true;
       }
 
       if (drupalSettings.diffRevisionRadios) {
-        $rows.find('input[name="radios_left"], input[name="radios_right"]').click(updateDiffRadios);
+        rows.forEach((row) => {
+          row
+            .querySelectorAll(
+              'input[name="radios_left"], input[name="radios_right"]',
+            )
+            .forEach((radio) => {
+              radio.addEventListener('change', updateDiffRadios);
+            });
+        });
         updateDiffRadios();
       }
-    }
+    },
   };
-
-})(jQuery, Drupal, drupalSettings, once);
+})(Drupal, drupalSettings, once);

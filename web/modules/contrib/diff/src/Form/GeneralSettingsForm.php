@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\diff\Form;
 
 use Drupal\Component\Utility\Xss;
@@ -16,23 +18,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GeneralSettingsForm extends ConfigFormBase {
 
   /**
-   * The field diff layout plugin manager service.
-   *
-   * @var \Drupal\diff\DiffLayoutManager
-   */
-  protected $diffLayoutManager;
-
-  /**
    * GeneralSettingsForm constructor.
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,
     TypedConfigManagerInterface $typedConfigManager,
-    DiffLayoutManager $diff_layout_manager,
+    protected DiffLayoutManager $diffLayoutManager,
   ) {
     parent::__construct($config_factory, $typedConfigManager);
-
-    $this->diffLayoutManager = $diff_layout_manager;
   }
 
   /**
@@ -80,15 +73,16 @@ class GeneralSettingsForm extends ConfigFormBase {
       '#description' => $this->t('<em>Simple exclusion</em> means that users will not be able to select the same revision, <em>Linear restrictions</em> means that users can only select older or newer revisions of the current selections.'),
     ];
 
-    $layout_plugins = $this->diffLayoutManager->getDefinitions();
-    $weight = count($layout_plugins) + 1;
+    $discovered_plugins = $this->diffLayoutManager->getDefinitions();
+    $weight = \count($discovered_plugins) + 1;
     $layout_plugins_order = [];
-    foreach ($layout_plugins as $id => $layout_plugin) {
-      $layout_plugin_settings = $config->get('general_settings.layout_plugins')[$id];
+    $configured_plugins = $config->get('general_settings.layout_plugins');
+    foreach ($discovered_plugins as $id => $layout_plugin) {
+      $layout_plugin_settings = $configured_plugins[$id] ?? NULL;
       $layout_plugins_order[$id] = [
         'label' => $layout_plugin['label'],
         'description' => $layout_plugin['description'] ?: '',
-        'enabled' => $layout_plugin_settings['enabled'],
+        'enabled' => $layout_plugin_settings['enabled'] ?? FALSE,
         'weight' => $layout_plugin_settings['weight'] ?? $weight,
       ];
       $weight++;
@@ -96,8 +90,8 @@ class GeneralSettingsForm extends ConfigFormBase {
 
     $form['layout_plugins'] = [
       '#type' => 'table',
-      '#header' => [t('Layout'), t('Description'), t('Weight')],
-      '#empty' => t('There are no items yet. Add an item.'),
+      '#header' => [\t('Layout'), \t('Description'), \t('Weight')],
+      '#empty' => \t('There are no items yet. Add an item.'),
       '#suffix' => '<div class="description">' . $this->t('The layout plugins that are enabled to display the revision comparison.') . '</div>',
       '#tabledrag' => [
         [
@@ -108,7 +102,7 @@ class GeneralSettingsForm extends ConfigFormBase {
       ],
     ];
 
-    uasort($layout_plugins_order, 'Drupal\Component\Utility\SortArray::sortByWeightElement');
+    \uasort($layout_plugins_order, 'Drupal\Component\Utility\SortArray::sortByWeightElement');
 
     foreach ($layout_plugins_order as $id => $layout_plugin) {
       $form['layout_plugins'][$id] = [
@@ -127,7 +121,7 @@ class GeneralSettingsForm extends ConfigFormBase {
         ],
         'weight' => [
           '#type' => 'weight',
-          '#title' => t('Weight for @title', ['@title' => $layout_plugin['label']]),
+          '#title' => \t('Weight for @title', ['@title' => $layout_plugin['label']]),
           '#title_display' => 'invisible',
           '#delta' => 50,
           '#default_value' => (int) $layout_plugin['weight'],
@@ -154,7 +148,7 @@ class GeneralSettingsForm extends ConfigFormBase {
     ];
 
     $context_lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    $options = array_combine($context_lines, $context_lines);
+    $options = \array_combine($context_lines, $context_lines);
     $form['field_based_settings']['context_lines_leading'] = [
       '#type' => 'select',
       '#title' => $this->t('Leading'),
@@ -230,7 +224,7 @@ class GeneralSettingsForm extends ConfigFormBase {
       }
     }
     if (!$enabled_layouts) {
-      $form_state->setErrorByName('layout_plugins', t('At least one layout plugin needs to be enabled.'));
+      $form_state->setErrorByName('layout_plugins', \t('At least one layout plugin needs to be enabled.'));
     }
   }
 
