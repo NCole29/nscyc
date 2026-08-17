@@ -112,6 +112,7 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         '5897ea0ac4cccf14d323035e65887801' => __DIR__ . '/..' . '/symfony/polyfill-php82/bootstrap.php',
         '606a39d89246991a373564698c2d8383' => __DIR__ . '/..' . '/symfony/polyfill-php85/bootstrap.php',
         'bad842bce63596a608e2623519fb382c' => __DIR__ . '/..' . '/xkerman/restricted-unserialize/src/function.php',
@@ -145,9 +146,17 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
             'phootwork\\lang\\' => 15,
             'phootwork\\collection\\' => 21,
         ),
+        'm' =>
+        array (
+            'mglaman\\PHPStanDrupal\\' => 22,
+        ),
         'e' =>
         array (
             'enshrined\\svgSanitize\\' => 22,
+        ),
+        'd' =>
+        array (
+            'dekor\\' => 6,
         ),
         'c' =>
         array (
@@ -240,6 +249,7 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
             'Peast\\' => 6,
             'ParagonIE\\ConstantTime\\' => 23,
             'Padaliyajay\\PHPAutoprefixer\\' => 28,
+            'PHPStan\\' => 8,
         ),
         'O' =>
         array (
@@ -305,6 +315,7 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
             'Drupal\\Composer\\Plugin\\Scaffold\\' => 32,
             'Drupal\\Composer\\Plugin\\ProjectMessage\\' => 38,
             'Drupal\\Component\\' => 17,
+            'DrupalFinder\\' => 13,
             'DrupalCodeGenerator\\' => 20,
             'Dompdf\\' => 7,
             'Doctrine\\Persistence\\' => 21,
@@ -376,9 +387,17 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         array (
             0 => __DIR__ . '/..' . '/phootwork/collection',
         ),
+        'mglaman\\PHPStanDrupal\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+        ),
         'enshrined\\svgSanitize\\' =>
         array (
             0 => __DIR__ . '/..' . '/enshrined/svg-sanitize/src',
+        ),
+        'dekor\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/dekor/php-array-table/src',
         ),
         'cweagans\\Composer\\' =>
         array (
@@ -666,6 +685,10 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         array (
             0 => __DIR__ . '/..' . '/padaliyajay/php-autoprefixer/src',
         ),
+        'PHPStan\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
+        ),
         'OomphInc\\ComposerInstallersExtender\\' =>
         array (
             0 => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src',
@@ -818,6 +841,10 @@ class ComposerStaticInitff6226cee62d5ae76e391017291157ee
         'Drupal\\Component\\' =>
         array (
             0 => __DIR__ . '/../..' . '/web/core/lib/Drupal/Component',
+        ),
+        'DrupalFinder\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/webflo/drupal-finder/src',
         ),
         'DrupalCodeGenerator\\' =>
         array (

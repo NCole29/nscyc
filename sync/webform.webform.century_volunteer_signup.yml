@@ -377,6 +377,7 @@ handlers:
       attachments: false
       twig: true
       theme_name: clubtheme
+      langcode: ''
       parameters: {  }
       debug: false
 variants: {  }

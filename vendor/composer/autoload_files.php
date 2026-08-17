@@ -111,6 +111,7 @@ return array(
     '23c18046f52bef3eea034657bafda50f' => $vendorDir . '/symfony/polyfill-php81/bootstrap.php',
     '2cffec82183ee1cea088009cef9a6fc3' => $vendorDir . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     '9e4824c5afbdc1482b6025ce3d4dfde8' => $vendorDir . '/league/csv/src/functions_include.php',
+    '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
     '5897ea0ac4cccf14d323035e65887801' => $vendorDir . '/symfony/polyfill-php82/bootstrap.php',
     '606a39d89246991a373564698c2d8383' => $vendorDir . '/symfony/polyfill-php85/bootstrap.php',
     'bad842bce63596a608e2623519fb382c' => $vendorDir . '/xkerman/restricted-unserialize/src/function.php',
