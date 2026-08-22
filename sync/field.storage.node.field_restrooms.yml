@@ -12,9 +12,6 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: '0'
-      label: "Don't know (nothing is printed on ride page)"
-    -
       value: '1'
       label: 'There are restrooms at the start.'
     -

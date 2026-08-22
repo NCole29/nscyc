@@ -12,7 +12,7 @@ field_name: field_restrooms
 entity_type: node
 bundle: location
 label: Restrooms
-description: 'Indicate if restrooms are available at the ride start. This allows riders to plan a stop in advance, if necessary.'
+description: 'Select an option if restroom availability is known, else leave the "-None-" selection.'
 required: false
 translatable: false
 default_value: {  }
