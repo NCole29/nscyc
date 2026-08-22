@@ -18,7 +18,8 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
                           'node_recurring_ride_quick_node_clone_form'] )) {
 
   $form['#attached']['library'][] = 'club_ride/content_form_styles';
-  
+
+  /*
   // Time: hide field if multiple times is unchecked.
     $form['field_time']['#states'] = [
       'invisible' => [
@@ -39,16 +40,6 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ':input[name^="field_lunch_same"]' =>  ['value' => '1'],
       ],
     ];
-    
-    // If master ride, hide field_based_on.
-    $form['field_based_on']['#states'] = [
-      'invisible' => [
-        ':input[name^="field_master"]' =>  ['value' => '1'],
-      ],
-    ];
-    
-    // Ride leader: change button text to "Add another leader".
-    $form['field_ride_leader']['widget']['add_more']['#value'] = "Add another leader";
 
     // Ride Leader: hide field if show_and_go is checked.
     // [attribute^='value'] where "^=" denotes "starts with"
@@ -57,6 +48,17 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ':input[name^="field_show_and_go"]' => ['checked' => TRUE],
       ],
     ];
+    */    
+    
+    // If master ride, hide field_based_on.
+    $form['field_based_on']['#states'] = [
+      'invisible' => [
+        ':input[name^="field_master"]' =>  ['value' => '1'],
+      ],
+    ];
+
+    // Ride leader: change button text to "Add another leader".
+    $form['field_ride_leader']['widget']['add_more']['#value'] = "Add another leader";
 
     // Disable Route field if RWGPS API key is empty.
     $rwgps = \Drupal::config('club.adminsettings')->get('rwgps_api');
@@ -90,7 +92,7 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ];
       }  
     }
-  
+    /*
       // Show free registration form, paid registration form, or registration link - depending on type of event.
       $form['field_registration_free_form']['#states'] = [
         'visible' => [
@@ -116,7 +118,7 @@ function club_ride_form_node_form_alter(&$form, FormStateInterface &$form_state,
           [':input[name="field_registration"]' => ['value' => '2']],
         ],        
       ];
-      
+      */
       // Remove instructions "begin typing" ...
       $form['field_registration_link']['widget'][0]['uri']['#description'] = NULL;
 

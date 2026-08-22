@@ -26,6 +26,7 @@ function club_page_form_node_form_alter(&$form, FormStateInterface &$form_state,
 
   if ( in_array($form_id, ['node_page_form','node_page_edit_form','node_page_quick_node_clone_form'] )) {
     // Show text area or paragraphs components, depending on 'type of page'.
+    /*
     $form['field_text']['#states'] = [
       'visible' => [
         ':input[name^="field_type_of_page"]' => ['value' => 1],
@@ -41,10 +42,6 @@ function club_page_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ':input[name^="field_contact_form"]' => ['value' => 'personal'],
       ],
     ];
-
-    // Change '- None -' to '- All -' on Page visibility dropdown
-    $form['field_page_access']['widget']['#options']['_none'] = '- All -';
-
     // Hide Sticky-on-top and Summary field if Promote to front page is unchecked.
     $form['sticky']['#states'] = [
       'invisible' => [
@@ -57,6 +54,9 @@ function club_page_form_node_form_alter(&$form, FormStateInterface &$form_state,
         ':input[name^="promote"]' => ['unchecked' => TRUE],
       ],
     ];
+    */
+    // Change '- None -' to '- All -' on Page visibility dropdown
+    $form['field_page_access']['widget']['#options']['_none'] = '- All -';
   }
 }
 

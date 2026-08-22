@@ -11,6 +11,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - allowed_formats
+    - conditional_fields
     - content_moderation
     - field_group
     - scheduler
@@ -59,7 +60,26 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        428e5252-d7a4-4f43-ba64-a6ff2b2875dc:
+          entity_type: node
+          bundle: announcement
+          dependee: field_contact_form
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: personal
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_summary:
     type: text_textarea
     weight: 1

@@ -55,6 +55,7 @@ function club_event_form_node_form_alter(&$form, FormStateInterface &$form_state
   if ( in_array($form_id, ['node_webform_form','node_webform_edit_form','node_webform_quick_node_clone_form',
                            'node_event_form','node_event_edit_form','node_event_quick_node_clone_form', ])) {
 
+    /*
     // Hide Summary field if Promote to front page is unchecked.
     $form['field_summary']['#states'] = [
       'invisible' => [
@@ -74,25 +75,28 @@ function club_event_form_node_form_alter(&$form, FormStateInterface &$form_state
       ],
     ];
 
-    // Change '- None -' to '- All -' on Page visibility dropdown
-    $form['field_page_access']['widget']['#options']['_none'] = '- All -';
-
     $form['field_contact_person']['#states'] = [
       'visible' => [
         ':input[name^="field_contact_form"]' => ['value' => 'personal'],
       ],
     ];
 
+    */
+    // Change '- None -' to '- All -' on Page visibility dropdown
+    $form['field_page_access']['widget']['#options']['_none'] = '- All -';
+
+
+
     // Form fields in Events but not webforms.
     if ( in_array($form_id, ['node_event_form','node_event_edit_form','node_event_quick_node_clone_form', ])) {
-      
+      /*
       // Show Location and Date if event page.
       $form['field_location']['#states'] = [
         'visible' => [
           ':input[name^="field_event_page"]' => ['value' => 1],
         ],
       ];
-
+      
       // Show free registration form, paid registration form, or registration link - depending on type of event.
       $form['field_registration_free_form']['#states'] = [
         'visible' => [
@@ -109,7 +113,7 @@ function club_event_form_node_form_alter(&$form, FormStateInterface &$form_state
           ':input[name="field_registration"]' => ['value' => 3],
         ],
       ];
-
+      
       // Show "Results are visible to" if free event or paid webform.
       $form['field_results_access']['#states'] = [
         'visible' => [
@@ -118,7 +122,7 @@ function club_event_form_node_form_alter(&$form, FormStateInterface &$form_state
           [':input[name="field_registration"]' => ['value' => '2']],
         ],        
       ];
-
+      */
       // Remove instructions "begin typing" ...
       $form['field_registration_link']['widget'][0]['uri']['#description'] = NULL;
     }
