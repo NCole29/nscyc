@@ -1,7 +1,9 @@
-uuid: 93b6afd8-1ffb-45ca-ac61-40827fa46839
+uuid: 78e688b5-9296-40f8-adf8-8f4962cf9581
 langcode: en
-status: closed
+status: open
 dependencies:
+  module:
+    - club_user
   enforced:
     module:
       - webform
@@ -10,28 +12,42 @@ _core:
 weight: 0
 open: null
 close: null
-uid: null
-template: true
+uid: 1
+template: false
 archive: false
-id: contact
-title: Contact
-description: '<p>Basic email contact webform.</p>'
+id: contact_form
+title: 'Contact form'
+description: '<p>This replaces the deprecated Drupal core contact form.</p>'
 categories:
   - User
-elements: |
+elements: |-
+  recipient_userid:
+    '#type': hidden
+    '#title': 'Recipient userid'
+    '#default_value': '[current-page:query:uid]'
+  recipient_email:
+    '#type': hidden
+    '#title': 'Recipient email'
   name:
-    '#title': 'Your Name'
     '#type': textfield
+    '#title': 'Your name'
+    '#size': 25
     '#required': true
     '#default_value': '[current-user:display-name]'
   email:
-    '#title': 'Your Email'
     '#type': email
+    '#title': 'Your email'
+    '#size': 30
     '#required': true
     '#default_value': '[current-user:mail]'
-  subject:
-    '#title': Subject
+  recipient:
     '#type': textfield
+    '#title': To
+    '#readonly': true
+    '#default_value': '[current-page:query:username]'
+  subject:
+    '#type': textfield
+    '#title': Subject
     '#required': true
     '#test': 'Testing contact webform from [site:name]'
   message:
@@ -52,11 +68,11 @@ settings:
   ajax_effect: ''
   ajax_speed: null
   page: true
-  page_submit_path: ''
+  page_submit_path: /contact-form
   page_confirm_path: ''
   page_theme_name: ''
   form_title: source_entity_webform
-  form_submit_once: false
+  form_submit_once: true
   form_open_message: ''
   form_close_message: ''
   form_exception_message: ''
@@ -148,10 +164,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: url_message
-  confirmation_url: '<front>'
+  confirmation_type: modal
+  confirmation_url: current-page
   confirmation_title: ''
-  confirmation_message: 'Your message has been sent.'
+  confirmation_message: '<p>Your message has been sent.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -231,7 +247,7 @@ handlers:
   email_confirmation:
     id: email
     handler_id: email_confirmation
-    label: 'Email confirmation'
+    label: 'Email via contact form'
     notes: ''
     status: true
     conditions: {  }
@@ -239,16 +255,16 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[current-user:mail]'
+      to_mail: '[webform_submission:values:recipient_email]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: '[webform_submission:values:email:raw]'
       from_options: {  }
-      from_name: _default
-      reply_to: ''
+      from_name: '[webform_submission:values:name:raw]'
+      reply_to: '[webform_submission:values:email:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
@@ -271,13 +287,13 @@ handlers:
     handler_id: email_notification
     label: 'Email notification'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 2
     settings:
       states:
         - completed
-      to_mail: _default
+      to_mail: '[webform_submission:values:recipient_userid:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -304,4 +320,13 @@ handlers:
       langcode: ''
       parameters: {  }
       debug: false
+  add_user_email:
+    id: AddUserEmail
+    handler_id: add_user_email
+    label: 'Add User Email'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings: {  }
 variants: {  }
