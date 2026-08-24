@@ -20,4 +20,4 @@
 /tmp
 
 # Ignore git repos inside vendor folders
-/vendor/webflo/drupal-finder/.github
+#/vendor/webflo/drupal-finder/.github
