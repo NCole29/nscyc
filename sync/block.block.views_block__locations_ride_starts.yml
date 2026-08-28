@@ -8,9 +8,6 @@ dependencies:
     - views
   theme:
     - clubtheme
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: 7U-9TstZHKMIg6OXpY9kr87_f0YYIoLHuhBfIY6eWs4
 id: views_block__locations_ride_starts

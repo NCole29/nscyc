@@ -1,10 +1,7 @@
 uuid: afa01ae7-044e-4fe2-9792-917594e1baf4
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - club_media
+dependencies: {  }
 _core:
   default_config_hash: diz0-MNs2lZqt7tOuK_Xx3z1_Pwld57DvTVKIOJ_7lY
 id: gallery

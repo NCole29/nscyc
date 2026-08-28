@@ -13,8 +13,6 @@ dependencies:
   module:
     - civicrm
     - civicrm_group_roles
-    - club_ride
-    - club_schedule
     - comment
     - contact
     - content_moderation
@@ -32,9 +30,6 @@ dependencies:
     - smart_date_recur
     - system
     - toolbar
-  enforced:
-    module:
-      - club_user
 id: rides_coordinator
 label: 'Rides coordinator'
 weight: -3

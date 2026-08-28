@@ -17,16 +17,11 @@ dependencies:
     - user.role.site_admin
   module:
     - address
-    - club_ride
-    - club_schedule
     - datetime
     - node
     - smart_date
     - taxonomy
     - user
-  enforced:
-    module:
-      - club_schedule
 id: schedule_ride_dates
 label: 'Schedule of ride dates'
 module: views

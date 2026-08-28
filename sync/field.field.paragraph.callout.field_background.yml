@@ -7,9 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.callout
   module:
     - options
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: dcYmHk1saa57GO-wQHCPhGIjyAlsWWH_kaWxM0X_eBs
 id: paragraph.callout.field_background

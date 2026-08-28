@@ -14,9 +14,6 @@ dependencies:
     - layout_builder_restrictions
     - text
     - user
-  enforced:
-    module:
-      - club_announcement
 third_party_settings:
   layout_builder:
     enabled: false
@@ -68,4 +65,5 @@ content:
     weight: 4
     region: content
 hidden:
+  field_contact_us: true
   field_summary: true

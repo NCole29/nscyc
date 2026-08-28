@@ -8,9 +8,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: '-MogaUTStxlgi1Q6IVYoZ9ommeOMEgATsMZ8z9pZqQg'
 id: paragraph.text.default

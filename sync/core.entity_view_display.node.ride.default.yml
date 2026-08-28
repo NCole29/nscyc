@@ -40,9 +40,6 @@ dependencies:
     - text
     - user
     - webform
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   layout_builder:
     enabled: true

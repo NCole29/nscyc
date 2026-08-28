@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - media
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: 3enXiwUwXVSnJ6hbnV68FLF5yoJLrbWurzxIWwlTR6A
 id: media.large

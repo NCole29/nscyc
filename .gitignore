@@ -19,5 +19,7 @@
 # Ignore paths that may contain temporary files
 /tmp
 
+# Ignore tar backups
+*.tar.gz
 # Ignore git repos inside vendor folders
 #/vendor/webflo/drupal-finder/.github

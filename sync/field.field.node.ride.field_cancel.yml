@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_cancel
     - node.type.ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: hvtxdYjCZcab-qbBGsfSVBDZyt_zKJQl90vEYRCVVFg
 id: node.ride.field_cancel

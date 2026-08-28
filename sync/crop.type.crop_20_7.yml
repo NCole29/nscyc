@@ -1,14 +1,11 @@
 uuid: 3f05d40d-e8f1-40bf-8599-0abd867e47a1
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - club_media
+dependencies: {  }
 _core:
   default_config_hash: yGMkqgFw7AnIqYYMM_pnbR115L4pDKjmCVy35zDfBRY
-id: crop_20_7
 label: 'Crop 20:7'
+id: crop_20_7
 description: 'Wide image used for banner pictures.'
 aspect_ratio: '20:7'
 soft_limit_width: null

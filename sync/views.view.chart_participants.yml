@@ -8,9 +8,6 @@ dependencies:
     - civicrm_entity
     - datetime
     - options
-  enforced:
-    module:
-      - club_report
 _core:
   default_config_hash: htwMuMRbXVdM_SS3XReUJlhDuZe4R0P8EOPQH0N45B8
 id: chart_participants

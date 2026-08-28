@@ -6,9 +6,6 @@ dependencies:
     - field.storage.node.field_ride_picture
     - media.type.image_crop_16_9
     - node.type.ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: k1bZGj6C-rtirPovBtHiStgGxyjaVePaozjFoND-hzg
 id: node.ride.field_ride_picture

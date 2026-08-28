@@ -1,10 +1,7 @@
 uuid: 2a79e200-e8dc-4d26-8717-090cd3e69661
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - club_media
+dependencies: {  }
 _core:
   default_config_hash: 9PZlTFQgkTHpCrsyh88al6sPL1CCNSKD2B0pY93JLC4
 name: Activities

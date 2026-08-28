@@ -12,9 +12,6 @@ dependencies:
     - paragraphs.paragraphs_type.callout
   module:
     - text
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: 28a01I-FTCP8a2gNNtZYVl5IVbAxq0xU2CrYW094PcU
 id: paragraph.callout.default

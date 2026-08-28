@@ -7,9 +7,6 @@ dependencies:
     - node.type.location
   module:
     - address
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: dOAxbDmVjakHXsEziQAj8pGOMRfOsvQwinXzyM--ss8
 id: node.location.field_address

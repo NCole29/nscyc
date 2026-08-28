@@ -11,8 +11,6 @@ dependencies:
     - node.type.ride
     - workflows.workflow.rides
   module:
-    - club_ride
-    - club_schedule
     - comment
     - contact
     - content_moderation
@@ -24,9 +22,6 @@ dependencies:
     - system
     - toolbar
     - webform_node
-  enforced:
-    module:
-      - club_user
 id: ride_leader
 label: 'Ride leader'
 weight: -4

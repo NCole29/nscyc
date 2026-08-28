@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_schedule_date
     - node.type.ride
-  enforced:
-    module:
-      - club_schedule
 _core:
   default_config_hash: FMxs6P5L7EsM85OwAmzdATgfaBPis3I3tzsWOsKYk44
 id: node.ride.field_schedule_date

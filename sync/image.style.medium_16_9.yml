@@ -6,9 +6,6 @@ dependencies:
     - crop.type.crop_16_9
   module:
     - crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: MFwRDY3CaX08X1Up0fSUyzOUPQbWvagfTDiQ-22MGxU
 name: medium_16_9

@@ -3,7 +3,6 @@ langcode: en
 status: open
 dependencies:
   module:
-    - club_user
     - webform_civicrm
 weight: 0
 open: null

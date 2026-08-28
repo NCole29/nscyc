@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: j7n_MupNx8XJHPUN3ei6ux6ozz7-1C8Wgck_F_Xt73o
 id: node.field_time
@@ -15,8 +12,8 @@ entity_type: node
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: -1

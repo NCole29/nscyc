@@ -5,11 +5,7 @@ dependencies:
   config:
     - field.storage.club_schedule.field_schedule_date
   module:
-    - club_schedule
     - datetime
-  enforced:
-    module:
-      - club_schedule
 _core:
   default_config_hash: a23NrtsOSxyDNWXRxlvJrPil-Kk-chDj45qxI7VtIO8
 id: club_schedule.club_schedule.field_schedule_date

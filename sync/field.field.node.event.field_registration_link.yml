@@ -7,9 +7,6 @@ dependencies:
     - node.type.event
   module:
     - link
-  enforced:
-    module:
-      - club_event
 _core:
   default_config_hash: PALk8f00CnCY0euraE2pJ5c6Bzgy6MzouwuB_OfB_lw
 id: node.event.field_registration_link

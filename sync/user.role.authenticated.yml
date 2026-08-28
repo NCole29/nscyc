@@ -6,7 +6,6 @@ dependencies:
     - filter.format.webform_default
   module:
     - civicrm
-    - club_ride
     - contact
     - file
     - file_delete

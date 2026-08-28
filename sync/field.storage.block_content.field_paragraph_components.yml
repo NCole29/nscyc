@@ -6,9 +6,6 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: kJWIn_XrH_LSaZNptoXZDj4PLIPCYlT4ztFyFsrOObo
 id: block_content.field_paragraph_components

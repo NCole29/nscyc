@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.announcement
-  enforced:
-    module:
-      - club_announcement
 _core:
   default_config_hash: FUoxVCq38ZlZxRgntwCOpXk1Db0U_hOVdyhk8plLnwQ
 id: node.announcement.promote

@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.club_route.related_ride_page
     - field.field.club_route.club_route.field_ride_start
   module:
-    - club_ride
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
@@ -78,6 +77,51 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
+          b59b4e68-4b6f-43a9-b762-19a80c959fd5:
+            uuid: b59b4e68-4b6f-43a9-b762-19a80c959fd5
+            region: second
+            configuration:
+              id: 'field_block:club_route:club_route:unpaved'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: integer
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          526374da-be7a-4911-8760-937986e2fcdc:
+            uuid: 526374da-be7a-4911-8760-937986e2fcdc
+            region: second
+            configuration:
+              id: 'field_block:club_route:club_route:terrain'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: integer
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          17dc9fe9-ecac-467c-b5ce-eeb4c2704273:
+            uuid: 17dc9fe9-ecac-467c-b5ce-eeb4c2704273
+            region: second
+            configuration:
+              id: 'field_block:club_route:club_route:surface'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: integer
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
       -
         layout_id: layout_onecol
@@ -120,6 +164,27 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  surface:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: second
+  terrain:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: second
+  unpaved:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: second
 hidden:
   created_at: true
   elevation_gain: true

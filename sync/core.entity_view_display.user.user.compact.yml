@@ -7,16 +7,18 @@ dependencies:
     - field.field.user.user.user_picture
   module:
     - user
-  enforced:
-    module:
-      - club_user
 _core:
   default_config_hash: 5fckBz3ulreYKf5edAoOKlyDqcillxjvLxspi8pC2U4
 id: user.user.compact
 targetEntityType: user
 bundle: user
 mode: compact
-content: {  }
+content:
+  masquerade:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 50
+    region: content
 hidden:
   civicrm_dashboard: true
   civicrm_profiles: true

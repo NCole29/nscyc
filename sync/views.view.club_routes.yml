@@ -13,7 +13,6 @@ dependencies:
     - user.role.rides_coordinator
     - user.role.site_admin
   module:
-    - club_ride
     - csv_serialization
     - node
     - rest
@@ -21,9 +20,6 @@ dependencies:
     - taxonomy
     - user
     - views_data_export
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: oSiCUAR4mI_zUhv1PeMzGpUcjYast_BkZ0HSt83pGEY
 id: club_routes
@@ -3099,10 +3095,10 @@ display:
         routes_per_location: '0'
       filename: Routes.csv
       automatic_download: false
+      export_filesystem: private
       custom_redirect_path: false
       redirect_to_display: none
       include_query_params: false
-      export_filesystem: private
     cache_metadata:
       max-age: -1
       contexts:

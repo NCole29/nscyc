@@ -32,9 +32,6 @@ dependencies:
     - text
     - user
     - webform
-  enforced:
-    module:
-      - club_event
 third_party_settings:
   layout_builder:
     enabled: true

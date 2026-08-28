@@ -7,9 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.callout
   module:
     - options
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: K9mPUndbiQFg-wzZirdS78PgkR9u9YHDHClSHaLIZS0
 id: paragraph.callout.field_callout_height

@@ -6,9 +6,6 @@ dependencies:
     - crop.type.crop_20_7
   module:
     - crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: 4H-QWt_Bwo9c455ckzjaGX7zwbDYrIFp3rYgjlDKvNg
 name: thumbnail_20_7

@@ -17,9 +17,6 @@ dependencies:
     - fontawesome
     - media
     - text
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: 1n9ZT9KsJh0TzWvu-WpW8IG7yHYIq6qGcF3DZomNhps
 id: paragraph.card.default

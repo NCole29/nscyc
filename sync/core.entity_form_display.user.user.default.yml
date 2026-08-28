@@ -9,9 +9,6 @@ dependencies:
     - field_group
     - svg_image
     - user
-  enforced:
-    module:
-      - club_user
 third_party_settings:
   field_group:
     group_edit_me:

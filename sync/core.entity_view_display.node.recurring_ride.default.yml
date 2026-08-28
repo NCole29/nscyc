@@ -31,9 +31,6 @@ dependencies:
     - smart_date_recur
     - text
     - user
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   layout_builder:
     enabled: false
@@ -90,11 +87,11 @@ content:
       force_chronological: false
       add_classes: false
       time_wrapper: true
+      localize: false
       past_display: 0
       upcoming_display: 1
       show_next: false
-      localize: 0
-      current_upcoming: 0
+      current_upcoming: false
     third_party_settings: {  }
     weight: 2
     region: content

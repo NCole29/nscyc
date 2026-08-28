@@ -11,9 +11,6 @@ dependencies:
     - content_moderation
     - field_group
     - media_library
-  enforced:
-    module:
-      - club_media
 third_party_settings:
   field_group:
     group_images:

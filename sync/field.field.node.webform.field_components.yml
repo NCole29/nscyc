@@ -7,9 +7,6 @@ dependencies:
     - node.type.webform
   module:
     - entity_reference_revisions
-  enforced:
-    module:
-      - club_event
 _core:
   default_config_hash: 3t4TIlgi5fDJeXMf3SiP1ZKk3hSMmJAU33lGgXaf5is
 id: node.webform.field_components

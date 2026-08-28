@@ -5,9 +5,6 @@ dependencies:
   module:
     - geofield
     - node
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: fFBapJy3PkFSvB7YMdR8cpos7lAtIn2kfdJ7PTUhhlo
 id: node.field_coordinates

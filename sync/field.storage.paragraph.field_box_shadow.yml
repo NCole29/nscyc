@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: lYKm3FvbISNUI_rWRdxRi50vHpzHOSzjIie7UzOQfYo
 id: paragraph.field_box_shadow

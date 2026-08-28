@@ -9,9 +9,6 @@ dependencies:
     - media.type.image_crop_4_3
   module:
     - svg_image
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: hZvWLUS6T52vjbnnWcJaHn1Jsszf3MNOISTKskexq7g
 id: media.image_crop_4_3.default
@@ -25,12 +22,12 @@ content:
     settings:
       image_link: ''
       image_style: thumbnail_4_3
+      image_loading:
+        attribute: lazy
       svg_attributes:
         width: null
         height: null
       svg_render_as_image: true
-      image_loading:
-        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content

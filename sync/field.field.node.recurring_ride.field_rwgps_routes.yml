@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_rwgps_routes
     - node.type.recurring_ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: bMamtQv0thgR3yvZ7w726fK4-ZNO95IS58SbR6JyENE
 id: node.recurring_ride.field_rwgps_routes

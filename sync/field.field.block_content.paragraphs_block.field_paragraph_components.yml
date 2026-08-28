@@ -7,9 +7,6 @@ dependencies:
     - field.storage.block_content.field_paragraph_components
   module:
     - entity_reference_revisions
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: LAc3FjJwUuQOI-KcBMlmtXtzOzlkWK7nYedcB5qAnDo
 id: block_content.paragraphs_block.field_paragraph_components

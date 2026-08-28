@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.location
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: b6r-ynTjCssMqWaNCA4YJUnw__ifHzGuEunlMCUDnJY
 id: node.location.title

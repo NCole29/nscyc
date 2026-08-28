@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.banner
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: Oqu9LOccbzTksc_i1ncJbRNHdCsMHc_fhTtBw4mmlko
 id: node.banner.promote

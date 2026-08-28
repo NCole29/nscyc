@@ -6,12 +6,8 @@ dependencies:
     - field.field.club_contacts.club_contacts.field_end_date
     - field.field.club_contacts.club_contacts.field_start_date
   module:
-    - club_leader
     - datetime
     - field_group
-  enforced:
-    module:
-      - club_leader
 third_party_settings:
   field_group:
     group_position:

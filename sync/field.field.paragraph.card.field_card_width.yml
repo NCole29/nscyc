@@ -7,9 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.card
   module:
     - options
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: S_gUd0XCU3672R2h5Q6VgKeKMrad_fI5aU7zyMiB2hQ
 id: paragraph.card.field_card_width

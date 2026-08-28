@@ -7,9 +7,6 @@ dependencies:
     - node.type.event
   module:
     - webform
-  enforced:
-    module:
-      - club_event
 id: node.event.field_registration_form
 field_name: field_registration_form
 entity_type: node

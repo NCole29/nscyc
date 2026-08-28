@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: JsE26xjsIOVwgX7ZnBToF_-93MNgWmUEliH_rZ8drzQ
 id: node.field_developed_by
@@ -15,8 +12,8 @@ entity_type: node
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

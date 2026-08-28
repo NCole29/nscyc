@@ -17,9 +17,6 @@ dependencies:
     - smart_date
     - user
     - webform
-  enforced:
-    module:
-      - club_report
 _core:
   default_config_hash: yq5xvlS-S6z2ugti76c-xMvYBuGmg_hq8AWC7VF3ACM
 id: chart_revenue

@@ -10,16 +10,12 @@ dependencies:
     - image.style.thumbnail
     - taxonomy.vocabulary.positions
   module:
-    - club_leader
     - contact
     - datetime
     - options
     - svg_image
     - taxonomy
     - user
-  enforced:
-    module:
-      - club_leader
 id: club_contacts
 label: 'Club leaders'
 module: views

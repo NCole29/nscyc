@@ -5,9 +5,6 @@ dependencies:
   module:
     - media
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: 1TOnqWTY_KlYQgMdrhzdakTl52qsId8arNUbqbS6OTc
 id: paragraph.field_image

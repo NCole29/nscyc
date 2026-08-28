@@ -6,9 +6,6 @@ dependencies:
     - crop.type.crop_20_7
   module:
     - crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: dk4yq78iM7NvrCOgvigtTsfV728DHBTZvtq7UggPQlo
 name: banner

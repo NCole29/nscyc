@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.paragraph.field_box_shadow
     - paragraphs.paragraphs_type.card
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: E66vDA7omy0wHP9iTGDog6SfO53qA5oJDT343j-t_xc
 id: paragraph.card.field_box_shadow

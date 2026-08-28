@@ -10,9 +10,6 @@ dependencies:
     - media.type.gallery
   module:
     - svg_image
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: aBIXuY2bmkZTZKm7FCTMj0NJi8LzsdEGbMplhVnCH8Y
 id: media.gallery.media_library
@@ -26,12 +23,12 @@ content:
     settings:
       image_link: ''
       image_style: thumbnail_3_2
+      image_loading:
+        attribute: lazy
       svg_attributes:
         width: null
         height: null
       svg_render_as_image: true
-      image_loading:
-        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content

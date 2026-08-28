@@ -30,9 +30,6 @@ dependencies:
     - text
     - user
     - webform
-  enforced:
-    module:
-      - club_event
 _core:
   default_config_hash: 4NaK5sxjiOAdepiG1HexZVpAgnEhBU1gqhAujvMGXaY
 id: node.event.teaser

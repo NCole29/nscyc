@@ -7,9 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.card
   module:
     - options
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: nv2W1t1Fhtny7ty4IONi5slQzUk6r55RnPzI-RbAQ8s
 id: paragraph.card.field_card_height

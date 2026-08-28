@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.event
-  enforced:
-    module:
-      - club_event
 _core:
   default_config_hash: fcS6ewfm9bsSXHOXP-SWIy-OXKTXX6HD9BsrTqhjj84
 id: node.event.promote

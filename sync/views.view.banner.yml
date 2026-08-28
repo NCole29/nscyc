@@ -13,9 +13,6 @@ dependencies:
     - media
     - node
     - views_slideshow
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: XXi4ehv-GFkEjnKyHEhW1a4RslvGYooGNKqMfiz1_UM
 id: banner

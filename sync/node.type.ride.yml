@@ -6,9 +6,6 @@ dependencies:
     - menu_ui
     - node_revision_delete
     - scheduler
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   menu_ui:
     available_menus: {  }

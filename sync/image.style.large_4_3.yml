@@ -6,9 +6,6 @@ dependencies:
     - crop.type.crop_4_3
   module:
     - crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: VBf4XY1LEkn6wnBOR7DZKu74syzQC0450SHMCITofQ4
 name: large_4_3

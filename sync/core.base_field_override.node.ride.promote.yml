@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: 4dt-J3hl_CD2g4GrKuPQHtqX_jfP6Ew7v09RzRxvas4
 id: node.ride.promote

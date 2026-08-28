@@ -10,9 +10,6 @@ dependencies:
   module:
     - layout_builder
     - magnific_popup
-  enforced:
-    module:
-      - club_media
 third_party_settings:
   layout_builder:
     enabled: false

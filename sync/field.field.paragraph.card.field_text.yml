@@ -8,9 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.card
   module:
     - text
-  enforced:
-    module:
-      - club_paragraph
 id: paragraph.card.field_text
 field_name: field_text
 entity_type: paragraph

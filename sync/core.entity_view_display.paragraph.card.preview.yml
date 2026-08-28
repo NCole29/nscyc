@@ -14,9 +14,6 @@ dependencies:
     - field.field.paragraph.card.field_text
     - field.field.paragraph.card.field_title
     - paragraphs.paragraphs_type.card
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: gsTcoizSDi885C0EXow6wjLH2CnrXI1yYQdK3QBRGic
 id: paragraph.card.preview

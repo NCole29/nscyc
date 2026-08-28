@@ -7,9 +7,6 @@ dependencies:
     - node.type.event
   module:
     - entity_reference_revisions
-  enforced:
-    module:
-      - club_event
 _core:
   default_config_hash: Dzh-HRYCvaIBo8tpMcA-Tdi5_h6sil1-L9WdENzsLow
 id: node.event.field_components

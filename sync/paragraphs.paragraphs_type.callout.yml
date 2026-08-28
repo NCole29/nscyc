@@ -4,9 +4,6 @@ status: true
 dependencies:
   content:
     - 'file:file:9758bf79-4492-46a8-a829-03b7f93d7328'
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: Ny4ATr_i0ENBeDVZo4uYkYMANUwytgnRuARJ6jWg0EQ
 id: callout

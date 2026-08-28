@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: 6Oat9dNKw42dI9ElzIxUwoN-wGLJ1XDkqsQW7PDLwOQ
 id: paragraph.teaser

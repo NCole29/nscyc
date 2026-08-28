@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - club_ride
     - node
 id: club_route.field_ride_start
 field_name: field_ride_start

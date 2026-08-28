@@ -14,9 +14,6 @@ dependencies:
     - allowed_formats
     - field_group
     - text
-  enforced:
-    module:
-      - club_paragraph
 third_party_settings:
   field_group:
     group_formatting_options:

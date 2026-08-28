@@ -5,9 +5,6 @@ dependencies:
   module:
     - options
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: eprRXub3F28yjixPJmYNRJQ9gavlaQQX742CrawgSnc
 id: paragraph.field_background

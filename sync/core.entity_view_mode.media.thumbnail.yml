@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - media
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: FrONFcN1ekJzVidgSXDa7HeqAoz1sSvxRASiNs5tdEk
 id: media.thumbnail

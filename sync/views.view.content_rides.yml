@@ -32,9 +32,6 @@ dependencies:
     - taxonomy
     - user
     - views_data_export
-  enforced:
-    module:
-      - club_ride
 id: content_rides
 label: 'Content - Rides tab'
 module: node

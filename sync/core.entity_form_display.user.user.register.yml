@@ -9,9 +9,6 @@ dependencies:
   module:
     - svg_image
     - user
-  enforced:
-    module:
-      - club_user
 _core:
   default_config_hash: e1izN1ID5x3mQomhErpKKqYuCmcWzcVYCXMxWmSh_10
 id: user.user.register
@@ -26,6 +23,11 @@ content:
     third_party_settings: {  }
   contact:
     weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  google_analytics:
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }

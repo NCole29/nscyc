@@ -6,12 +6,8 @@ dependencies:
     - field.field.club_contacts.club_contacts.field_end_date
     - field.field.club_contacts.club_contacts.field_start_date
   module:
-    - club_leader
     - datetime
     - taxonomy
-  enforced:
-    module:
-      - club_leader
 id: club_contacts.club_contacts.default
 targetEntityType: club_contacts
 bundle: club_contacts

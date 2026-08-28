@@ -9,9 +9,6 @@ dependencies:
     - media.type.image_crop_20_7
   module:
     - image_widget_crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: qoT7oMQ4YFSQEMlQpxE5YLZlnN9E2n4uFyj8DbM_kfU
 id: media.image_crop_20_7.default

@@ -12,9 +12,6 @@ dependencies:
     - layout_builder
     - layout_discovery
     - user
-  enforced:
-    module:
-      - club_user
 third_party_settings:
   layout_builder:
     enabled: true
@@ -44,10 +41,10 @@ third_party_settings:
             uuid: 9156f4d6-ccd7-4e15-a520-100eba5e4ae1
             region: content
             configuration:
+              id: 'extra_field_block:user:user:masquerade'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:user:user:masquerade'
             weight: 1
             additional: {  }
         third_party_settings: {  }
@@ -59,9 +56,9 @@ bundle: user
 mode: full
 content:
   masquerade:
-    weight: 50
     settings: {  }
     third_party_settings: {  }
+    weight: 50
     region: content
 hidden:
   civicrm_dashboard: true

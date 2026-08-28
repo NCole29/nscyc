@@ -36,9 +36,6 @@ dependencies:
     - layout_discovery
     - text
     - user
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   layout_builder:
     enabled: true

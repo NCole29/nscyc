@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: mE_fuigPHSOxxWAyYcBJ6X1temWBQS6SluzhZHpbtTk
 id: paragraph.field_callout_border

@@ -5,9 +5,6 @@ dependencies:
   module:
     - node
     - taxonomy
-  enforced:
-    module:
-      - club_page
 _core:
   default_config_hash: mxz02lDkH1RiPmJNXrexYoHhGgLl_0nWjYejmgvRsDo
 id: node.field_page_access

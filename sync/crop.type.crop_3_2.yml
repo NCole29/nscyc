@@ -1,14 +1,11 @@
 uuid: 83cc240e-ec7c-4e21-ab2e-bbd13671259e
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - club_media
+dependencies: {  }
 _core:
   default_config_hash: bWdxKHYTNC5PJJyJ8rFPmEEo2BHb7KrwUwHEuF7ISlI
-id: crop_3_2
 label: 'Crop 3:2'
+id: crop_3_2
 description: 'Used for Gallery pictures in Banner content type.'
 aspect_ratio: '3:2'
 soft_limit_width: null

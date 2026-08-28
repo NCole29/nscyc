@@ -9,9 +9,6 @@ dependencies:
     - views
   theme:
     - clubtheme
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: 0sOxt7FgjkyKX9u4OvonDtiO57DVtH7OLjgHQDygx8E
 id: views_block__banner_gallery_home

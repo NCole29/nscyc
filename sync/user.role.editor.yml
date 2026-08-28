@@ -48,9 +48,6 @@ dependencies:
     - view_unpublished
     - webform
     - webform_node
-  enforced:
-    module:
-      - club_user
 id: editor
 label: 'Content editor'
 weight: -1

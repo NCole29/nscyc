@@ -5,9 +5,6 @@ dependencies:
   module:
     - node
     - taxonomy
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: TYAqJfIM2ynSDARSYVCNwKeC1S2IgXSmKVKQYQyau4w
 id: node.field_activity

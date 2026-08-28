@@ -5,9 +5,6 @@ dependencies:
   module:
     - media
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: Dc8GxUyD23EPR2dABRiLgy42wdmJkfIMBKYsrTHOqcs
 id: node.field_ride_picture

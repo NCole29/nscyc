@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.club_route.club_route.field_ride_start
-  module:
-    - club_ride
 id: club_route.club_route.default
 targetEntityType: club_route
 bundle: club_route
@@ -30,4 +28,7 @@ hidden:
   name: true
   rwgps_id: true
   state: true
+  surface: true
+  terrain: true
+  unpaved: true
   updated_at: true

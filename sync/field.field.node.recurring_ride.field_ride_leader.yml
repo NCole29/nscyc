@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_ride_leader
     - node.type.recurring_ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: jsld2uUA1zB28RjXVdQ3Un_2-Abh0403hz4B-GZZ42g
 id: node.recurring_ride.field_ride_leader

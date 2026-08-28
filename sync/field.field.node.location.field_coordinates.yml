@@ -10,24 +10,23 @@ dependencies:
     - geofield
   enforced:
     module:
-      - club_location
       - geofield
 third_party_settings:
   geocoder_field:
     method: geocode
     weight: 0
+    field: field_address
     skip_not_empty_value: false
     disabled: false
     hidden: true
     providers:
       - googlemaps
     dumper: wkt
+    delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
-    field: field_address
-    delta_handling: default
 _core:
   default_config_hash: PicH7hYqcBpz4ZFDow4vot4k1oQhE1VdNBAJakluT8c
 id: node.location.field_coordinates

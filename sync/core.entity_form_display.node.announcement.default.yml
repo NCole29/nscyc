@@ -16,9 +16,6 @@ dependencies:
     - field_group
     - scheduler
     - text
-  enforced:
-    module:
-      - club_announcement
 third_party_settings:
   field_group:
     group_contact_link:
@@ -154,6 +151,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_contact_us: true
   path: true
   status: true
   uid: true

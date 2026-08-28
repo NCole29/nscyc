@@ -33,9 +33,6 @@ dependencies:
     - smart_date
     - smart_date_recur
     - text
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   field_group:
     group_date_and_time:

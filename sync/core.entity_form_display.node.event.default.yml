@@ -36,9 +36,6 @@ dependencies:
     - media_library
     - text
     - webform
-  enforced:
-    module:
-      - club_event
 third_party_settings:
   field_group:
     group_place_announcement_on_home:

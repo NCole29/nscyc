@@ -3,11 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - club_schedule
     - node
-  enforced:
-    module:
-      - club_schedule
 _core:
   default_config_hash: BG9yhq9US_vzYKTo4FBJ5D1NsEopZWphoDZP9qqXlLo
 id: node.field_schedule_date

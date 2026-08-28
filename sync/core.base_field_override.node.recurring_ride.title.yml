@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.recurring_ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: OZ7JgvkII5ZV02j361yJ3KVucU_gnPoRZk8bmh3ArmM
 id: node.recurring_ride.title

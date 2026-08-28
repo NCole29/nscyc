@@ -1,10 +1,7 @@
 uuid: 18908b78-56de-4a1b-9fce-5f4e13edeab9
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - club_media
+dependencies: {  }
 _core:
   default_config_hash: Nr_Gli9BKXipV5n4_41LOiB03LT_P69s2VV6btmAbpE
 id: image

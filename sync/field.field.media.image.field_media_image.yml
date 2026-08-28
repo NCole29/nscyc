@@ -7,10 +7,6 @@ dependencies:
     - media.type.image
   module:
     - image
-  enforced:
-    module:
-      - media
-      - club_media
 _core:
   default_config_hash: knMGBG6dw-10QmgIDUtvJtv9Ts4c6nheT5mgz8Rp7L4
 id: media.image.field_media_image

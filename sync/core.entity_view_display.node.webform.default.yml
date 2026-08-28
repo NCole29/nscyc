@@ -21,9 +21,6 @@ dependencies:
     - text
     - user
     - webform
-  enforced:
-    module:
-      - club_event
 id: node.webform.default
 targetEntityType: node
 bundle: webform
@@ -85,6 +82,7 @@ content:
 hidden:
   banner_image: true
   body: true
+  field_contact_us: true
   field_padding: true
   field_page_access: true
   field_summary: true

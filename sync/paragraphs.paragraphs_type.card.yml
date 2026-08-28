@@ -4,9 +4,6 @@ status: true
 dependencies:
   content:
     - 'file:file:be53313f-315b-4d6a-872c-723fe6ea13fc'
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: RmR5Qr-a9h_AXP2-jOjjbBiFauN0R6-jSZ-nhRMqBLE
 id: card

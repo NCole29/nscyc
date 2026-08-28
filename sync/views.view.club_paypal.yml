@@ -7,13 +7,9 @@ dependencies:
     - user.role.civicrm
   module:
     - civicrm_entity
-    - club_report
     - datetime
     - options
     - user
-  enforced:
-    module:
-      - club_report
 _core:
   default_config_hash: i_4XPqic8glZnQ-jydQuD-_1NSG8V3SrLgUUdQMPcP8
 id: club_paypal

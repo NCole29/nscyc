@@ -42,9 +42,6 @@ dependencies:
     - path
     - text
     - webform
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   field_group:
     group_date_and_time:

@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: QMKLRXcliivC32vHnZuyFRS4XtTYTWRlUIudlZmROW4
 id: node.field_show_and_go

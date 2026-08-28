@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - club_leader
     - datetime
 id: club_contacts.field_start_date
 field_name: field_start_date

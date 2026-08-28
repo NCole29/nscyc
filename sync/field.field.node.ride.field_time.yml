@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_time
     - node.type.ride
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: 99ynud4HcnuHS2JTa6Kmpy04AkMry4KORRIA0f9FaBM
 id: node.ride.field_time

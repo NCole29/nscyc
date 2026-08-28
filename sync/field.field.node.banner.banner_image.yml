@@ -7,9 +7,6 @@ dependencies:
     - media.type.gallery
     - media.type.image_crop_20_7
     - node.type.banner
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: OvooKOpDS4cHlwlEtpnBNvVzUC5raZ_-gbh9XFfItSM
 id: node.banner.banner_image

@@ -8,9 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.callout
   module:
     - text
-  enforced:
-    module:
-      - club_paragraph
 id: paragraph.callout.field_text
 field_name: field_text
 entity_type: paragraph

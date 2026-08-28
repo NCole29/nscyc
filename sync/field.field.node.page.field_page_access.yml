@@ -6,9 +6,6 @@ dependencies:
     - field.storage.node.field_page_access
     - node.type.page
     - taxonomy.vocabulary.page_access
-  enforced:
-    module:
-      - club_page
 _core:
   default_config_hash: LIcGk3b7QvMrJe6XR1mbt8KXepjLUnsHmL50wVbpq7M
 id: node.page.field_page_access

@@ -16,9 +16,6 @@ dependencies:
     - allowed_formats
     - content_moderation
     - text
-  enforced:
-    module:
-      - club_location
 id: node.location.default
 targetEntityType: node
 bundle: location

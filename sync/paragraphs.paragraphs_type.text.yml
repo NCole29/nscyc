@@ -4,9 +4,6 @@ status: true
 dependencies:
   content:
     - 'file:file:b9d0749d-9305-456f-9820-ed3034fed1f8'
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: RTdNbdDzsaoh9b-30WQN9962354e2okgzd7nfKIfpfA
 id: text

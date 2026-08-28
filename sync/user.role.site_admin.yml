@@ -32,9 +32,6 @@ dependencies:
     - block_content
     - civicrm
     - civicrm_group_roles
-    - club_leader
-    - club_ride
-    - club_schedule
     - contact
     - content_moderation
     - contextual

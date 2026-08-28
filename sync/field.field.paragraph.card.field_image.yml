@@ -6,9 +6,6 @@ dependencies:
     - field.storage.paragraph.field_image
     - media.type.image_crop_4_3
     - paragraphs.paragraphs_type.card
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: zkei3zXRpe5OTNulb7EoLrifIqfvQPSrYkljlbhk6yA
 id: paragraph.card.field_image

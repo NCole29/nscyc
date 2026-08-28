@@ -6,9 +6,6 @@ dependencies:
     - field.storage.node.field_activity
     - node.type.ride
     - taxonomy.vocabulary.activities
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: NCXflWB6lSMst7-uMzD8sb1OxISjFVqzOWmnGhCTBIY
 id: node.ride.field_activity

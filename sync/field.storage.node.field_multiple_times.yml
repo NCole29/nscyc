@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: 5Ffmz78ZghgrNQ_qZAsHUQmFJRJRU-ulvYSvqsPCN4k
 id: node.field_multiple_times

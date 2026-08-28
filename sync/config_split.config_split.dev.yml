@@ -18,7 +18,6 @@ module:
   devel: 0
   kint: 0
   upgrade_status: 0
-  permission_spreadsheet: 0
 theme: {  }
 complete_list: {  }
 partial_list: {  }

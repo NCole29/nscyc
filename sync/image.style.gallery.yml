@@ -9,7 +9,6 @@ dependencies:
   enforced:
     module:
       - responsive_image
-      - club_media
 _core:
   default_config_hash: hts4JLq9-4dRLo3LtRllXrwqTV09jXrVxVjbktziX9c
 name: gallery

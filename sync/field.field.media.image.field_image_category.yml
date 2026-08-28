@@ -6,9 +6,6 @@ dependencies:
     - field.storage.media.field_image_category
     - media.type.image
     - taxonomy.vocabulary.image_category
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: l_k-pjXL_ht0z-RidnlPXQB8CFgMtBBaYI0tLrwbgLI
 id: media.image.field_image_category

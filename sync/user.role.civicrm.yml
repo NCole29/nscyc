@@ -13,8 +13,6 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - civicrm
-    - club_leader
-    - club_ride
     - comment
     - contact
     - content_moderation
@@ -29,9 +27,6 @@ dependencies:
     - scheduler
     - system
     - toolbar
-  enforced:
-    module:
-      - club_user
 _core:
   default_config_hash: AU6dwrPfeFfnexgy42Cxb7DcSM_MOSnq_usp2-r_AMg
 id: civicrm

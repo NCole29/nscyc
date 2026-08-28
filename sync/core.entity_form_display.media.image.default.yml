@@ -9,9 +9,6 @@ dependencies:
     - media.type.image
   module:
     - svg_image
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: Zbmgu5iVG81My70Z3wcMkcTwCJ5xNyBL26FZR_k5Bfg
 id: media.image.default

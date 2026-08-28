@@ -9,9 +9,6 @@ dependencies:
     - file_delete
     - system
     - webform_node
-  enforced:
-    module:
-      - club_user
 _core:
   default_config_hash: MWdEK832cY4CO5y2fcWCRDjiVTy5sEtqqYFWUpA6Efw
 id: member

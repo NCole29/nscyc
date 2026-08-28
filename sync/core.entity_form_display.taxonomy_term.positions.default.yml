@@ -7,9 +7,6 @@ dependencies:
     - field.field.taxonomy_term.positions.field_position_category
     - field.field.taxonomy_term.positions.field_website_role
     - taxonomy.vocabulary.positions
-  enforced:
-    module:
-      - club_leader
 _core:
   default_config_hash: Zts1aZc84nSMLUS13BHfZmrdM8QjOHDsm7Q7g4aRXzI
 id: taxonomy_term.positions.default

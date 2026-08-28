@@ -10,9 +10,6 @@ dependencies:
     - media.type.image
   module:
     - svg_image
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: pvRPZbfDScibACByDZ8UZUrAosgaEvsJyQ_XOwMrrYc
 id: media.image.media_library
@@ -29,8 +26,8 @@ content:
       image_loading:
         attribute: lazy
       svg_attributes:
-        width: ''
-        height: ''
+        width: null
+        height: null
       svg_render_as_image: true
     third_party_settings: {  }
     weight: 0

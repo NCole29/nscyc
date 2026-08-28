@@ -9,9 +9,6 @@ dependencies:
     - views
   theme:
     - clubtheme
-  enforced:
-    module:
-      - club_ride
 id: views_block__cancellations_cancellations
 theme: clubtheme
 region: canceled

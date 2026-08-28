@@ -16,14 +16,10 @@ dependencies:
     - user.role.rides_coordinator
     - user.role.site_admin
   module:
-    - club_ride
     - datetime
     - node
     - smart_date
     - user
-  enforced:
-    module:
-      - club_ride
 id: club_rides
 label: 'Club rides'
 module: views

@@ -8,9 +8,6 @@ dependencies:
   module:
     - taxonomy
     - user
-  enforced:
-    module:
-      - club_leader
 id: club_positions
 label: 'Taxonomy entity references'
 module: views

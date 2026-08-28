@@ -7,9 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.card
   module:
     - options
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: FRx3eG_cXRAtweASOaZ0A1KiDw8CTiSxd3fVRoxkVVo
 id: paragraph.card.field_background

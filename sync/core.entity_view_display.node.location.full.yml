@@ -17,9 +17,6 @@ dependencies:
     - options
     - text
     - user
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: TTLikLhNuGw65-rrzFRAESTtpH5FAJR5LeFZZpmK8Xw
 id: node.location.full

@@ -8,9 +8,6 @@ dependencies:
     - node.type.ride
   module:
     - text
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: 9qSRytJl8Y9M3XnVlre4SxNT62WsDftReWiTXhgcKy4
 id: node.ride.field_description

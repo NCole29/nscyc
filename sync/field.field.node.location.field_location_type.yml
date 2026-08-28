@@ -6,9 +6,6 @@ dependencies:
     - field.storage.node.field_location_type
     - node.type.location
     - taxonomy.vocabulary.locations
-  enforced:
-    module:
-      - club_location
 _core:
   default_config_hash: N7cbwXtQtPtHWbGrvPSO3fNcbcZp3_U4QHxrrMGsjRE
 id: node.location.field_location_type

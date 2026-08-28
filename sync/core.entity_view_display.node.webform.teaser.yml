@@ -20,9 +20,6 @@ dependencies:
     - text
     - user
     - webform
-  enforced:
-    module:
-      - club_event
 id: node.webform.teaser
 targetEntityType: node
 bundle: webform
@@ -63,6 +60,7 @@ hidden:
   field_components: true
   field_contact_form: true
   field_contact_person: true
+  field_contact_us: true
   field_padding: true
   field_page_access: true
   field_text: true

@@ -8,9 +8,6 @@ dependencies:
     - node.type.recurring_ride
   module:
     - text
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: cS-YVMeNyo84WnlJ75Q3AyNlcEZfbswoqjJQbPeW53E
 id: node.recurring_ride.field_description

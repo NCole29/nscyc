@@ -10,9 +10,6 @@ dependencies:
     - media.type.gallery
   module:
     - image_widget_crop
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: XdjxqWYKO0iQYJdCDRlzQNan4EL8Mrwxd48hHo3Frhw
 id: media.gallery.media_library

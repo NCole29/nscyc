@@ -6,9 +6,6 @@ dependencies:
     - 'file:file:373167e4-506f-4088-9ebc-e1b1298b9480'
   module:
     - layout_paragraphs
-  enforced:
-    module:
-      - club_paragraph
 _core:
   default_config_hash: moRT_5s5dY58n0J5r-iea1wGOUb33uhQcieRj04cEsk
 id: section

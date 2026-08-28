@@ -24,9 +24,6 @@ dependencies:
     - options
     - taxonomy
     - user
-  enforced:
-    module:
-      - club_location
 id: locations
 label: 'Club locations'
 module: views

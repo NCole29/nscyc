@@ -12,9 +12,6 @@ dependencies:
     - layout_builder_restrictions
     - text
     - user
-  enforced:
-    module:
-      - club_announcement
 third_party_settings:
   layout_builder:
     enabled: false
@@ -33,6 +30,11 @@ targetEntityType: node
 bundle: announcement
 mode: teaser
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_summary:
     type: text_default
     label: hidden
@@ -41,5 +43,8 @@ content:
     weight: 0
     region: content
 hidden:
+  field_contact_form: true
+  field_contact_person: true
+  field_contact_us: true
   field_text: true
   links: true

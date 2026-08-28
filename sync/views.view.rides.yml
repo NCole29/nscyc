@@ -23,9 +23,6 @@ dependencies:
     - taxonomy
     - user
     - views_year_filter
-  enforced:
-    module:
-      - club_ride
 id: rides
 label: Rides
 module: views

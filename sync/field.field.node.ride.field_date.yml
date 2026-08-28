@@ -7,9 +7,6 @@ dependencies:
     - node.type.ride
   module:
     - datetime
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: PkArSnSStcizsCoNrkY6HgCKXMikMX6Rp5HEy3LfUek
 id: node.ride.field_date

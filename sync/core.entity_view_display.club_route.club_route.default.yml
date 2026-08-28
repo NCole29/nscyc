@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.club_route.club_route.field_ride_start
   module:
-    - club_ride
     - layout_builder
 third_party_settings:
   layout_builder:
@@ -88,6 +87,27 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 6
+    region: content
+  surface:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  terrain:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  unpaved:
+    type: integer
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   updated_at:
     type: timestamp

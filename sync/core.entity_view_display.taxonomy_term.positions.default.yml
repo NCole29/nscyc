@@ -8,9 +8,6 @@ dependencies:
     - taxonomy.vocabulary.positions
   module:
     - options
-  enforced:
-    module:
-      - club_leader
 _core:
   default_config_hash: cNajajaqhY0z2D-cQvbEb1TdOFbBeyY1rTAO65ZcTMg
 id: taxonomy_term.positions.default
@@ -19,19 +16,20 @@ bundle: positions
 mode: default
 content:
   field_position_category:
-    weight: 1
+    type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 1
     region: content
   field_website_role:
-    weight: 2
+    type: entity_reference_label
     label: inline
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 2
     region: content
 hidden:
   description: true
+  field_disabled: true

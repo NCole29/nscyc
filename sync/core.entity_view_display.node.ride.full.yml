@@ -38,9 +38,6 @@ dependencies:
     - text
     - user
     - views
-  enforced:
-    module:
-      - club_ride
 third_party_settings:
   layout_builder:
     enabled: true

@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.club_contacts.field_start_date
   module:
-    - club_leader
     - datetime
 id: club_contacts.club_contacts.field_start_date
 field_name: field_start_date

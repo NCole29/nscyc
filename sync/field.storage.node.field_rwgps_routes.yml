@@ -3,11 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - club_ride
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: '-e83ygtSkIp5kOG_NPHo6Mc-tMne9WDcM6z2wrgoWig'
 id: node.field_rwgps_routes

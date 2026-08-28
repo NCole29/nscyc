@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_ride
 _core:
   default_config_hash: l-rFBn0YScBJvJgMRTUwPJ3b3jPdHaMPHe2HUB1EgI8
 id: node.field_cancel

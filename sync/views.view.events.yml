@@ -17,9 +17,6 @@ dependencies:
     - text
     - user
     - views_year_filter
-  enforced:
-    module:
-      - club_event
 id: events
 label: Events
 module: views

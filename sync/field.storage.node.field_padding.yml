@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - node
-  enforced:
-    module:
-      - club_media
 _core:
   default_config_hash: hy6FijYlhJsUvC_pl4CesWO1ZWMxJXSSD2YEOiwwvjM
 id: node.field_padding
