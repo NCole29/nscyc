@@ -1,0 +1,23 @@
+uuid: 2eb92de4-a033-4af9-ae5e-279509d38348
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_disabled
+    - taxonomy.vocabulary.mailboxes
+id: taxonomy_term.mailboxes.field_disabled
+field_name: field_disabled
+entity_type: taxonomy_term
+bundle: mailboxes
+label: Disabled
+description: 'Disabled positions are not available for selection when adding club leaders.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.field_components
     - field.field.node.event.field_contact_form
     - field.field.node.event.field_contact_person
+    - field.field.node.event.field_contact_us
     - field.field.node.event.field_date
     - field.field.node.event.field_location
     - field.field.node.event.field_padding
@@ -493,7 +494,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 3
     region: content
     settings:
       display_label: true
@@ -533,7 +534,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -542,12 +543,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
+  field_contact_us: true
   layout_builder__layout: true
   path: true
   publish_on: true

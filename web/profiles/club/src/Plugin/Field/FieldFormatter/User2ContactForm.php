@@ -15,15 +15,15 @@ use Drupal\Core\Link;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Plugin implementation for link to the user contact form.
+ * Plugin implementation for link to the user contact form.(new link to webform).
  */
 #[FieldFormatter(
-  id: "user_link_2_webform",
-  label: new TranslatableMarkup("Link to contact webform"),
+  id: "user_2_contactform",
+  label: new TranslatableMarkup("Link to webform contact_form"),
   field_types: ["entity_reference"]
 )]
 
-class UserLink2ContactForm extends EntityReferenceFormatterBase implements ContainerFactoryPluginInterface {
+class User2ContactForm extends EntityReferenceFormatterBase implements ContainerFactoryPluginInterface {
 
   /**
    * The user data service.

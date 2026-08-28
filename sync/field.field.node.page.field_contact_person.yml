@@ -28,7 +28,6 @@ settings:
       role:
         member: member
         administrator: '0'
-        board: '0'
         events_coordinator: '0'
         civicrm: '0'
         ride_leader: '0'
@@ -36,5 +35,6 @@ settings:
         content_creator: '0'
         editor: '0'
         site_admin: '0'
+        board: '0'
     include_anonymous: false
 field_type: entity_reference

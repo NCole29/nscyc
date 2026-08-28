@@ -1,0 +1,29 @@
+uuid: 12837945-73ed-42f0-8010-d41b81ec0274
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_us
+    - node.type.announcement
+    - taxonomy.vocabulary.mailboxes
+id: node.announcement.field_contact_us
+field_name: field_contact_us
+entity_type: node
+bundle: announcement
+label: 'Contact taxonomy'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      mailboxes: mailboxes
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

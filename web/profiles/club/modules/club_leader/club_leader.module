@@ -47,7 +47,6 @@ function club_leader_form_taxonomy_overview_terms_alter(&$form, FormStateInterfa
   // Get vocabulary name from path (cannot get it from formState because its protected)
   $path = \Drupal::request()->getpathInfo();
   $arg = explode('/', $path);
-
   
   // Club positions
   if ($arg[5] == "positions") {
@@ -92,7 +91,40 @@ function club_leader_form_taxonomy_overview_terms_alter(&$form, FormStateInterfa
       }
     }
   }
-}
+  // Mailboxes
+  elseif ($arg[5] == "mailboxes") {
+
+      $form['terms']['#header'] = array_merge(array_slice($form['terms']['#header'], 0, 1, TRUE),
+      [t('Mailbox')],
+      [t('Disabled')],
+      array_slice($form['terms']['#header'], 1, NULL, TRUE)
+    );
+
+    foreach ($form['terms'] as &$term) {
+      if (is_array($term) && !empty($term['#term'])) {
+
+        $disabled = ($term['#term']->get('field_disabled')->value == 1 ) ? "yes" : "-";
+        $mailbox  = ($term['#term']->get('field_mailbox')->value );
+
+
+        $mail['Mailbox'] = [
+          '#markup' => $mailbox, 
+          '#type' => 'item',
+        ];
+        $dropped['Disabled'] = [
+          '#markup' => $disabled,
+          '#type' => 'item',
+        ];
+       
+        $term = array_merge(
+          array_slice($term, 0, 1, TRUE),
+          $mail, $dropped,
+          array_slice($term, 1, NULL, TRUE),
+        );
+      }
+    }
+  }
+ }
 
 /**
  * Implements hook_entity_presave().

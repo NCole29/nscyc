@@ -1,0 +1,19 @@
+uuid: 8da34c26-6bff-49b6-b527-508da620a35c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_mailbox
+    - taxonomy.vocabulary.mailboxes
+id: taxonomy_term.mailboxes.field_mailbox
+field_name: field_mailbox
+entity_type: taxonomy_term
+bundle: mailboxes
+label: Mailbox
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

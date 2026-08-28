@@ -7,6 +7,9 @@ dependencies:
     - field.field.node.page.banner_image
     - field.field.node.page.field_comment
     - field.field.node.page.field_components
+    - field.field.node.page.field_contact_form
+    - field.field.node.page.field_contact_person
+    - field.field.node.page.field_contact_us
     - field.field.node.page.field_padding
     - field.field.node.page.field_page_access
     - field.field.node.page.field_summary
@@ -24,6 +27,11 @@ targetEntityType: node
 bundle: page
 mode: teaser
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_summary:
     type: text_default
     label: hidden
@@ -35,6 +43,9 @@ hidden:
   banner_image: true
   field_comment: true
   field_components: true
+  field_contact_form: true
+  field_contact_person: true
+  field_contact_us: true
   field_padding: true
   field_page_access: true
   field_text: true

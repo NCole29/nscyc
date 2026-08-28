@@ -1,0 +1,40 @@
+uuid: e1456ebc-f956-4378-bb6c-b188dfcd6ea1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.mailboxes.field_disabled
+    - field.field.taxonomy_term.mailboxes.field_mailbox
+    - taxonomy.vocabulary.mailboxes
+  module:
+    - text
+id: taxonomy_term.mailboxes.default
+targetEntityType: taxonomy_term
+bundle: mailboxes
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_disabled:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_mailbox:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

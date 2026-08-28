@@ -1144,7 +1144,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<small><strong>See <a href="/rides">non-recurring rides list</a> or <a href="/calendar">calendar</a>.</strong></small>'
+          content: '<small><strong>See <a href="/rides/list">non-recurring rides list</a> or <a href="/calendar">calendar</a>.</strong></small>'
           tokenize: false
       display_extenders: {  }
       block_description: 'Gravel rides'
@@ -3513,7 +3513,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<small><strong>See <a href="/rides">non-recurring rides list</a> or <a href="/calendar">calendar</a>.</strong></small>'
+          content: '<small><strong>See <a href="/rides/list">non-recurring rides list</a> or <a href="/calendar">calendar</a>.</strong></small>'
           tokenize: false
       display_extenders: {  }
       block_description: 'Weekend rides'

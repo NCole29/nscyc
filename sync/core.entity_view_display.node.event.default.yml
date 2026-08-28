@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.field_components
     - field.field.node.event.field_contact_form
     - field.field.node.event.field_contact_person
+    - field.field.node.event.field_contact_us
     - field.field.node.event.field_date
     - field.field.node.event.field_location
     - field.field.node.event.field_padding
@@ -316,6 +317,14 @@ content:
     third_party_settings: {  }
     weight: 5
     region: content
+  field_contact_us:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 19
+    region: first
   field_date:
     type: datetime_default
     label: above
@@ -425,6 +434,8 @@ content:
     weight: 0
     region: content
 hidden:
+  field_contact_form: true
+  field_contact_person: true
   field_registration_free_form: true
   field_registration_link: true
   layout_builder__layout: true
