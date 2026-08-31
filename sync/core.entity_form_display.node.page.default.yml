@@ -100,7 +100,6 @@ third_party_settings:
         required_fields: true
     group_contact_link:
       children:
-        - field_contact_us
         - field_contact_form
         - field_contact_person
       label: 'Contact link'
@@ -226,12 +225,6 @@ content:
             effect: show
             effect_options: {  }
             selector: ''
-  field_contact_us:
-    type: options_select
-    weight: 17
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_padding:
     type: boolean_checkbox
     weight: 6
@@ -309,13 +302,13 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -367,11 +360,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_contact_us: true
   layout_builder__layout: true
   publish_on: true
   uid: true
