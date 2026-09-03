@@ -1,8 +1,9 @@
-uuid: 5f3e73f9-8793-4d44-a57a-0d16f9a50c58
+uuid: 495f2c88-bc92-415e-9388-e350a870ef2a
 langcode: en
 status: open
 dependencies:
   module:
+    - club_user
     - webform_civicrm
 weight: 0
 open: null
@@ -10,9 +11,9 @@ close: null
 uid: 1
 template: false
 archive: false
-id: register_for_picnic
-title: 'Picnic - $5'
-description: '<p>Registration for paid $5 picnic. To create a form with a different fee: Duplicate the form. Select Build. Edit&nbsp;"Participant Fee", click Advanced, and change default value.&nbsp;Save form with a new name.</p>'
+id: picnic_5
+title: 'Picnic, $5'
+description: ''
 categories:
   - 'Paid event'
 elements: |-
@@ -22,56 +23,42 @@ elements: |-
     '#title': 'Contact Information'
     civicrm_1_contact_1_fieldset_fieldset:
       '#type': fieldset
-      '#title': 'Contact information'
-      '#title_display': invisible
+      '#title': 'Contact Info'
       '#form_key': civicrm_1_contact_1_fieldset_fieldset
       civicrm_1_contact_1_contact_existing:
         '#type': civicrm_contact
-        '#title': 'Form is populated for logged-in Member:'
-        '#title_display': inline
-        '#description_display': invisible
+        '#search_prompt': '- Choose existing -'
         '#widget': hidden
-        '#none_prompt': 'You are not logged in. Please complete the form'
-        '#show_hidden_contact': 1
-        '#results_display':
-          display_name: display_name
-        '#hide_fields':
-          name: name
-          email: email
-        '#hide_method': disable
-        '#submit_disabled': true
-        '#default': user
-        '#allow_create': 1
-        '#contact_type': individual
         '#form_key': civicrm_1_contact_1_contact_existing
+        '#allow_create': 1
+        '#none_prompt': '+ Create new +'
+        '#default': user
+        '#contact_type': individual
         '#parent': civicrm_1_contact_1_fieldset_fieldset
         '#extra': {  }
-      flexbox:
-        '#type': webform_flexbox
-        civicrm_1_contact_1_contact_first_name:
-          '#type': textfield
-          '#counter_type': character
-          '#counter_maximum': 64
-          '#counter_maximum_message': ' '
-          '#contact_type': individual
-          '#form_key': civicrm_1_contact_1_contact_first_name
-          '#extra':
-            width: 20
-          '#parent': civicrm_1_contact_1_fieldset_fieldset
-          '#title': 'First Name'
-          '#required': true
-        civicrm_1_contact_1_contact_last_name:
-          '#type': textfield
-          '#counter_type': character
-          '#counter_maximum': 64
-          '#counter_maximum_message': ' '
-          '#contact_type': individual
-          '#form_key': civicrm_1_contact_1_contact_last_name
-          '#extra':
-            width: 20
-          '#parent': civicrm_1_contact_1_fieldset_fieldset
-          '#title': 'Last Name'
-          '#required': true
+        '#title': 'Existing Contact'
+      civicrm_1_contact_1_contact_first_name:
+        '#type': textfield
+        '#counter_type': character
+        '#counter_maximum': 64
+        '#counter_maximum_message': ' '
+        '#contact_type': individual
+        '#form_key': civicrm_1_contact_1_contact_first_name
+        '#extra':
+          width: 20
+        '#parent': civicrm_1_contact_1_fieldset_fieldset
+        '#title': 'First Name'
+      civicrm_1_contact_1_contact_last_name:
+        '#type': textfield
+        '#counter_type': character
+        '#counter_maximum': 64
+        '#counter_maximum_message': ' '
+        '#contact_type': individual
+        '#form_key': civicrm_1_contact_1_contact_last_name
+        '#extra':
+          width: 20
+        '#parent': civicrm_1_contact_1_fieldset_fieldset
+        '#title': 'Last Name'
       civicrm_1_contact_1_email_email:
         '#type': email
         '#form_key': civicrm_1_contact_1_email_email
@@ -79,22 +66,13 @@ elements: |-
           width: 20
         '#parent': civicrm_1_contact_1_fieldset_fieldset
         '#title': Email
-        '#required': true
-      civicrm_1_contact_1_contact_user_id:
-        '#type': hidden
-        '#form_key': civicrm_1_contact_1_contact_user_id
-        '#parent': civicrm_1_contact_1_fieldset_fieldset
-        '#extra': {  }
-        '#title': 'User ID'
-      civicrm_1_participant_1_participant_fee_amount:
+      civicrm_1_contribution_1_contribution_total_amount:
         '#type': civicrm_number
-        '#title': 'Participant Fee'
+        '#title': 'Payment amount'
         '#field_prefix': $
-        '#size': '1'
-        '#readonly': true
+        '#disabled': true
         '#default_value': '5'
-        '#attributes':
-          style: 'width: 40px;font-weight:bold;color:black;border-width:0 !important;background: unset;-webkit-box-shadow:unset;padding-left:0; '
+        '#parent': contribution_pagebreak
         '#data_type': Money
         '#extra':
           field_prefix: $
@@ -102,16 +80,7 @@ elements: |-
           separator: ','
           decimals: 2
           min: 0
-        '#form_key': civicrm_1_participant_1_participant_fee_amount
-        '#parent': civicrm_1_contact_1_fieldset_fieldset
-      civicrm_1_contact_1_contact_source:
-        '#type': hidden
-        '#title': Source
-        '#default_value': '[webform_submission:node:title]'
-        '#form_key': civicrm_1_contact_1_contact_source
-        '#extra':
-          width: 20
-        '#parent': civicrm_1_contact_1_fieldset_fieldset
+        '#form_key': civicrm_1_contribution_1_contribution_total_amount
       payment_status:
         '#type': hidden
         '#title': 'Payment status'
@@ -119,14 +88,6 @@ elements: |-
     '#type': webform_wizard_page
     '#form_key': contribution_pagebreak
     '#title': Payment
-    civicrm_1_contribution_1_contribution_is_test:
-      '#type': hidden
-      '#expose_list': true
-      '#value': '0'
-      '#form_key': civicrm_1_contribution_1_contribution_is_test
-      '#extra': {  }
-      '#parent': contribution_pagebreak
-      '#title': 'Payment Processor Mode'
 css: ''
 javascript: ''
 settings:
@@ -139,7 +100,7 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: source_entity
+  form_title: both
   form_submit_once: false
   form_open_message: ''
   form_close_message: ''
@@ -168,6 +129,7 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_file_limit_message: ''
   form_attributes: {  }
   form_method: ''
   form_action: ''
@@ -183,12 +145,7 @@ settings:
   submission_excluded_elements: {  }
   submission_exclude_empty: false
   submission_exclude_empty_checkbox: false
-  submission_views:
-    paid_picnic:
-      title: Registrations
-      view: 'webform_submissions_custom:paid_picnic'
-      webform_routes: {  }
-      node_routes: {  }
+  submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
   submission_user_duplicate: false
@@ -236,7 +193,7 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: inline
+  confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
@@ -328,7 +285,7 @@ handlers:
       nid: 1
       number_of_contacts: '1'
       1_contact_type: individual
-      1_webform_label: 'Contact 1'
+      1_webform_label: 'Contact Info'
       civicrm_1_contact_1_contact_contact_sub_type: {  }
       civicrm_1_contact_1_contact_existing: create_civicrm_webform_element
       civicrm_1_contact_1_contact_first_name: create_civicrm_webform_element
@@ -344,9 +301,9 @@ handlers:
       civicrm_1_contact_1_contact_communication_style_id: 0
       civicrm_1_contact_1_contact_image_url: 0
       civicrm_1_contact_1_contact_contact_id: 0
-      civicrm_1_contact_1_contact_user_id: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_user_id: 0
       civicrm_1_contact_1_contact_external_identifier: 0
-      civicrm_1_contact_1_contact_source: create_civicrm_webform_element
+      civicrm_1_contact_1_contact_source: 0
       civicrm_1_contact_1_contact_cs: 0
       civicrm_1_contact_1_contact_employer_id: 0
       civicrm_1_contact_1_contact_is_deceased: 0
@@ -368,15 +325,15 @@ handlers:
       toggle_message: 0
       message: ''
       activity_number_of_activity: '0'
-      participant_reg_type: separate
+      participant_reg_type: '0'
       reg_options:
         event_type:
-          7: '7'
+          any: any
         show_past_events: now
-        show_future_events: now
-        show_public_events: '1'
+        show_future_events: '1'
+        show_public_events: all
         title_display: title
-        show_full_events: 0
+        show_full_events: 1
         event_sort_field: start_date
         show_remaining: '0'
         validate: 1
@@ -384,20 +341,10 @@ handlers:
         disable_unregister: 0
         allow_url_load: 0
         disable_primary_participant: 0
-      participant_1_number_of_participant: '1'
-      civicrm_1_participant_1_participant_event_id:
-        32-7: 32-7
-      civicrm_1_participant_1_participant_role_id:
-        1: '1'
-      civicrm_1_participant_1_participant_status_id: '0'
-      civicrm_1_participant_1_participant_note: 0
-      civicrm_1_participant_1_participant_fee_amount: create_civicrm_webform_element
-      civicrm_1_participant_1_cg5_custom_7: 0
-      civicrm_1_participant_1_cg9_custom_19: 0
       membership_1_number_of_membership: '0'
       civicrm_1_contribution_1_contribution_enable_contribution: '1'
       civicrm_1_contribution_1_contribution_contact_id: '1'
-      civicrm_1_contribution_1_contribution_total_amount: 0
+      civicrm_1_contribution_1_contribution_total_amount: create_civicrm_webform_element
       civicrm_1_contribution_1_contribution_payment_processor_id: '4'
       civicrm_1_contribution_1_contribution_is_test: '0'
       civicrm_1_contribution_1_contribution_note: 0
@@ -419,7 +366,7 @@ handlers:
       block_unknown_users: 0
       create_new_relationship: 0
       disable_contact_paging: 0
-      new_contact_source: Picnic
+      new_contact_source: 'Picnic, $5'
       data:
         contact:
           1:
@@ -427,7 +374,7 @@ handlers:
               1:
                 contact_type: individual
                 contact_sub_type: {  }
-                webform_label: 'Contact 1'
+                webform_label: 'Contact Info'
             matching_rule: Unsupervised
             number_of_cg1: '0'
             number_of_other: '0'
@@ -443,15 +390,6 @@ handlers:
                 is_primary: '1'
         activity:
           number_of_activity: '0'
-        participant:
-          1:
-            number_of_participant: '1'
-            participant:
-              1:
-                event_id:
-                  32-7: 32-7
-                role_id:
-                  1: '1'
         membership:
           1:
             number_of_membership: '0'
@@ -471,15 +409,15 @@ handlers:
           number_number_of_lineitem: '0'
         receipt:
           number_number_of_receipt: '0'
-        participant_reg_type: separate
+        participant_reg_type: '0'
         reg_options:
           event_type:
-            7: '7'
+            any: any
           show_past_events: now
-          show_future_events: now
-          show_public_events: '1'
+          show_future_events: '1'
+          show_public_events: all
           title_display: title
-          show_full_events: 0
+          show_full_events: 1
           event_sort_field: start_date
           show_remaining: '0'
           validate: 1
