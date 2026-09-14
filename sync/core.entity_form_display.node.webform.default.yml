@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.webform.field_components
     - field.field.node.webform.field_contact_form
     - field.field.node.webform.field_contact_person
+    - field.field.node.webform.field_contact_us
     - field.field.node.webform.field_padding
     - field.field.node.webform.field_page_access
     - field.field.node.webform.field_summary
@@ -283,6 +284,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_state:
+    type: options_select
+    weight: 56
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   scheduler_settings:
     weight: 50
     region: content
@@ -331,6 +338,12 @@ content:
   unpublish_on:
     type: datetime_timestamp_no_default
     weight: 54
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: options_select
+    weight: 57
     region: content
     settings: {  }
     third_party_settings: {  }

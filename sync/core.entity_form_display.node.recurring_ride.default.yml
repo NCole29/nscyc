@@ -456,5 +456,7 @@ hidden:
   field_show_and_go: true
   promote: true
   publish_on: true
+  publish_state: true
   sticky: true
   unpublish_on: true
+  unpublish_state: true

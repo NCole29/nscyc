@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.location.field_location_type
     - field.field.node.location.field_restrooms
     - node.type.location
-    - workflows.workflow.editorial
   module:
     - address
     - allowed_formats
@@ -90,6 +89,8 @@ hidden:
   path: true
   promote: true
   publish_on: true
+  publish_state: true
   sticky: true
   uid: true
   unpublish_on: true
+  unpublish_state: true

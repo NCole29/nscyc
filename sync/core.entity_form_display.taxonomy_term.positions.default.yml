@@ -45,5 +45,7 @@ hidden:
   description: true
   path: true
   publish_on: true
+  publish_state: true
   status: true
   unpublish_on: true
+  unpublish_state: true
