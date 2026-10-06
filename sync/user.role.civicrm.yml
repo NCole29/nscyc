@@ -13,7 +13,8 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - civicrm
-    - comment
+    - club_leader
+    - club_ride
     - contact
     - content_moderation
     - contextual
@@ -43,7 +44,6 @@ permissions:
   - 'access Contact Dashboard'
   - 'access Report Criteria'
   - 'access administration pages'
-  - 'access comments'
   - 'access content overview'
   - 'access contextual links'
   - 'access deleted contacts'
@@ -61,7 +61,6 @@ permissions:
   - 'administer Reports'
   - 'administer Tagsets'
   - 'administer dedupe rules'
-  - 'administer payment processors'
   - 'administer users'
   - 'change own username'
   - 'clone announcement content'
@@ -99,11 +98,9 @@ permissions:
   - 'manage event profiles'
   - 'manage tags'
   - 'merge duplicate contacts'
-  - 'post comments'
   - 'save Report Criteria'
   - 'schedule publishing of nodes'
   - 'send SMS'
-  - 'skip comment approval'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition finalize_draft'
   - 'use text format basic_html'

@@ -11,7 +11,8 @@ dependencies:
     - node.type.ride
     - workflows.workflow.rides
   module:
-    - comment
+    - club_ride
+    - club_schedule
     - contact
     - content_moderation
     - filter
@@ -27,7 +28,6 @@ label: 'Ride leader'
 weight: -4
 is_admin: false
 permissions:
-  - 'access comments'
   - 'access content overview'
   - 'access toolbar'
   - 'access user contact forms'
@@ -47,9 +47,7 @@ permissions:
   - 'edit own ride content'
   - 'enter waivers'
   - 'make smart dates recur'
-  - 'post comments'
   - 'reschedule smart date recur instances'
-  - 'skip comment approval'
   - 'use rides transition create_new_draft'
   - 'use rides transition finalize_draft'
   - 'use text format basic_html'

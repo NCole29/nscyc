@@ -1,0 +1,17 @@
+uuid: ba1eced8-60d7-4db6-bdf3-64d3ec82d7ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.nominations
+id: contact_form.mail.nominations
+configuration:
+  email_body:
+    content:
+      value: '<p>Send message</p>'
+      format: basic_html
+  email_to:
+    addresses:
+      -
+        value: nominations@nscyc.org
+        display: 'Nominations for Board'

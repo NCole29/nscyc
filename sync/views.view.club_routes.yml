@@ -13,6 +13,7 @@ dependencies:
     - user.role.rides_coordinator
     - user.role.site_admin
   module:
+    - club_ride
     - csv_serialization
     - node
     - rest
@@ -5306,6 +5307,50 @@ display:
             min: '0'
             max: '5'
             value: '5'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_ride_start_target_id:
+          id: field_ride_start_target_id
+          table: club_route__field_ride_start
+          field: field_ride_start_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: empty
+          value:
+            min: ''
+            max: ''
+            value: ''
           group: 1
           exposed: false
           expose:

@@ -13,7 +13,8 @@ dependencies:
   module:
     - civicrm
     - civicrm_group_roles
-    - comment
+    - club_ride
+    - club_schedule
     - contact
     - content_moderation
     - contextual
@@ -36,12 +37,14 @@ weight: -3
 is_admin: false
 permissions:
   - 'access CiviCRM'
+  - 'access CiviContribute'
+  - 'access CiviEvent'
   - 'access CiviMail'
+  - 'access CiviMember'
   - 'access CiviReport'
   - 'access Report Criteria'
   - 'access administration pages'
   - 'access civicrm group role setting'
-  - 'access comments'
   - 'access content'
   - 'access content overview'
   - 'access contextual links'
@@ -51,6 +54,7 @@ permissions:
   - 'access shortcuts'
   - 'access toolbar'
   - 'access user contact forms'
+  - 'add contact notes'
   - 'administer Reports'
   - 'cancel smart date recur instances'
   - 'clone recurring_ride content'
@@ -78,12 +82,11 @@ permissions:
   - 'edit groups'
   - 'edit message templates'
   - 'make smart dates recur'
-  - 'post comments'
+  - 'profile listings and forms'
   - 'reschedule smart date recur instances'
   - 'revert all revisions'
   - 'save Report Criteria'
   - 'schedule publishing of nodes'
-  - 'skip comment approval'
   - 'update any media'
   - 'use rides transition archive'
   - 'use rides transition create_new_draft'
@@ -94,6 +97,7 @@ permissions:
   - 'use text format ride_page'
   - 'use text format summary_fields'
   - 'view all contacts'
+  - 'view all notes'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view club_route entity'

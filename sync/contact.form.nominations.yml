@@ -1,0 +1,21 @@
+uuid: 9123d281-d91e-4562-a074-07c39f6fef66
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact_storage
+third_party_settings:
+  contact_storage:
+    submit_text: 'Send message'
+    show_preview: true
+    disabled_form_message: 'This contact form has been disabled.'
+    maximum_submissions_user: 0
+    page_autoreply_format: plain_text
+id: nominations
+label: Nominations
+recipients:
+  - info@nscyc.org
+reply: ''
+weight: 0
+message: ''
+redirect: /node

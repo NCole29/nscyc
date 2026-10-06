@@ -80,6 +80,121 @@ display:
           action_title: 'With selection'
           include_exclude: exclude
           selected_actions: {  }
+        contact_form_label:
+          id: contact_form_label
+          table: contact_message
+          field: contact_form_label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: contact_message
+          plugin_id: contact_form
+          label: 'Contact form'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+        recipient:
+          id: recipient
+          table: contact_message
+          field: recipient
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: contact_message
+          entity_field: recipient
+          plugin_id: field
+          label: 'Recipient ID'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         name:
           id: name
           table: contact_message
@@ -136,71 +251,6 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        recipient:
-          id: recipient
-          table: contact_message
-          field: recipient
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: contact_message
-          entity_field: recipient
-          plugin_id: field
-          label: Recipient
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -339,56 +389,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        contact_form_label:
-          id: contact_form_label
-          table: contact_message
-          field: contact_form_label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: contact_message
-          plugin_id: contact_form
-          label: 'Contact form'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
         created:
           id: created
           table: contact_message
@@ -697,29 +697,29 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        uid:
-          id: uid
-          table: users_field_data
-          field: uid
-          relationship: recipient
+        subject:
+          id: subject
+          table: contact_message
+          field: subject
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: uid
-          plugin_id: user_name
-          operator: in
-          value: {  }
+          entity_type: contact_message
+          entity_field: subject
+          plugin_id: string
+          operator: contains
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: uid_op
-            label: 'Recipient Name (autocomplete)'
+            operator_id: subject_op
+            label: Subject
             description: ''
             use_operator: false
-            operator: uid_op
+            operator: subject_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: uid
+            identifier: subject
             required: false
             remember: false
             multiple: false
@@ -728,14 +728,15 @@ display:
               anonymous: '0'
               administrator: '0'
               member: '0'
-              board: '0'
-              ride_leader: '0'
-              rides_editor: '0'
-              editor: '0'
-              rides_coordinator: '0'
+              events_coordinator: '0'
               civicrm: '0'
+              ride_leader: '0'
+              rides_coordinator: '0'
+              content_creator: '0'
+              editor: '0'
               site_admin: '0'
-            reduce: false
+              board: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''

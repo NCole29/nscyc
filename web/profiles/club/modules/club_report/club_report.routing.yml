@@ -5,6 +5,7 @@ club_report.fix_memberships:
     _title: 'Fix memberships'
   requirements:
     _role: 'administrator'
+
 club_report.getPayPalData:
   path: '/update-paypal-data'
   defaults:
@@ -12,6 +13,7 @@ club_report.getPayPalData:
     _title: 'Update PayPal Data'
   requirements:
     _role: 'administrator'
+    
 club_report.uploads:
   path: '/admin/uploads'
   defaults:
