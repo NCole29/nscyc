@@ -179,7 +179,7 @@ abstract class GeoPhpGeocodeFormatter extends FileGeocodeFormatter {
       if (array_key_exists($adapter, $adapters)) {
         foreach ($items as $delta => $item) {
           /** @var \Geometry $collection */
-          if ($collection = $this->geocoder->geocode($item->value, $providers)) {
+          if ($collection = $this->geocoder->geocode($item->getValue()['value'] ?? NULL, $providers)) {
             $elements[$delta] = [
               '#type' => 'html_tag',
               '#tag' => 'code',
