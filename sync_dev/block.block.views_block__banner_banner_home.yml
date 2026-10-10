@@ -13,7 +13,7 @@ _core:
   default_config_hash: w5H7oUvIhHacpe-_m1dlot_OPLlkDzj3M8zhxZMOcV4
 id: views_block__banner_banner_home
 theme: clubtheme
-region: content
+region: banner_pictures
 weight: -16
 provider: null
 plugin: 'views_block:banner-banner_home'

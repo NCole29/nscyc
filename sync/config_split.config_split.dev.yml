@@ -19,5 +19,6 @@ module:
   kint: 0
   upgrade_status: 0
 theme: {  }
-complete_list: {  }
+complete_list:
+  - block.block.views_block__banner_banner_home
 partial_list: {  }

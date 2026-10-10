@@ -1,0 +1,30 @@
+uuid: 88be1918-bb72-4fdd-8748-6485c5eb2c98
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:919346a2-34ae-4869-afc6-41eee36622fb'
+  module:
+    - block_content
+    - system
+  theme:
+    - clubtheme
+id: clubtheme_welcometonorthshorecyclists
+theme: clubtheme
+region: content
+weight: -16
+provider: null
+plugin: 'block_content:919346a2-34ae-4869-afc6-41eee36622fb'
+settings:
+  id: 'block_content:919346a2-34ae-4869-afc6-41eee36622fb'
+  label: 'Welcome to North Shore Cyclists!'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

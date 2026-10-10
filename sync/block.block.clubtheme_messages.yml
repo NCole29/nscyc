@@ -11,7 +11,7 @@ _core:
 id: clubtheme_messages
 theme: clubtheme
 region: highlighted
-weight: -50
+weight: -17
 provider: null
 plugin: system_messages_block
 settings:

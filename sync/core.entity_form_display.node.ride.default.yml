@@ -85,13 +85,12 @@ third_party_settings:
         required_fields: true
     group_description:
       children:
-        - field_ride_picture
         - field_activity
         - field_gravel_category
         - field_description
         - field_additional_information
-        - field_developed_by
         - group_ride_picture
+        - field_developed_by
       label: Description
       region: content
       parent_name: group_ta
@@ -189,11 +188,12 @@ third_party_settings:
         description: "Help keep the Master ride list clean of duplicates!<br>\r\nIf adding a new ride (not cloning a ride), please code if its a \"master ride\" or variation of an existing ride.<br>Variations have slightly different routes, or they start from a different place along the route."
         required_fields: true
     group_ride_picture:
-      children: {  }
+      children:
+        - field_ride_picture
       label: 'Ride picture'
       region: hidden
       parent_name: group_description
-      weight: 52
+      weight: 58
       format_type: details
       format_settings:
         classes: ''
@@ -265,7 +265,7 @@ content:
         hide_guidelines: '1'
   field_developed_by:
     type: string_textfield
-    weight: 58
+    weight: 59
     region: content
     settings:
       size: 60
@@ -362,7 +362,7 @@ content:
     third_party_settings: {  }
   field_registration_form:
     type: webform_entity_reference_select
-    weight: 7
+    weight: 8
     region: content
     settings:
       default_data: true
@@ -389,7 +389,7 @@ content:
             selector: ''
   field_registration_free_form:
     type: webform_entity_reference_select
-    weight: 6
+    weight: 7
     region: content
     settings:
       default_data: true
@@ -540,13 +540,13 @@ content:
             selector: ''
   moderation_state:
     type: moderation_state_default
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -576,7 +576,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }

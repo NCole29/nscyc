@@ -13,7 +13,7 @@ _core:
 id: views_block__banner_gallery_other
 theme: clubtheme
 region: banner_pictures
-weight: -14
+weight: -15
 provider: null
 plugin: 'views_block:banner-gallery_other'
 settings:
